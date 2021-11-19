@@ -1,8 +1,6 @@
 import { NextApiResponse, NextApiRequest } from 'next';
-import { scopes, URLS, TokenData } from '../../../types';
+import { scopes } from '../../../types';
 import nookies from 'nookies';
-import { encode } from '../../../Utils/encode';
-import axios from 'axios';
 import fetch from 'node-fetch'
 import formData from 'form-data'
 require('dotenv').config();
@@ -25,8 +23,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       body: data
     }).then(x => x.json())
 
-    console.log(token)
-
     if(!token.access_token) return res.send('No access token');
 
     nookies.set({ res }, 'lunarydash.token', token.access_token, {
@@ -36,13 +32,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		path: '/',
 	});
 
-    nookies.set({ res }, 'lunarydash.token_type', token.token_type, {
-		expires: new Date(Date.now() + token.expires_in * 1000),
-		httpOnly: true,
-		secure: process.env.NODE_ENV !== 'development',
-		path: '/',
-	});
-
-    console.log(token);
     res.redirect('/');
 }
