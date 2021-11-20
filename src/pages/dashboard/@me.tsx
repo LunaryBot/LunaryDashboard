@@ -1,10 +1,11 @@
 import React, { useEffect, useState  } from 'react';
 import { parseCookies } from 'nookies';
-import { URLS, User } from '../types';
+import { URLS, User } from '../../types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
+import NavBar from '../../components/NavBar';
 
-export default function Home({ token }) {
+export default function DashboardUser({ token }) {
   const [user, setUser] = useState<User | null | any>(null);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Home({ token }) {
   
   return (
     <main>
-      <h1>Hello {user?.username}</h1>
+        <NavBar user={user} />
     </main>
   )
 }
