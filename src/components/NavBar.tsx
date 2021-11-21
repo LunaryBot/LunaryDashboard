@@ -12,10 +12,21 @@ const Header = sty.header`
     transition-duration: 0.5s;
 `
 
+const LuaIcon = sty.img`
+    width: 4%;
+    margin-right: 10px;
+    transition: border 0.5s;
+    pointer-events: none;
+    filter: grayscale(100%);
+`
+
 const Username = sty.h1`
     font-size: 1.5em;
     color: #cfcfcf;
     margin-right: 10px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 `
 
 const UserDiscriminator = sty.span`
@@ -31,6 +42,7 @@ const Avatar = sty.div`
 `
 
 const AvatarImg = sty.img`
+    margin-right: -70px;
     border-radius: 50%;
     width: 10%;
     min-width: 60px;
@@ -60,7 +72,6 @@ const Cta = sty.div`
         color: #141414;
         background-color: #fafafa;
     }
-
     i {
         margin-right: 5px;
     }
@@ -80,7 +91,7 @@ const urls = [
 ]
 
 interface DataNavBar {
-    user: User;
+    user: User | null;
 }
 
 export default function NavBar({ user }: DataNavBar) {
@@ -88,6 +99,7 @@ export default function NavBar({ user }: DataNavBar) {
     
     return (
         <Header>
+            <LuaIcon src={"https://imgur.com/YkjiyCT.png"} />
             {urls.map(url => {
                 return (
                     <Link href={url.url}>
@@ -98,10 +110,29 @@ export default function NavBar({ user }: DataNavBar) {
                     </Link>
                 )
             })}
+            
+            <UserBox user={user} />
+        </Header>
+    )
+}
+
+function UserBox({ user }: DataNavBar) {
+    if(user) {
+        return (
             <Avatar>
                 <Username>{user?.username}<UserDiscriminator>#{user?.discriminator}</UserDiscriminator></Username>
                 <AvatarImg src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png`} alt="avatar" />
             </Avatar>
-        </Header>
-    )
+        )
+    } else {
+        return (
+            <Avatar>
+                <a href="/api/auth/login">
+                    <Cta>
+                        <i className="fas fa-sign-in-alt"></i>
+                    </Cta>
+                </a>
+            </Avatar>
+        )
+    }
 }

@@ -26,7 +26,7 @@ export default function DashboardUser({ token }) {
   
   return (
     <main>
-        <NavBar user={user} />
+      <NavBar user={user} />
     </main>
   )
 }
