@@ -47,11 +47,15 @@ export default function DashboardUser({ token }) {
   return (
     <main>
       <NavBar user={user} />
+      <br />
+      <br />
       {guilds?.map((guild: Guild) => {
         return (
           <_GuildCard key={guild.id} guild={guild} />
         )
       })}
+      <br />
+      <br />
     </main>
   )
 }
