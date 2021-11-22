@@ -19,6 +19,16 @@ export interface User {
 	verified: boolean;
 }
 
+export interface Guild {
+	icon: string;
+	id: string;
+	name: string;
+	owner: boolean;
+	permissions: number;
+	features: string[];
+	permissions_new: string;
+} 
+
 export const scopes: Array<string> = [
 	'identify',
 	'guilds'
