@@ -47,7 +47,8 @@ export default function DashboardUser({ token }) {
   return (
     <main>
       <NavBar user={user} />
-      <br />
+      
+      {/* <br />
       <br />
       {guilds?.map((guild: Guild) => {
         return (
@@ -55,7 +56,7 @@ export default function DashboardUser({ token }) {
         )
       })}
       <br />
-      <br />
+      <br /> */}
     </main>
   )
 }
