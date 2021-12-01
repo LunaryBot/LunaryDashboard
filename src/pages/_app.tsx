@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "@fortawesome/fontawesome-free/css/all.min.css";
+import Head from 'next/head';
 import "../styles/SideBar.css";
 
 const GlobalStyle = createGlobalStyle`
@@ -20,6 +21,11 @@ const GlobalStyle = createGlobalStyle`
 export default function MyApp({ Component, pageProps }) {
   return (
     <> 
+      <Head>
+        <title>Luna</title>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
+        {/* <script src="https://raw.githubusercontent.com/LunaryBot/LunaryWebsite/master/src/assets/js/jquery.js"></script> */}
+      </Head>
       <GlobalStyle />
       <Component {...pageProps} />
     </>

@@ -2,10 +2,84 @@
     width: 20%;
     height: 100vh;
     z-index: 10;
-    position: absolute;
+    position: fixed;
     padding: 10px;
     background-color: #24252a;
     color: black;
-    border-right: 2px solid #333;
+    /* border-right: 2px solid #333; */
     box-shadow: 20px 0px 0px 3px rgba(0, 0, 0, 0.082);
+    overflow-y: scroll;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 0em;
+}
+  
+.sidebar::-webkit-scrollbar-track {
+    background: #ffffff00;
+    box-shadow: inset 0 0 6px #ffffff00;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #ffffff00;
+    border-radius: 0em;
+}
+
+.sidebar .sidebar-header {
+    padding: 10px;
+    overflow: hidden;
+}
+
+.sidebar .sidebar-header .user-pic {
+    float: left;
+    width: 60px;
+    padding: 2px;
+    margin-right: 15px;
+}
+
+.sidebar .sidebar-header .user-pic img {
+    border-radius: 8px;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar .sidebar-header .user-info {
+    color: #fffafa;
+    float: left;
+}
+
+.sidebar .sidebar-header .user-info > h1 {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.sidebar .sidebar-header .user-info .user-id {
+    font-size: 11px;
+    color: rgb(129, 129, 129);
+    font-weight: 500;
+}
+
+@media screen and (max-width: 980px) {
+    .sidebar {
+        width: 100%;
+        height: 100vh;
+        z-index: 10;
+        position: none;
+        padding: 10px;
+        background-color: #24252a;
+        color: black;
+        border-right: 2px solid #333;
+        box-shadow: 20px 0px 0px 3px rgba(0, 0, 0, 0.082);
+        display: fixed;
+        transition: all 0.5s ease 0s;
+    }
+
+    .sidebar.open {
+        display: fixed;
+        transition: all 0.5s ease 0s;
+    }
 }

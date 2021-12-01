@@ -102,7 +102,7 @@ export default function NavBar({ user }: DataNavBar) {
             <LuaIcon src={"https://imgur.com/YkjiyCT.png"} />
             {urls.map(url => {
                 return (
-                    <Link href={url.url}>
+                    <Link href={url.url} key={url.url}>
                         <Cta>
                             <i className={url.icon}></i>
                             {url.name}
@@ -121,7 +121,7 @@ function UserBox({ user }: DataNavBar) {
         return (
             <Avatar>
                 <Username>{user?.username}<UserDiscriminator>#{user?.discriminator}</UserDiscriminator></Username>
-                <AvatarImg src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png`} alt="avatar" />
+                <AvatarImg src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"} alt="avatar" />
             </Avatar>
         )
     } else {

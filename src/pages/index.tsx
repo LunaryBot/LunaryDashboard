@@ -4,7 +4,7 @@ import { URLS, User } from '../types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
-import { SideBar } from '../components/SideBar';
+import SideBar from '../components/SideBar';
 
 export default function Home({ token }) {
   const [user, setUser] = useState<User | null | any>(null);
@@ -30,7 +30,7 @@ export default function Home({ token }) {
   return (
     <main>
       <NavBar user={user} />
-      <SideBar />
+      {/* <SideBar /> */}
       <h1>Hello</h1>
     </main>
   )
