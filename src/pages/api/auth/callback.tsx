@@ -8,7 +8,14 @@ require('dotenv').config();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const code = req.query.code as string;
 
-    if(!code) return res.send('No code');
+    if(!code) {
+      if(req.query.error) {
+        const error = req.query.error as string;
+        // const errorDescription = req.query.error_description as string;
+        if(error === 'access_denied') return res.redirect('/');
+      }
+      return res.send('No code');
+    }
 
     const data = new formData();
     data.append("client_id", process.env.DISCORD_CLIENT_ID)
