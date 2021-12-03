@@ -30,8 +30,6 @@ export default function Home({ token }) {
   return (
     <main>
       <NavBar user={user} />
-      {/* <SideBar /> */}
-      <h1>Hello</h1>
     </main>
   )
 }

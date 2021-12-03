@@ -39,6 +39,7 @@ const Avatar = sty.div`
     margin-left: auto;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `
 
 const AvatarImg = sty.img`
@@ -119,10 +120,12 @@ export default function NavBar({ user }: DataNavBar) {
 function UserBox({ user }: DataNavBar) {
     if(user) {
         return (
-            <Avatar>
-                <Username>{user?.username}<UserDiscriminator>#{user?.discriminator}</UserDiscriminator></Username>
-                <AvatarImg src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"} alt="avatar" />
-            </Avatar>
+            <Link href="/dashboard/@me">
+                <Avatar>
+                    <Username>{user?.username}<UserDiscriminator>#{user?.discriminator}</UserDiscriminator></Username>
+                    <AvatarImg src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"} alt="avatar" />
+                </Avatar>
+            </Link>
         )
     } else {
         return (
