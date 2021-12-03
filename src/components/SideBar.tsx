@@ -3,8 +3,6 @@ import sty from "styled-components";
 import Link from "next/link";
 import { User, Guild } from "../types"
 import { useRouter } from "next/router"
-import axios from "axios"   
-import Script from "next/script"
 
 const imgDefault = "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"
 
@@ -45,7 +43,10 @@ const SelectGuild = sty.div`
     flex-direction: column;
     border-width: 0 0 0 0;
     border-style: solid;
-    &:hover div {
+    &.open {
+        background-color: #ffffff30;
+    }
+    &.open div {
         opacity: 1;
         visibility: visible;
         pointer-events: all;
@@ -139,9 +140,9 @@ const _urls = {
             icon: "fas fa-home"
         },
         {
-            name: "Invite",
-            url: "/invite",
-            icon: "fas fa-plus"
+            name: " Servidores",
+            url: "/guilds",
+            icon: "fad fa-grip-vertical"
         }
     ]
 }
@@ -164,7 +165,11 @@ export default function SideBar({ user, guild, guilds }: SideBarData) {
                 <br />
 
                 <SelectGuildWrapper>
-                    <SelectGuild>
+                    <SelectGuild id={"SelectGuildSideBar"} onClick={() => {
+                        const select = document.getElementById("SelectGuildSideBar")
+
+                        select.classList.toggle("open")
+                    }}>
                         <GuildCard>
                             <div className="sidebar-header">
                                 <div className={"user-pic"}>
@@ -185,7 +190,7 @@ export default function SideBar({ user, guild, guilds }: SideBarData) {
                                 </GuildCard>
                             </Link>
                             <hr />
-                            {guilds && guilds.map((guild: Guild) => {
+                            {guilds && guilds.sort((a, b) => a.name.localeCompare(b.name)).map((guild: Guild) => {
                                 return (
                                     <Link href={`/dashboard/guild/${guild.id}`} key={guild.id}>
                                         <GuildCard>
