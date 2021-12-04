@@ -10,6 +10,11 @@ const Header = sty.header`
     padding: 7px 20px;
     background-color: #24252a;
     transition-duration: 0.5s;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+	top: 0;
 `
 
 const LuaIcon = sty.img`

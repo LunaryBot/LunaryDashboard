@@ -141,7 +141,7 @@ const _urls = {
         },
         {
             name: " Servidores",
-            url: "/guilds",
+            url: "/dashboard/guilds",
             icon: "fad fa-grip-vertical"
         }
     ]

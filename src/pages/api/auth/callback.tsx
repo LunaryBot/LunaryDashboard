@@ -33,7 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(!token.access_token) return res.send('No access token');
 
     nookies.set({ res }, 'lunarydash.token', token.access_token, {
-      maxAge: 1 * 60 * 60, // 1 hour
+      maxAge: 5 * 60 * 60, // 5 hours
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       path: '/',

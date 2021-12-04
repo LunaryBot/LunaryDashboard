@@ -1,13 +1,13 @@
 import React, { useEffect, useState  } from 'react';
 import { parseCookies } from 'nookies';
-import { Guild, URLS, User } from '../../types';
+import { Guild, URLS, User } from '../../../types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
-import NavBar from '../../components/NavBar';
-import SideBar from '../../components/SideBar';
-import _GuildCard from '../../components/GuildCard';
+import NavBar from '../../../components/NavBar';
+import SideBar from '../../../components/SideBar';
+import _GuildCard from '../../../components/GuildCard';
 
-export default function DashboardUser({ token }) {
+export default function DashboardGuilds({ token }) {
   const [user, setUser] = useState<User | null | any>(null);
 
   useEffect(() => {
@@ -58,15 +58,14 @@ export default function DashboardUser({ token }) {
     <main>
       <NavBar user={user} />
       <SideBar user={user} guilds={guilds} />
-      {/* <br />
-      <br />
-      {guilds?.map((guild: Guild) => {
-        return (
-          <_GuildCard key={guild.id} guild={guild} />
-        )
-      })}
-      <br />
-      <br /> */}
+      
+      <div className={"content"}>
+        {guilds?.map((guild: Guild) => {
+            return (
+            <_GuildCard key={guild.id} guild={guild} />
+            )
+        })}
+      </div>
     </main>
   )
 }
