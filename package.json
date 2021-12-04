@@ -19,6 +19,7 @@
     "@types/node-fetch": "^3.0.3",
     "@types/uuid": "^8.3.3",
     "axios": "^0.24.0",
+    "discord.js": "^12.5.1",
     "dotenv": "^10.0.0",
     "eris": "^0.16.1",
     "form-data": "^4.0.0",

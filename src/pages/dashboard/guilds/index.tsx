@@ -60,9 +60,14 @@ export default function DashboardGuilds({ token }) {
       <SideBar user={user} guilds={guilds} />
       
       <div className={"content"}>
-        {guilds?.map((guild: Guild) => {
+        {_guilds?.sort((a, b) => a.name.localeCompare(b.name))
+        .sort((a, b) => {
+            if(guilds.find(g => g.id == a.id)) return -1;
+            else return 1;
+        })
+        .map((guild: Guild) => {
             return (
-            <_GuildCard key={guild.id} guild={guild} />
+                <_GuildCard key={guild.id} guild={guild} has={!!guilds.find(g => g.id == guild.id)} />
             )
         })}
       </div>

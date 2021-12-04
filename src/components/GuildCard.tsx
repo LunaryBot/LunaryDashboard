@@ -57,12 +57,24 @@ const GuildButton = sty.div`
     }
 `
 
-export default function _GuildCard({ guild }: { guild: Guild }) {
+export default function _GuildCard({ guild, has }: { guild: Guild, has: boolean }) {
     return (
         <GuildCard>
             <GuildIcon src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : "https://cdn.discordapp.com/emojis/821939251243122719.png?size=128"} />
             <GuildName>{guild.name}</GuildName>
-            <Link href={`/dashboard/guild/${guild.id}`}><GuildButton><i className={"fas fa-wrench"}></i> Manage</GuildButton></Link>
+            <Link href={`/dashboard/guild/${guild.id}`}><GuildButton>{(() => {
+                if(!has) return (
+                    <>
+                        <i className={"fas fa-plus"}></i> Invite
+                    </>
+                )
+                
+                return (
+                    <>
+                        <i className={"fas fa-wrench"}></i> Setup
+                    </>
+                )
+            })()}</GuildButton></Link>
         </GuildCard>
     )
 }
