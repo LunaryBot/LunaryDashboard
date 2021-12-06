@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 import Head from 'next/head';
 import "../styles/SideBar.css";
+import Script from 'next/script';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -28,6 +29,15 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <GlobalStyle />
       <Component {...pageProps} />
+
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        type="text/javascript"
+        onLoad={() => {
+          console.log('jquery loaded')
+          console.log($('#SidebarBtn').hasClass('active'))
+        }}
+      />
     </>
   )
 }

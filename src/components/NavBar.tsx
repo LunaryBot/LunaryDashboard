@@ -40,11 +40,42 @@ const UserDiscriminator = sty.span`
     color: #9e9e9e;
 `
 
+const CtaMenu = sty.div`
+    margin-left: auto;
+    display: none;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+    padding: 9px 25px;
+    background-color: #141414;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &:hover {
+        color: #141414;
+        background-color: #fafafa;
+    }
+    i {
+        margin-right: 5px;
+    }
+    @media (max-width: 980px) {
+        display: flex;
+    }
+`
+
 const Avatar = sty.div`
     margin-left: auto;
     display: flex;
     align-items: center;
     cursor: pointer;
+    @media (max-width: 768px) {
+        span, h1, img {
+            display: none;
+        }
+    }
 `
 
 const AvatarImg = sty.img`
@@ -98,11 +129,10 @@ const urls = [
 
 interface DataNavBar {
     user: User | null;
+    hasSidebar?: boolean;
 }
 
-export default function NavBar({ user }: DataNavBar) {
-    const router = useRouter()
-    
+export default function NavBar({ user, hasSidebar = true }: DataNavBar) {
     return (
         <Header>
             <LuaIcon src={"https://imgur.com/YkjiyCT.png"} />
@@ -117,20 +147,35 @@ export default function NavBar({ user }: DataNavBar) {
                 )
             })}
             
-            <UserBox user={user} />
+            <UserBox user={user} hasSidebar={!!hasSidebar} />
         </Header>
     )
 }
 
-function UserBox({ user }: DataNavBar) {
+function UserBox({ user, hasSidebar = true }: DataNavBar) {
     if(user) {
         return (
-            <Link href="/dashboard/@me">
-                <Avatar>
-                    <Username>{user?.username}<UserDiscriminator>#{user?.discriminator}</UserDiscriminator></Username>
-                    <AvatarImg src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"} alt="avatar" />
-                </Avatar>
-            </Link>
+            <>
+                <Link href="/dashboard/@me">
+                    <Avatar>
+                        <Username>{user?.username}<UserDiscriminator>#{user?.discriminator}</UserDiscriminator></Username>
+                        <AvatarImg src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"} alt="avatar" />
+                    </Avatar>
+                </Link>
+
+                {(() => {
+                    if(hasSidebar != false) {
+                        return (
+                            <CtaMenu id="SidebarBtn" onClick={() => {
+                                const sidebar = document.getElementById("Sidebar")
+                                sidebar.classList.toggle("open")
+                            }}>
+                                <i className="fas fa-bars"></i> Menu
+                            </CtaMenu>
+                        )
+                    }
+                })()}
+            </>
         )
     } else {
         return (

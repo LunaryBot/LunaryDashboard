@@ -161,7 +161,7 @@ export default function SideBar({ user, guild, guilds }: SideBarData) {
 
     return (
         <>
-            <div className="sidebar">
+            <div className={"sidebar open"} id="Sidebar">
                 <br />
 
                 <SelectGuildWrapper>
