@@ -7,6 +7,8 @@ import NavBar from '../../../components/NavBar';
 import SideBar from '../../../components/SideBar';
 import _GuildCard from '../../../components/GuildCard';
 import { useRouter } from 'next/router';
+import { createState } from '../../../Utils/states';
+
 
 export default function DashboardGuilds({ token }) {
   const [user, setUser] = useState<User | null | any>(null);
@@ -80,10 +82,7 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
   const { ['lunarydash.token']: token } = parseCookies(ctx)
   
   if(!token) {
-    const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    if(!global.states || (typeof global.states == "object" && !Array.isArray(global.states))) global.states = {};
-    
-    global.states[state] = ctx.req.url
+    const state = createState({ url: ctx.req.url });
 
     return {
       redirect: {
