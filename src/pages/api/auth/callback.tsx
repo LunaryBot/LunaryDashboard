@@ -39,5 +39,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       path: '/',
     });
 
+    const state = req.query.state as string;
+    if(state) {
+      const url = global.states?.[state];
+      if(url) {
+        delete global.states[state];
+        return res.redirect(url);
+      }
+      if(url) return res.redirect(url);
+    }
+
     res.redirect('/dashboard/@me');
 }

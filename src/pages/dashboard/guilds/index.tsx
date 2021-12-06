@@ -1,4 +1,4 @@
-import React, { useEffect, useState  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
 import { Guild, URLS, User } from '../../../types';
 import { GetServerSideProps } from 'next';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import NavBar from '../../../components/NavBar';
 import SideBar from '../../../components/SideBar';
 import _GuildCard from '../../../components/GuildCard';
+import { useRouter } from 'next/router';
 
 export default function DashboardGuilds({ token }) {
   const [user, setUser] = useState<User | null | any>(null);
@@ -78,10 +79,17 @@ export default function DashboardGuilds({ token }) {
 export const getServerSideProps: GetServerSideProps = async(ctx) => {
   const { ['lunarydash.token']: token } = parseCookies(ctx)
   
-  if(!token) return {
-    redirect: {
-      destination: '/api/auth/login',
-      permanent: false
+  if(!token) {
+    const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    if(!global.states || (typeof global.states == "object" && !Array.isArray(global.states))) global.states = {};
+    
+    global.states[state] = ctx.req.url
+
+    return {
+      redirect: {
+        destination: `/api/auth/login?state=${state}`,
+        permanent: false
+      }
     }
   }
 

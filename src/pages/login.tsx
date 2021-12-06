@@ -7,9 +7,11 @@ export default function Login() {
 }
 
 export const getServerSideProps: GetServerSideProps = async(ctx) => {
+    const state = ctx.query.state;
+
     return {
         redirect: {
-            destination: '/api/auth/login',
+            destination: `/api/auth/login${state ? `?state=${state}` : ''}`,
             permanent: false
         }
     }

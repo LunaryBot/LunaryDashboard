@@ -6,5 +6,7 @@ import axios from 'axios';
 require('dotenv').config();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	res.redirect('/api/auth/login');
+	const state = req.query.state;
+
+	res.redirect(`/api/auth/login${state ? `?state=${state}` : ''}`);
 }
