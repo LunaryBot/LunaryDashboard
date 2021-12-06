@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 import Head from 'next/head';
 import "../styles/SideBar.css";
+import "../styles/NavBar.css"
 import Script from 'next/script';
 
 const GlobalStyle = createGlobalStyle`

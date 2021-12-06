@@ -1,0 +1,129 @@
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 7px 20px;
+    background-color: #24252a;
+    transition-duration: 0.5s;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+	top: 0;
+}
+
+header .icon {
+    width: 4%;
+    margin-right: 10px;
+    transition: border 0.5s;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+/* 
+================================================================================
+                                Cta's
+================================================================================
+*/
+header .Cta {
+    margin-left: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+    padding: 9px 25px;
+    background-color: #141414;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+header .CtaMenu {
+    margin-left: auto;
+    display: none;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+    padding: 9px 25px;
+    background-color: #141414;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+header .CtaMenu i,
+header .Cta i {
+    margin-right: 5px;
+}
+
+header .CtaMenu:hover,
+header .Cta:hover {
+    color: #141414;
+    background-color: #fafafa;
+}
+
+/* 
+================================================================================
+                                Avatar
+================================================================================
+*/
+
+header .avatar {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+header .avatar img {
+    margin-right: -70px;
+    border-radius: 50%;
+    width: 10%;
+    min-width: 60px;
+    opacity: 50%;
+    border: 2px solid #00000000;
+    transition: border 0.5s;
+}
+
+header .avatar img:hover {
+    opacity: 100%;
+    border: 2px solid #A020F0;
+    transition: border 0.5s;
+}
+
+header .avatar h1 {
+    font-size: 1.5em;
+    color: #cfcfcf;
+    margin-right: 10px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+header .avatar span {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: #9e9e9e;
+}
+
+/*
+================================================================================
+                                Responsive
+================================================================================
+*/
+
+@media screen and (max-width: 980px) {
+    header .avatar span, 
+    header .avatar h1, 
+    header .avatar img {
+        display: none;
+    }
+
+    header .CtaMenu {
+        display: flex;
+    }
+}

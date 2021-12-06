@@ -29,7 +29,7 @@ export default function Home({ token }) {
   
   return (
     <main>
-      <NavBar user={user} />
+      <NavBar user={user} hasSidebar={false} />
     </main>
   )
 }

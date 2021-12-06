@@ -90,7 +90,6 @@ const SelectGuildOptions = sty.div`
 const GuildCard = sty.div`
     color: #ffffff;
     width: 100%;
-    heigth: 100px;
     margin: auto;
     display: flex;
     border-radius: 5px;
@@ -147,81 +146,114 @@ const _urls = {
     ]
 }
 
+const urlsDefault = [
+    {
+        name: "Home",
+        url: "/",
+        icon: "fas fa-home"
+    },
+    {
+        name: "Invite",
+        url: "/invite",
+        icon: "fas fa-plus"
+    }
+]
+
 interface SideBarData {
     user: User | null;
     guild?: Guild | null;
-    guilds: Guild[] | null;
-    guildId?: string | null 
+    guilds?: Guild[] | null;
+    guildId?: string | null;
+    hasDashboard?: boolean;
 }
 
-export default function SideBar({ user, guild, guilds }: SideBarData) {
+interface SideBarProfileData {
+    user: User | null;
+    guild?: Guild | null;
+    guilds?: Guild[] | null;
+}
+
+export default function SideBar({ user, guild, guilds, hasDashboard = true }: SideBarData) {
     const router = useRouter()
-    const s = guild || user
-    const urls = _urls[guild ? "guild" : "user"]
+    const urls = hasDashboard ? _urls[guild ? "guild" : "user"] : urlsDefault
 
     return (
         <>
-            <div className={"sidebar open"} id="Sidebar">
+            <div className={"sidebar"} id="Sidebar">
                 <br />
 
-                <SelectGuildWrapper>
-                    <SelectGuild id={"SelectGuildSideBar"} onClick={() => {
-                        const select = document.getElementById("SelectGuildSideBar")
+                {(() => {
+                    if(hasDashboard) return (
+                        <Profile user={user} guilds={guilds} guild={guild} />
+                    )
+                })()}
 
-                        select.classList.toggle("open")
-                    }}>
-                        <GuildCard>
-                            <div className="sidebar-header">
-                                <div className={"user-pic"}>
-                                    <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : imgDefault} />
-                                </div>
-                                <div className={"user-info"}>
-                                    <h1 className={"user-name"}>{user?.username}</h1>
-                                    <span className={"user-id"}>{user?.id}</span>
-                                </div>
-                            </div>
-                        </GuildCard>
-
-                        <SelectGuildOptions>
-                            <Link href={`/dashboard/@me`} key={user?.id}>
-                                <GuildCard className={!guild ? "selected" : ""}>
-                                    <GuildIcon src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : imgDefault} />
-                                    <GuildName>{user?.username}</GuildName>
-                                </GuildCard>
-                            </Link>
-                            <hr />
-                            {guilds && guilds.sort((a, b) => a.name.localeCompare(b.name)).map((guild: Guild) => {
-                                return (
-                                    <Link href={`/dashboard/guild/${guild.id}`} key={guild.id}>
-                                        <GuildCard>
-                                            <GuildIcon src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : imgDefault} />
-                                            <GuildName>{guild.name}</GuildName>
-                                        </GuildCard>
-                                    </Link>
-                                )
-                            })}
-                            <hr />
-                            <Link href={`/invite`} key={`invite`}>
-                                <Cta id={"cta-invite"}>
-                                    <i className={`fas fa-plus`}></i>
-                                    Invite
-                                </Cta>
-                            </Link>
-                        </SelectGuildOptions>
-                    </SelectGuild>
-                </SelectGuildWrapper>
-
-                {urls.map((url) => {
+                {urls.map((url: {
+                    name: string;
+                    url: string;
+                    icon: string;
+                }) => {
                     return (
                         <Link href={url.url} key={url.url}>
-                            <Cta>
+                            <div className={"Cta"}>
                                 <i className={`${url.icon} ${router.pathname == url.url ? "selected" : ""}`}></i>
                                 {url.name}
-                            </Cta>
+                            </div>
                         </Link>
                     )
                 })}
             </div>
         </>
     );
-}; 
+};
+
+function Profile({ user, guilds, guild }: SideBarProfileData) {
+    return (
+        <div className={"select-guild-wrapper"}>
+            <div className={"select-guild"} id={"SelectGuildSideBar"} onClick={() => {
+                const select = document.getElementById("SelectGuildSideBar")
+
+                select.classList.toggle("open")
+            }}>
+                <div className={"guild-card"}>
+                    <div className="sidebar-header">
+                        <div className={"user-pic"}>
+                                <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : imgDefault} />
+                        </div>
+                        <div className={"user-info"}>
+                            <h1 className={"user-name"}>{user?.username}</h1>
+                            <span className={"user-id"}>{user?.id}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={"select-guild-options"}>
+                    <Link href={`/dashboard/@me`} key={user?.id}>
+                        <div className={`guild-card ${!guild ? "selected" : ""}`}>
+                            <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : imgDefault} />
+                            <span>{user?.username}</span>
+                        </div>
+                    </Link>
+                    <hr />
+                    {guilds && guilds.sort((a, b) => a.name.localeCompare(b.name)).map((guild: Guild) => {
+                        return (
+                            <Link href={`/dashboard/guild/${guild.id}`} key={guild.id}>
+                                <div className={"guild-card"}>
+                                    <img src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : imgDefault} />
+                                    <span>{guild.name}</span>
+                                </div>
+                            </Link>
+                        )
+                    })}
+                    <hr />
+                    <Link href={`/invite`} key={`invite`}>
+                        <div className={"Cta"} id={"cta-invite"}>
+                            <i className={`fas fa-plus`}></i>
+                            Invite
+                        </div>
+                    </Link>
+                </div> 
+            </div>
+        </div>
+    )
+}
