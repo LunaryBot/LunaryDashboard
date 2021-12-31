@@ -39,9 +39,13 @@ header .Cta {
     transition: all 0.3s ease 0s;
 }
 
+header .Cta img {
+    width: 15px;
+}
+
 header .CtaMenu {
-    margin-left: auto;
     display: none;
+    margin-left: 10px;
     align-items: center;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
@@ -56,7 +60,8 @@ header .CtaMenu {
 }
 
 header .CtaMenu i,
-header .Cta i {
+header .Cta i,
+header .Cta img {
     margin-right: 5px;
 }
 
@@ -71,6 +76,61 @@ header .Cta:hover {
                                 Avatar
 ================================================================================
 */
+
+header .avatar .user-menu-wrapper {
+    position: relative;
+    user-select: none;
+}
+
+header .avatar .user-menu-wrapper .user-menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-width: 0 0 0 0;
+    border-style: solid;
+}
+
+header .avatar:hover .user-menu-wrapper .user-menu .user-menu-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+header .avatar .user-menu-wrapper .user-menu .user-menu-options {
+    position: absolute;
+    margin-top: 30px;
+    top: 100%;
+    left: -105px;
+    width: 180px;
+    background-color: #151516;
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease 0s;
+    color: #edf0f1;
+}
+
+header .avatar .user-menu-wrapper .user-menu .user-menu-options div {
+    margin-top: 9px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 18px;
+}
+
+header .avatar .user-menu-wrapper .user-menu .user-menu-options div:hover {
+    margin-left: 10px;
+}
+
+header .avatar .user-menu-wrapper .user-menu .user-menu-options i {
+    color: #A020F0;
+    margin-right: 5px;
+}
 
 header .avatar {
     margin-left: auto;
@@ -118,12 +178,19 @@ header .avatar span {
 
 @media screen and (max-width: 980px) {
     header .avatar span, 
-    header .avatar h1, 
-    header .avatar img {
+    header .avatar h1 {
         display: none;
     }
 
     header .CtaMenu {
+        display: flex;
+    }
+
+    header .Cta {
+        display: none;
+    }
+
+    header .CtaInvite {
         display: flex;
     }
 }

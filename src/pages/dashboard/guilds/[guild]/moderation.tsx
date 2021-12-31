@@ -1,16 +1,19 @@
-import React, { useEffect, useState  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
-import { Guild, URLS, User } from '../../../types';
+import { Guild, URLS, User } from '../../../../types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
-import NavBar from '../../../components/NavBar';
-import SideBar from '../../../components/SideBar';
-import _GuildCard from '../../../components/GuildCard';
-import { createState } from '../../../Utils/states';
+import NavBar from '../../../../components/NavBar';
+import SideBar from '../../../../components/SideBar';
+import _GuildCard from '../../../../components/GuildCard';
+import { useRouter } from 'next/router';
+import { createState } from '../../../../Utils/states';
+import fetch from 'node-fetch';
 
-export default function DashboardUser({ token, user }: { token: string; user: User }) {
+export default function DashboardGuilds({ token, user }: { token: string; user: User }) {
     const [guilds, setGuilds] = useState<Guild[] | null | any>(null);
     const [_guilds, _setGuilds] = useState<Guild[] | null | any>(null);
+    const [guild, setGuild] = useState<Guild | null | any>(null);
 
     useEffect(() => {
         (async() => {
@@ -35,20 +38,38 @@ export default function DashboardUser({ token, user }: { token: string; user: Us
             _setGuilds(data);
         }
         })()
-    }, [guilds])
-    
+    }, [guilds]);
+
+    // useEffect(() => {
+    //     (async() => {
+    //     if(guild) setGuild(guild)
+    //     else {
+    //         console.log(`${bot_api}/api/guild/${guildId}`)
+    //         const res = await axios.get(`${bot_api}/api/guild/${guildId}`)
+    //         const data = res;
+    //         console.log("fetch guild")
+    //         console.log(data);
+    //         setGuild(data);
+    //     }
+    //     })()
+    // }, [guild]);
+  
     return (
         <main>
             <NavBar user={user} />
             <SideBar user={user} guilds={guilds} />
+            
+            <div className={"content"}>
+                
+            </div>
         </main>
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async(ctx) => {
     const { ['lunarydash.token']: token } = parseCookies(ctx)
-  
-  
+    
+    
     if(!token) {
         return propsRedirect()
     }
@@ -59,17 +80,18 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 Authorization: `Bearer ${token}`,
             }
         }).then(res => res.json());
+
+        console.log(ctx.req.url.split("/")[2])
     
         return {
             props: {
                 token,
-                user,
-                bot_api: process.env.BOT_API
+                user
             }
         }
     } catch(e) {
         return propsRedirect()
-  }
+    }
 
     function propsRedirect() {
         const state = createState({ url: ctx.req.url });
