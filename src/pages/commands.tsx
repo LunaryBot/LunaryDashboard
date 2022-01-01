@@ -10,11 +10,13 @@ const constants = {
     "user-tag": "Pinho#1856",
     "@user": "@Pinho",
     "reason": "Regra 13: É biscoito, bobo",
-    "notify-dm": "True",
+    "notify-dm": "False",
     "time": "1h30m",
     "amountClear": "132",
     "amount": "3",
-    "id": "mhjr44cg-f1yu-0o2d-8wxq-m3n56kbgwp"
+    "id": "mhjr44cg-f1yu-0o2d-8wxq-m3n56kbgwp",
+    "newreason": "É biscoito, bobinho",
+    "channel": "#general"
 }
   
 const categorys = {
@@ -36,7 +38,7 @@ const categorys = {
     },
     "owner": {
         name: "Owner",
-        color: "#d696fd"
+        color: "#c07aec"
     }
 }
 
