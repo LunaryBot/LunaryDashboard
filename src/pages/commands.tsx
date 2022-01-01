@@ -36,7 +36,6 @@ function replaceUsage(string) {
 }
 
 export default function Commands({ token, user }: { token?: string|null; user?: User|null }) {
-    
     return (
         <>
             <main>
@@ -56,7 +55,7 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                             </p>
                     </div>
                     
-                    <form>
+                    <form onSubmit={(e) => e.preventDefault()}>
                         <div className="content-commands-column-2">
                             <div className="content-commands-column-2-left">
                             <h1>Grupos</h1>
@@ -175,6 +174,24 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                         $('#commands-list').hide();
                         $('.commands-loading-failed').show();
                     }
+
+                    $(".search-box").on("keyup", function(){
+                        console.log('searching')
+                        const e = $(this)
+                        const value = String($(this).val()).toLowerCase().trim();
+                        if(!value) {
+                            const attr = $('.col-2-btn.active').attr('data-li');
+                            $('.command').hide();
+                            $(`.${attr}`).show();
+                            return;
+                        };
+
+                        const commandsDiv = $(".commands div") as any;
+                        commandsDiv.filter(function(_,el) {
+                            if(!$(el).hasClass('command')) { return; };
+                            $(this).toggle($(this).text().toLowerCase().trim().indexOf(value)>-1)
+                        });
+                    });
                 }}
             >
 
