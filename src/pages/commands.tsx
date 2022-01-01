@@ -2,6 +2,7 @@ import { commands } from '../json/commands.json';
 import { parseCookies } from 'nookies';
 import { URLS, User } from '../types';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import NavBar from '../components/NavBar';
 import Script from 'next/script';
 const constants = {
@@ -17,11 +18,26 @@ const constants = {
 }
   
 const categorys = {
-    "moderation": "Moderação",
-    "administration": "Administração",
-    "utilities": "Utilitarios",
-    "bot": "Luny",
-    "owner": "Owner"
+    "moderation": {
+        name: "Moderação",
+        color: "#ff7373",
+    },
+    "administration": {
+        name: "Administração",
+        color: '#fcb75c',
+    },
+    "utilities": {
+        name: "Utilitarios",
+        color: "#fd87b0"
+    },
+    "bot": {
+        name: "Luny",
+        color: "#A020F0"
+    },
+    "owner": {
+        name: "Owner",
+        color: "#d696fd"
+    }
 }
 
 function replaceUsage(string) {
@@ -36,6 +52,7 @@ function replaceUsage(string) {
 }
 
 export default function Commands({ token, user }: { token?: string|null; user?: User|null }) {
+    const { query: { category } } = useRouter();
     return (
         <>
             <main>
@@ -67,11 +84,11 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                                 </div>
                             </div>
                             <ul className="qa-menu-list">
-                                <li data-li="moderation" className="col-2-btn">Moderação</li>
-                                <li data-li="administration" className="col-2-btn">Administração</li>
-                                <li data-li="utilities" className="col-2-btn">Utilitarios</li>
-                                <li data-li="bot" className="col-2-btn">Luny</li>
-                                <li data-li="owner" className="col-2-btn">Owner</li>
+                                {Object.entries(categorys).map(([key, {name}]) => {
+                                    return (
+                                        <li data-li={key} className={`col-2-btn ${category == key ? "active" : ""}`}>{name}</li>
+                                    )
+                                })}
                             </ul>
                             </div>
                             <div className="content-commands-column-2-right">
@@ -103,8 +120,8 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                             $commands.append(`
                             <div class="command ${command.group}" name="${command.name}">
                             <div class="command-heading">
-                            <div class="group-icon group-for-${command.name.replace(/ +/g, "_")}" style="background-color: #a020f0">
-                                <p>${categorys[command.group] || 'No group'}</p>
+                            <div class="group-icon group-for-${command.name.replace(/ +/g, "_")}" style="background-color: ${categorys[command.group]?.color || '#a020f0'}">
+                                <strong>${categorys[command.group]?.name || 'No group'}</strong>
                             </div>
                             <div class="command-heading-left">
                                 <div class="arrow-icon">
@@ -139,6 +156,7 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
 
                         $('.commands-still-loading').hide();
                         $('.command').hide();
+                        if(categorys[category as string]) { $(`.command.${category}`).show() }
                         $('.Moderação').show();
                         $('.command-details').hide();
                         $('.clock-icon').hide()
@@ -189,7 +207,7 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                         const commandsDiv = $(".commands div") as any;
                         commandsDiv.filter(function(_,el) {
                             if(!$(el).hasClass('command')) { return; };
-                            $(this).toggle($(this).text().toLowerCase().trim().indexOf(value)>-1)
+                            $(this).toggle($(this).attr('name').toLowerCase().trim().indexOf(value)>-1)
                         });
                     });
                 }}
