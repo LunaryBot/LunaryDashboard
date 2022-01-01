@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 import "../styles/SideBar.css";
 import "../styles/NavBar.css"
+import '../styles/commands.css';
 import Script from 'next/script';
 
 const GlobalStyle = createGlobalStyle`
@@ -17,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: sans-serif;
     background-color: #1e1e22;
+    color: white
   }
 `
 
@@ -26,19 +28,18 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>Luna</title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
-        {/* <script src="https://raw.githubusercontent.com/LunaryBot/LunaryWebsite/master/src/assets/js/jquery.js"></script> */}
       </Head>
       <GlobalStyle />
       <Component {...pageProps} />
 
-      <Script
+      {/* <Script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         type="text/javascript"
         onLoad={() => {
           console.log('jquery loaded')
           console.log($('#SidebarBtn').hasClass('active'))
         }}
-      />
+      /> */}
     </>
   )
 }
