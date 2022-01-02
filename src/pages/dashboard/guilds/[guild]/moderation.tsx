@@ -80,14 +80,20 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 Authorization: `Bearer ${token}`,
             }
         }).then(res => res.json());
+        
+        try {
+            const guild = await fetch(`${process.env.BOT_API}`.replace(/\/$/, '') + "/api/guild/" + ctx.query.id).then(res => res.json()) as any;
 
-        console.log(ctx.req.url.split("/")[2])
-    
-        return {
-            props: {
-                token,
-                user
+            if(!guild || guild.status !== 200) {}
+            return {
+                props: {
+                    token,
+                    user,
+                    guild
+                }
             }
+        } catch (e) {
+            
         }
     } catch(e) {
         return propsRedirect()

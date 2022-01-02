@@ -1,5 +1,5 @@
 import sty from "styled-components";
-import { Guild } from "../types";
+import { GuildData } from "../types";
 import Link from "next/link";
 
 const GuildCard = sty.div`
@@ -57,7 +57,7 @@ const GuildButton = sty.div`
     }
 `
 
-export default function _GuildCard({ guild, has }: { guild: Guild, has: boolean }) {
+export default function _GuildCard({ guild, has }: { guild: GuildData, has: boolean }) {
     return (
         <GuildCard>
             <GuildIcon src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : "https://cdn.discordapp.com/emojis/821939251243122719.png?size=128"} />

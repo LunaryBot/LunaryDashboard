@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
-import { Guild, URLS, User } from '../../../types';
+import { GuildData, URLS, User } from '../../../types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../components/NavBar';
@@ -10,8 +10,8 @@ import { useRouter } from 'next/router';
 import { createState } from '../../../Utils/states';
 
 export default function DashboardGuilds({ token, user }: { token: string; user: User }) {
-    const [guilds, setGuilds] = useState<Guild[] | null | any>(null);
-    const [_guilds, _setGuilds] = useState<Guild[] | null | any>(null);
+    const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
+    const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
 
     useEffect(() => {
         (async() => {
@@ -50,7 +50,7 @@ export default function DashboardGuilds({ token, user }: { token: string; user: 
                     if(guilds.find(g => g.id == a.id)) return -1;
                     else return 1;
                 })
-                .map((guild: Guild) => {
+                .map((guild: GuildData) => {
                 return (
                     <_GuildCard key={guild.id} guild={guild} has={!!guilds.find(g => g.id == guild.id)} />
                 );

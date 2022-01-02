@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from "next/link";
-import { User, Guild } from "../types"
+import { User, GuildData } from "../types"
 import { useRouter } from "next/router"
 
 const imgDefault = "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"
@@ -42,16 +42,16 @@ const urlsDefault = [
 
 interface SideBarData {
     user: User | null;
-    guild?: Guild | null;
-    guilds?: Guild[] | null;
+    guild?: GuildData | null;
+    guilds?: GuildData[] | null;
     guildId?: string | null;
     hasDashboard?: boolean;
 }
 
 interface SideBarProfileData {
     user: User | null;
-    guild?: Guild | null;
-    guilds?: Guild[] | null;
+    guild?: GuildData | null;
+    guilds?: GuildData[] | null;
 }
 
 export default function SideBar({ user, guild, guilds, hasDashboard = true }: SideBarData) {
@@ -117,7 +117,7 @@ function Profile({ user, guilds, guild }: SideBarProfileData) {
                     </Link>
                     <hr />
                     {guilds?.filter(x => !!(x.permissions & 8))
-                    .sort((a, b) => a.name.localeCompare(b.name)).map((guild: Guild) => {
+                    .sort((a, b) => a.name.localeCompare(b.name)).map((guild: GuildData) => {
                         return (
                             <Link href={`/dashboard/guilds/${guild.id}/moderation`} key={guild.id}>
                                 <div className={"guild-card"}>

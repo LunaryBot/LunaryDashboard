@@ -157,8 +157,10 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                         })
 
                         $('.commands-still-loading').hide();
-                        $('.command').hide();
-                        if(categorys[category as string]) { $(`.command.${category}`).show() }
+                        if(categorys[category as string]) { 
+                            $('.command').hide();
+                            $(`.command.${category}`).show() 
+                        }
                         $('.Moderação').show();
                         $('.command-details').hide();
                         $('.clock-icon').hide()
