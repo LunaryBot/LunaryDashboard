@@ -86,3 +86,10 @@ export interface Guild {
 	shardID: number;
 	cluserID: string;
 }
+
+export interface APIGuildResponse {
+	status: number;
+	statusText: string;
+	data?: GuildData|null;
+	query: string;
+}

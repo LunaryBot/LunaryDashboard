@@ -7,6 +7,7 @@ import '../styles/commands.css';
 import Script from 'next/script';
 
 const GlobalStyle = createGlobalStyle`
+    @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap';
     * {
         margin: 0;
         padding: 0;

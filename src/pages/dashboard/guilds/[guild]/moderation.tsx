@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
-import { Guild, URLS, User } from '../../../../types';
+import { APIGuildResponse, Guild , GuildData, URLS, User } from '../../../../types';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
@@ -10,10 +10,9 @@ import { useRouter } from 'next/router';
 import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
 
-export default function DashboardGuilds({ token, user }: { token: string; user: User }) {
-    const [guilds, setGuilds] = useState<Guild[] | null | any>(null);
-    const [_guilds, _setGuilds] = useState<Guild[] | null | any>(null);
-    const [guild, setGuild] = useState<Guild | null | any>(null);
+export default function DashboardGuilds({ token, user, guild }: { token: string; user: User, guild: Guild }) {
+    const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
+    const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
 
     useEffect(() => {
         (async() => {
@@ -39,28 +38,13 @@ export default function DashboardGuilds({ token, user }: { token: string; user: 
         }
         })()
     }, [guilds]);
-
-    // useEffect(() => {
-    //     (async() => {
-    //     if(guild) setGuild(guild)
-    //     else {
-    //         console.log(`${bot_api}/api/guild/${guildId}`)
-    //         const res = await axios.get(`${bot_api}/api/guild/${guildId}`)
-    //         const data = res;
-    //         console.log("fetch guild")
-    //         console.log(data);
-    //         setGuild(data);
-    //     }
-    //     })()
-    // }, [guild]);
-  
     return (
         <main>
             <NavBar user={user} />
             <SideBar user={user} guilds={guilds} />
             
             <div className={"content"}>
-                
+                <h1>{guild.name}</h1>
             </div>
         </main>
     )
@@ -80,20 +64,34 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 Authorization: `Bearer ${token}`,
             }
         }).then(res => res.json());
+
+        console.log("aqui")
         
         try {
-            const guild = await fetch(`${process.env.BOT_API}`.replace(/\/$/, '') + "/api/guild/" + ctx.query.id).then(res => res.json()) as any;
+            const guild = await fetch(`${process.env.BOT_API}`.replace(/\/$/, '') + "/api/guild/" + ctx.query.guild)
+            .then(res => res.json()) as APIGuildResponse;
 
-            if(!guild || guild.status !== 200) {}
+            if(!guild?.data || guild.status == 404) return {
+                redirect: {
+                    destination: '/invite?guild=' + ctx.query.guild,
+                    permanent: false,
+                }
+            }
+
             return {
                 props: {
                     token,
                     user,
-                    guild
+                    guild: guild.data
                 }
             }
         } catch (e) {
-            
+            return {
+                redirect: {
+                    destination: '/500?error=' + encodeURI(e.message),
+                    permanent: false,
+                }
+            }
         }
     } catch(e) {
         return propsRedirect()
