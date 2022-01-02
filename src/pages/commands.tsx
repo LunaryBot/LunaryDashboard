@@ -54,7 +54,7 @@ function replaceUsage(string) {
 }
 
 export default function Commands({ token, user }: { token?: string|null; user?: User|null }) {
-    const { query: { category } } = useRouter();
+    const { query: { category, s: search } } = useRouter();
     return (
         <>
             <main>
@@ -195,9 +195,25 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                         $('.commands-loading-failed').show();
                     }
 
+                    if(search) {
+                        (function() {
+                            const value = String(search).toLowerCase().trim();
+                            if(!value) {
+                                const attr = $('.col-2-btn.active').attr('data-li');
+                                $('.command').hide();
+                                $(`.${attr}`).show();
+                                return;
+                            };
+
+                            const commandsDiv = $(".commands div") as any;
+                            commandsDiv.filter(function(_,el) {
+                                if(!$(el).hasClass('command')) { return; };
+                                $(this).toggle($(this).attr('name').toLowerCase().trim().indexOf(value)>-1)
+                            });
+                        })()
+                    }
+
                     $(".search-box").on("keyup", function(){
-                        console.log('searching')
-                        const e = $(this)
                         const value = String($(this).val()).toLowerCase().trim();
                         if(!value) {
                             const attr = $('.col-2-btn.active').attr('data-li');

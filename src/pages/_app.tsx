@@ -7,39 +7,45 @@ import '../styles/commands.css';
 import Script from 'next/script';
 
 const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    background-color: #1e1e22;
-    color: white
-  }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins' sans-serif;
+        background-color: #1e1e22;
+        color: white
+    }
+
+    body::-webkit-scrollbar {
+        width: 5px;
+    }
+        
+    body::-webkit-scrollbar-track {
+        background: #16131B;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #A020F0;
+        /*outline: 1px solid slategrey;*/
+        border-radius: 0.5em;
+    }
 `
 
 export default function MyApp({ Component, pageProps }) {
-  return (
-    <> 
-      <Head>
-        <title>Luna</title>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
-      </Head>
-      <GlobalStyle />
-      <Component {...pageProps} />
-
-      {/* <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        type="text/javascript"
-        onLoad={() => {
-          console.log('jquery loaded')
-          console.log($('#SidebarBtn').hasClass('active'))
-        }}
-      /> */}
-    </>
-  )
+    return (
+        <> 
+            <Head>
+                <title>Luna</title>
+                <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
+            </Head>
+            <GlobalStyle />
+            <Component {...pageProps} />
+        </>
+    )
 }
