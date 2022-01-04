@@ -4,7 +4,10 @@ import Head from 'next/head';
 import "../styles/SideBar.css";
 import "../styles/NavBar.css"
 import '../styles/commands.css';
-import Script from 'next/script';
+import '../styles/select-menu.css';
+import initializerFirebases from '../Utils/initializerFirebase';
+
+initializerFirebases();
 
 const GlobalStyle = createGlobalStyle`
     @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap';

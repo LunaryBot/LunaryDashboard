@@ -6,11 +6,11 @@ import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
 import SideBar from '../../../../components/SideBar';
 import _GuildCard from '../../../../components/GuildCard';
-import { useRouter } from 'next/router';
 import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
+import Script from 'next/script';
 
-export default function DashboardGuilds({ token, user, guild }: { token: string; user: User, guild: Guild }) {
+export default function DashboardGuilds({ token, user, guild, database }: { token: string; user: User, guild: Guild, database: any; }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
     const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
 
@@ -19,9 +19,9 @@ export default function DashboardGuilds({ token, user, guild }: { token: string;
         if(guilds) setGuilds(guilds)
         else {
             const res = await axios.get(URLS.GUILDS, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
             
             const data = res.data;
@@ -39,14 +39,82 @@ export default function DashboardGuilds({ token, user, guild }: { token: string;
         })()
     }, [guilds]);
     return (
-        <main>
-            <NavBar user={user} />
-            <SideBar user={user} guilds={guilds} />
-            
-            <div className={"content"}>
-                <h1>{guild.name}</h1>
-            </div>
-        </main>
+        <>
+            <main>
+                <NavBar user={user} />
+                <SideBar user={user} guilds={guilds} />
+                
+                <div className={"content"}>
+                    <div className="select-wrapper" data-send-on-save>
+                            <div className="select" id="muterole">
+                                <div className="select__trigger">
+                                    <p>{(function() {
+                                        let a = "Selecionar Cargo"
+                                        if(database.muterole) {
+                                            const role = guild.roles.filter(x => !x.managed && x.id != guild.id).find(x => x.id == database.muterole)
+                                            if(role) {
+                                                a = role.name
+                                            }
+                                        }
+                                        return a
+                                    })()}</p>
+                                </div>
+                                <form onSubmit={(e) => e.preventDefault() }><p className="select-menu-search"><input type="text" autoComplete='off' placeholder="Nome/ID" name="search" /><i className="icon fas fa-search"></i></p></form>
+                                <div className="custom-options close" id="co-chat_modlogs">
+                                    <span className="custom-option" data-value="none" data-li="Selecionar Cargo">Nenhum</span>
+                                    {guild.roles.filter(x => !x.managed && x.id != guild.id).map(x => <span className="custom-option" style={{color: `#${Number(x.color).toString(16)}`}} data-color={`#${Number(x.color).toString(16)}`} data-value={x.id} data-li={x.name} key={x.id}>{x.name}</span>)}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <Script
+                src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+                onLoad={() => {
+                    $(".select").hover(function() {
+                        const menuID = this.id
+                        const menu = $(this)
+                        menu.addClass("open")
+                    
+                        menu.find(".custom-options").find("span").each(function() {
+                            const option = $(this)
+                    
+                            option.click(function() {
+                                const o = $(this)
+                                menu.find(".custom-options span.selected").map(function() {
+                                    const op = $(this)
+                                    op.removeClass("selected")
+                                })
+                                if(!o.hasClass("selected")) {
+                                    o.addClass("selected")
+                                    menu.find("div.select__trigger p").text(o.attr("data-li") || o.text())
+                                }
+                            })
+                        })
+                        menu.find("input").keyup(function() {
+                            const value = String($(this).val() || "")
+                            menu.find("span").each(function(i, x) {
+                                const option = $(this)
+                                
+                                if((option.text() || "").indexOf(value) > -1 || (option.attr('data-value') || "") == value) {
+                                    $(this).show();
+                                } else {
+                                    $(this).hide();
+                                }
+                            });
+                        })
+                    }, function() {
+                        const menu = $(this)
+                        menu.find("input").val("")
+                        menu.removeClass("open")
+                        menu.find("span").each(function(i, x) {
+                            const option = $(this).show()
+                        })
+                    })
+                }}
+            ></Script>
+        </>
     )
 }
 
@@ -64,8 +132,6 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 Authorization: `Bearer ${token}`,
             }
         }).then(res => res.json());
-
-        console.log("aqui")
         
         try {
             const guild = await fetch(`${process.env.BOT_API}`.replace(/\/$/, '') + "/api/guild/" + ctx.query.guild)
@@ -78,11 +144,17 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 }
             }
 
+            const database = await global.GuildsDB.ref('Servers/869916717122469898').once('value')
+
+            const databaseVal = database.val()
+            console.log(databaseVal)
+
             return {
                 props: {
                     token,
                     user,
-                    guild: guild.data
+                    guild: guild.data,
+                    database: databaseVal
                 }
             }
         } catch (e) {
