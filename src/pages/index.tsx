@@ -13,14 +13,14 @@ export default function Home({ token }) {
             if(token) {
                 if(user) setUser(user)
                 else {
-                const res = await axios.get(URLS.USER, {
-                    headers: {
-                    Authorization: `Bearer ${token}`,
-                    },
-                });
-                const data = res.data;
-                console.log("fetch")
-                setUser(data);
+                    const res = await axios.get(URLS.USER, {
+                        headers: {
+                        Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    const data = res.data;
+                    console.log("fetch")
+                    setUser(data);
                 }
             }
         })()
