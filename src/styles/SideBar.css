@@ -24,6 +24,17 @@
     margin-top: 80px;
 }
 
+.content .page-title {
+	font-family: 'Montserrat', sans-serif;
+	width: auto;
+	color: #edf0f1;
+	border-bottom: 1px solid #A020F0;
+}
+
+.content .page-title i {
+    color: #A020F0;
+}
+
 .content .card {
 	margin-top: 30px;
 }

@@ -68,6 +68,12 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                         </div>
                     </div> */}
 
+                    <div className="page-title">
+                        <br />
+                        <h2><strong><i className="fas fa-hammer"></i> MODERAÇÃO</strong></h2>
+                    </div>
+
+                    <br />
                     <div className="card">
                         <div className="card-title">
                             <h3><strong><i className="fas fa-cog"></i> GERAL</strong></h3>
