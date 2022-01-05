@@ -24,6 +24,34 @@
     margin-top: 80px;
 }
 
+.content .card {
+	margin-top: 30px;
+}
+.content .card .card-title{
+	margin-left: 10px;
+	font-family: 'Montserrat', sans-serif;
+	color: #edf0f1;
+}
+
+.content .card .card-content{
+    background: #181818;
+	padding: 15px;
+	margin-bottom: 10px;
+	opacity: 0.8;
+	border-radius: 5px;
+	border: 2px solid #A020F0;
+    color: #edf0f1;
+    font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+}
+
+.content .card .card-content label {
+	margin-left: 3%;
+}
+
+.content .card .card-content .select-wrapper {
+	margin-left: 3%;
+}
 
 
 @media screen and (max-width: 980px) {

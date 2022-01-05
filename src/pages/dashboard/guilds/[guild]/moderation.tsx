@@ -46,7 +46,7 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                 <SideBar user={user} guilds={guilds} />
                 
                 <div className={"content"}>
-                    <div className="select-wrapper" data-send-on-save>
+                    {/* <div className="select-wrapper" data-send-on-save>
                             <div className="select" id="muterole">
                                 <div className="select__trigger">
                                     <p>{(function() {
@@ -66,9 +66,16 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                                     {guild.roles.filter(x => !x.managed && x.id != guild.id).map(x => <span className="custom-option" style={{color: `#${Number(x.color).toString(16)}`}} data-color={`#${Number(x.color).toString(16)}`} data-value={x.id} data-li={x.name} key={x.id}>{x.name}</span>)}
                                 </div>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <Toggle />
+                    <div className="card">
+                        <div className="card-title">
+                            <h3><strong><i className="fas fa-cog"></i> GERAL</strong></h3>
+                        </div>
+                        <div className="card-content">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore delectus alias laudantium odio eum, aspernatur amet provident, soluta quis doloribus quibusdam assumenda commodi dolor et vel. Sed dolore maiores cum dolorum odio earum, pariatur eum placeat! Aspernatur, cupiditate eius ducimus, eveniet, obcaecati deserunt magni possimus libero optio consectetur nulla iste.
+                        </div>
+                    </div>
                 </div>
             </main>
 
