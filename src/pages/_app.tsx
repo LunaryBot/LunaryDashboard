@@ -10,7 +10,6 @@ import initializerFirebases from '../Utils/initializerFirebase';
 initializerFirebases();
 
 const GlobalStyle = createGlobalStyle`
-    @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap';
     * {
         margin: 0;
         padding: 0;
@@ -47,6 +46,7 @@ export default function MyApp({ Component, pageProps }) {
             <Head>
                 <title>Luna</title>
                 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" />
             </Head>
             <GlobalStyle />
             <Component {...pageProps} />

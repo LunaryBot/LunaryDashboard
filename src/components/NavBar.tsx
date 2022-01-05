@@ -96,7 +96,7 @@ function UserBox({ user, hasSidebar = true }: DataNavBar) {
         return (
             <div className={"avatar"}>
                 <a href="/api/auth/login">
-                    <div className={"Cta"}>
+                    <div className={"Cta"} id={"CtaLogin"}>
                         <i className="fas fa-sign-in-alt"></i>
                     </div>
                 </a>
