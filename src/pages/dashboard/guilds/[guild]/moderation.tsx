@@ -5,6 +5,7 @@ import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
 import SideBar from '../../../../components/SideBar';
+import Toggle from '../../../../components/Toggle';
 import _GuildCard from '../../../../components/GuildCard';
 import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
@@ -66,6 +67,8 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                                 </div>
                         </div>
                     </div>
+
+                    <Toggle />
                 </div>
             </main>
 
