@@ -38,6 +38,20 @@
 .content .card {
 	margin-top: 30px;
 }
+
+.content .card code {
+	color: #A020F0;
+	background: #070707;
+	border-radius: 3px;
+    padding: 1.3px;
+}
+
+.content .card hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #A020F0;
+}
+
 .content .card .card-title{
 	margin-left: 10px;
 	font-family: 'Montserrat', sans-serif;
@@ -53,7 +67,7 @@
 	border: 2px solid #A020F0;
     color: #edf0f1;
     font-family: 'Montserrat', sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .content .card .card-content label {

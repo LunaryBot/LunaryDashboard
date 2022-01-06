@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from "next/link";
-import { User, GuildData } from "../types"
+import { User, GuildData, Guild } from "../types"
 import { useRouter } from "next/router"
 
 const imgDefault = "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"
@@ -9,8 +9,13 @@ const _urls = {
     guild: [
         {
             name: "Home",
-            url: "/",
+            url: "/dashboard/guilds/[guild]/",
             icon: "fas fa-home"
+        },
+        {
+            name: "Moderação",
+            url: "/dashboard/guilds/[guild]/moderation",
+            icon: "fad fa-hammer"
         }
     ],
     user: [
@@ -42,7 +47,7 @@ const urlsDefault = [
 
 interface SideBarData {
     user: User | null;
-    guild?: GuildData | null;
+    guild?: Guild | null;
     guilds?: GuildData[] | null;
     guildId?: string | null;
     hasDashboard?: boolean;
@@ -50,13 +55,13 @@ interface SideBarData {
 
 interface SideBarProfileData {
     user: User | null;
-    guild?: GuildData | null;
+    guild?: Guild | null;
     guilds?: GuildData[] | null;
 }
 
 export default function SideBar({ user, guild, guilds, hasDashboard = true }: SideBarData) {
     const router = useRouter()
-    const urls = hasDashboard ? _urls[guild ? "guild" : "user"] : urlsDefault
+    const urls: any = hasDashboard ? _urls[guild ? "guild" : "user"] : urlsDefault
 
     return (
         <>
@@ -75,7 +80,7 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                     icon: string;
                 }) => {
                     return (
-                        <Link href={url.url} key={url.url}>
+                        <Link href={url.url.replace("[guild]", guild?.id)} key={url.url}>
                             <div className={"Cta"}>
                                 <i className={`${url.icon} ${router.pathname == url.url ? "selected" : ""}`}></i>
                                 {url.name}
@@ -89,6 +94,11 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
 };
 
 function Profile({ user, guilds, guild }: SideBarProfileData) {
+    const icon = (guild ? guild.icon : user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : null) || imgDefault
+    const id = guild ? guild.id : user?.id
+    const name = guild ? guild.name : user?.username
+
+    console.log(icon)
     return (
         <div className={"select-guild-wrapper"}>
             <div className={"select-guild"} id={"SelectGuildSideBar"} onClick={() => {
@@ -99,11 +109,11 @@ function Profile({ user, guilds, guild }: SideBarProfileData) {
                 <div className={"guild-card"}>
                     <div className="sidebar-header">
                         <div className={"user-pic"}>
-                                <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : imgDefault} />
+                                <img src={icon} />
                         </div>
                         <div className={"user-info"}>
-                            <h1 className={"user-name"}>{user?.username}</h1>
-                            <span className={"user-id"}>{user?.id}</span>
+                            <h1 className={"user-name"}>{name}</h1>
+                            <span className={"user-id"}>{id}</span>
                         </div>
                     </div>
                 </div>

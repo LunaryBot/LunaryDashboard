@@ -5,9 +5,6 @@ import "../styles/SideBar.css";
 import "../styles/NavBar.css"
 import '../styles/commands.css';
 import '../styles/select-menu.css';
-import initializerFirebases from '../Utils/initializerFirebase';
-
-initializerFirebases();
 
 const GlobalStyle = createGlobalStyle`
     * {

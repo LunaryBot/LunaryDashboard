@@ -1,6 +1,6 @@
 import sty from 'styled-components';
 
-const CheckRadio = sty.div`
+export const CheckRadio = sty.div`
     margin-left: 3%;
     position: relative;
 `
@@ -60,10 +60,6 @@ const Input = sty.input`
 `
 export default function Toggle(props) {
     return (
-        <>
-            <CheckRadio>
-                <Input type="checkbox" {...props} />
-            </CheckRadio>
-        </>
+        <Input type="checkbox" {...props} />
     )
 }

@@ -5,11 +5,12 @@ import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
 import SideBar from '../../../../components/SideBar';
-import Toggle from '../../../../components/Toggle';
+import Toggle, { CheckRadio } from '../../../../components/Toggle';
 import _GuildCard from '../../../../components/GuildCard';
 import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
 import Script from 'next/script';
+import initializerFirebases from '../../../../Utils/initializerFirebase';
 
 export default function DashboardGuilds({ token, user, guild, database }: { token: string; user: User, guild: Guild, database: any; }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
@@ -43,7 +44,7 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
         <>
             <main>
                 <NavBar user={user} />
-                <SideBar user={user} guilds={guilds} />
+                <SideBar user={user} guilds={guilds} guild={guild} />
                 
                 <div className={"content"}>
                     {/* <div className="select-wrapper" data-send-on-save>
@@ -79,7 +80,24 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                             <h3><strong><i className="fas fa-cog"></i> GERAL</strong></h3>
                         </div>
                         <div className="card-content">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore delectus alias laudantium odio eum, aspernatur amet provident, soluta quis doloribus quibusdam assumenda commodi dolor et vel. Sed dolore maiores cum dolorum odio earum, pariatur eum placeat! Aspernatur, cupiditate eius ducimus, eveniet, obcaecati deserunt magni possimus libero optio consectetur nulla iste.
+                            <CheckRadio>
+                                <Toggle name="mandatory_reason" id="mandatory_reason" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Tornar motivo para punições obrigatório</strong></label>
+                                <p>Permitir que uma punição usando o bot(Lunar) só seja efetuada com um motivo especificado.<br />Essa opção só ira ser aplicada para usuários que não possuem um cargo com a permissão <code>Punir sem motivo</code>.</p>
+                            </CheckRadio>
+                            
+                            <hr />
+
+                            <CheckRadio>
+                                <Toggle name="log_unban" id="log_unban" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Registrar evento Unban</strong></label>
+                                <p>Registrar no canal de modlogs quando um banimento for retirado.<br />Para mostrar o motivo e o autor, você precisa dar ao bot permissão de <code>Ver registro de autoria</code>.</p>
+                            </CheckRadio>
+
+                            <hr />
+
+                            <CheckRadio>
+                                <Toggle type="checkbox" name="log_events" id="log_events" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Eventos de banimento de log não feitos através do bot(Lunar)</strong></label>
+                                <p>Registrar no canal de modlogs e punições quando um banimento for aplicado e não tenha sido feito pelo bot(Lunar).<br />Para mostrar o motivo e o autor, você precisa dar ao bot permissão de <code>Ver registro de autoria</code>.</p>
+                            </CheckRadio>
                         </div>
                     </div>
                 </div>
@@ -88,6 +106,7 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
             <Script
                 src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
                 onLoad={() => {
+                    // $("#mandatory_reason").prop('checked', false);
                     $(".select").hover(function() {
                         const menuID = this.id
                         const menu = $(this)
@@ -160,7 +179,9 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 }
             }
 
-            const database = await global.GuildsDB.ref('Servers/869916717122469898').once('value')
+            const dbs = initializerFirebases()
+
+            const database = await dbs.guilds.ref(`Servers/${guild.data.id}`).once('value')
 
             const databaseVal = database.val()
             console.log(databaseVal)
