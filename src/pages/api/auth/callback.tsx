@@ -39,14 +39,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         path: '/',
     });
 
+    const guildId = req.query.guild_id as string;
     const state = req.query.state as string;
-    if(state) {
+
+    if(guildId) {
+        return res.redirect(`/dashboard/guilds/${guildId}`);
+    } else if(state) {
         const url = global.states?.[state];
         if(url) {
             delete global.states[state];
             return res.redirect(url);
         }
-    }
+    } else res.redirect('/dashboard/@me');
 
-    res.redirect('/dashboard/@me');
 }
