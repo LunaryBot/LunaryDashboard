@@ -100,6 +100,15 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                             </CheckRadio>
                         </div>
                     </div>
+
+                    <div className="card">
+                        <div className="card-title">
+                            <h3><strong><i className="fas fa-cog"></i> MODERADORES</strong></h3>
+                        </div>
+                        <div className="card-content">
+                            
+                        </div>
+                    </div>
                 </div>
             </main>
 
