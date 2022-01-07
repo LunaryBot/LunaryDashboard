@@ -12,15 +12,18 @@ interface _dbs {
 
 export default function initializerFirebases() {
     const dbs: _dbs = {}
+    
+    console.log(firebase.apps.some(app => app.name == 'Guilds'))
+    if(!firebase.apps.find((app: firebase.app.App) => app.name == 'Guilds')) {
+        console.log("a")
 
-    if(!firebase.apps.find(app => app.name !== 'Guilds')) {
         const GuildsDB = initializerFirebase(
             data.GuildsDB,
             'Guilds'
         );
 
         dbs.guilds = GuildsDB.database();
-    }
+    } else dbs.guilds = firebase.apps.find((app: firebase.app.App) => app.name == 'Guilds').database()
 
     return dbs;
 }
