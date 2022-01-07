@@ -15,8 +15,6 @@ export default function initializerFirebases() {
     
     console.log(firebase.apps.some(app => app.name == 'Guilds'))
     if(!firebase.apps.find((app: firebase.app.App) => app.name == 'Guilds')) {
-        console.log("a")
-
         const GuildsDB = initializerFirebase(
             data.GuildsDB,
             'Guilds'
