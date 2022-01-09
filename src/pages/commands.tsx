@@ -1,10 +1,13 @@
-import { commands } from '../json/commands.json';
+import _commands from '../json/commands.json';
 import { parseCookies } from 'nookies';
 import { URLS, User } from '../types';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import NavBar from '../components/NavBar';
 import Script from 'next/script';
+
+const { commands } = _commands;
+
 const constants = {
     "userID": "822470491574763580",
     "user-tag": "Pinho#1856",
@@ -88,7 +91,7 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
                             <ul className="qa-menu-list">
                                 {Object.entries(categorys).map(([key, {name}]) => {
                                     return (
-                                        <li data-li={key} className={`col-2-btn ${category == key ? "active" : ""}`}>{name}</li>
+                                        <li data-li={key} className={`col-2-btn ${category == key ? "active" : ""}`} key={key}>{name}</li>
                                     )
                                 })}
                             </ul>
@@ -199,6 +202,7 @@ export default function Commands({ token, user }: { token?: string|null; user?: 
 
                     if(search) {
                         (function() {
+                            $(".search-box").val(search);
                             const value = String(search).toLowerCase().trim();
                             if(!value) {
                                 const attr = $('.col-2-btn.active').attr('data-li');
