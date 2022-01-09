@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Poppins' sans-serif;
+        font-family: cursive;
         background-color: #1e1e22;
         color: white
     }
@@ -43,7 +43,8 @@ export default function MyApp({ Component, pageProps }) {
             <Head>
                 <title>Luna</title>
                 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" />
+                {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" /> */}
+                <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
             </Head>
             <GlobalStyle />
             <Component {...pageProps} />
