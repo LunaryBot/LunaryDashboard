@@ -60,8 +60,7 @@ header .CtaMenu {
 }
 
 header .CtaMenu i,
-header .Cta i,
-header .Cta img {
+header .Cta i {
     margin-right: 5px;
 }
 
@@ -156,7 +155,7 @@ header .avatar img:hover {
 }
 
 header .avatar h1 {
-    font-size: 1.5em;
+    font-size: 18px;
     color: #cfcfcf;
     margin-right: 10px;
     max-width: 140px;

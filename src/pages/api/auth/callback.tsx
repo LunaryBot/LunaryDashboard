@@ -51,5 +51,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.redirect(url);
         }
     } else res.redirect('/dashboard/@me');
-
 }
