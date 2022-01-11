@@ -17,8 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             });
         };
 
-        console.log(String(token).split("-")?.[1])
-
         if(!global.tokens?.[token] || global.tokens?.[token].guild != guildId) {
             return res.json({
                 status: 401,
@@ -46,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         };
 
         return res.json({
-            code: 200,
+            status: 200,
             statusText: "Ok",
             data: {
                 token: newToken

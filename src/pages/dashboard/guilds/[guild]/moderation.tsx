@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
 import { APIGuildResponse, Guild , GuildData, URLS, User } from '../../../../types';
-import { Permissions } from '../../../../Constants';
+import { Permissions, GuildConfig } from '../../../../Constants';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
@@ -112,7 +112,45 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             <h3><strong><i className="fas fa-cog"></i> MODERADORES</strong></h3>
                         </div>
                         <div className="card-content">
-                            
+                            <button onClick={async function save() {
+
+                                const json = { config: 0 }
+
+                                $("[data-send-on-save]").map(function() {
+                                    const a = $(this)
+                                    const type = a.attr("type")
+                                    
+                                    if(type == "selectmenu") {
+                                        const m = a.find("div.select div.custom-options span.custom-option.selected")[0]
+                                        const select = $(m)
+                                        if(select) {
+                                            const value = $(select).attr("data-value")
+                                            return json[a.find("div.select").attr("id")] = value
+                                        }
+                                    }
+
+                                    if(type == "checkbox") {
+                                        if(GuildConfig[a.attr("id").toUpperCase()]) {
+                                            return json.config |= GuildConfig[a.attr("id").toUpperCase()]
+                                        } else {
+                                            return json[a.attr("id")] = a.is(':checked')
+                                        }
+                                    }
+                                })
+
+                                const res = await axios.patch(`/api/guilds/${guild.id}`, {
+                                    token: localStorage.getItem("reqToken"),
+                                    type: "moderation",
+                                    data: json
+                                })
+                                
+                                if(res.data.status == 200) {
+                                    localStorage.setItem("reqToken", res.data.data.token);
+                                    alert("Salvo com sucesso!")
+                                }
+                                
+                                return json
+                            }} >Salvar</button>
                         </div>
                     </div>
                 </div>
@@ -165,11 +203,7 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                         })
                     })
                 }}
-            />
-
-            <Script />
-
-
+            ></Script>
         </>
     )
 }
