@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
 import { GuildData, URLS, User } from '../../../types';
+import { Permissions } from '../../../Constants';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../components/NavBar';
@@ -44,7 +45,7 @@ export default function DashboardGuilds({ token, user }: { token: string; user: 
             <SideBar user={user} guilds={guilds} />
             
             <div className={"content"}>
-                {_guilds?.filter(x => !!(x.permissions & 8))
+                {_guilds?.filter(x => !!(x.permissions & Permissions.ADMINISTRATOR))
                 .sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name))
                 .sort((a, b) => {
                     if(guilds.find(g => g.id == a.id)) return -1;

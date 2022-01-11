@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
 import { APIGuildResponse, Guild , GuildData, URLS, User } from '../../../../types';
+import { Permissions } from '../../../../Constants';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
@@ -11,8 +12,9 @@ import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
 import Script from 'next/script';
 import initializerFirebases from '../../../../Utils/initializerFirebase';
+global.axios = axios;
 
-export default function DashboardGuilds({ token, user, guild, database }: { token: string; user: User, guild: Guild, database: any; }) {
+export default function DashboardGuilds({ token, user, guild, database, reqToken }: { reqToken: string; token: string; user: User, guild: Guild, database: any; }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
     const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
 
@@ -40,6 +42,10 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
         }
         })()
     }, [guilds]);
+
+    useEffect(() => {
+        localStorage.setItem("reqToken", reqToken);
+    }, [token])
     return (
         <>
             <main>
@@ -116,6 +122,8 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                 src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
                 onLoad={() => {
                     // $("#mandatory_reason").prop('checked', false);
+                    
+                    // Select Menu
                     $(".select").hover(function() {
                         const menuID = this.id
                         const menu = $(this)
@@ -157,7 +165,11 @@ export default function DashboardGuilds({ token, user, guild, database }: { toke
                         })
                     })
                 }}
-            ></Script>
+            />
+
+            <Script />
+
+
         </>
     )
 }
@@ -175,13 +187,13 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
-        }).then(res => res.json());
+        }).then(res => res.json()) as User;
         
         try {
             const guild = await fetch(`${process.env.BOT_API}`.replace(/\/$/, '') + "/api/guild/" + ctx.query.guild)
             .then(res => res.json()) as APIGuildResponse;
 
-            if(!guild?.data || guild.status == 404) return {
+            if(guild.status == 404 || !guild?.data) return {
                 redirect: {
                     destination: '/invite?guild=' + ctx.query.guild,
                     permanent: false,
@@ -190,17 +202,37 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
 
             const dbs = initializerFirebases()
 
-            const database = await dbs.guilds.ref(`Servers/${guild.data.id}`).once('value')
+            const database = (await dbs.guilds.ref(`Servers/${guild.data.id}`).once('value')).val()
 
-            const databaseVal = database.val()
-            console.log(databaseVal)
+            const baseToken = `${Number(user.id).toString(12)}-${Number(ctx.query.guild).toString(36)}-`
+
+            if(!global.tokens || (typeof global.tokens == "object" && !Array.isArray(global.tokens))) {
+                global.tokens = {}
+            }
+
+            const [oldToken] = Object.entries(global.tokens).find(([k, v]) => k.startsWith(baseToken)) || []
+            console.log(oldToken)
+            if(oldToken) {
+                delete global.tokens[oldToken]
+            }
+
+            const newToken = baseToken + Math.random().toString(36).split(".")[1]
+
+            global.tokens[newToken] = {
+                guild: ctx.query.guild,
+                user: user.id,
+                token: token,
+            }
+
+            console.log(global.tokens)
 
             return {
                 props: {
                     token,
                     user,
                     guild: guild.data,
-                    database: databaseVal
+                    database: database,
+                    reqToken: newToken,
                 }
             }
         } catch (e) {
@@ -226,3 +258,16 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
         }
     }
 }
+
+/*
+Test Function
+
+function request() {
+    axios.patch("/api/guilds/869916717122469898", { 
+        token: localStorage.getItem("reqToken")
+    }).then(({ data }) => {
+        console.log(data);
+        localStorage.setItem("reqToken", data.data.token);
+    })
+}
+*/
