@@ -146,7 +146,6 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                                 
                                 if(res.data.status == 200) {
                                     localStorage.setItem("reqToken", res.data.data.token);
-                                    alert("Salvo com sucesso!")
                                 }
                                 
                                 return json
@@ -245,7 +244,7 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
             }
 
             const [oldToken] = Object.entries(global.tokens).find(([k, v]) => k.startsWith(baseToken)) || []
-            console.log(oldToken)
+
             if(oldToken) {
                 delete global.tokens[oldToken]
             }
@@ -257,8 +256,6 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 user: user.id,
                 token: token,
             }
-
-            console.log(global.tokens)
 
             return {
                 props: {
