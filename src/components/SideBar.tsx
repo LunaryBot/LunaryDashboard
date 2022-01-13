@@ -89,8 +89,9 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                     )
                 })}
                 <div className={"information-card"}>
-                    <h1>Top 10 Titulos da Atualidade</h1>
-                    <h3>sua mãe</h3>
+                    <span className={"title"}>Importante!</span>
+                    <br />
+                    <span className={"desc"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, neque pariatur nam nulla facilis, possimus, quis aut labore laudantium sequi similique vitae accusamus. Ducimus dolor tempora, ipsam debitis minus harum!</span>
                 </div>
             </div>
         </>
