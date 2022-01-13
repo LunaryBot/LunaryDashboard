@@ -2,13 +2,14 @@ import { NextApiResponse, NextApiRequest } from 'next';
 
 interface bodyPatch {
     token: string;
+    userId: string;
     data: object;
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "PATCH") {
         const guildId = req.query.guild as string;
-        const { token, data }: bodyPatch = req.body as any;
+        const { token, data, userId }: bodyPatch = req.body as any;
         
         if(!token) {
             return res.json({
@@ -17,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             });
         };
 
-        console.log(global.tokens?.[token]);
+        console.log(token, global.tokens, global.tokens?.[token]);
 
         if(!global.tokens?.[token] || (global.tokens?.[token] && global.tokens[token].guild != guildId)) {
             return res.json({
@@ -32,8 +33,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             statusText: "No data provided"
         });
 
-        const { user: userId, token: _token } = global.tokens[token];
-
+        const { token: _token } = global.tokens[token];
+        console.log(userId)
         console.log(data)
 
         const newToken = `${Number(userId).toString(12)}-${Number(guildId).toString(36)}-${Math.random().toString(36).split(".")[1]}`
@@ -41,7 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         delete global.tokens[token];
 
         global.tokens[newToken] = {
-            userId: userId,
+            user: userId,
             guild: guildId,
             token: _token
         };

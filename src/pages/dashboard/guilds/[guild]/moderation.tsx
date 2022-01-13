@@ -151,7 +151,8 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             const res = await axios.patch(`/api/guilds/${guild.id}`, {
                                 token: localStorage.getItem("reqToken"),
                                 type: "moderation",
-                                data: json
+                                data: json,
+                                userId: user.id
                             })
 
                             if(res.data.status == 200) {
