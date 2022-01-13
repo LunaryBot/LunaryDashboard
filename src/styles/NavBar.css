@@ -189,7 +189,31 @@ header .avatar span {
         display: none;
     }
 
+    header #CtaLogin {
+        display: none;
+    }
+
     header .CtaInvite {
         display: flex;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    header .CtaMenu {
+        font-size: 14px;
+    }
+
+    header .CtaInvite {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    header .CtaMenu {
+        font-size: 12px;
+    }
+
+    header .CtaInvite {
+        font-size: 12px;
     }
 }

@@ -88,6 +88,10 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                         </Link>
                     )
                 })}
+                <div className={"information-card"}>
+                    <h1>Top 10 Titulos da Atualidade</h1>
+                    <h3>sua mãe</h3>
+                </div>
             </div>
         </>
     );
@@ -144,7 +148,7 @@ function Profile({ user, guilds, guild }: SideBarProfileData) {
                             Invite
                         </div>
                     </Link>
-                </div> 
+                </div>
             </div>
         </div>
     )
