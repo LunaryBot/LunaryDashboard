@@ -27,7 +27,7 @@ header .icon {
 */
 header .Cta {
     margin-left: 10px;
-    font-family: "Montserrat", sans-serif;
+    font-family: cursive, sans-serif;
     font-weight: 500;
     color: #edf0f1;
     text-decoration: none;
@@ -47,7 +47,7 @@ header .CtaMenu {
     display: none;
     margin-left: 10px;
     align-items: center;
-    font-family: "Montserrat", sans-serif;
+    font-family: cursive, sans-serif;
     font-weight: 500;
     color: #edf0f1;
     text-decoration: none;
@@ -113,7 +113,7 @@ header .avatar .user-menu-wrapper .user-menu .user-menu-options {
 
 header .avatar .user-menu-wrapper .user-menu .user-menu-options div {
     margin-top: 9px;
-    font-family: "Montserrat", sans-serif;
+    font-family: cursive, sans-serif;
     font-weight: 500;
     color: #edf0f1;
     text-decoration: none;

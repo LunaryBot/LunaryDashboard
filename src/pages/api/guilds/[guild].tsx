@@ -17,12 +17,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             });
         };
 
-        if(!global.tokens?.[token] || global.tokens?.[token].guild != guildId) {
+        console.log(global.tokens?.[token]);
+
+        if(!global.tokens?.[token] || (global.tokens?.[token] && global.tokens[token].guild != guildId)) {
             return res.json({
                 status: 401,
                 statusText: "Invalid token"
             });
         };
+
 
         if(!data) return res.json({
             status: 400,
