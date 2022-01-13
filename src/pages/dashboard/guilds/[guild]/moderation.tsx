@@ -49,6 +49,14 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
     return (
         <>
             <main>
+                <div id="overlay-save-error">
+                    <img src="https://cdn.discordapp.com/emojis/849302611744129084.png?v=1" alt="Salvando..." />
+                    <p>Houve um erro ao entrar em contato com o servidor!</p>
+                </div>
+                <div id="overlay-save">
+                    <img src="https://cdn.discordapp.com/emojis/888110062516723812.png?v=1" alt="Salvando..." />
+                    <p>Salvando...</p>
+                </div>
                 <NavBar user={user} />
                 <SideBar user={user} guilds={guilds} guild={guild} />
                 
@@ -108,51 +116,72 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                     </div>
 
                     <div className="card">
+                        <div className="card-content" id="save" onClick={async function save() {
+                            $("#overlay-save").css({
+                                display: "block"
+                            })
+                            const json = { config: 0 }
+
+                            $("[data-send-on-save]").map(function() {
+                                const a = $(this)
+                                const type = a.attr("type")
+                                
+                                if(type == "selectmenu") {
+                                    const m = a.find("div.select div.custom-options span.custom-option.selected")[0]
+                                    const select = $(m)
+                                    if(select) {
+                                        const value = $(select).attr("data-value")
+                                        return json[a.find("div.select").attr("id")] = value
+                                    }
+                                }
+
+                                if(type == "checkbox") {
+                                    if(GuildConfig[a.attr("id").toUpperCase()]) {
+                                        return json.config |= GuildConfig[a.attr("id").toUpperCase()]
+                                    } else {
+                                        return json[a.attr("id")] = a.is(':checked')
+                                    }
+                                }
+                            })
+
+                            const res = await axios.patch(`/api/guilds/${guild.id}`, {
+                                token: localStorage.getItem("reqToken"),
+                                type: "moderation",
+                                data: json
+                            })
+
+                            if(res.data.status == 200) {
+                                localStorage.setItem("reqToken", res.data.data.token);
+
+                                setTimeout(() => {
+                                    $("#overlay-save").css({
+                                        display: "none"
+                                    })
+                                }, 1500)
+                            } else {
+                                $("#overlay-save").css({
+                                    display: "none"
+                                })
+                                $("#overlay-save-error").css({
+                                    display: "block"
+                                })
+                                console.log(res.data.statusText)
+                            }
+
+                            return json
+                        }}>
+                            <h1><i className="fad fa-folder-upload" /> Save</h1>
+                        </div>
+                    </div>  
+
+                    {/* <div className="card">
                         <div className="card-title">
                             <h3><strong><i className="fas fa-cog"></i> MODERADORES</strong></h3>
                         </div>
                         <div className="card-content">
-                            <button onClick={async function save() {
-
-                                const json = { config: 0 }
-
-                                $("[data-send-on-save]").map(function() {
-                                    const a = $(this)
-                                    const type = a.attr("type")
-                                    
-                                    if(type == "selectmenu") {
-                                        const m = a.find("div.select div.custom-options span.custom-option.selected")[0]
-                                        const select = $(m)
-                                        if(select) {
-                                            const value = $(select).attr("data-value")
-                                            return json[a.find("div.select").attr("id")] = value
-                                        }
-                                    }
-
-                                    if(type == "checkbox") {
-                                        if(GuildConfig[a.attr("id").toUpperCase()]) {
-                                            return json.config |= GuildConfig[a.attr("id").toUpperCase()]
-                                        } else {
-                                            return json[a.attr("id")] = a.is(':checked')
-                                        }
-                                    }
-                                })
-
-                                const res = await axios.patch(`/api/guilds/${guild.id}`, {
-                                    token: localStorage.getItem("reqToken"),
-                                    type: "moderation",
-                                    data: json
-                                })
-                                
-                                if(res.data.status == 200) {
-                                    localStorage.setItem("reqToken", res.data.data.token);
-                                    alert("Salvo com sucesso!")
-                                }
-                                
-                                return json
-                            }} >Salvar</button>
+                            <button onClick={} >Salvar</button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </main>
 
@@ -245,7 +274,7 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
             }
 
             const [oldToken] = Object.entries(global.tokens).find(([k, v]) => k.startsWith(baseToken)) || []
-            console.log(oldToken)
+
             if(oldToken) {
                 delete global.tokens[oldToken]
             }

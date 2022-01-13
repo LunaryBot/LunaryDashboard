@@ -1,6 +1,6 @@
 import { NextApiResponse, NextApiRequest } from 'next';
 
-interface headersPatch {
+interface bodyPatch {
     token: string;
     data: object;
 }
@@ -8,7 +8,7 @@ interface headersPatch {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "PATCH") {
         const guildId = req.query.guild as string;
-        const { token, data }: headersPatch = req.body as any;
+        const { token, data }: bodyPatch = req.body as any;
         
         if(!token) {
             return res.json({
@@ -17,12 +17,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             });
         };
 
-        if(!global.tokens?.[token] || global.tokens?.[token].guild != guildId) {
+        console.log(global.tokens?.[token]);
+
+        if(!global.tokens?.[token] || (global.tokens?.[token] && global.tokens[token].guild != guildId)) {
             return res.json({
                 status: 401,
                 statusText: "Invalid token"
             });
         };
+
 
         if(!data) return res.json({
             status: 400,
