@@ -63,8 +63,8 @@ function UserBox({ user, hasSidebar = true }: DataNavBar) {
         return (
             <>
                 <div className={"avatar"}>
-                    <h1>{user?.username}<span>#{user?.discriminator}</span></h1>
                     <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=128&height=128"} alt="avatar" />
+                    <h1>{user?.username}<span>#{user?.discriminator}</span></h1>
                     <div className={"user-menu-wrapper"}>
                         <div className={"user-menu"}>
                             <div className={"user-menu-options"}>

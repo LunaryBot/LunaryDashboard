@@ -97,9 +97,9 @@ header .avatar:hover .user-menu-wrapper .user-menu .user-menu-options {
 
 header .avatar .user-menu-wrapper .user-menu .user-menu-options {
     position: absolute;
-    margin-top: 30px;
+    margin-top: 33px;
     top: 100%;
-    left: -105px;
+    left: -150px;
     width: 180px;
     background-color: #151516;
     border-radius: 10px;
@@ -139,7 +139,7 @@ header .avatar {
 }
 
 header .avatar img {
-    margin-right: -70px;
+    margin-right: 10px;
     border-radius: 50%;
     width: 10%;
     min-width: 60px;
@@ -157,7 +157,7 @@ header .avatar img:hover {
 header .avatar h1 {
     font-size: 18px;
     color: #cfcfcf;
-    margin-right: 10px;
+    margin-right: -70px;
     max-width: 140px;
     overflow: hidden;
     text-overflow: ellipsis; 
