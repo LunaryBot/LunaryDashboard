@@ -92,6 +92,10 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                     <span className={"title"}>Importante!</span>
                     <br />
                     <span className={"desc"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, neque pariatur nam nulla facilis, possimus, quis aut labore laudantium sequi similique vitae accusamus. Ducimus dolor tempora, ipsam debitis minus harum!</span>
+                    <br />
+                    <button className={"button"}>
+                        Saiba mais!
+                    </button>
                 </div>
             </div>
         </>
