@@ -88,7 +88,7 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                         </Link>
                     )
                 })}
-                <div className={"information-card"}>
+                {/* <div className={"information-card"}>
                     <span className={"title"}>Importante!</span>
                     <br />
                     <span className={"desc"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, neque pariatur nam nulla facilis, possimus, quis aut labore laudantium sequi similique vitae accusamus. Ducimus dolor tempora, ipsam debitis minus harum!</span>
@@ -96,7 +96,7 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                     <button className={"button"}>
                         Saiba mais!
                     </button>
-                </div>
+                </div> */}
             </div>
         </>
     );
@@ -118,7 +118,7 @@ function Profile({ user, guilds, guild }: SideBarProfileData) {
                 <div className={"guild-card"}>
                     <div className="sidebar-header">
                         <div className={"user-pic"}>
-                                <img src={icon} />
+                            <img src={icon} />
                         </div>
                         <div className={"user-info"}>
                             <h1 className={"user-name"}>{name}</h1>
