@@ -122,6 +122,8 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             })
                             const json = { config: 0 }
 
+                            console.log(localStorage.getItem("reqToken"));
+
                             $("[data-send-on-save]").map(function() {
                                 const a = $(this)
                                 const type = a.attr("type")
@@ -137,7 +139,9 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
 
                                 if(type == "checkbox") {
                                     if(GuildConfig[a.attr("id").toUpperCase()]) {
-                                        return json.config |= GuildConfig[a.attr("id").toUpperCase()]
+                                        if(a.is(':checked')) {
+                                            return json.config |= GuildConfig[a.attr("id").toUpperCase()]
+                                        }
                                     } else {
                                         return json[a.attr("id")] = a.is(':checked')
                                     }
@@ -147,7 +151,8 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             const res = await axios.patch(`/api/guilds/${guild.id}`, {
                                 token: localStorage.getItem("reqToken"),
                                 type: "moderation",
-                                data: json
+                                data: json,
+                                userId: user.id
                             })
 
                             if(res.data.status == 200) {
