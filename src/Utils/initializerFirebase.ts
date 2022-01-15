@@ -21,6 +21,15 @@ export default function initializerFirebases() {
 
         dbs.guilds = GuildsDB.database();
     } else dbs.guilds = firebase.apps.find((app: firebase.app.App) => app.name == 'Guilds').database()
+    
+    if(!firebase.apps.find((app: firebase.app.App) => app.name == 'Logs')) {
+        const LogsDB = initializerFirebase(
+            data.LogsDB,
+            'Logs'
+        );
+
+        dbs.logs = LogsDB.database();
+    } else dbs.logs = firebase.apps.find((app: firebase.app.App) => app.name == 'Logs').database()
 
     return dbs;
 }
