@@ -96,7 +96,7 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                         <div className="card-content">
                             <CheckRadio>
                                 <Toggle name="mandatory_reason" id="mandatory_reason" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Tornar motivo para punições obrigatório</strong></label>
-                                <p>Permitir que uma punição usando o bot(Lunar) só seja efetuada com um motivo especificado.<br />Essa opção só ira ser aplicada para usuários que não possuem um cargo com a permissão <code>Punir sem motivo</code>.</p>
+                                <p>Permitir que uma punição usando o bot (Lunar) só seja efetuada com um motivo especificado.<br />Essa opção só ira ser aplicada para usuários que não possuem um cargo com a permissão <code>Punir sem motivo</code>.</p>
                             </CheckRadio>
                             
                             <hr />
@@ -109,7 +109,7 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             <hr />
 
                             <CheckRadio>
-                                <Toggle type="checkbox" name="log_events" id="log_events" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Eventos de banimento não feitos através do bot(Lunar)</strong></label>
+                                <Toggle type="checkbox" name="log_events" id="log_events" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Eventos de banimento não feitos através do bot (Lunar)</strong></label>
                                 <p>Registrar no canal de modlogs e punições quando um banimento for aplicado e não tenha sido feito pelo bot(Lunar).<br />Para mostrar o motivo e o autor, você precisa dar ao bot permissão de <code>Ver registro de autoria</code>.</p>
                             </CheckRadio>
                         </div>
