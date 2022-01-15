@@ -117,3 +117,14 @@ export interface APIGuildResponse {
 	data?: GuildData|null;
 	query: string;
 }
+
+export interface LogData {
+	id: string;
+	type: number;
+	reason: string;
+	date: number;
+	time?: number;
+	user: string;
+	author: string;
+	server: string;
+}
