@@ -116,6 +116,69 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                     </div>
 
                     <div className="card">
+                        <div className="card-title">
+                            <h3><strong><i className="fas fa-hashtag" /> Canais de Logs</strong></h3>
+                        </div>
+                        <div className="card-content">
+                            <label><strong>Canal de punições:</strong></label>
+                            <div className="select-wrapper" data-send-on-save>
+                                <div className="select" id="muterole">
+                                    <div className="select__trigger">
+                                        <p>{(function() {
+                                            let a = "Selecionar Cargo"
+                                            if(database.chat_punish) {
+                                                const channel = guild.channels.filter(x => ["GUILD_TEXT", "GUILD_NEWS"].includes(x.type)).find(x => x.id == database.chat_punish)
+                                                if(channel.name) {
+                                                    a = channel.name
+                                                }
+                                            }
+                                            return a
+                                        })()}</p>
+                                    </div>
+                                    <form onSubmit={(e) => e.preventDefault() }><p className="select-menu-search"><input type="text" autoComplete='off' placeholder="Nome/ID" name="search" /><i className="icon fas fa-search"></i></p></form>
+                                    <div className="custom-options close" id="co-chat_punish">
+                                        <span className="custom-option" data-value="none" data-li="Selecionar Cargo">Nenhum</span>
+                                        {guild.channels.filter(x => ["GUILD_TEXT", "GUILD_NEWS"].includes(x.type)).sort((a, b) => a.rawPosition - b.rawPosition).map(channel => <span className={`custom-option ${database.chat_punish && database.chat_punish == channel.id  ? "selected" : ""}`} data-value={channel.id} data-li={channel.name} key={channel.id}>{channel.name}</span>)}
+                                    </div>
+                                </div>
+                            </div>
+                            <p style={{marginLeft: "3%"}}>
+                                Canal onde será enviado as mensagem de punições.
+                                <br /><code style={{color: "#00ff00"}}>+ Customização possível</code>, 
+                                <br /><code style={{color: "#FF6347"}}>- Não mostra id e link de log da punição</code>
+                            </p>
+                            <hr />
+                            <label><strong>Canal de modlogs:</strong></label>
+                            <div className="select-wrapper" data-send-on-save>
+                                <div className="select" id="muterole">
+                                    <div className="select__trigger">
+                                        <p>{(function() {
+                                            let a = "Selecionar Cargo"
+                                            if(database.chat_modlogs) {
+                                                const channel = guild.channels.filter(x => ["GUILD_TEXT", "GUILD_NEWS"].includes(x.type)).find(x => x.id == database.chat_modlogs)
+                                                if(channel.name) {
+                                                    a = channel.name
+                                                }
+                                            }
+                                            return a
+                                        })()}</p>
+                                    </div>
+                                    <form onSubmit={(e) => e.preventDefault() }><p className="select-menu-search"><input type="text" autoComplete='off' placeholder="Nome/ID" name="search" /><i className="icon fas fa-search"></i></p></form>
+                                    <div className="custom-options close" id="co-chat_modlogs">
+                                        <span className="custom-option" data-value="none" data-li="Selecionar Cargo">Nenhum</span>
+                                        {guild.channels.filter(x => ["GUILD_TEXT", "GUILD_NEWS"].includes(x.type)).sort((a, b) => a.rawPosition - b.rawPosition).map(channel => <span className={`custom-option ${database.chat_modlogs && database.chat_modlogs == channel.id  ? "selected" : ""}`} data-value={channel.id} data-li={channel.name} key={channel.id}>{channel.name}</span>)}
+                                    </div>
+                                </div>
+                            </div>
+                            <p style={{marginLeft: "3%"}}>
+                                Canal onde será enviado as mensagem de modlogs. <a href="https://imgur.com/eUWWLQ8.png"><code>Exemplo</code></a>
+                                <br /><code style={{color: "#00ff00"}}>+ Mostra autor, usuário, motivo, id e link para log punição</code>, 
+                                <br /><code style={{color: "#FF6347"}}>- Não é possível customizar</code>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="card">
                         <div className="card-content" id="save" onClick={async function save() {
                             $("#overlay-save").css({
                                 display: "block"
