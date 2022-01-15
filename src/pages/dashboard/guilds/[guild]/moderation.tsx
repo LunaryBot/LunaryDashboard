@@ -109,7 +109,7 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             <hr />
 
                             <CheckRadio>
-                                <Toggle type="checkbox" name="log_events" id="log_events" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Eventos de banimento de log não feitos através do bot(Lunar)</strong></label>
+                                <Toggle type="checkbox" name="log_events" id="log_events" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Eventos de banimento não feitos através do bot(Lunar)</strong></label>
                                 <p>Registrar no canal de modlogs e punições quando um banimento for aplicado e não tenha sido feito pelo bot(Lunar).<br />Para mostrar o motivo e o autor, você precisa dar ao bot permissão de <code>Ver registro de autoria</code>.</p>
                             </CheckRadio>
                         </div>
@@ -144,7 +144,7 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                             </div>
                             <p style={{marginLeft: "3%"}}>
                                 Canal onde será enviado as mensagem de punições.
-                                <br /><code style={{color: "#00ff00"}}>+ Customização possível</code>, 
+                                <br /><code style={{color: "#00ff00"}}>+ Customização possível (BETA)</code>, 
                                 <br /><code style={{color: "#FF6347"}}>- Não mostra id e link de log da punição</code>
                             </p>
                             <hr />

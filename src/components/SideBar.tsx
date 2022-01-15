@@ -16,6 +16,11 @@ const _urls = {
             name: "Moderação",
             url: "/dashboard/guilds/[guild]/moderation",
             icon: "fad fa-hammer"
+        },
+        {
+            name: "Logs",
+            url: "/dashboard/guilds/[guild]/logs",
+            icon: "fad fa-clipboard-list"
         }
     ],
     user: [
