@@ -355,8 +355,6 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                 token: token,
             }
 
-            console.log(global.tokens)
-
             return {
                 props: {
                     token,
