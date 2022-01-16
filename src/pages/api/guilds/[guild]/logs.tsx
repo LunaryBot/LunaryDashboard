@@ -1,10 +1,12 @@
 import { NextApiResponse, NextApiRequest } from 'next';
 import initializerFirebases from '../../../../Utils/initializerFirebase';
-import { LogData } from '../../../../types';
+import { LogData, Log } from '../../../../types';
 import chunk from '../../../../Utils/chunk';
+import getUser from '../../../../Utils/getUser';
 
 interface bodyGet {
     token: string;
+    requesterId: string;
     userId: string;
     authorId: string;
     logId: string;
@@ -15,8 +17,8 @@ interface bodyGet {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "GET") {
         const guildId = req.query.guild as string;
-        const { token, authorId, userId, logId, chunk: _chunk = 0, limit = 20 }: bodyGet = req.body as any;
-        
+        const { requesterId, token, authorId, userId, logId, chunk: _chunk = 0, limit = 20 }: bodyGet = req.body as any;
+
         if(!token) {
             return res.json({
                 status: 401,
@@ -31,7 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             });
         };
 
-        const dbs = initializerFirebases()
+        const dbs = initializerFirebases();
 
         let logs: LogData[] = Object.entries((await dbs.logs.ref().once('value')).val() || {}).map(
             function([k, v]: [string, string], i) {
@@ -40,19 +42,30 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 return data
             })
             .filter(x => x.server == guildId)
-            .sort((a, b) => b.date - a.date) || []
+            .sort((a, b) => b.date - a.date) || [];
 
-        if(userId) logs = logs.filter(x => x.user == userId)
-        if(authorId) logs = logs.filter(x => x.author == authorId)
-        if(logId) logs = logs.filter(x => x.id == logId)
+        if(userId) logs = logs.filter(x => x.user == userId);
+        if(authorId) logs = logs.filter(x => x.author == authorId);
+        if(logId) logs = logs.filter(x => x.id == logId);
 
         const chunks = chunk(logs, limit)
 
-        logs = chunks[_chunk] || []
+        logs = chunks[_chunk > 1 ? 1 : 0] || []
+
+        const _logs = (await Promise.all(await logs.map(async function(log: LogData) {
+            const data  = { 
+                ...log,
+                reason: decodeURIComponent(log.reason),
+                user: (await getUser(log.user)),
+                author: (await getUser(log.author)),
+            }
+
+            return data
+        })));
 
         const { token: _token } = global.tokens[token];
 
-        const newToken = `${Number(userId).toString(12)}-${Number(guildId).toString(36)}-${Math.random().toString(36).split(".")[1]}`
+        const newToken = `${Number(requesterId).toString(12)}-${Number(guildId).toString(36)}-${Math.random().toString(36).split(".")[1]}`
 
         delete global.tokens[token];
 
@@ -69,7 +82,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 userId,
                 authorId,
                 logId,
-                logs,
+                logs: _logs,
                 token: newToken
             }
         });
