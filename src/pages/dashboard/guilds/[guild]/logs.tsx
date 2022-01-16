@@ -12,7 +12,8 @@ import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
 import Script from 'next/script';
 import initializerFirebases from '../../../../Utils/initializerFirebase';
-global.axios = axios;
+import Head from 'next/head';
+import styles from '../../../../styles/guild.module.css';
 
 export default function DashboardGuilds({ token, user, guild, database, reqToken }: { reqToken: string; token: string; user: User, guild: Guild, database: any; }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
@@ -53,7 +54,58 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                 <SideBar user={user} guilds={guilds} guild={guild} />
                 
                 <div className={"content"}>
+                    <div className={styles["table-responsive"]}>
 
+                        <div className={`${styles["table"]} ${styles["logs-list"]}`}>
+                            <thead>
+                                <tr>
+                                    <th><span>User</span></th>
+                                    <th><span>Created</span></th>
+                                    <th className={styles["text-center"]}><span>Status</span></th>
+                                    <th><span>Email</span></th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>
+                                    <img src="https://github.com/jvopinho.png" alt="" />
+                                    <a href="#" className="user-link">Bae</a>
+                                    <span className="user-subhead">Admin</span>
+                                </td>
+                                <td>
+                                    31/03/2005
+                                </td>
+                                <td className="text-center">
+                                    <span className="label label-default">Inactive</span>
+                                </td>
+                                <td>
+                                    <a href="#">jvopinho.dev@gmail.com</a>
+                                </td>
+                                <td style={{width: "20%"}}>
+                                    <a href="#" className={styles["table-link"]}>
+                                        <span className="fa-stack">
+                                            <i className="fa fa-square fa-stack-2x"></i>
+                                            <i className="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" className={styles["table-link"]}>
+                                        <span className="fa-stack">
+                                            <i className="fa fa-square fa-stack-2x"></i>
+                                            <i className="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    {/* <a href="#" className={`${styles["table-link"]} ${styles["danger"]}`}>
+                                        <span className="fa-stack">
+                                            <i className="fa fa-square fa-stack-2x"></i>
+                                            <i className="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a> */}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </div>
+                    </div>
                 </div>
             </main>
 
