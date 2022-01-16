@@ -129,13 +129,19 @@ export interface LogData {
 	server: string;
 }
 
+export interface Log {
+	LogData;
+	user: DiscordUser;
+	author: DiscordUser;
+}
+
 export interface DiscordUser {
 	id: string;
 	username: string;
 	discriminator: string;
 	avatar: string;
-	public_flags: number;
-	banner: string;
-	banner_color: string;
-	accent_color: number;
+	public_flags?: number;
+	banner?: string;
+	banner_color?: string;
+	accent_color?: number;
 }
