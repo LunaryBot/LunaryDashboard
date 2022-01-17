@@ -130,7 +130,12 @@ export interface LogData {
 }
 
 export interface Log {
-	LogData;
+	id: string;
+	type: number;
+	reason: string;
+	date: number;
+	time?: number;
+	server: string;
 	user: DiscordUser;
 	author: DiscordUser;
 }
