@@ -4,7 +4,7 @@ import { LogData, Log } from '../../../../types';
 import chunk from '../../../../Utils/chunk';
 import getUser from '../../../../Utils/getUser';
 
-interface bodyGet {
+interface headersGet {
     token: string;
     requesterId: string;
     userId: string;
@@ -17,7 +17,7 @@ interface bodyGet {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "GET") {
         const guildId = req.query.guild as string;
-        const { requesterId, token, authorId, userId, logId, chunk: _chunk = 0, limit = 20 }: bodyGet = req.body as any;
+        const { requesterId, token, authorId, userId, logId, chunk: _chunk = 0, limit = 20 }: headersGet = req.headers as any;
 
         if(!token) {
             return res.json({
