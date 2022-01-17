@@ -85,6 +85,16 @@
     text-align: center;
 }
 
+.content #loadingDot {
+    position: absolute;
+    top: 45%;
+    left: 55%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    height: 150px;
+}
+
 
 @media screen and (max-width: 980px) {
     .sidebar {
@@ -111,6 +121,14 @@
 		margin-left: 0;
 		margin-top: 80px;
 		padding: 20px;
+    }
+
+    .content #loadingDot {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
     }
 }
 
