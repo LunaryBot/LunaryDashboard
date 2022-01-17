@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
-import { APIGuildResponse, Guild , GuildData, URLS, User, LogData } from '../../../../types';
+import { APIGuildResponse, Guild , GuildData, URLS, User, LogData, Log } from '../../../../types';
 import { Permissions, GuildConfig } from '../../../../Constants';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import NavBar from '../../../../components/NavBar';
 import SideBar from '../../../../components/SideBar';
+import LoadingDots from '../../../../components/LoadingDots';
 import Toggle, { CheckRadio } from '../../../../components/Toggle';
 import _GuildCard from '../../../../components/GuildCard';
 import { createState } from '../../../../Utils/states';
@@ -14,10 +15,12 @@ import Script from 'next/script';
 import initializerFirebases from '../../../../Utils/initializerFirebase';
 import Head from 'next/head';
 import styles from '../../../../styles/guild.module.css';
+global.axios = axios;
 
-export default function DashboardGuilds({ token, user, guild, database, reqToken }: { reqToken: string; token: string; user: User, guild: Guild, database: any; }) {
+export default function DashboardGuilds({ token, user, guild, reqToken }: { reqToken: string; token: string; user: User, guild: Guild }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
     const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
+    let logs: Log[] | null;
 
     useEffect(() => {
         (async() => {
@@ -47,14 +50,23 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
     useEffect(() => {
         localStorage.setItem("reqToken", reqToken);
     }, [token])
+
     return (
         <>
             <main>
+                <div id="overlay-save-error">
+                    <img src="https://cdn.discordapp.com/emojis/849302611744129084.png?v=1" alt="Salvando..." />
+                    <p>Houve um erro ao entrar em contato com o servidor!</p>
+                </div>
+
                 <NavBar user={user} />
                 <SideBar user={user} guilds={guilds} guild={guild} />
                 
                 <div className={"content"}>
-                    <div className={styles["scr"]}>
+                    <div id='loadingDot'>
+                        <LoadingDots />
+                    </div>
+                    <div className={styles["scr"]} id="logs-content-wrapper" hidden>
                         <table className={styles["cards-log"]}>
                             <thead>
                                 <tr>
@@ -64,23 +76,8 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                                     <th>Data</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr id="fxe176s1-pkvl-7t1i-q6qb-tyej6k4hr5" card-log={"true"}>
-                                    <td className={styles["author"]}>
-                                        <img src="https://cdn.discordapp.com/avatars/869640914916757564/f0f883ebdb4a9e894a301e29b05d7fc9.png" className={styles["img"]} alt="" />
-                                        <p className={styles["details"]}><strong>MarkProfissa#1252<br /><br />869640914916757564</strong></p>
-                                    </td>
-                                    <td><strong>Mr. Tower#9283<br /><br />425396277560475648</strong></td>
-                                    <td><strong>Mute</strong></td>
-                                    <td><strong>16/00/2022 15:56</strong></td>
-                                </tr>
-                                <tr>
-                                    <td className={`${styles["card-footer"]} ${styles["close"]}`} colSpan={6} id="footer-fxe176s1-pkvl-7t1i-q6qb-tyej6k4hr5">
-                                        <h3>Motivo</h3>
-                                        <br />
-                                        <p><strong>eu avisei</strong></p>
-                                    </td>
-                                </tr>
+                            <tbody id="logs-content">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -90,30 +87,95 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
             <Script
                 src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
                 onLoad={() => {
-                    $("[card-log]").click(function() {
-                        const card = $(this)
-                        const card_footer = $(`#footer-${card.attr("id")}`)
-                        // card.toggleClass(styles["open"])
-                        // card_footer.toggleClass(styles["close"])
-                        if(card_footer.hasClass(styles["close"])) {
-                            $("[card-log]").each(function() {
-                                const card = $(this)
-                                const card_footer = $(`#footer-${card.attr("id")}`)
-            
-                                if(card.hasClass(styles["open"])) {
-                                    card.removeClass(styles["open"])
+                    async function fetchLogs(options = {} as { limit: number, chunk: number }) {
+                        const { limit = 20, chunk = 0 } = options
+                        $("#loadingDot").show();
+                        try {
+                            const res = (await axios.get(`/api/guilds/${guild.id}/logs`, {
+                                headers: {
+                                    token: localStorage.getItem("reqToken"),
+                                    limit: limit.toString(),
+                                    chunk: chunk.toString(),
+                                    requesterId: user.id
                                 }
-                                if(!card_footer.hasClass(styles["close"])) {
-                                    card_footer.addClass(styles["close"])
-                                }
-                            })
-                            card.addClass(styles["open"])
-                            card_footer.removeClass(styles["close"])
-                        } else {
-                            card.removeClass(styles["open"])
-                            card_footer.addClass(styles["close"])
+                            })).data as any;
+
+                            if(res.status == 200) {
+                                localStorage.setItem("reqToken", res.data.token)
+
+                                logs = res.data.logs;
+                                $("#loadingDot").hide();
+
+                                setLogs();
+                            } else {
+                                showErrorOverlay();
+                                console.log(res.statusText);
+                            }
+                        } catch (e) {
+                            console.log(e)
+                            showErrorOverlay()
                         }
-                    })
+                        
+                        function showErrorOverlay() {
+                            $("#overlay-save-error").css({
+                                display: "block"
+                            })
+                        }
+                    }
+
+                    fetchLogs()
+
+                    function setLogs() {
+                        $("#logs-content").html("");
+                        $("#logs-content-wrapper").show()
+                        logs.forEach((log: Log) => {
+                            const { user, author, reason, date, id, type } = log;
+
+                            $("#logs-content").append(`
+                                <tr id="${id}" card-log>
+                                    <td class="${styles["author"]}">
+                                        <img src="https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png" class="${styles["img"]}" alt="" />
+                                        <p class="${styles["details"]}"><strong>${user?.username}<br /><br />${user?.id}</strong></p>
+                                    </td>
+                                    <td><strong>${author?.username}<br /><br />${author?.id}</strong></td>
+                                    <td><strong>Mute</strong></td>
+                                    <td><strong>16/00/2022 15:56</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="${styles["card-footer"]} ${styles["close"]}" colspan=6 id="footer-${id}">
+                                        <h3>Motivo</h3>
+                                        <br />
+                                        <p><strong>${reason}</strong></p>
+                                    </td>
+                                </tr>
+                            `)
+                        })
+
+                        $("[card-log]").click(function() {
+                            const card = $(this)
+                            const card_footer = $(`#footer-${card.attr("id")}`)
+                            // card.toggleClass(styles["open"])
+                            // card_footer.toggleClass(styles["close"])
+                            if(card_footer.hasClass(styles["close"])) {
+                                $("[card-log]").each(function() {
+                                    const card = $(this)
+                                    const card_footer = $(`#footer-${card.attr("id")}`)
+                
+                                    if(card.hasClass(styles["open"])) {
+                                        card.removeClass(styles["open"])
+                                    }
+                                    if(!card_footer.hasClass(styles["close"])) {
+                                        card_footer.addClass(styles["close"])
+                                    }
+                                })
+                                card.addClass(styles["open"])
+                                card_footer.removeClass(styles["close"])
+                            } else {
+                                card.removeClass(styles["open"])
+                                card_footer.addClass(styles["close"])
+                            }
+                        })
+                    }
                 }}
             ></Script>
         </>
@@ -145,24 +207,33 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
                     permanent: false,
                 }
             }
-
-            const dbs = initializerFirebases()
-
-            let database: LogData[] = Object.entries((await dbs.logs.ref().once('value')).val() || {}).map(function([k, v]: [string, string], i) {
-                const data = JSON.parse(Buffer.from(v, 'base64').toString('ascii'))
-                data.id = k
-                return data
-            }).filter(x => x.server == ctx.query.guild).sort((a, b) => b.date - a.date) || []
-
-            database
             
+            const baseToken = `${Number(user.id).toString(12)}-${Number(ctx.query.guild).toString(36)}-`
+
+            if(!global.tokens || (typeof global.tokens == "object" && !Array.isArray(global.tokens))) {
+                global.tokens = {}
+            }
+
+            const [oldToken] = Object.entries(global.tokens).find(([k, v]) => k.startsWith(baseToken)) || []
+
+            if(oldToken) {
+                delete global.tokens[oldToken]
+            }
+
+            const newToken = baseToken + Math.random().toString(36).split(".")[1]
+
+            global.tokens[newToken] = {
+                guild: ctx.query.guild,
+                user: user.id,
+                token: token,
+            }
 
             return {
                 props: {
                     token,
                     user,
                     guild: guild.data,
-                    database: database,
+                    reqToken: newToken,
                 }
             }
         } catch (e) {
