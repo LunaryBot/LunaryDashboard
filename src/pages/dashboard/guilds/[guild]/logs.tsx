@@ -54,57 +54,35 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                 <SideBar user={user} guilds={guilds} guild={guild} />
                 
                 <div className={"content"}>
-                    <div className={styles["table-responsive"]}>
-
-                        <div className={`${styles["table"]} ${styles["logs-list"]}`}>
+                    <div className={styles["scr"]}>
+                        <table className={styles["cards-log"]}>
                             <thead>
                                 <tr>
-                                    <th><span>User</span></th>
-                                    <th><span>Created</span></th>
-                                    <th className={styles["text-center"]}><span>Status</span></th>
-                                    <th><span>Email</span></th>
-                                    <th>&nbsp;</th>
+                                    <th>Usuário</th>
+                                    <th>Autor</th>
+                                    <th>Ação</th>
+                                    <th>Data</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr id="fxe176s1-pkvl-7t1i-q6qb-tyej6k4hr5" card-log={"true"}>
+                                    <td className={styles["author"]}>
+                                        <img src="https://cdn.discordapp.com/avatars/869640914916757564/f0f883ebdb4a9e894a301e29b05d7fc9.png" className={styles["img"]} alt="" />
+                                        <p className={styles["details"]}><strong>MarkProfissa#1252<br /><br />869640914916757564</strong></p>
+                                    </td>
+                                    <td><strong>Mr. Tower#9283<br /><br />425396277560475648</strong></td>
+                                    <td><strong>Mute</strong></td>
+                                    <td><strong>16/00/2022 15:56</strong></td>
+                                </tr>
                                 <tr>
-                                <td>
-                                    <img src="https://github.com/jvopinho.png" alt="" />
-                                    <a href="#" className="user-link">Bae</a>
-                                    <span className="user-subhead">Admin</span>
-                                </td>
-                                <td>
-                                    31/03/2005
-                                </td>
-                                <td className="text-center">
-                                    <span className="label label-default">Inactive</span>
-                                </td>
-                                <td>
-                                    <a href="#">jvopinho.dev@gmail.com</a>
-                                </td>
-                                <td style={{width: "20%"}}>
-                                    <a href="#" className={styles["table-link"]}>
-                                        <span className="fa-stack">
-                                            <i className="fa fa-square fa-stack-2x"></i>
-                                            <i className="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    <a href="#" className={styles["table-link"]}>
-                                        <span className="fa-stack">
-                                            <i className="fa fa-square fa-stack-2x"></i>
-                                            <i className="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                    {/* <a href="#" className={`${styles["table-link"]} ${styles["danger"]}`}>
-                                        <span className="fa-stack">
-                                            <i className="fa fa-square fa-stack-2x"></i>
-                                            <i className="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a> */}
-                                </td>
-                            </tr>
+                                    <td className={`${styles["card-footer"]} ${styles["close"]}`} colSpan={6} id="footer-fxe176s1-pkvl-7t1i-q6qb-tyej6k4hr5">
+                                        <h3>Motivo</h3>
+                                        <br />
+                                        <p><strong>eu avisei</strong></p>
+                                    </td>
+                                </tr>
                             </tbody>
-                        </div>
+                        </table>
                     </div>
                 </div>
             </main>
@@ -112,7 +90,30 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
             <Script
                 src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
                 onLoad={() => {
-                    
+                    $("[card-log]").click(function() {
+                        const card = $(this)
+                        const card_footer = $(`#footer-${card.attr("id")}`)
+                        // card.toggleClass(styles["open"])
+                        // card_footer.toggleClass(styles["close"])
+                        if(card_footer.hasClass(styles["close"])) {
+                            $("[card-log]").each(function() {
+                                const card = $(this)
+                                const card_footer = $(`#footer-${card.attr("id")}`)
+            
+                                if(card.hasClass(styles["open"])) {
+                                    card.removeClass(styles["open"])
+                                }
+                                if(!card_footer.hasClass(styles["close"])) {
+                                    card_footer.addClass(styles["close"])
+                                }
+                            })
+                            card.addClass(styles["open"])
+                            card_footer.removeClass(styles["close"])
+                        } else {
+                            card.removeClass(styles["open"])
+                            card_footer.addClass(styles["close"])
+                        }
+                    })
                 }}
             ></Script>
         </>
