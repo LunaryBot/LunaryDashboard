@@ -6,17 +6,15 @@ const UnknownUser = {
     id: "0".repeat(18),
     username: "Unknown",
     discriminator: "0000",
-    avatar: "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"
+    avatar: null
 }
 
 export default async function getUser(userId): Promise<DiscordUser>  {
-    let user: DiscordUser;
-
     if(!global.users || !(global.users instanceof Map)) global.users = new Map();
+    
+    let user: DiscordUser = global.users.get(userId);
 
-    if(global.users.has(userId)) {
-        user = global.users.get(userId);
-    } else {
+    if(!user) {
         try {
             user = (await axios.get(`https://discord.com/api/v9/users/${userId}`, { 
                 headers: {
@@ -26,6 +24,8 @@ export default async function getUser(userId): Promise<DiscordUser>  {
         } catch(_) {
             user = UnknownUser;
         }
+
+        global.users.set(userId, user);
     }
 
     return user

@@ -17,6 +17,27 @@ import Head from 'next/head';
 import styles from '../../../../styles/guild.module.css';
 global.axios = axios;
 
+const punishments = {
+    "1": {
+        name: "Ban",
+        color: "#ed4245"
+    }, 
+    "2": {
+        name: "Kick",
+        color: "#ea8935"
+    }, 
+    "3": {
+        name: "Mute",
+        color: "#4b8cd2"
+    }, 
+    "4": {
+        name: "Adv",
+        color: "#eaac35"
+    }
+}
+
+const defaulImg = "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499";
+
 export default function DashboardGuilds({ token, user, guild, reqToken }: { reqToken: string; token: string; user: User, guild: Guild }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
     const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
@@ -91,6 +112,12 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                         const { limit = 20, chunk = 0 } = options
                         $("#loadingDot").show();
                         try {
+                            const timeout = setTimeout(() => {
+                                console.log("timeout")
+                                showErrorOverlay();
+                                // fetchLogs(options)
+                            }, 10 * 1000);
+
                             const res = (await axios.get(`/api/guilds/${guild.id}/logs`, {
                                 headers: {
                                     token: localStorage.getItem("reqToken"),
@@ -100,7 +127,12 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                                 }
                             })).data as any;
 
+                            clearTimeout(timeout);
+
                             if(res.status == 200) {
+                                $("#overlay-save-error").css({
+                                    display: "none"
+                                })
                                 localStorage.setItem("reqToken", res.data.token)
 
                                 logs = res.data.logs;
@@ -130,16 +162,18 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                         $("#logs-content-wrapper").show()
                         logs.forEach((log: Log) => {
                             const { user, author, reason, date, id, type } = log;
+                            const punishment = punishments[type];
+                            const dateFormat = new Date(date).toLocaleString();
 
                             $("#logs-content").append(`
                                 <tr id="${id}" card-log>
                                     <td class="${styles["author"]}">
-                                        <img src="https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png" class="${styles["img"]}" alt="" />
+                                        <img src="${user.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : defaulImg}" class="${styles["img"]}" alt="" />
                                         <p class="${styles["details"]}"><strong>${user?.username}<br /><br />${user?.id}</strong></p>
                                     </td>
                                     <td><strong>${author?.username}<br /><br />${author?.id}</strong></td>
-                                    <td><strong>Mute</strong></td>
-                                    <td><strong>16/00/2022 15:56</strong></td>
+                                    <td><span class="${styles["punishment"]}" style="background-color: ${punishment.color};"><strong>${punishment.name}</strong></span></td>
+                                    <td><strong>${dateFormat}</strong></td>
                                 </tr>
                                 <tr>
                                     <td class="${styles["card-footer"]} ${styles["close"]}" colspan=6 id="footer-${id}">
@@ -154,8 +188,6 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                         $("[card-log]").click(function() {
                             const card = $(this)
                             const card_footer = $(`#footer-${card.attr("id")}`)
-                            // card.toggleClass(styles["open"])
-                            // card_footer.toggleClass(styles["close"])
                             if(card_footer.hasClass(styles["close"])) {
                                 $("[card-log]").each(function() {
                                     const card = $(this)

@@ -78,6 +78,17 @@
     word-break: break-all;
 }
 
+.cards-log td span.punishment {
+    min-width: 46px;
+    width: 46px;
+    padding: 5px; 
+    border-radius: 5px;
+}
+
+.cards-log td span.punishment strong {
+    color: white;
+}
+
 .cards-log .card-footer.close {
     display: none;
 }
