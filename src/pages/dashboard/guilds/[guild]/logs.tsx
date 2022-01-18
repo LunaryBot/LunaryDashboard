@@ -179,7 +179,14 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                                     <td class="${styles["card-footer"]} ${styles["close"]}" colspan=6 id="footer-${id}">
                                         <h3>Motivo</h3>
                                         <br />
-                                        <p><strong>${reason}</strong></p>
+                                        <p><strong>${
+                                            reason
+                                            .replace(/\[([^\]]+)\]\(([^\)]+)\)/,'<a href="$2">$1</a>')
+                                            .replace(/<(a)?:(.{2,32}):(\d{17,19})>/g, `<img class="${styles["emoji"]}" name="$2" alt="<$1:$2:$3>" animated="$1" src="https://cdn.discordapp.com/emojis/$3" />`)
+                                            .replace(/\`(\w{1,})\`/g,'<code>$1</code>')
+                                            .replace(/\*\*(\w{1,})\*\*/g,'<strong>$1</strong>')
+                                            .replace(/\*(\w{1,})\*|__(\w{1,})__/g,'<i>$1</i>')
+                                        }</strong></p>
                                     </td>
                                 </tr>
                             `)
