@@ -125,10 +125,10 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                                 <div className="select" id="muterole">
                                     <div className="select__trigger">
                                         <p>{(function() {
-                                            let a = "Selecionar Cargo"
+                                            let a = "Selecionar Canal"
                                             if(database.chat_punish) {
                                                 const channel = guild.channels.filter(x => ["GUILD_TEXT", "GUILD_NEWS"].includes(x.type)).find(x => x.id == database.chat_punish)
-                                                if(channel.name) {
+                                                if(channel?.name) {
                                                     a = channel.name
                                                 }
                                             }
@@ -153,10 +153,10 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                                 <div className="select" id="muterole">
                                     <div className="select__trigger">
                                         <p>{(function() {
-                                            let a = "Selecionar Cargo"
+                                            let a = "Selecionar Canal"
                                             if(database.chat_modlogs) {
                                                 const channel = guild.channels.filter(x => ["GUILD_TEXT", "GUILD_NEWS"].includes(x.type)).find(x => x.id == database.chat_modlogs)
-                                                if(channel.name) {
+                                                if(channel?.name) {
                                                     a = channel.name
                                                 }
                                             }
