@@ -1,4 +1,4 @@
-export const encode = (obj: { [key: string]: unknown }) => {
+export default function encode(obj: { [key: string]: unknown }) {
 	let string = '';
 	for (const [K, V] of Object.entries(obj)) {
 		if (!V) continue;
