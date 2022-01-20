@@ -17,6 +17,7 @@ import Head from 'next/head';
 import styles from '../../../../styles/guild.module.css';
 import { useRouter } from 'next/router';
 import decode from '../../../../Utils/decode';
+import encode from '../../../../Utils/encode';
 global.axios = axios;
 
 const punishments = {
@@ -111,7 +112,7 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
             <Script
                 src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
                 onLoad={() => {
-                    async function fetchLogs(options = {} as { limit: number, chunk: number }) {
+                    async function fetchLogs(options = {} as { limit?: number, chunk?: number, id?: string, filters: { userId?: string, logId?: string, authorId?: string, type?: number }}) {
                         const { limit = 20, chunk = 0 } = options
                         $("#loadingDot").show();
                         try {
@@ -126,6 +127,8 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                                     token: localStorage.getItem("reqToken"),
                                     limit: limit.toString(),
                                     chunk: chunk.toString(),
+                                    filters: encode(options.filters || {}),
+                                    id : options.id || "",
                                     requesterId: user.id
                                 }
                             })).data as any;
@@ -158,7 +161,9 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                         }
                     }
 
-                    fetchLogs()
+                    const params = new URLSearchParams(window.location.search);
+                    
+                    fetchLogs({ id: params.get("id"), filters: decode(params.get("filters") || "") })
 
                     function setLogs() {
                         $("#logs-content").html("");
