@@ -15,6 +15,7 @@ import Script from 'next/script';
 import initializerFirebases from '../../../../Utils/initializerFirebase';
 import Head from 'next/head';
 import styles from '../../../../styles/guild.module.css';
+import { useRouter } from 'next/router';
 global.axios = axios;
 
 const punishments = {
@@ -86,6 +87,7 @@ export default function DashboardGuilds({ token, user, guild, reqToken }: { reqT
                 <div className={"content"}>
                     <div id='loadingDot'>
                         <LoadingDots />
+                        <a href={useRouter().route.replace('[guild]', guild.id)}>Caso a pagina não carregue clique aqui</a>
                     </div>
                     <div className={styles["scr"]} id="logs-content-wrapper" hidden>
                         <table className={styles["cards-log"]}>
