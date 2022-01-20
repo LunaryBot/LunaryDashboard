@@ -3,21 +3,34 @@ import initializerFirebases from '../../../../Utils/initializerFirebase';
 import { LogData, Log } from '../../../../types';
 import chunk from '../../../../Utils/chunk';
 import getUser from '../../../../Utils/getUser';
+import decode from '../../../../Utils/decode';
 
 interface headersGet {
     token: string;
     requesterId: string;
-    userId: string;
-    authorId: string;
-    logId: string;
     chunk: number;
     limit: number;
+    filters: string;
+    id: string;
+}
+
+const punishmentsTypes = {
+    ban: 1,
+    b: 1,
+    kick: 2,
+    k: 2,
+    mute: 3,
+    m: 3,
+    adv: 4,
+    a: 4,
+    warn: 4,
+    w: 4,
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "GET") {
         const guildId = req.query.guild as string;
-        const { requesterId, token, authorId, userId, logId, chunk: _chunk = 0, limit = 20 }: headersGet = req.headers as any;
+        const { requesterId, token, id, filters, chunk: _chunk = 0, limit = 20 }: headersGet = req.headers as any;
 
         if(!token) {
             return res.json({
@@ -43,10 +56,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             })
             .filter(x => x.server == guildId)
             .sort((a, b) => b.date - a.date) || [];
-
-        if(userId) logs = logs.filter(x => x.user == userId);
-        if(authorId) logs = logs.filter(x => x.author == authorId);
-        if(logId) logs = logs.filter(x => x.id == logId);
+            
+        if(id) {
+            logs = logs.filter(x => x.id == id.toLowerCase?.());
+        } else if(filters) {
+            const { userId, authorId, type }: any = decode(typeof filters == "string" ? filters : "");
+            
+            if(userId) logs = logs.filter(x => x.user == userId);
+            if(authorId) logs = logs.filter(x => x.author == authorId);    
+            if(type) logs = logs.filter(x => x.type == (Number(type) || punishmentsTypes[type]));    
+        }
 
         const chunks = chunk(logs, limit)
 
@@ -70,7 +89,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         delete global.tokens[token];
 
         global.tokens[newToken] = {
-            user: userId,
+            user: requesterId,
             guild: guildId,
             token: _token
         };
@@ -79,9 +98,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             status: 200,
             statusText: "Ok",
             data: {
-                userId,
-                authorId,
-                logId,
+                filters: typeof filters == "string" ? decode(filters.toString()) : {},
                 logs: _logs,
                 token: newToken
             }
