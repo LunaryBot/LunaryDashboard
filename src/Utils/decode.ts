@@ -1,4 +1,4 @@
-export const decode = (s: string, obj: object = {}) => {
+export default function decode (s: string, obj: object = {}) {
     obj = obj || {};
 
     let p;

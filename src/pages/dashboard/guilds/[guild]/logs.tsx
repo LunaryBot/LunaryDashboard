@@ -16,6 +16,7 @@ import initializerFirebases from '../../../../Utils/initializerFirebase';
 import Head from 'next/head';
 import styles from '../../../../styles/guild.module.css';
 import { useRouter } from 'next/router';
+import decode from '../../../../Utils/decode';
 global.axios = axios;
 
 const punishments = {
