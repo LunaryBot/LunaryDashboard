@@ -62,7 +62,7 @@ export default function _GuildCard({ guild, has }: { guild: GuildData, has: bool
         <GuildCard>
             <GuildIcon src={guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : "https://cdn.discordapp.com/emojis/821939251243122719.png?size=128"} />
             <GuildName>{guild.name}</GuildName>
-            <Link href={`/dashboard/guild/${guild.id}`}><GuildButton>{(() => {
+            <Link href={`/dashboard/guilds/${guild.id}/moderation`}><GuildButton>{(() => {
                 if(!has) return (
                     <>
                         <i className={"fas fa-plus"}></i> Invite

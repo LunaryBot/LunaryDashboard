@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import { User, GuildData, Guild } from "../types"
 import { useRouter } from "next/router"
+import { InformationCard } from "./InformationCard";
 
 const imgDefault = "https://media.discordapp.net/attachments/880176654801059860/915300231866900530/91ce69b6c7c6ab40b1d35808979394a5.png?width=499&height=499"
 
@@ -21,6 +22,11 @@ const _urls = {
             name: "Logs",
             url: "/dashboard/guilds/[guild]/logs",
             icon: "fad fa-clipboard-list"
+        },
+        {
+            name: "Permissões",
+            url: "/dashboard/guilds/[guild]/permissions",
+            icon: "fad fa-briefcase"
         }
     ],
     user: [
@@ -93,15 +99,11 @@ export default function SideBar({ user, guild, guilds, hasDashboard = true }: Si
                         </Link>
                     )
                 })}
-                {/* <div className={"information-card"}>
-                    <span className={"title"}>Importante!</span>
-                    <br />
-                    <span className={"desc"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, neque pariatur nam nulla facilis, possimus, quis aut labore laudantium sequi similique vitae accusamus. Ducimus dolor tempora, ipsam debitis minus harum!</span>
-                    <br />
-                    <button className={"button"}>
-                        Saiba mais!
-                    </button>
-                </div> */}
+                { /* <InformationCard 
+                    title="Importante!" 
+                    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet sapien semper, auctor arcu eget, sagittis orci. Morbi interdum tortor ut tellus posuere lobortis at nec lectus." 
+                    button="Saiba mais!" 
+                /> */ }
             </div>
         </>
     );
