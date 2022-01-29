@@ -95,7 +95,7 @@ export default function DashboardGuilds({ token, user, guild, database, reqToken
                         </div>
                         <div className="card-content">
                             <CheckRadio>
-                                <Toggle name="mandatory_reason" id="mandatory_reason" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Tornar motivo para punições obrigatório</strong></label>
+                                <Toggle name="mandatory_reason" id="mandatory_reason" data-send-on-save bitfield /><label style={{marginLeft: '1%', fontSize: '18px'}}><strong>Tornar obrigatório ter um motivo para as punições</strong></label>
                                 <p>Permitir que uma punição usando o bot (Lunar) só seja efetuada com um motivo especificado.<br />Essa opção só ira ser aplicada para usuários que não possuem um cargo com a permissão <code>Punir sem motivo</code>.</p>
                             </CheckRadio>
                             

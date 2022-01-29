@@ -130,3 +130,15 @@
     border-radius: 5px;
     border: 2px solid #181818;
 }
+
+/* Permissions */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 0.5fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.container div { margin: 10px; }

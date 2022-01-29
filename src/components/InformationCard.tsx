@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
+import { Component, ReactNode } from 'react';
+interface PropsInterface {
+    title: string;
+    desc: string;
+    button: string;
+};
 
 export class InformationCard extends Component {
-    render() {
-        const { title, desc, button } = this.props;
+    render(): ReactNode {
+        const { title, desc, button } = this.props as PropsInterface;
         if (!title || !desc || !button) return (
             <>
                 <h3 style={{
