@@ -30,7 +30,6 @@ const GlobalStyle = createGlobalStyle`
         /*outline: 1px solid slategrey;*/
         border-radius: 0.5em;
     }
-
     a {
         text-decoration: none;
     }
