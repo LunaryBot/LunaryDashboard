@@ -11,19 +11,18 @@ import Toggle, { CheckRadio } from '../../../../components/Toggle';
 import _GuildCard from '../../../../components/GuildCard';
 import { createState } from '../../../../Utils/states';
 import fetch from 'node-fetch';
-import Script from 'next/script';
 import initializerFirebases from '../../../../Utils/initializerFirebase';
-import Head from 'next/head';
 import styles from '../../../../styles/guild.module.css';
 import { useRouter } from 'next/router';
 import decode from '../../../../Utils/decode';
 import encode from '../../../../Utils/encode';
+import fs from 'node:fs'
+fs.readFileSync
 global.axios = axios;
 
 export default function Permissions({ token, user, guild, reqToken }) {
     const [guilds, setGuilds] = useState<GuildData[] | null | any>(null);
     const [_guilds, _setGuilds] = useState<GuildData[] | null | any>(null);
-    let logs: Log[] | null;
 
     useEffect(() => {
         (async() => {
@@ -76,49 +75,49 @@ export default function Permissions({ token, user, guild, reqToken }) {
                             <div className={styles["container"]}>
                                 
                                 <div>
-                                <h3>Adicionar Usuario:</h3>
+                                <span>Adicionar Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-add" />
                                 </CheckRadio>
                                 </div>
 
                                 <div>
-                                <h3>Remover Usuario:</h3>
+                                <span>Remover Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-remove" />
                                 </CheckRadio>
                                 </div>
 
                                 <div>
-                                <h3>A Usuario:</h3>
+                                <span>A Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-kill" />
                                 </CheckRadio>
                                 </div>
 
                                 <div>
-                                <h3>A Usuario:</h3>
+                                <span>A Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-kill" />
                                 </CheckRadio>
                                 </div>
 
                                 <div>
-                                <h3>A Usuario:</h3>
+                                <span>A Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-kill" />
                                 </CheckRadio>
                                 </div>
 
                                 <div>
-                                <h3>A Usuario:</h3>
+                                <span>A Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-kill" />
                                 </CheckRadio>
                                 </div>
 
                                 <div>
-                                <h3>A Usuario:</h3>
+                                <span>A Usuario:</span>
                                 <CheckRadio>
                                     <Toggle id="user-kill" />
                                 </CheckRadio>
