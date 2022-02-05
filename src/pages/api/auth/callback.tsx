@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse} from 'next'
 import nookies from 'nookies';
 import fetch from 'node-fetch'
 import formData from 'form-data'
+import { getState, deleteState } from '../../../utils/states'
 
 export default async function APIAuthCallback(req: NextApiRequest, res: NextApiResponse) {
     const code = req.query.code as string;
@@ -32,7 +33,7 @@ export default async function APIAuthCallback(req: NextApiRequest, res: NextApiR
 
     if(!token.access_token) return res.send('No access token');
 
-    nookies.set({ res }, 'lunarydash.token', token.access_token, {
+    nookies.set({ res }, '__SessionLuny', token.access_token, {
         maxAge: 5 * 60 * 60, // 5 hours
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
@@ -45,9 +46,9 @@ export default async function APIAuthCallback(req: NextApiRequest, res: NextApiR
     if(guildId) {
         return res.redirect(`/dashboard/guilds/${guildId}`);
     } else if(state) {
-        const url = global.states?.[state];
+        const url = getState(state);
         if(url) {
-            delete global.states[state];
+            deleteState(state);
             return res.redirect(url);
         }
     } else res.redirect('/dashboard/@me');
