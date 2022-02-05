@@ -22,7 +22,7 @@ export interface IUser {
 	verified?: boolean;
 }
 
-export interface GuildData {
+export interface IGuildData {
 	icon: string;
 	id: string;
 	name: string;
@@ -47,7 +47,7 @@ export const scopes: string[] = [
 	'webhook.incoming'
 ];
 
-export type scope = 
+export type Tscope = 
 	'applications.builds.read' 
 	| 'applications.commands'
 	| 'applications.entitlements' 
@@ -61,7 +61,7 @@ export type scope =
 	| 'gdm.join' 
 	| 'webhook.incoming'
 
-export interface TokenData {
+export interface ITokenData {
 	access_token: string;
 	expires_in: number;
 	refresh_token: string;
