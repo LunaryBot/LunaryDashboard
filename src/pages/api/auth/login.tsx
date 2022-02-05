@@ -19,6 +19,5 @@ export default (req, res) => {
         prompt: "none"
     });
 
-    // res.redirect(url);
-    res.send('...')
+    res.redirect(url);
 }
