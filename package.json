@@ -18,6 +18,8 @@
     "@heroicons/react": "^1.0.5",
     "@types/cookie": "^0.4.1",
     "@types/node-fetch": "^3.0.3",
+    "@types/socket.io": "^3.0.2",
+    "@types/socket.io-client": "^3.0.0",
     "@types/uuid": "^8.3.3",
     "axios": "^0.24.0",
     "discord.js": "^12.5.1",
@@ -35,6 +37,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
+    "socket.io-client": "^4.4.1",
     "styled-components": "^5.2.3",
     "sydb": "^1.0.1",
     "uuid": "^8.3.2"
