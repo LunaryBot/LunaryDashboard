@@ -1,7 +1,32 @@
 import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 
+const tonalits = Object.entries({
+    "5": '0d', 
+    "10": '1a', 
+    "15": '26', 
+    "20": '33', 
+    "40": '66', 
+    "60": '99', 
+    "80": 'cc', 
+    "100": ''
+})
+
+const baseColor = '#ffffff';
+const baseColor2 = '#000000';
+const baseBandColor = '#A020F0'
+
 const GlobalStyle = createGlobalStyle`
+    :root {
+        // #f6f6f6 #0d0510
+        --background: #0d0510;
+        ${tonalits.map(([key, value]) => `--luny-colors-text-${key}: ${baseColor}${value};`).join('\n')}
+        ${tonalits.map(([key, value]) => `--luny-colors-flow-${key}: ${baseColor2}${value};`).join('\n')}
+        ${tonalits.map(([key, value]) => `--luny-colors-ui-${key}: ${baseColor}${value};`).join('\n')}
+        ${tonalits.map(([key, value]) => `--luny-colors-band-${key}: ${baseBandColor}${value};`).join('\n')}
+        ${tonalits.map(([key, value]) => `--luny-colors-light-${key}: ${baseColor}${value};`).join('\n')}
+        ${tonalits.map(([key, value]) => `--luny-colors-dark-${key}: ${baseColor2}${value};`).join('\n')}
+    }
     * {
         margin: 0;
         padding: 0;
@@ -12,8 +37,8 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: cursive;
-        background-color: #1e1e22;
-        color: white
+        background-color: var(--background);
+        color: var(--font-primary-color)
     }
 
     body::-webkit-scrollbar {
