@@ -6,7 +6,7 @@ interface IProps {
 }
 
 export default class LoadingPage extends React.Component {
-  constructor(props: IProps) {
+    constructor(props: IProps) {
         super(props as IProps);
 
         const { loading } = this.props as IProps;

@@ -2,7 +2,7 @@
     position: fixed;
     width: 50%;
     height: 100vh;
-    z-index: 2;
+    z-index: 1001;
     top: 0;
     background: #A020F0;
     transition: all ease-in-out 1s;
