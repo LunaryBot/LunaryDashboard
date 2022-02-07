@@ -16,7 +16,7 @@
 .left-column .menu {
     padding: 24px;
     width: 96%;
-    height: 300px;
+    height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
     border-radius: 20px;
@@ -83,8 +83,21 @@
     color: var(--luny-colors-text-100);
 }
 
+.left-column .menu p.stack {
+    font-size: 12px;
+    font-weight: 300;
+    /* line-height: 32px; */
+    letter-spacing: 0;
+    color: var(--luny-colors-text-100);
+}
+
+.left-column .menu .border {
+    border-left: 3px solid var(--luny-colors-ui-20);
+    border-radius: 3px;
+}
+
 .left-column .menu .link {
-    color: var(--luny-colors-ui-60);
+    color: var(--luny-colors-text-60);
     align-items: center;
     display: -webkit-box;
     display: -webkit-flex;
@@ -98,9 +111,11 @@
     -ms-flex-direction: row;
     flex-direction: row;
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px 13px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .left-column .menu .link i {
