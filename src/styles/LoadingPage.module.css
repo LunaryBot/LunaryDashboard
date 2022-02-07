@@ -21,7 +21,7 @@
     background: white;
     width: 100%;
     height: 100vh;
-    z-index: 1;
+    z-index: 1001;
 }
 
 
@@ -31,7 +31,7 @@
     position: fixed;
     top: -200%;
     left: 0;
-    z-index: 3;
+    z-index: 1002;
     opacity: 0;
     display: flex;
     justify-content: center;
