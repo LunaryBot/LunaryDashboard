@@ -1,0 +1,52 @@
+/* Header */
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 7px 20px;
+    transition-duration: 0.5s;
+    height: 80px;
+    position: fixed;
+    background-color: var(--luny-colors-overlay);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+	top: 0;
+    width: 100%;
+    opacity: 1;
+}
+
+.header.onTop {
+    background-color: transparent;
+}
+
+.header .header-wrapper {
+    opacity: 1;
+    filter: none;
+}
+
+.header .avatar {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header .avatar img {
+    margin-right: -70px;
+    border-radius: 50%;
+    width: 10%;
+    min-width: 60px;
+    opacity: 70%;
+    border: 2px solid #00000000;
+    transition: border 0.5s;
+}
+
+.header.onTop .avatar img {
+    opacity: 1;
+}
+
+.header .avatar:hover img {
+    opacity: 1;
+    border: 2px solid #A020F0;
+    transition: border 0.5s;
+}
