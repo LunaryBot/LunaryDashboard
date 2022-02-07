@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
         ${tonalits.map(([key, value]) => `--luny-colors-band-${key}: ${baseBandColor}${value};`).join('\n')}
         ${tonalits.map(([key, value]) => `--luny-colors-light-${key}: ${baseColor}${value};`).join('\n')}
         ${tonalits.map(([key, value]) => `--luny-colors-dark-${key}: ${baseColor2}${value};`).join('\n')}
+        --luny-colors-overlay: ${baseColor2}E6;
     }
     * {
         margin: 0;
@@ -36,9 +37,12 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: cursive;
         background-color: var(--background);
-        color: var(--font-primary-color)
+        background-image: linear-gradient(180deg, var(--luny-colors-band-15) 5%, var(--background) 20%);
+        background-size: 100% 100%;
+        height: 100vh;
+        font-family: cursive;
+        color: var(--font-primary-color);
     }
 
     body::-webkit-scrollbar {
