@@ -22,6 +22,37 @@
     border-radius: 20px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.left-column .infoCard .title {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.left-column .infoCard .desc {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+}
+
+.left-column .infoCard .button {
+    background-color: white;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    transition: 0.5s;
+}
+
+.left-column .infoCard .button:hover {
+    background-color: #eee;
+    cursor: pointer;
+    transition: 0.5s;
 }
 
 .left-column .menu .user {
@@ -84,16 +115,18 @@
 }
 
 .left-column .menu p.stack {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     /* line-height: 32px; */
     letter-spacing: 0;
+    margin-bottom: 5px;
     color: var(--luny-colors-text-100);
 }
 
 .left-column .menu .border {
     border-left: 3px solid var(--luny-colors-ui-20);
     border-radius: 3px;
+    /* margin-left: 5px; */
 }
 
 .left-column .menu .link {
@@ -129,12 +162,73 @@
 }
 
 .content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 100px;
-    padding: 20px;
+    padding: 10px 20px;
     margin-left: 25%;
     background-position: center;
     background-size: cover;
     height: auto;
     transition: 0.5s;
     margin-top: 160px;
+}
+
+.content .small-card {
+    margin: 10px;
+    padding: 24px;
+    width: 45%;
+    height: auto;
+    background-color: var(--luny-colors-ui-5);
+    border: 1px solid var(--luny-colors-ui-15);
+    border-radius: 14px;
+}
+
+.content .card {
+    margin: 10px;
+    padding: 24px;
+    width: 92%;
+    height: auto;
+    background-color: var(--luny-colors-ui-5);
+    border: 1px solid var(--luny-colors-ui-15);
+    border-radius: 14px;
+}
+
+.content .guilds .small-card {
+    margin: 10px;
+    padding: 24px;
+    width: 22%;
+    height: auto;
+    background-color: var(--luny-colors-ui-5);
+    border: 1px solid var(--luny-colors-ui-15);
+    border-radius: 14px;
+}
+
+@media screen and (max-width: 980px) {
+    .left-column {
+        width: 100%;
+        position: relative;
+    }
+    
+    .content {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        width: 98%;
+    }
+
+    .content .card, 
+    .content .small-card {
+        width: 100%;
+    }
+}
+
+
+.font-style-1 {
+    font-family: "Whitney", "Roboto", cursive, Arial, sans-serif;
+}
+
+.font-style-2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
