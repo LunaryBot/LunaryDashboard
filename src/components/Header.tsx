@@ -70,24 +70,24 @@ export default class Header extends React.Component {
                     <div className={styles["user-menu-wrapper"]}>
                         <div className={styles["user-menu"]}>
                             <div className={styles["user-menu-options"]}>
-                                <Link href={"/dashboard/@me"}>
+                                <a href={"/dashboard/@me"}>
                                     <div style={{marginTop: "0"}}>
                                         <i className={"fas fa-tools"}></i>
                                         Dashboard
                                     </div>
-                                </Link>
-                                <Link href={"/commands"}>
+                                </a>
+                                <a href={"/commands"}>
                                     <div>
                                         <i className={"fas fa-project-diagram"}></i>
                                         Comandos
                                     </div>
-                                </Link>
-                                <Link href={"/api/auth/logout"}>
+                                </a>
+                                <a href={"/api/auth/logout"}>
                                     <div>
                                         <i className={"fas fa-sign-out-alt"} style={{color: "var(--luny-colors-red)"}}></i>
                                         Logout
                                     </div>
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </div>
