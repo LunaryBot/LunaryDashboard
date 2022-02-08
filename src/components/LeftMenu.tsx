@@ -51,7 +51,7 @@ export default class Header extends React.Component {
         function iconComponent() {
             if(icon) {
                 return (
-                    <img src={`https://cdn.discordapp.com/avatars/${id}/${icon}.png`} alt="" />
+                    <img src={guild ? icon : `https://cdn.discordapp.com/avatars/${id}/${icon}.png`} alt="" />
                 )
             } else {
                 const a = /[a-z]/i
