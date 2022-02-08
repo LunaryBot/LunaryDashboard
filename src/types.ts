@@ -114,6 +114,12 @@ export interface IGuild {
 	cluserID: string;
 }
 
+export interface IGuildSuper extends IGuild {
+	modlogs_channel: string;
+	punishments_channel: string;
+	configs: number;
+}
+
 export interface IAPIGuildResponse {
 	status: number;
 	statusText: string;
