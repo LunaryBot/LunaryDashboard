@@ -15,6 +15,33 @@
     opacity: 1;
 }
 
+.header .links {
+    position: relative;
+    top: 0;
+    left: 11%;
+    right: 0;
+    margin: auto;
+}
+
+.header .links .link {
+    display: inline-block;
+    color: var(--luny-colors-text-100);
+    margin-right: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    transition-duration: 0.5s;
+}
+
+.header.onTop .links .link{
+    /* text-decoration: underline; */
+    color: var(--luny-colors-text-100);
+    border-bottom: 2px solid var(--luny-colors-text-80);
+}
+
+.header .links .link:hover {
+    color: var(--luny-colors-text-80);
+}
+
 .header .icon {
     width: 52px;
     height: 52px;
@@ -59,6 +86,62 @@
 
 .header .avatar:hover img {
     opacity: 1;
-    border: 2px solid #A020F0;
+    border: 2px solid var(--luny-colors-band-100);
     transition: border 0.5s;
+}
+
+.header .avatar .user-menu-wrapper {
+    position: relative;
+    user-select: none;
+}
+
+.header .avatar .user-menu-wrapper .user-menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-width: 0 0 0 0;
+    border-style: solid;
+}
+
+.header .avatar.openMenu .user-menu-wrapper .user-menu .user-menu-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.header .avatar .user-menu-wrapper .user-menu .user-menu-options {
+    position: absolute;
+    margin-top: 33px;
+    top: 100%;
+    left: -105px;
+    width: 180px;
+    background-color: var(--luny-colors-background);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease 0s;
+    color: var(--luny-colors-text-60);
+    border: 1px solid var(--luny-colors-ui-15);
+}
+
+.header .avatar .user-menu-wrapper .user-menu .user-menu-options div {
+    margin-top: 9px;
+    font-family: cursive, sans-serif;
+    font-weight: 500;
+    color: var(--luny-colors-text-60);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 18px;
+}
+
+.header .avatar .user-menu-wrapper .user-menu .user-menu-options div:hover {
+    margin-left: 10px;
+}
+
+.header .avatar .user-menu-wrapper .user-menu .user-menu-options i {
+    color: #A020F0;
+    margin-right: 5px;
 }
