@@ -12,27 +12,28 @@ const _urls = {
     user: {
         general: [
             {
-                name: "Home",
-                url: "/dashboard/@me",
-                icon: "fas fa-home"
+                name: 'Home',
+                url: '/dashboard/@me',
+                icon: 'fad fa-home'
             },
             {
-                name: "Servidores",
-                url: "/dashboard/guilds",
-                icon: "fad fa-grip-vertical"
+                name: 'Servidores',
+                url: '/dashboard/guilds',
+                icon: 'fad fa-grip-vertical'
             }
         ]
     },
     guild: {
         general: [
             {
-                name: "Home",
-                url: "/dashboard/guilds/[guild]/",
-                icon: "fas fa-home"
+                name: 'Home',
+                url: '/dashboard/guilds/[guild]/',
+                icon: 'fad fa-home'
             },
             {
-                name: "Moderação",
-                url: "/dashboard/guilds/[guild]/moderation"
+                name: 'Moderação',
+                url: '/dashboard/guilds/[guild]/moderation',
+                icon: 'fad fa-hammer'
             }
         ]
     }
@@ -46,18 +47,18 @@ export default class Header extends React.Component {
         const id = guild?.id || user?.id
         const icon = guild ? guild?.icon : user?.avatar
 
-        const urls = Object.entries(_urls[guild ? "guild" : "user"]);
+        const urls = Object.entries(_urls[guild ? 'guild' : 'user']);
         
         function iconComponent() {
             if(icon) {
                 return (
-                    <img src={guild ? icon : `https://cdn.discordapp.com/avatars/${id}/${icon}.png`} alt="" />
+                    <img src={guild ? icon : `https://cdn.discordapp.com/avatars/${id}/${icon}.png`} alt='' />
                 )
             } else {
                 const a = /[a-z]/i
                 const b = /\s[a-z]/i
                 // @ts-ignore
-                let array = [ ...(name || "") ]
+                let array = [ ...(name || '') ]
                 array = array.filter(function(x, i) {
                     if(i == 0) return true
                     if(!x.trim()) return
@@ -66,7 +67,7 @@ export default class Header extends React.Component {
                 })
 
                 return (
-                    <div>{array.join("")}</div>
+                    <div>{array.join('')}</div>
                 )
             }
         }
@@ -74,24 +75,24 @@ export default class Header extends React.Component {
 
         return (
             <>
-                <div className={styles["left-column"]}>
-                    <div className={styles["menu"]}>
-                        <div className={styles["user"]}>
-                            <span className={styles["avatar"]}>
+                <div className={styles['left-column']}>
+                    <div className={styles['menu']}>
+                        <div className={styles['user']}>
+                            <span className={styles['avatar']}>
                                 {iconComponent()}
                             </span>
-                            <div className={styles["username"]}>
+                            <div className={styles['username']}>
                                 <p>{name || '...'}</p>
                             </div>
                         </div>
                         {urls.map(([k, v]) => {
                             return (
                                 <main key={k}>
-                                    <p className={styles["stack"]}>{k.toLocaleUpperCase()}</p>
-                                    <div className={styles["border"]}>
+                                    <p className={styles['stack']}>{k.toLocaleUpperCase()}</p>
+                                    <div className={styles['border']}>
                                         {v.map(({ name, url, icon}) => {
                                             return (
-                                                <a href={url} className={styles["link"]} key={url}>
+                                                <a href={url} className={styles['link']} key={url}>
                                                     <p><i className={icon}></i>{name}</p>
                                                 </a>
                                             )
