@@ -175,7 +175,7 @@
 
 .content {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-wrap: wrap;
     margin-bottom: 100px;
     padding: 10px 20px;
@@ -187,6 +187,13 @@
     margin-top: 160px;
 }
 
+.content code {
+	color: var(--luny-colors-band-100);
+	background: var(--luny-colors-flow-80);
+	border-radius: 3px;
+    padding: 1.3px;
+}
+
 .content .small-card {
     margin: 10px;
     padding: 24px;
@@ -194,6 +201,7 @@
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
+    color: var(--luny-colors-text-60);
     border-radius: 14px;
 }
 
@@ -204,6 +212,7 @@
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
+    color: var(--luny-colors-text-60);
     border-radius: 14px;
 }
 
@@ -227,7 +236,8 @@
         margin-left: auto;
         margin-right: auto;
         margin-top: 30px;
-        width: 98%;
+        width: 100%;
+        padding: 10px;
     }
 
     .content .card, 
