@@ -8,8 +8,8 @@ const Input = sty.input`
     -webkit-appearance: none;
     appearance: none;
     background-color: var(--luny-colors-red);
-    width: 30px;
-    height: 19px;
+    width: 26px;
+    height: 16px;
     border-radius: 10px;
     box-shadow: inset 0 1px 5px var(--luny-colors-flow-40);
 
@@ -20,10 +20,10 @@ const Input = sty.input`
 
     &:before{
         content: '';
-        margin-top: 2.25px;
+        margin-top: 1.5px;
         display: block;
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
         background-color: var(--luny-colors-ui-100);
         border-radius: 50%;
         position: absolute;
@@ -34,7 +34,7 @@ const Input = sty.input`
 
     &:after{
         display: block;
-        margin-top: 2.25px;
+        margin-top: 1.5px;
         left: 20px;
         position: absolute;
         font-size: 14px;
