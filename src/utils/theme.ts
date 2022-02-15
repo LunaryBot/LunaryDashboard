@@ -25,7 +25,7 @@ const basesColors = {
         icon: whiteColor
     },
     light: {
-        background: '#f6f6f6',
+        background: '#faecff',
         ui: blackColor,
         flow: whiteColor,
         text: blackColor,

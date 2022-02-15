@@ -1,12 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
+import Script from 'next/script';
+import { useState, useEffect } from 'react';
 
 import '../styles/styles.css';
 import Theme from '../utils/theme';
 
 export default function MyApp({ Component, pageProps }) {
+    const [mode, setMode] = useState<'dark'|'light'|null>(null);
+
+    useEffect(() => {
+        if(!mode) {
+            setMode(localStorage.getItem('mode') as 'dark' | 'light' | null || 'dark')
+        }
+    }, []);
+
     const GlobalStyles = createGlobalStyle`
-        :root {${Theme({ mode: pageProps.mode || 'dark' }).toString()}}
+        :root {${Theme({ mode: mode || 'dark' }).toString()}}
     `
 
     return (
