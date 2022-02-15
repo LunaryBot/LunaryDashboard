@@ -58,7 +58,7 @@ function ThemeVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) 
         "--luny-colors-icon": baseColors.icon || band,
         ...mapTonalits("--luny-colors-light", whiteColor),
         ...mapTonalits("--luny-colors-dark", blackColor),
-        "--luny-colors-gree": "#61fe80",
+        "--luny-colors-green": "#61fe80",
         "--luny-colors-red": "#fe4854"
     };
 
