@@ -4,14 +4,24 @@ import styles from '../styles/Select.module.css';
 export default class Select extends React.Component {
     componentDidMount() {
         const { id } = this.props as { id: string };
-        const select = document.getElementById(id)
-        const options = select.querySelectorAll(`#options-${id} .${styles["option"]}`)
-        const placeholder = select.querySelector(`#placeholder-${id}`)
-        console.log(placeholder.innerHTML)
+        const w = document.getElementById(`w-${id}`) as HTMLElement;
+        const select = document.getElementById(id);
+        const options = select.querySelectorAll(`#options-${id} .${styles["option"]}`) as NodeListOf<HTMLElement>;
+        const placeholder = select.querySelector(`#placeholder-${id}`);
+        console.log(placeholder.innerHTML);
         options.forEach(element => {
             const attrs = element.attributes
             element.addEventListener('click', (e) => {
                 console.log(attrs["data-li"])
+
+                options.forEach(element => {
+                    element.classList.remove(styles["selected"])
+                })
+                
+                element.classList.add(styles["selected"])
+
+                w.setAttribute('data-value', attrs["data-value"]?.value || attrs["data-li"]?.value || element.innerHTML);
+                
                 placeholder.innerHTML = attrs["data-li"]?.value || element.innerHTML
             })
         })
@@ -29,6 +39,7 @@ export default class Select extends React.Component {
 
     componentDidUpdate() {
         const { id } = this.props as { id: string };
+        const w = document.getElementById(`w-${id}`) as HTMLElement;
         const select = document.getElementById(id)
         const options = select.querySelectorAll(`#options-${id} .${styles["option"]}`)
         const placeholder = select.querySelector(`#placeholder-${id}`)
@@ -37,15 +48,24 @@ export default class Select extends React.Component {
             const attrs = element.attributes
             element.addEventListener('click', (e) => {
                 console.log(attrs["data-li"])
+
+                options.forEach(element => {
+                    element.classList.remove(styles["selected"])
+                })
+                
+                element.classList.add(styles["selected"])
+
+                w.setAttribute('data-value', attrs["data-value"]?.value || attrs["data-li"]?.value || element.innerHTML);
+
                 placeholder.innerHTML = attrs["data-li"]?.value || element.innerHTML
             })
         })
     }
     
     render() {
-        const { children, id, value, placeholder = "" } = this.props as { children: any; id: string; value: string, placeholder: string };
+        const { children, id, ['data-value']: data_value, value, placeholder = "", ...m } = this.props as { children: any; id: string; 'data-value': string, value: string, placeholder: string };
         return (
-            <main>
+            <main id={`w-${id}`} {...m} data-value={data_value || value || 'none'}>
                 <div className={styles["select-wrapper"]}>
                     <div id={id} className={`${styles["select"]}`}>
                         <div className={styles["placeholder"]}>
