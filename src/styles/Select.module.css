@@ -34,7 +34,7 @@
     top: 110%;
     left: 0;
     right: 0;
-    background-color: var(--luny-colors-flow-80);
+    background-color: var(--luny-colors-flow-100);
     border: 1px solid var(--luny-colors-ui-20);
     transition: all 0.5s;
     opacity: 0;
