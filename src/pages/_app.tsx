@@ -27,6 +27,7 @@ export default function MyApp({ Component, pageProps }) {
                 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
             </Head>
             <GlobalStyles id="globalstyles" />
+            <div className={"background-gradient"} />
             <Component {...pageProps} />
         </>
     )
