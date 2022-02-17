@@ -28,29 +28,29 @@
 .left-column .infoCard .title {
     font-size: 20px;
     font-weight: 500;
-    color: white;
+    color: var(--luny-colors-text-100);
 }
 
 .left-column .infoCard .desc {
     font-size: 15px;
     font-weight: 500;
-    color: white;
+    color:var(--luny-colors-text-100);;
 }
 
 .left-column .infoCard .button {
-    background-color: white;
+    background-color: var(--luny-colors-ui-60);;
     padding: 5px;
     margin-top: 10px;
     border-radius: 5px;
     text-align: center;
     font-size: 15px;
     font-weight: 500;
-    color: black;
+    color: var(--luny-colors-text-80);;
     transition: 0.5s;
 }
 
 .left-column .infoCard .button:hover {
-    background-color: #eee;
+    background-color: var(--luny-colors-text-100);
     cursor: pointer;
     transition: 0.5s;
 }
@@ -173,6 +173,49 @@
     margin-left: 10px;
 }
 
+.left-column .menu .save-button {
+    background-color: var(--luny-colors-band-100);
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--luny-colors-text-80);;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.left-column .menu .save-button:hover {
+    background-color: var(--luny-colors-band-80);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.left-column .menu .save-button.sending {
+    background-color: var(--luny-colors-ui-60);
+    color: var(--luny-colors-band-100);
+    cursor: not-allowed;
+    transition: 0.5s;
+}
+
+.left-column .menu .save-button p {
+    display: inline-block;
+}
+
+.left-column .menu .save-button i {
+    display: none;
+}
+
+.left-column .menu .save-button.sending p {
+    display: none;
+}
+
+.left-column .menu .save-button.sending i {
+    display: inline-block;
+    animation: luny-loading 1s infinite;
+}
+
 .content {
     display: flex;
     /* justify-content: center; */
@@ -189,9 +232,9 @@
 
 .content code {
 	color: var(--luny-colors-band-100);
-	background: var(--luny-colors-flow-80);
+	background: var(--luny-colors-flow-20);
 	border-radius: 3px;
-    padding: 1.3px;
+    padding: 1.5px 3px;
 }
 
 .content .small-card {
@@ -214,6 +257,13 @@
     border: 1px solid var(--luny-colors-ui-15);
     color: var(--luny-colors-text-60);
     border-radius: 14px;
+}
+
+.content .card hr,
+.content .small-card hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--luny-colors-band-20);
 }
 
 .content .guilds .small-card {
@@ -243,5 +293,14 @@
     .content .card, 
     .content .small-card {
         width: 100%;
+    }
+}
+
+@keyframes luny-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

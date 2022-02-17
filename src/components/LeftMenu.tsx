@@ -101,6 +101,11 @@ export default class Header extends React.Component {
                                 </main>
                             )
                         })}
+
+                        <div className={styles['save-button']} id={'save-button'}>
+                            <i className={'fas fa-spinner-third'} />
+                            <p>Salvar</p>
+                        </div>
                     </div>
                 </div>
             </>
