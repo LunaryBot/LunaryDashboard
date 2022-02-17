@@ -41,3 +41,9 @@ export const Permissions = {
 	START_EMBEDDED_ACTIVITIES: 1 << 39,
 	MODERATE_MEMBERS: 1 << 40
 }
+
+export const GuildConfigs = {
+	MANDATORY_REASON: 1 << 0,
+	LOG_UNBAN: 1 << 1,
+	LOG_EVENTS: 1 << 2,
+}
