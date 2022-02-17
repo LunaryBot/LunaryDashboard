@@ -34,6 +34,11 @@ const _urls = {
                 name: 'Moderação',
                 url: '/dashboard/guilds/[guild]/moderation',
                 icon: 'fad fa-hammer'
+            },
+            {
+                name: "Permissões",
+                url: "/dashboard/guilds/[guild]/permissions",
+                icon: "fad fa-briefcase"
             }
         ]
     }
@@ -92,7 +97,7 @@ export default class Header extends React.Component {
                                     <div className={styles['border']}>
                                         {v.map(({ name, url, icon}) => {
                                             return (
-                                                <a href={url} className={styles['link']} key={url}>
+                                                <a href={url.replace('[guild]', guild?.id)} className={styles['link']} key={url}>
                                                     <p><i className={icon}></i>{name}</p>
                                                 </a>
                                             )
