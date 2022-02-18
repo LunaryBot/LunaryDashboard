@@ -13,6 +13,7 @@ import styles from '../../../styles/main.module.css';
 import { createState } from '../../../utils/states';
 
 import { IUser } from '../../../types';
+import { GuildCard } from '../../../components/GuildCard';
 
 interface IState {
     user: IUser | null;
@@ -46,7 +47,11 @@ export default class DashboardMe extends React.Component {
                 <LeftMenu {...{user}}/>
 
                 <div className={`${styles['content']}`}>
-                    
+                    <GuildCard
+                        name="Kingdom Score"
+                        icon="https://cdn.discordapp.com/icons/730047147860295732/a_a1d9d9eb9ba2065c7081b4bfbb37e08e"
+                        id="730047147860295732"
+                    />
                 </div>
 
                 <Script

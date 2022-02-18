@@ -17,6 +17,9 @@
 
 .header .links {
     position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     top: 0;
     left: 11%;
     right: 0;

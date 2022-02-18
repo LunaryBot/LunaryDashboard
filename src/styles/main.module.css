@@ -238,9 +238,10 @@
 }
 
 .content .small-card {
+    position: relative;
     margin: 10px;
     padding: 24px;
-    width: 45%;
+    min-width: 45%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
@@ -249,9 +250,10 @@
 }
 
 .content .card {
+    position: relative;
     margin: 10px;
     padding: 24px;
-    width: 92%;
+    min-width: 92%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
@@ -266,14 +268,74 @@
     border: 1px solid var(--luny-colors-band-20);
 }
 
-.content .guilds .small-card {
+.content .guild-card {
+    position: relative;
     margin: 10px;
     padding: 24px;
-    width: 22%;
+    min-width: 22%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
     border-radius: 14px;
+}
+
+.guild-card .guildImage {
+    position: relative;
+    width: 250px;
+    height: 150px;
+    margin-bottom: 16px;
+}
+
+.guildImage .blur {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(9px);
+    -webkit-filter: blur(9px);
+}
+
+.guildImage img {
+    position: absolute;
+    z-index: 2;
+    border: 2px solid white;
+    border-radius: 15px;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.guild-card .infos {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.guild-card .infos a {
+    background: linear-gradient(-45deg, #fff, #f5f5f5, #ebebeb, #d1d1d1);
+    background-size: 800% 400%;
+    color: black;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 10px;
+    animation: gradient 10s infinite cubic-bezier(.62, .28, .23, .99) both;
+    transition: 0.5s;
+}
+
+.guild-card .infos a:hover {
+    animation: gradient 3s infinite;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.guild-card .infos a:active {
+    animation: gradient 3s infinite;
+    transform: scale(0.8);
+    transition: 0.5s;
 }
 
 @media screen and (max-width: 980px) {
@@ -291,7 +353,12 @@
     }
 
     .content .card, 
-    .content .small-card {
+    .content .small-card,
+    .content .guild-card {
+        width: 100%;
+    }
+
+    .guild-card .guildImage {
         width: 100%;
     }
 }
@@ -302,5 +369,19 @@
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
     }
 }
