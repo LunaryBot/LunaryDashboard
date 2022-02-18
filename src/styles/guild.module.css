@@ -1,0 +1,24 @@
+/* Permissions Page */
+
+.toggles-container {
+    display: grid;
+    grid-template-columns: repeat(5, 0.5fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    background-color: var(--luny-colors-background);
+    border-radius: 10px;
+}
+
+.toggles-container div.item { 
+    margin: 10px;
+}
+
+.toggles-container div.item span {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .toggles-container {
+        grid-template-columns: repeat(3, 0.5fr);
+    }
+}

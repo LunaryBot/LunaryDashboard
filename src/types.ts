@@ -118,6 +118,9 @@ export interface IGuildSuper extends IGuild {
 	modlogs_channel: string;
 	punishments_channel: string;
 	configs: number;
+	permissions: {
+		[id: string]: number;
+	}
 }
 
 export interface IAPIGuildResponse {
