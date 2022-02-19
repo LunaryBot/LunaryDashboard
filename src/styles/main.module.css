@@ -199,6 +199,11 @@
     transition: 0.5s;
 }
 
+.left-column .menu .save-button.disabled {
+    background-color: var(--luny-colors-ui-60);
+    cursor: not-allowed;
+}
+
 .left-column .menu .save-button p {
     display: inline-block;
 }
@@ -218,7 +223,6 @@
 
 .content {
     display: flex;
-    /* justify-content: center; */
     flex-wrap: wrap;
     margin-bottom: 100px;
     padding: 10px 20px;
@@ -226,6 +230,7 @@
     background-position: center;
     background-size: cover;
     height: auto;
+    max-width: 75%;
     transition: 0.5s;
     margin-top: 160px;
 }
@@ -241,7 +246,7 @@
     position: relative;
     margin: 10px;
     padding: 24px;
-    min-width: 45%;
+    width: 45%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
@@ -253,7 +258,7 @@
     position: relative;
     margin: 10px;
     padding: 24px;
-    min-width: 92%;
+    width: 92%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
