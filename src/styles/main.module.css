@@ -199,11 +199,6 @@
     transition: 0.5s;
 }
 
-.left-column .menu .save-button.disabled {
-    background-color: var(--luny-colors-ui-60);
-    cursor: not-allowed;
-}
-
 .left-column .menu .save-button p {
     display: inline-block;
 }
@@ -223,6 +218,7 @@
 
 .content {
     display: flex;
+    /* justify-content: center; */
     flex-wrap: wrap;
     margin-bottom: 100px;
     padding: 10px 20px;
@@ -230,7 +226,6 @@
     background-position: center;
     background-size: cover;
     height: auto;
-    max-width: 75%;
     transition: 0.5s;
     margin-top: 160px;
 }
@@ -246,7 +241,9 @@
     position: relative;
     margin: 10px;
     padding: 24px;
+    min-width: 45%;
     width: 45%;
+    max-width: 45%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
@@ -258,12 +255,16 @@
     position: relative;
     margin: 10px;
     padding: 24px;
+    min-width: 92%;
     width: 92%;
+    max-width: 92%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
     color: var(--luny-colors-text-60);
     border-radius: 14px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .content .card hr,
@@ -360,7 +361,9 @@
     .content .card, 
     .content .small-card,
     .content .guild-card {
-        width: 100%;
+        max-width: 96%;
+        width: 96%;
+        min-width: 96%;
     }
 
     .guild-card .guildImage {
