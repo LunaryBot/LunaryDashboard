@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/Header.module.css';
 import { IUser} from '../types';
+import { defaultAvatar } from '../Constants';
 import Link from 'next/link';
 
 interface IProps {
@@ -66,7 +67,7 @@ export default class Header extends React.Component {
                     <a href="" className={styles["link"]}>Vote</a>
                 </div>
                 <div id="avatar" className={styles["avatar"]}>
-                    <img src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png`} alt="" />
+                    <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : defaultAvatar} alt="" />
                     <div className={styles["user-menu-wrapper"]}>
                         <div className={styles["user-menu"]}>
                             <div className={styles["user-menu-options"]}>
