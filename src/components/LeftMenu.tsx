@@ -40,6 +40,11 @@ const _urls = {
                 name: "Permissões",
                 url: "/dashboard/guilds/[guild]/permissions",
                 icon: "fad fa-briefcase"
+            },
+            {
+                name: "Modlogs",
+                url: "/dashboard/guilds/[guild]/modlogs",
+                icon: "fad fa-clipboard-list"
             }
         ]
     }
