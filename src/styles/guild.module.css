@@ -60,6 +60,76 @@
     margin-bottom: 10px;
 }
 
+.cardLog {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+}
+
+.cardLog .box {
+    min-width: 50%;
+    min-height: 50%;
+    background-color: rgb(36, 36, 36);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 8px 5px 5px 2px rgba(117, 112, 112, 0.2);
+    color: white;
+    position: absolute;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.cardLog .line {
+    width: 100%;
+    height: 1px;
+    border: 1px solid white;
+}
+
+.cardLog .grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+}
+
+.cardLog .item {
+    margin: 10px;
+}
+
+.cardLog .Text1 {
+    font-size: 18px;
+}
+
+.cardLog .Text2 {
+    font-size: 16px;
+}
+
+.cardLog .reason {
+    margin-left: 50px;
+}
+
+.cardLog .reasonText {
+    margin-left: 10px;
+}
+
+.cardLog .user {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+
+.cardLog .user img {
+    width: 64px;
+    border-radius: 100%;
+    margin: 10px;
+}
+
 @media screen and (max-width: 700px) {
     .toggles-container {
         grid-template-columns: repeat(3, 0.5fr);

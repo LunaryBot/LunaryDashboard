@@ -344,6 +344,25 @@
     transition: 0.5s;
 }
 
+.perms-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.perms-grid .item {
+    position: relative;
+    display: block;
+    min-width: 0;
+    margin: 10px;
+}
+
+.perms-grid .item h3 {
+    margin-bottom: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
 @media screen and (max-width: 980px) {
     .left-column {
         width: 100%;
