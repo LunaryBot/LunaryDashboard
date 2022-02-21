@@ -48,7 +48,7 @@ export class GuildCard extends Component {
                         >
                             {name}
                         </h3>
-                        <a href={`/dashboard/guilds/${id}`}>
+                        <a href={`/dashboard/guilds/${id}/moderation`}>
                             <i className="fas fa-wrench"style={{ marginRight: "5px" }} />
                             Configurar
                         </a>
