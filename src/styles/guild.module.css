@@ -147,3 +147,112 @@
 .cards-log td.user p span {
     font-weight: 500;
 }
+
+.modal-log-wrapper {
+    display: flex; 
+	position: fixed;
+    background: var(--luny-colors-flow-80);
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+	left: 0;
+	top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: .75s;
+	pointer-events: unset;
+    backdrop-filter: blur(10px);
+}
+
+.modal-log-wrapper .modal-log {
+    display: flex;
+    width: 500px;
+    height: 500px;
+    background: var(--luny-colors-background);
+    border-radius: 10px;
+    border: 1px solid var(--luny-colors-ui-20);
+    box-shadow: 0 0 20px var(--luny-colors-band-20);
+    transition: .75s;
+    padding: 25px;
+}
+
+.modal-log .h {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 2px;
+    background-color: var(--luny-colors-ui-20);
+}
+
+.modal-log .modal-log-header {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    position: relative;
+}
+
+.modal-log .modal-log-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 13px;
+    margin-top: -10px;
+}
+
+.modal-log .modal-log-header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--luny-colors-text-100);
+}
+
+.modal-log .modal-log-header h2 span {
+    font-weight: 500;
+    color: var(--luny-colors-text-60);
+}
+
+.modal-log .modal-log-header .punishment {
+    position: absolute;
+    min-width: 46px;
+    width: 46px;
+    height: 23px;
+    padding: 5px;
+    font-size: 16px; 
+    border-radius: 5px;
+    margin-left: 5px;
+    color: var(--luny-colors-flow-100);
+}
+
+.modal-log .modal-log-header .close-button {
+    position: absolute;
+    top: -25px;
+    right: -230px;
+    color: var(--luny-colors-text-100);
+    font-size: 1.5em;
+    font-weight: 700;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: .75s;
+}
+
+.modal-log .modal-log-header .close-button:hover {
+    color: var(--luny-colors-red);
+}
+
+.modal-log .modal-log-content {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 50px);
+    margin-top: 75px;
+    align-items: unset;
+    justify-content: left;
+    color: var(--luny-colors-band-100)
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}

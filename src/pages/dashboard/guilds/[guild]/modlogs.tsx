@@ -96,6 +96,21 @@ export default class DashboardMe extends React.Component {
         return (
             <>
                 <LoadingPage {...{loading}} />
+                <div className={guildStyles['modal-log-wrapper']}>
+                    <div className={guildStyles['modal-log']}>
+                        <div className={guildStyles['modal-log-header']}>
+                            <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : defaultAvatar} alt="" />
+                            <h2>{user?.username}<span>#{user?.discriminator}</span></h2>
+                            {/* <div className={guildStyles['punishment']} style={{backgroundColor: '#ed4245'}}>Ban</div> */}
+                            
+                            <div className={guildStyles['close-button']}> X </div>
+                        </div>
+
+                        <div className={guildStyles['modal-log-content']}>
+                            <h1>a</h1>
+                        </div>
+                    </div>
+                </div>
                 <Header {...{user}}/>
                 <LeftMenu {...{user, guild}}/>
 
@@ -115,7 +130,7 @@ export default class DashboardMe extends React.Component {
                                     const punishment = punishments[log.type];
 
                                     return (
-                                        <tr key={log.id}>
+                                        <tr key={log.id} data-log>
                                             <td className={guildStyles['user']}>
                                                 <img src={log.user.avatar ? `https://cdn.discordapp.com/avatars/${log.user?.id}/${log.user?.avatar}.png` : defaultAvatar} alt={''} />
                                                 <p>
