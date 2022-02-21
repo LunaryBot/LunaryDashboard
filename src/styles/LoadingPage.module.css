@@ -4,7 +4,7 @@
     height: 100vh;
     z-index: 1001;
     top: 0;
-    background: #A020F0;
+    background: var(--luny-colors-band-100);
     transition: all ease-in-out 1s;
 }
   
