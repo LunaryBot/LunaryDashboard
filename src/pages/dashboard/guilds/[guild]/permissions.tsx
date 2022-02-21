@@ -62,27 +62,33 @@ export default class DashboardMe extends React.Component {
             <>
                 <LoadingPage {...{loading}} />
                 <Header {...{user}}/>
-                <LeftMenu {...{user, guild}}/>
+                <LeftMenu {...{user, guild, saveButton: true}}/>
 
                 <div className={`${styles['content']}`}>
                     <div className={styles['card']}>
-                        <div className={guildStyles['add-button']} id={'add'}>
-                            <i className={'fas fa-plus'} />
-                        </div>
-                        {permissions.map(([roleId, p], index) => {
+                        <h3>Staff Roles<div className={`${guildStyles['add-button']} ${((this.state as IState).permissions || []).length < 7 ? '' : guildStyles['disabled']}`} id={'add'}>
+                            <i className={'fas fa-plus'} /> <strong style={{color: 'var(--luny-colors-band-60)'}}>({((this.state as IState).permissions || []).length} / 7)</strong>
+                        </div></h3>
+                        <br />
+                        <hr />
+                        <br />
+                        {permissions.map(([roleId, p], selectIndex) => {
                             console.log(roleId)
                             return (
-                                <main key={roleId}>
+                                <main key={selectIndex}>
                                     <Select 
                                         {...{
-                                            id: `select-role-${index}`,
+                                            id: `select-role-${selectIndex}`,
                                             placeholder: 'Selecione um cargo',
                                             value: guild.roles.find(role => role.id === roleId)?.name || (roleId ? 'deleted-role' : ''),
                                             style: {
-                                                width: '85%',
+                                                width: '86.5%',
                                                 display: 'inline-block',
                                             }
                                         }}
+
+                                        data-send-on-save
+                                        data-value={roleId}
                                     >
                                         {guild?.roles
                                         .filter(role => !role.managed && role.id != guild.id)
@@ -98,20 +104,26 @@ export default class DashboardMe extends React.Component {
                                             </Option>
                                         ))}
                                     </Select>
-                                    <div className={guildStyles['delete-button']}><i className={'fas fa-trash'} /></div>
+                                    <div className={guildStyles['delete-button']} onClick={(e) => {
+                                        e.preventDefault();
+
+                                        this.setState({
+                                            permissions: (this.state as IState).permissions.filter(([_roleId, _]) => _roleId !== roleId)
+                                        });
+                                    }}><i className={'fas fa-trash'} /></div>
                                     <br />
                                     <br />
                                     <div className={guildStyles['toggles-container']}>
 
-                                        {Object.entries(LunarPermissions).map(([key, value], index) => {
+                                        {Object.entries(LunarPermissions).map(([key, value], toggleIndex) => {
                                             return (
                                                 <div className={guildStyles['item']} key={key}>
                                                     <span>{permissionsNames[key] || key}</span>
                                                     <CheckRadio style={{marginTop: '10px'}}>
-                                                        <Toggle 
-                                                            data-send-on-save 
+                                                        <Toggle
                                                             data-type={'bitfield'}
                                                             data-value={value}
+                                                            id={`t-${selectIndex}`}
                                                             defaultChecked={(p & value) === value}
                                                         />
                                                     </CheckRadio>
@@ -120,7 +132,7 @@ export default class DashboardMe extends React.Component {
                                         })}
                                     </div>
 
-                                    {permissions[index + 1] && ( 
+                                    {permissions[selectIndex + 1] && ( 
                                         <>
                                             <br />
                                             <hr />
@@ -138,6 +150,8 @@ export default class DashboardMe extends React.Component {
                     onLoad={() => {
                         console.log(guildId);
                         const { setState } = this;
+                        const buttonSave = $('#save-button');
+                        const sendingClass = styles['sending'];
 
                         const api = socket(hostApi, {
                             query: {
@@ -170,6 +184,10 @@ export default class DashboardMe extends React.Component {
                         });
 
                         $('#add').click(() => {
+                            if(((this.state as IState).permissions || []).length >= 7) {
+                                return;
+                            };
+
                             this.setState({
                                 permissions: [
                                     ...((this.state as IState).permissions || []),
@@ -179,7 +197,39 @@ export default class DashboardMe extends React.Component {
                                     ]
                                 ]
                             })
+
+                            location.href = `#w-select-role-${((this.state as IState).permissions || []).length - 1}`;
                         })
+
+                        buttonSave.click(async function() {
+                            if(!buttonSave.hasClass(sendingClass)) {
+                                buttonSave.addClass(sendingClass);
+                                
+                                const json = saveJSON();
+
+                                console.log(json)
+
+                                setTimeout(() => {
+                                    buttonSave.removeClass(sendingClass);
+                                }, 1000);
+                            };
+                        });
+
+                        function saveJSON() {
+                            const json = {};
+
+                            $('[data-send-on-save]').each(function() {
+                                const select = $(this);
+                                const toggles = $(`[id=t-${select.attr('id').split('-')[3]}]`)
+                                const b = toggles.map(function() {
+                                    const toggle = $(this);
+                                    return toggle.is(':checked') ? parseInt(toggle.attr('data-value')) : 0;
+                                })
+                                
+                                json[select.attr('data-value')] = b.toArray().reduce((a, b) => a | b, 0);
+                            })
+                            return json;
+                        } 
                     }}
                 ></Script>
             </>

@@ -242,6 +242,8 @@
     margin: 10px;
     padding: 24px;
     min-width: 45%;
+    width: 45%;
+    max-width: 45%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
@@ -254,11 +256,15 @@
     margin: 10px;
     padding: 24px;
     min-width: 92%;
+    width: 92%;
+    max-width: 92%;
     height: auto;
     background-color: var(--luny-colors-ui-5);
     border: 1px solid var(--luny-colors-ui-15);
     color: var(--luny-colors-text-60);
     border-radius: 14px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .content .card hr,
@@ -374,7 +380,9 @@
     .content .card, 
     .content .small-card,
     .content .guild-card {
-        width: 100%;
+        max-width: 96%;
+        width: 96%;
+        min-width: 96%;
     }
 
     .guild-card .guildImage {

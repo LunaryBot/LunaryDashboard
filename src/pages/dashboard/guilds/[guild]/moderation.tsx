@@ -49,7 +49,7 @@ export default class DashboardMe extends React.Component {
             <>
                 <LoadingPage {...{loading}} />
                 <Header {...{user}}/>
-                <LeftMenu {...{user, guild}}/>
+                <LeftMenu {...{user, guild, saveButton: true}}/>
 
                 <div className={`${styles['content']}`}>
                     <div className={styles['small-card']}>

@@ -4,8 +4,9 @@ import { IUser, IGuild } from '../types';
 import Link from 'next/link';
 
 interface IProps {
-    user: IUser,
-    guild?: IGuild
+    user: IUser;
+    guild?: IGuild;
+    saveButton?: boolean;
 }
 
 const _urls = {
@@ -39,6 +40,11 @@ const _urls = {
                 name: "Permissões",
                 url: "/dashboard/guilds/[guild]/permissions",
                 icon: "fad fa-briefcase"
+            },
+            {
+                name: "Modlogs",
+                url: "/dashboard/guilds/[guild]/modlogs",
+                icon: "fad fa-clipboard-list"
             }
         ]
     }
@@ -46,7 +52,7 @@ const _urls = {
 
 export default class Header extends React.Component {
     render() {
-        const { user, guild = null } = this.props as IProps;
+        const { user, guild = null, saveButton = false } = this.props as IProps;
 
         const name = guild?.name || user?.username
         const id = guild?.id || user?.id
@@ -107,10 +113,12 @@ export default class Header extends React.Component {
                             )
                         })}
 
-                        <div className={styles['save-button']} id={'save-button'}>
-                            <i className={'fas fa-spinner-third'} />
-                            <p>Salvar</p>
-                        </div>
+                        {saveButton == true && (
+                            <div className={styles['save-button']} id={'save-button'}>
+                                <i className={'fas fa-spinner-third'} />
+                                <p>Salvar</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </>
