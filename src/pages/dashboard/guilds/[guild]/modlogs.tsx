@@ -7,6 +7,7 @@ import { parseCookies } from 'nookies';
 import LeftMenu from '../../../../components/LeftMenu';
 import LoadingPage from '../../../../components/LoadingPage';
 import Header from '../../../../components/Header';
+import CardLog from '../../../../components/CardLog';
 
 import styles from '../../../../styles/main.module.css';
 import guildStyles from '../../../../styles/guild.module.css';
@@ -96,21 +97,15 @@ export default class DashboardMe extends React.Component {
         return (
             <>
                 <LoadingPage {...{loading}} />
-                <div className={guildStyles['modal-log-wrapper']}>
-                    <div className={guildStyles['modal-log']}>
-                        <div className={guildStyles['modal-log-header']}>
-                            <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : defaultAvatar} alt="" />
-                            <h2>{user?.username}<span>#{user?.discriminator}</span></h2>
-                            {/* <div className={guildStyles['punishment']} style={{backgroundColor: '#ed4245'}}>Ban</div> */}
-                            
-                            <div className={guildStyles['close-button']}> X </div>
-                        </div>
-
-                        <div className={guildStyles['modal-log-content']}>
-                            <h1>a</h1>
-                        </div>
-                    </div>
-                </div>
+                <CardLog 
+                    {...{
+                        avatar: "https://cdn.discordapp.com/avatars/522752913794138112/9f81dd922901d2108219c9960ecf86f4.png",
+                        user: "VhGamess_1#8157",
+                        data: "21.02.2022",
+                        reason: "Teste.",
+                        author: "Bae.#7500"
+                    }}
+                />
                 <Header {...{user}}/>
                 <LeftMenu {...{user, guild}}/>
 

@@ -7,7 +7,7 @@ interface PropsIE {
     id: string;
 };
 
-export class GuildCard extends Component {
+export default class GuildCard extends Component {
     render() {
         const { name, icon, id } = this.props as PropsIE;
 

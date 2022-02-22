@@ -13,7 +13,6 @@ import styles from '../../../styles/main.module.css';
 import { createState } from '../../../utils/states';
 
 import { IUser } from '../../../types';
-import { CardLog } from '../../../components/CardLog';
 
 interface IState {
     user: IUser | null;
@@ -54,17 +53,6 @@ export default class DashboardMe extends React.Component {
                         {user?.username || '...'}
                     </div>
                 </div>
-
-                <CardLog 
-                    {...{
-                        avatar: "https://cdn.discordapp.com/avatars/522752913794138112/9f81dd922901d2108219c9960ecf86f4.png",
-                        user: "VhGamess_1#8157",
-                        data: "21.02.2022",
-                        reason: "Teste.",
-                        author: "Bae.#7500"
-                    }}
-                />
-
 
                 <Script
                     src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'

@@ -9,7 +9,7 @@ interface PropsIE {
     author: string;
 }
 
-export class CardLog extends Component {
+export default class CardLog extends Component {
     render() {
         const { avatar, user, data, reason, author } = this.props as PropsIE;
 

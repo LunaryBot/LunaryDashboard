@@ -7,13 +7,13 @@ import { parseCookies } from 'nookies';
 import LeftMenu from '../../../components/LeftMenu';
 import LoadingPage from '../../../components/LoadingPage';
 import Header from '../../../components/Header';
+import GuildCard from '../../../components/GuildCard';
 
 import styles from '../../../styles/main.module.css';
 
 import { createState } from '../../../utils/states';
 
 import { IUser } from '../../../types';
-import { GuildCard } from '../../../components/GuildCard';
 
 interface IState {
     user: IUser | null;
