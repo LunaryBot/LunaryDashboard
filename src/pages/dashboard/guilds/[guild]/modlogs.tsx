@@ -162,7 +162,11 @@ export default class DashboardMe extends React.Component {
                                     const punishment = punishments[log.type];
 
                                     return (
-                                        <tr key={log.id} data-log>
+                                        <tr key={log.id} id={log.id} data-log onClick={(e) => {
+                                            this.setState({
+                                                id: log.id
+                                            })
+                                        }}>
                                             <td className={guildStyles['user']}>
                                                 <img src={log.user.avatar ? `https://cdn.discordapp.com/avatars/${log.user?.id}/${log.user?.avatar}.png` : defaultAvatar} alt={''} />
                                                 <p>
@@ -198,6 +202,7 @@ export default class DashboardMe extends React.Component {
                     src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
                     onLoad={() => {
                         console.log(guildId);
+                        const { setState } = this;
                         const _f = Object.fromEntries([...(new URLSearchParams(location.search).entries() || [])  as [string, string][]]);
                         const __f = decode(_f.filters || '') as IFilters;
 
@@ -239,16 +244,9 @@ export default class DashboardMe extends React.Component {
                         });
 
                         api.on('getGuildLogs', ({ data }) => {
-                            // if((this.state as IState).id) {
-                            //     data.log = data.logs.find(log => log.id === (this.state as IState).id) || null;
-                            //     console.log('a')
-                            // }
-                            
                             this.setState({
                                 ...data,
                             });
-
-                            console.log(data);
                         });
 
                         api.on('error', ({ data }) => {

@@ -238,7 +238,7 @@
 
 .cards-log tbody tr {
     cursor: pointer;
-    border-bottom: 1px solid var(--luny-colors-band-20);
+    border-bottom: 1px solid var(--luny-colors-ui-15);
 }
 
 .cards-log td.punishment span {
