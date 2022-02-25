@@ -7,7 +7,6 @@ import { parseCookies } from 'nookies';
 import LeftMenu from '../../../../components/LeftMenu';
 import LoadingPage from '../../../../components/LoadingPage';
 import Header from '../../../../components/Header';
-import CardLog from '../../../../components/CardLog';
 
 import styles from '../../../../styles/main.module.css';
 import guildStyles from '../../../../styles/guild.module.css';
@@ -28,6 +27,7 @@ interface IState {
     id: string|null;
     logs: ILog[];
     filters: IFilters;
+    log?: ILog|null;
 };
 
 interface IProps {
@@ -86,29 +86,66 @@ export default class DashboardMe extends React.Component {
                 type: null,
                 authorId: null,
                 userId: null,
-            }
+            },
+            log: null
         } as IState;
     }
 
     render() {
-        const { user, guild, loading, logs } = this.state as IState;
+        const { user, guild, loading, logs, id: logId } = this.state as IState;
         const { token, hostApi, guildId } = this.props as IProps;
 
         return (
             <>
                 <LoadingPage {...{loading}} />
-                <CardLog 
-                    {...{
-                        avatar: "https://cdn.discordapp.com/avatars/522752913794138112/9f81dd922901d2108219c9960ecf86f4.png",
-                        user: "VhGamess_1#8157",
-                        data: "21.02.2022",
-                        reason: "Teste.",
-                        author: "Bae.#7500"
-                    }}
-                />
                 <Header {...{user}}/>
                 <LeftMenu {...{user, guild}}/>
+                {(() => {
+                    if(logId) {
+                        const log = logs.find(log => log.id === (this.state as IState).id) || null;
 
+                        if(log) {
+                            const punishment = punishments[log.type];
+
+                            return (
+                                <>
+                                    <div className={guildStyles["modal-wrapper"]}>
+                                        <div className={guildStyles["modal-log"]}>
+                                            <div className={guildStyles["user"]}>
+                                                <img
+                                                    src={log?.user?.avatar ? `https://cdn.discordapp.com/avatars/${log?.user?.id}/${log?.user?.avatar}.png` : defaultAvatar}
+                                                    alt={"avatar-" + log?.user?.username}
+                                                />
+                                                <h3>{log?.user?.username}<span>#{log?.user?.discriminator}</span><span className={guildStyles['punishment']} style={{backgroundColor: punishment.color}}>{punishment.name}</span></h3>
+                                            </div>
+                                            <br />
+                                            <div className={guildStyles["line"]} />
+                                            <br />
+                                            <div className={guildStyles["grid"]}>
+                                                <div className={guildStyles["item"]}>
+                                                    <h4>Data:</h4>
+                                                    <p>{new Date(log.date).toLocaleString()}</p>
+                                                </div>
+                                                <div className={guildStyles["item"]}>
+                                                    <h4>Autor:</h4>
+                                                    <p>{log?.author?.username}#{log?.author?.discriminator}</p>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <h4>Motivo:</h4>
+                                            <p>{log?.reason}</p>
+                                            <br />
+                                        </div>
+                                    </div>
+
+                                    <Script>{`
+                                        console.log('a');
+                                    `}</Script>
+                                </>
+                            )
+                        }
+                    }
+                })()}
                 <div className={`${styles['content']}`}>
                     <div className={guildStyles["scr"]} id="logs-content-wrapper">
                         <table className={guildStyles['cards-log']}>
@@ -202,9 +239,14 @@ export default class DashboardMe extends React.Component {
                         });
 
                         api.on('getGuildLogs', ({ data }) => {
+                            // if((this.state as IState).id) {
+                            //     data.log = data.logs.find(log => log.id === (this.state as IState).id) || null;
+                            //     console.log('a')
+                            // }
+                            
                             this.setState({
                                 ...data,
-                            })
+                            });
 
                             console.log(data);
                         });
