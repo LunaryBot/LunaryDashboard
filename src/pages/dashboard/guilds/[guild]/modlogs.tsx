@@ -51,21 +51,21 @@ interface IFilters {
 }
 
 const punishments = {
-    "1": {
-        name: "Ban",
-        color: "#ed4245"
+    '1': {
+        name: 'Ban',
+        color: '#ed4245'
     }, 
-    "2": {
-        name: "Kick",
-        color: "#ea8935"
+    '2': {
+        name: 'Kick',
+        color: '#ea8935'
     }, 
-    "3": {
-        name: "Mute",
-        color: "#4b8cd2"
+    '3': {
+        name: 'Mute',
+        color: '#4b8cd2'
     }, 
-    "4": {
-        name: "Adv",
-        color: "#eaac35"
+    '4': {
+        name: 'Adv',
+        color: '#eaac35'
     }
 }
 
@@ -97,7 +97,7 @@ export default class DashboardMe extends React.Component {
 
         return (
             <>
-                <LoadingPage {...{loading}} />
+                {loading && ( <LoadingPage {...{loading}} /> )}
                 <Header {...{user}}/>
                 <LeftMenu {...{user, guild}}/>
                 {(() => {
@@ -106,27 +106,51 @@ export default class DashboardMe extends React.Component {
 
                         if(log) {
                             const punishment = punishments[log.type];
+                            const DateNow = Date.now();
 
                             return (
                                 <>
-                                    <div className={guildStyles["modal-wrapper"]}>
-                                        <div className={guildStyles["modal-log"]}>
-                                            <div className={guildStyles["user"]}>
+                                    <div className={guildStyles['modal-wrapper']} onClick={(e) => {
+                                        const modalLog = document.getElementById('modal-log');
+                                        const _html = document.querySelector('html') as any;
+                                        const _body = document.querySelector('body') as any;
+                                        const scrollTop = _html.style.top;
+
+                                        _html.style = '';
+                                        window.scrollTo({
+                                            top: Number(scrollTop.replace(/-(\d*)px/, '$1')) || 0,
+                                        });
+                                        
+                                        console.log(Number(_html.style.top.replace(/-(\d*)px/, '$1')) || 0,)
+                                        
+                                        if(!modalLog?.contains(e.target as Node)){
+                                            e.currentTarget.classList.add(guildStyles['hiding']);
+                                            
+                                            setTimeout(() => {
+                                                this.setState({
+                                                    id: null
+                                                });
+                                                _body.style = '';
+                                            }, 400);
+                                        };
+                                    }}>
+                                        <div className={guildStyles['modal-log']} id={'modal-log'}>
+                                            <div className={guildStyles['user']}>
                                                 <img
                                                     src={log?.user?.avatar ? `https://cdn.discordapp.com/avatars/${log?.user?.id}/${log?.user?.avatar}.png` : defaultAvatar}
-                                                    alt={"avatar-" + log?.user?.username}
+                                                    alt={'avatar-' + log?.user?.username}
                                                 />
                                                 <h3>{log?.user?.username}<span>#{log?.user?.discriminator}</span><span className={guildStyles['punishment']} style={{backgroundColor: punishment.color}}>{punishment.name}</span></h3>
                                             </div>
                                             <br />
-                                            <div className={guildStyles["line"]} />
+                                            <div className={guildStyles['line']} />
                                             <br />
-                                            <div className={guildStyles["grid"]}>
-                                                <div className={guildStyles["item"]}>
+                                            <div className={guildStyles['grid']}>
+                                                <div className={guildStyles['item']}>
                                                     <h4>Data:</h4>
                                                     <p>{new Date(log.date).toLocaleString()}</p>
                                                 </div>
-                                                <div className={guildStyles["item"]}>
+                                                <div className={guildStyles['item']}>
                                                     <h4>Autor:</h4>
                                                     <p>{log?.author?.username}#{log?.author?.discriminator}</p>
                                                 </div>
@@ -139,7 +163,13 @@ export default class DashboardMe extends React.Component {
                                     </div>
 
                                     <Script>{`
-                                        console.log('a');
+                                        const { scrollY: scrollY_${DateNow} } = window;
+
+                                        const html_${DateNow} = document.querySelector('html');
+                                        const body_${DateNow} = document.querySelector('body');
+                                    
+                                        html_${DateNow}.style = \`width: calc(100% - 12px); position: fixed; top: -\${scrollY_${DateNow}}px; overflow: hidden;\`;
+                                        body_${DateNow}.style = 'overflow: hidden;'
                                     `}</Script>
                                 </>
                             )
@@ -147,7 +177,7 @@ export default class DashboardMe extends React.Component {
                     }
                 })()}
                 <div className={`${styles['content']}`}>
-                    <div className={guildStyles["scr"]} id="logs-content-wrapper">
+                    <div className={guildStyles['scr']} id='logs-content-wrapper'>
                         <table className={guildStyles['cards-log']}>
                             <thead>
                                 <tr>
@@ -157,7 +187,7 @@ export default class DashboardMe extends React.Component {
                                     <th>Data</th>
                                 </tr>
                             </thead>
-                            <tbody id="logs-content">
+                            <tbody id='logs-content'>
                                 {logs.map((log, i) => {
                                     const punishment = punishments[log.type];
 
