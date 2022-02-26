@@ -46,10 +46,8 @@ export default async function APIAuthCallback(req: NextApiRequest, res: NextApiR
     if(guildId) {
         return res.redirect(`/dashboard/guilds/${guildId}`);
     } else if(state) {
-        const url = getState(state);
-        if(url) {
-            deleteState(state);
-            return res.redirect(url);
+        if(state) {
+            res.redirect(state)
         }
     } else res.redirect('/dashboard/@me');
 }
