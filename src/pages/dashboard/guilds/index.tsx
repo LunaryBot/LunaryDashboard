@@ -52,16 +52,9 @@ export default class DashboardMe extends React.Component {
                 <div className={`${styles['content']}`}>
                     {guilds
                         .sort((a, b) => a.name.localeCompare(b.name))
-                        .filter(guild => guild.owner || (guild.permissions % Permissions.ADMINISTRATOR) == Permissions.ADMINISTRATOR)
+                        .filter(guild => guild.owner || (guild.permissions & Permissions.ADMINISTRATOR) == Permissions.ADMINISTRATOR)
                         .map((guild, index) => ( <GuildCard {...{guild}} key={guild.id}/> ))
                     }
-                    {/* <GuildCard
-                        {...{
-                            name: "Kingdom Score",
-                            icon: "https://cdn.discordapp.com/icons/730047147860295732/a_a1d9d9eb9ba2065c7081b4bfbb37e08e",
-                            id: "730047147860295732"
-                        }}
-                    /> */}
                 </div>
 
                 <Script
