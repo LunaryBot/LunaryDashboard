@@ -13,10 +13,12 @@ import styles from '../../../styles/main.module.css';
 
 import { createState } from '../../../utils/states';
 
-import { IUser } from '../../../types';
+import { IUser, IGuildData } from '../../../types';
+import { Permissions } from '../../../Constants';
 
 interface IState {
     user: IUser | null;
+    guilds: IGuildData[];
     loading: boolean;
 };
 
@@ -32,12 +34,13 @@ export default class DashboardMe extends React.Component {
 
         this.state = {
             user: null,
+            guilds: [],
             loading: true,
         } as IState;
     }
 
     render() {
-        const { user, loading } = this.state as IState;
+        const { user, guilds, loading } = this.state as IState;
         const { token, hostApi } = this.props as IProps;
 
         return (
@@ -47,13 +50,18 @@ export default class DashboardMe extends React.Component {
                 <LeftMenu {...{user}}/>
 
                 <div className={`${styles['content']}`}>
-                    <GuildCard
+                    {guilds
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .filter(guild => guild.owner || (guild.permissions % Permissions.ADMINISTRATOR) == Permissions.ADMINISTRATOR)
+                        .map((guild, index) => ( <GuildCard {...{guild}} key={guild.id}/> ))
+                    }
+                    {/* <GuildCard
                         {...{
                             name: "Kingdom Score",
                             icon: "https://cdn.discordapp.com/icons/730047147860295732/a_a1d9d9eb9ba2065c7081b4bfbb37e08e",
                             id: "730047147860295732"
                         }}
-                    />
+                    /> */}
                 </div>
 
                 <Script
@@ -62,12 +70,14 @@ export default class DashboardMe extends React.Component {
                         const api = socket(hostApi, {
                             query: {
                                 token,
+                                fetchGuilds: true
                             },
                         });
 
                         api.on('ready', ({ data }) => {
                             this.setState({
                                 user: data.user,
+                                guilds: data.guilds,
                                 loading: false,
                             });
                         });
