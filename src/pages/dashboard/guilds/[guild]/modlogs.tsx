@@ -112,16 +112,21 @@ export default class DashboardMe extends React.Component {
 
                             return (
                                 <>
+                                    <Script>{`
+                                        const { scrollY: scrollY_${DateNow} } = window;
+
+                                        const html_${DateNow} = document.querySelector('html');
+                                        const body_${DateNow} = document.querySelector('body');
+                                    
+                                        html_${DateNow}.style = \`width: calc(100% - 12px); position: fixed; top: -\${scrollY_${DateNow}}px; overflow: hidden;\`;
+                                        body_${DateNow}.style = 'overflow: hidden;'
+                                    `}</Script>
+
                                     <div className={guildStyles['modal-wrapper']} onClick={(e) => {
                                         const modalLog = document.getElementById('modal-log');
                                         const _html = document.querySelector('html') as any;
                                         const _body = document.querySelector('body') as any;
                                         const scrollTop = _html.style.top;
-
-                                        _html.style = '';
-                                        window.scrollTo({
-                                            top: Number(scrollTop.replace(/-(\d*)px/, '$1')) || 0,
-                                        });
                                         
                                         console.log(Number(_html.style.top.replace(/-(\d*)px/, '$1')) || 0,)
                                         
@@ -133,7 +138,11 @@ export default class DashboardMe extends React.Component {
                                                     id: null
                                                 });
                                                 _body.style = '';
-                                            }, 400);
+                                                _html.style = '';
+                                                window.scrollTo({
+                                                    top: Number(scrollTop.replace(/-(\d*)px/, '$1')) || 0,
+                                                });
+                                            }, 450);
                                         };
                                     }}>
                                         <div className={guildStyles['modal-log']} id={'modal-log'}>
@@ -163,16 +172,6 @@ export default class DashboardMe extends React.Component {
                                             <br />
                                         </div>
                                     </div>
-
-                                    <Script>{`
-                                        const { scrollY: scrollY_${DateNow} } = window;
-
-                                        const html_${DateNow} = document.querySelector('html');
-                                        const body_${DateNow} = document.querySelector('body');
-                                    
-                                        html_${DateNow}.style = \`width: calc(100% - 12px); position: fixed; top: -\${scrollY_${DateNow}}px; overflow: hidden;\`;
-                                        body_${DateNow}.style = 'overflow: hidden;'
-                                    `}</Script>
                                 </>
                             )
                         }
@@ -295,7 +294,7 @@ export default class DashboardMe extends React.Component {
 
                         this.setState({
                             id: _f.id || null,
-                            chunk: _f.page || _f.chunk || 0,
+                            chunk: (Number(_f.page) || Number(_f.chunk) || 1) - 1,
                             filters: {
                                 type: __f.type || _f.type || null,
                                 authorId: __f.authorId || _f.authorId || null,
