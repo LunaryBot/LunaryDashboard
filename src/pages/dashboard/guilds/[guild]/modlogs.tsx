@@ -10,6 +10,7 @@ import Header from '../../../../components/Header';
 
 import styles from '../../../../styles/main.module.css';
 import guildStyles from '../../../../styles/guild.module.css';
+import paginationStyles from '../../../../styles/pagination.module.css';
 
 import { createState } from '../../../../utils/states';
 import decode from '../../../../utils/decode';
@@ -23,6 +24,7 @@ interface IState {
     guild: IGuildSuper;
     loading: boolean;
     chunk: number;
+    chunks: number;
     limit: number;
     id: string|null;
     logs: ILog[];
@@ -92,7 +94,7 @@ export default class DashboardMe extends React.Component {
     }
 
     render() {
-        const { user, guild, loading, logs, id: logId } = this.state as IState;
+        const { user, guild, loading, logs, id: logId, chunk, chunks } = this.state as IState;
         const { token, hostApi, guildId } = this.props as IProps;
 
         return (
@@ -226,6 +228,58 @@ export default class DashboardMe extends React.Component {
                             </tbody>
                         </table>
                     </div>
+
+                    <div className={paginationStyles['pagination-bar']}>
+                    <div 
+                        className={`${paginationStyles['dot']} ${chunk == 0 ? paginationStyles['selected'] : ''}`}
+                        onClick={() => {
+                            if(chunk != 0) {
+                                // @ts-ignore
+                                window.toChunk(0);
+                            }
+                        }}
+                    >
+                        <i className="far fa-angle-left"></i>
+                    </div>
+                    {Array(chunks)
+                        .fill(0)
+                        .map((_, i) => i)
+                        .slice(
+                            chunk <= 3 
+                                ? 0 
+                                : (
+                                    chunk >= chunks - 4
+                                    ? chunks - 7 
+                                    : chunk - 4
+                                )
+                        )
+                        .slice(0, 7)
+                        .map((i) => (
+                            <div 
+                                className={`${paginationStyles['dot']} ${i == chunk ? paginationStyles['selected'] : ''}`} 
+                                key={i}
+                                onClick={() => {
+                                    if(i != chunk) {
+                                        // @ts-ignore
+                                        window.toChunk(i);
+                                    };
+                                }}
+                            >
+                                {i + 1}
+                            </div>
+                        ))}
+                        <div 
+                            className={`${paginationStyles['dot']} ${chunks - 1 == chunk ? paginationStyles['selected'] : ''}`}
+                            onClick={() => {
+                                    if(chunks - 1 != chunk) {
+                                        // @ts-ignore
+                                        window.toChunk(chunks - 1);
+                                    }
+                                }}
+                        >
+                            <i className="far fa-angle-right"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <Script
@@ -290,6 +344,28 @@ export default class DashboardMe extends React.Component {
                                 return window.location.href = `/invite?guildId=${guildId}`;
                             };
                         });
+
+                        // @ts-ignore
+                        window.toChunk = (chunk) => {
+                            console.log(chunk);
+                            this.setState({
+                                chunk,
+                                logs: []
+                            });
+
+                            const state = this.state as IState;
+                            console.log(state)
+
+                            api.emit('getGuildLogs' , {
+                                guildId,
+                                data: {
+                                    chunk,
+                                    limit: state.limit,
+                                    id: state.id,
+                                    filters: encode(state.filters as { [key: string]: any }),
+                                } as IGetLogsData,
+                            })
+                        }
                     }}
                 ></Script>
             </>
