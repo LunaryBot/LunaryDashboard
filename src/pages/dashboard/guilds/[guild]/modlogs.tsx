@@ -229,57 +229,60 @@ export default class DashboardMe extends React.Component {
                         </table>
                     </div>
 
-                    <div className={paginationStyles['pagination-bar']}>
-                    <div 
-                        className={`${paginationStyles['dot']} ${chunk == 0 ? paginationStyles['selected'] : ''}`}
-                        onClick={() => {
-                            if(chunk != 0) {
-                                // @ts-ignore
-                                window.toChunk(0);
-                            }
-                        }}
-                    >
-                        <i className="far fa-angle-left"></i>
-                    </div>
-                    {Array(chunks)
-                        .fill(0)
-                        .map((_, i) => i)
-                        .slice(
-                            chunk <= 3 
-                                ? 0 
-                                : (
-                                    chunk >= chunks - 4
-                                    ? chunks - 7 
-                                    : chunk - 4
-                                )
-                        )
-                        .slice(0, 7)
-                        .map((i) => (
+                    {logs?.length && (
+                        <div className={paginationStyles['pagination-bar']}>
                             <div 
-                                className={`${paginationStyles['dot']} ${i == chunk ? paginationStyles['selected'] : ''}`} 
-                                key={i}
+                                className={`${paginationStyles['dot']} ${chunk == 0 ? paginationStyles['selected'] : ''}`}
                                 onClick={() => {
-                                    if(i != chunk) {
+                                    if(chunk != 0) {
                                         // @ts-ignore
-                                        window.toChunk(i);
-                                    };
-                                }}
-                            >
-                                {i + 1}
-                            </div>
-                        ))}
-                        <div 
-                            className={`${paginationStyles['dot']} ${chunks - 1 == chunk ? paginationStyles['selected'] : ''}`}
-                            onClick={() => {
-                                    if(chunks - 1 != chunk) {
-                                        // @ts-ignore
-                                        window.toChunk(chunks - 1);
+                                        window.toChunk(0);
                                     }
                                 }}
-                        >
-                            <i className="far fa-angle-right"></i>
+                            >
+                                <i className="far fa-angle-left"></i>
+                            </div>
+                            {Array(chunks)
+                                .fill(0)
+                                .map((_, i) => i)
+                                .slice(
+                                    chunk <= 3 
+                                        ? 0 
+                                        : (
+                                            chunk >= chunks - 4
+                                            ? chunks - 7 
+                                            : chunk - 4
+                                        )
+                                )
+                                .slice(0, 7)
+                                .map((i) => (
+                                    <div 
+                                        className={`${paginationStyles['dot']} ${i == chunk ? paginationStyles['selected'] : ''}`} 
+                                        key={i}
+                                        onClick={() => {
+                                            if(i != chunk) {
+                                                // @ts-ignore
+                                                window.toChunk(i);
+                                            };
+                                        }}
+                                    >
+                                        {i + 1}
+                                    </div>
+                                ))
+                            }
+                            <div 
+                                className={`${paginationStyles['dot']} ${chunks - 1 == chunk ? paginationStyles['selected'] : ''}`}
+                                onClick={() => {
+                                        if(chunks - 1 != chunk) {
+                                            // @ts-ignore
+                                            window.toChunk(chunks - 1);
+                                        }
+                                    }}
+                            >
+                                <i className="far fa-angle-right"></i>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <Script
