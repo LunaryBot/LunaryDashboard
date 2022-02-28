@@ -26,6 +26,11 @@ export default class CardLog extends Component {
         return (
             <div className={guildStyle["cardLog"]}>
                 <div className={guildStyle["box"]}>
+                    <div className={guildStyle["close"]}>
+                        <button>
+                            X
+                        </button>
+                    </div>
                     <div className={guildStyle["user"]}>
                         <img
                             src={avatar}
@@ -33,6 +38,8 @@ export default class CardLog extends Component {
                         />
                         <h3>{user}</h3>
                     </div>
+                    <br />
+                    <br />
                     <br />
                     <div className={guildStyle["line"]} />
                     <br />

@@ -91,6 +91,26 @@
 	transform: translate(-50%, -50%);
 }
 
+.cardLog .close {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+}
+
+.cardLog .close button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+
+.cardLog .close button:hover {
+    cursor: pointer;
+}
+
 .cardLog .line {
     width: 100%;
     height: 1px;
@@ -126,10 +146,12 @@
 }
 
 .cardLog .user {
+    width: 100%;
+    position: absolute;
+    top: 10px;
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 100%;
 }
 
 .cardLog .user img {
