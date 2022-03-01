@@ -38,8 +38,13 @@
 }
     
 .footer a {
+    cursor: pointer;
     text-decoration: none;
     color: var(--luny-colors-text-60);
+}
+
+.footer a:hover {
+    color: var(--luny-colors-band-100);
 }
     
 .r-footer {
@@ -59,8 +64,39 @@
     
 .b-footer {
     border-top: 2px solid var(--luny-colors-band-100);
-    text-align: center;
+    /* text-align: center; */
     padding-top: 50px;
+}
+
+.b-footer button {
+    background-color: var(--luny-colors-band-100);
+    background: linear-gradient(to bottom right, var(--luny-colors-band-100), var(--luny-colors-band-60));
+    color: var(--luny-colors-text-100);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: 150px;
+    height: 50px;
+    float: right;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.b-footer button:hover {
+    background-color: var(--luny-colors-band-80);
+}
+
+.b-footer svg.icon {
+    width: 64px;
+    height: 64px;
+    transition: border 0.5s;
+    pointer-events: none;
+}
+
+.b-footer svg.icon path {
+    fill: var(--luny-colors-band-100);
 }
     
 .l-footer p {
