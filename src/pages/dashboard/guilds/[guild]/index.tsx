@@ -9,6 +9,7 @@ import LoadingPage from '../../../../components/LoadingPage';
 import Header from '../../../../components/Header';
 
 import styles from '../../../../styles/main.module.css';
+import guildStyles from '../../../../styles/guild.module.css';
 
 import { createState } from '../../../../utils/states';
 
@@ -27,7 +28,7 @@ interface IProps {
     guildId: string;
 };
 
-export default class DashboardMe extends React.Component {
+export default class DashboardGuild extends React.Component {
     constructor(props) {
         super(props);
 
