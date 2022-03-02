@@ -1,4 +1,4 @@
-export const defaultAvatar = 'https://imgur.com/EgxuEaH.png';
+export const defaultAvatar = 'https://imgur.com/4KF9f6I.png';
 
 export const Permissions = {
     CREATE_INSTANT_INVITE: 1 << 0,

@@ -67,31 +67,41 @@ export default class Header extends React.Component {
                     <a href="" className={styles["link"]}>Vote</a>
                 </div>
                 <div id="avatar" className={styles["avatar"]}>
-                    <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : defaultAvatar} alt="" />
-                    <div className={styles["user-menu-wrapper"]}>
-                        <div className={styles["user-menu"]}>
-                            <div className={styles["user-menu-options"]}>
-                                <a href={"/dashboard/@me"}>
-                                    <div style={{marginTop: "0"}}>
-                                        <i className={"fas fa-tools"}></i>
-                                        Dashboard
+                    {user ? (
+                        <>
+                            <img src={user?.avatar ? `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png` : defaultAvatar} alt="" />
+                            <div className={styles["user-menu-wrapper"]}>
+                                <div className={styles["user-menu"]}>
+                                    <div className={styles["user-menu-options"]}>
+                                        <a href={"/dashboard/@me"}>
+                                            <div style={{marginTop: "0"}}>
+                                                <i className={"fas fa-tools"}></i>
+                                                Dashboard
+                                            </div>
+                                        </a>
+                                        <a href={"/commands"}>
+                                            <div>
+                                                <i className={"fas fa-project-diagram"}></i>
+                                                Comandos
+                                            </div>
+                                        </a>
+                                        <a href={"/api/auth/logout"}>
+                                            <div>
+                                                <i className={"fas fa-sign-out-alt"} style={{color: "var(--luny-colors-red)"}}></i>
+                                                Logout
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                                <a href={"/commands"}>
-                                    <div>
-                                        <i className={"fas fa-project-diagram"}></i>
-                                        Comandos
-                                    </div>
-                                </a>
-                                <a href={"/api/auth/logout"}>
-                                    <div>
-                                        <i className={"fas fa-sign-out-alt"} style={{color: "var(--luny-colors-red)"}}></i>
-                                        Logout
-                                    </div>
-                                </a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </>
+                    ) : (
+                        <a href="/api/auth/login">
+                            <div className={styles['CtaLogin']}>
+                                <i className="fas fa-sign-in-alt" />
+                            </div>
+                        </a>
+                    )}
                 </div>
             </header>
         )

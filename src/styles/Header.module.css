@@ -48,7 +48,7 @@
 .header .icon {
     width: 52px;
     height: 52px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     transition: border 0.5s;
     pointer-events: none;
 }
@@ -61,9 +61,43 @@
     background-color: transparent;
 }
 
-.header .header-wrapper {
+.header.onTop .header-wrapper {
     opacity: 1;
     filter: none;
+}
+
+.header .CtaLogin {
+    margin-left: 10px;
+    font-family: cursive, sans-serif;
+    font-weight: 500;
+    background-color: var(--luny-colors-text-100);
+    color: var(--luny-colors-flow-80);
+    text-decoration: none;
+    padding: 9px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.header .CtaLogin:hover {
+    background-color: var(--luny-colors-flow-80);
+    color: var(--luny-colors-text-100);
+}
+
+.header.onTop .CtaLogin {
+    background-color: var(--luny-colors-flow-80);
+    color: var(--luny-colors-text-100);
+}
+
+.header.onTop .CtaLogin:hover {
+    color: var(--luny-colors-flow-80);
+    background-color: var(--luny-colors-text-100);
+}
+
+.header .CtaLogin:hover {
+    color: var(--luny-colors-text-100);
+    background-color: var(--luny-colors-band-100);
 }
 
 .header .avatar {
