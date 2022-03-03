@@ -101,6 +101,12 @@
     text-align: left;
 }
 
+@media screen and (max-width: 500px) {
+    .modal-wrapper .modal-log {
+        width: 100%;
+    }
+}
+
 .modal-wrapper .modal-log .user {
     display: flex;
     width: 100%;
