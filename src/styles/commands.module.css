@@ -6,6 +6,12 @@
     /* padding: 20px */
 }
 
+@media screen and (max-width: 570px) {
+    .content-commands {
+        margin: 10px;
+    }
+}
+
 .content-commands p {
     font-size: 15px;
 }
@@ -84,7 +90,7 @@
 .content-commands-column-2 {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 30px
+    margin-top: 30px;
 }
 
 .content-commands-column-2-left {
@@ -107,13 +113,11 @@
     color: var(--luny-colors-text-100);
 }
 
-@media(max-width: 584px) {
+@media (max-width: 584px) {
     .content-commands-column-2-left {
         flex-grow: 1
     }
 }
-
-
 
 .content-commands-column-2-left h1 {
     font-size: 20px;
