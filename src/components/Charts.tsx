@@ -10,6 +10,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+
 import { Line } from 'react-chartjs-2';
 
 export default class Charts extends Component {
@@ -34,38 +35,40 @@ export default class Charts extends Component {
                     display: true,
                     position: 'left' as const,
                 },
-                y1: {
-                    type: 'linear' as const,
-                    display: true,
-                    position: 'right' as const,
-                    grid: {
-                        drawOnChartArea: false,
-                    },
-                },
             },
         };
 
         const data = {
-            labels: [
-                "Server 1",
-                "Server 2",
-                "Server 3"
-            ],
+            labels: Last7Days(),
             datasets: [
                 {
-                    label: 'Dataset 1',
-                    data: [60, 70, 35],
+                    label: 'Bans',
+                    data: Array(7).fill(0),
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
                     yAxisID: 'y',
                 },
                 {
-                    label: 'Dataset 2',
-                    data: [30, 50, 98],
-                    borderColor: 'rgb(53, 162, 235)',
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    yAxisID: 'y1',
-                }
+                    label: 'Kicks',
+                    data: Array(7).fill(1),
+                    borderColor: 'rgb(234, 137, 53)',
+                    backgroundColor: 'rgba(234, 137, 53, 0.5)',
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Mutes',
+                    data: Array(7).fill(2),
+                    borderColor: 'rgb(75, 140, 210)',
+                    backgroundColor: 'rgba(75, 140, 210, 0.5)',
+                    yAxisID: 'y',
+                },
+                {
+                    label: 'Advs',
+                    data: Array(7).fill(3),
+                    borderColor: 'rgb(234, 172, 53)',
+                    backgroundColor: 'rgba(234, 172, 53, 0.5)',
+                    yAxisID: 'y',
+                },
             ],
         };
 
@@ -90,4 +93,23 @@ export default class Charts extends Component {
             </div>
         );
     }
+}
+
+function Last7Days() {
+    const currentDate = new Date('03/02/2022 00:00');
+    const now = Date.now()
+
+    const dates = [currentDate, ...Array(6).fill(0).map((_, i) => new Date(now - ((i + 1) * 1000 * 60 * 60 * 24)))]
+
+    return dates.map(formatDate)
+}
+
+function formatDate(date){
+    let dd = date.getDate();
+    let mm = date.getMonth()+1;
+    let yyyy = date.getFullYear();
+    if(dd < 10) { dd = '0' + dd }
+    if(mm < 10) { mm = '0' + mm }
+    date = dd + '/' + mm  + '/' + yyyy;
+    return date
 }
