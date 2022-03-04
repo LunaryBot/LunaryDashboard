@@ -264,7 +264,7 @@
         },
         {
             "name": "daily",
-            "description": ":bug:",
+            "description": "Pegue sua recompensa de luas diária.",
             "lunyDiscordPermissions": null,
             "botUserPermissions": null,
             "userDiscordPermissions": null,
@@ -412,13 +412,13 @@
         },
         {
             "name": "pay",
-            "description": "Pague outra pessoa luas(moedas).",
+            "description": "Pague luas(moedas) para outra pessoa.",
             "lunyDiscordPermissions": null,
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
             "examples": [
-                "{user} {luasAmount}"
+                "{@user} {luasAmount}"
             ]
         },
         {
