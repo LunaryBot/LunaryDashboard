@@ -28,7 +28,8 @@
                     "title": "Pune um usuário sem notificar via dm.",
                     "usage": "user user:{@user} notify-dm:{notify-dm}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "adv edit",
@@ -46,7 +47,8 @@
                     "title": "Edita o motivo de uma advertência/aviso pelo id.",
                     "usage": "id:{id} newreason:{newreason}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "adv info",
@@ -64,7 +66,8 @@
                     "title": "Exibe as informações de uma advertência pelo id.",
                     "usage": "id:{id}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "adv list",
@@ -82,7 +85,8 @@
                     "title": "Exibe as informações de uma advertência de um usuário.",
                     "usage": "user:{@user}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "adv remove id",
@@ -100,7 +104,8 @@
                     "name": "Remove uma advertência/aviso usando o id.",
                     "usage": "id:{id}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "adv remove user",
@@ -126,7 +131,8 @@
                     "title": "Remove todas as advertências/avisos de um usuário.",
                     "usage": "user:{@user} amount:all"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "ban",
@@ -156,7 +162,8 @@
                     "title": "Pune um usuário sem notificar via dm.",
                     "usage": "user user:{@user} notify-dm:{notify-dm}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "ban info",
@@ -178,7 +185,8 @@
                     "title": "Veja as informações de um banimento pela tag do usuário.",
                     "usage": "user:{user-tag}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "ban remove",
@@ -204,7 +212,8 @@
                     "title": "Remove o banimento com um motivo.",
                     "usage": "user:{@user} reason:{reason}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "channel info",
@@ -216,7 +225,8 @@
             "examples": [
                 "",
                 "channel:{channel}"
-            ]
+            ],
+            "group": "utilities"
         },
         {
             "name": "channel lock",
@@ -228,7 +238,8 @@
             "examples": [
                 "",
                 "channel:{channel}"
-            ]
+            ],
+            "group": "administration"
         },
         {
             "name": "channel unlock",
@@ -240,7 +251,8 @@
             "examples": [
                 "",
                 "channel:{channel}"
-            ]
+            ],
+            "group": "administration"
         },
         {
             "name": "clean",
@@ -260,7 +272,8 @@
                     "title": "Apaga uma quantidade de mensagens filtrando as mensagens de um usuário no canal que foi executado o comando.",
                     "usage": "amount:{amountClear} user:{userID}"
                 }
-            ]
+            ],
+            "group": "administration"
         },
         {
             "name": "daily",
@@ -269,7 +282,8 @@
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
-            "examples": null
+            "examples": null,
+            "group": "social"
         },
         {
             "name": "eval",
@@ -278,7 +292,8 @@
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
-            "examples": null
+            "examples": null,
+            "group": "owner"
         },
         {
             "name": "help",
@@ -287,7 +302,8 @@
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
-            "examples": null
+            "examples": null,
+            "group": "bot"
         },
         {
             "name": "kick",
@@ -317,7 +333,8 @@
                     "title": "Pune um usuário sem notificar via dm.",
                     "usage": "user user:{@user} notify-dm:{notify-dm}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "kitsu anime",
@@ -330,7 +347,8 @@
                     "title": "Veja as informações de Sword Art Online em Kitsu.",
                     "usage": "query:Sword Art Online"
                 }
-            ]
+            ],
+            "group": "utilities"
         },
         {
             "name": "kitsu manga",
@@ -343,7 +361,8 @@
                     "title": "Veja as informações de Darling in the FranXX em Kitsu.",
                     "usage": "query:Darling in the FranXX"
                 }
-            ]
+            ],
+            "group": "utilities"
         },
         {
             "name": "luas",
@@ -352,7 +371,8 @@
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
-            "examples": null
+            "examples": null,
+            "group": "social"
         },
         {
             "name": "mute",
@@ -382,7 +402,8 @@
                     "title": "Pune um usuário sem notificar via dm.",
                     "usage": "user user:{@user} notify-dm:{notify-dm}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "mute remove",
@@ -408,7 +429,8 @@
                     "title": "Remove o silenciamento com um motivo.",
                     "usage": "user:{@user} reason:{reason}"
                 }
-            ]
+            ],
+            "group": "moderation"
         },
         {
             "name": "pay",
@@ -419,7 +441,8 @@
             "dm": false,
             "examples": [
                 "{@user} {luasAmount}"
-            ]
+            ],
+            "group": "social"
         },
         {
             "name": "ping",
@@ -428,7 +451,8 @@
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
-            "examples": null
+            "examples": null,
+            "group": "bot"
         },
         {
             "name": "profile",
@@ -440,7 +464,8 @@
             "examples": [
                 "",
                 "user:{@user}"
-            ]
+            ],
+            "group": "social"
         },
         {
             "name": "role info",
@@ -451,7 +476,8 @@
             "dm": false,
             "examples": [
                 "role:{role}"
-            ]
+            ],
+            "group": "utilities"
         },
         {
             "name": "server info",
@@ -460,7 +486,8 @@
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
-            "examples": null
+            "examples": null,
+            "group": "utilities"
         },
         {
             "name": "user avatar",
@@ -470,7 +497,8 @@
             "userDiscordPermissions": null,
             "examples": [
                 "user:{@user}"
-            ]
+            ],
+            "group": "utilities"
         },
         {
             "name": "user banner",
@@ -480,7 +508,8 @@
             "userDiscordPermissions": null,
             "examples": [
                 "user:{@user}"
-            ]
+            ],
+            "group": "utilities"
         },
         {
             "name": "user info",
@@ -490,7 +519,8 @@
             "userDiscordPermissions": null,
             "examples": [
                 "user:{@user}"
-            ]
+            ],
+            "group": "utilities"
         }
     ]
 }
