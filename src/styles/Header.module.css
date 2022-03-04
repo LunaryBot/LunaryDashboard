@@ -181,3 +181,8 @@
     color: #A020F0;
     margin-right: 5px;
 }
+
+.header .avatar .user-menu-wrapper .user-menu .user-menu-options div.selectTheme:hover,
+.header .avatar .user-menu-wrapper .user-menu .user-menu-options div.selectTheme:hover div input {
+    margin-left: 0;
+}

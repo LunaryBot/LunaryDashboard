@@ -289,7 +289,8 @@
     }
 
     .content .card, 
-    .content .small-card {
+    .content .small-card,
+    .content .infoCard {
         max-width: 96%;
         width: 96%;
         min-width: 96%;

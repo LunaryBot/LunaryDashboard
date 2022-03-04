@@ -3,6 +3,7 @@ import styles from '../styles/Header.module.css';
 import { IUser} from '../types';
 import { defaultAvatar } from '../Constants';
 import Link from 'next/link';
+import Toggle, { CheckRadio } from '../components/Toggle';
 
 interface IProps {
     user: IUser
@@ -91,6 +92,23 @@ export default class Header extends React.Component {
                                                 Logout
                                             </div>
                                         </a>
+                                        <div className={styles['selectTheme']}>
+                                            <hr 
+                                                style={{
+                                                    marginTop: '5px',
+                                                    marginBottom: '5px',
+                                                }}
+                                            />
+                                            <h3>
+                                                <i className='far fa-browser' />
+                                                Mudar o tema da página:
+                                            </h3>
+                                            <CheckRadio>
+                                                <Toggle
+                                                    data-value='dark'
+                                                />
+                                            </CheckRadio>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

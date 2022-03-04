@@ -9,6 +9,7 @@ import LoadingPage from '../../../components/LoadingPage';
 import Header from '../../../components/Header';
 
 import styles from '../../../styles/main.module.css';
+import userStyles from '../../../styles/user.module.css'; 
 
 import { createState } from '../../../utils/states';
 
@@ -46,11 +47,33 @@ export default class DashboardMe extends React.Component {
                 <LeftMenu {...{user}}/>
 
                 <div className={`${styles['content']}`}>
-                    <div className={styles['small-card']}>
-                        {user?.username || '...'}
+                    <div className={`${userStyles['infoCard']}`}>
+                        <i className="fal fa-moon" />
+                        <div>
+                            <h2>Luas</h2>
+                            <h3>{user?.email || '...'}</h3>
+                        </div>
                     </div>
-                    <div className={styles['small-card']}>
-                        {user?.username || '...'}
+                    <div className={`${userStyles['infoCard']}`}>
+                        <i className="fad fa-angle-up" />
+                        <div>
+                            <h2>XP</h2>
+                            <h3>{user?.email || '...'}</h3>
+                        </div>
+                    </div>
+                    <div className={`${userStyles['infoCard']}`}>
+                        <i className="far fa-hammer" />
+                        <div>
+                            <h2>Bans</h2>
+                            <h3>{user?.email || '...'}</h3>
+                        </div>
+                    </div>
+                    <div className={`${userStyles['infoCard']}`}>
+                        <i className="fal fa-chart-line" />
+                        <div>
+                            <h2>Rank</h2>
+                            <h3>{user?.email || '...'}</h3>
+                        </div>
                     </div>
                 </div>
 
