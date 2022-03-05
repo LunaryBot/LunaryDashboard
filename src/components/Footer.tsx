@@ -62,7 +62,7 @@ export default class Footer extends React.Component {
                                 />
                             </g>
                         </svg>
-                        <button>Invite Lunar</button>
+                        <button onClick={() => location.href = '/invite'}>Invite Lunar</button>
                     </div>
                 </footer>
             </>
