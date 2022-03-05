@@ -60,7 +60,7 @@ export default class Home extends React.Component {
                             </div>
                         </div>
 
-                        <div className={styles['main-content-children']}>
+                        <div className={`${styles['main-content-children']} ${styles['text']}`}>
                             <div className={styles['bot-icon-base']}>
                                 <h1>Lunar</h1>
                                 <div className={styles['bot-icon']}>
