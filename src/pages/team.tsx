@@ -77,17 +77,11 @@ export default class Home extends React.Component {
                                     Dev
                                 </h3>
                             </div>
-                            <br />
-                            <br />
-                            <br />
                             <hr />
                             <h3 className={styles['description']}>
                                 <h3 className={styles['topText']}>SOBRE MIM</h3>
                                 Um dev ae.
                             </h3>
-                            <br />
-                            <br />
-                            <br />
                             <div className={styles['socialMedia']}>
                                 <a href="#" className={styles['discord']}>
                                     <i className="fab fa-discord" />

@@ -49,6 +49,7 @@
     width: 320px;
     max-width: 320px;
     height: 225px;
+    min-height: 225px;
     background-color: var(--luny-colors-background);
     margin: 15px;
     border-radius: 15px;
@@ -100,6 +101,7 @@
     height: 1px;
     background-color: var(--luny-colors-band-80);
     border: none;
+    margin-top: 55px;
 }
 
 .content .grid .description {
