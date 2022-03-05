@@ -1,422 +1,638 @@
 {
     "commands": [
-      {
-        "name": "adv",
-        "description": "Aplica uma advertência/aviso em um usuário do servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_ADV_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": true,
-        "examples": [
-          {
-            "title": "Pune um usuário usando a menção.",
-            "usage": "user user:{@user}"
-          },
-          {
-            "title": "Pune um usuário usando o id.",
-            "usage": "user user:{userID}"
-          },
-          {
-            "title": "Pune um usuário usando com um motivo.",
-            "usage": "user user:{@user} reason:{reason}"
-          },
-          {
-            "title": "Pune um usuário sem notificar via dm.",
-            "usage": "user user:{@user} notify-dm:{notify-dm}"
-          }
-        ]
-      },
-      {
-        "name": "adv edit",
-        "description": "Edita o motivo de uma advertência/aviso do servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_MANAGE_HISTORY"
-        ],
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Edita o motivo de uma advertência/aviso pelo id.",
-            "usage": "id:{id} newreason:{newreason}"
-          }
-        ]
-      },
-      {
-        "name": "adv info",
-        "description": "Exibe as informações de uma advertência/aviso usando id.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_ADV_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Exibe as informações de uma advertência pelo id.",
-            "usage": "id:{id}"
-          }
-        ]
-      },
-      {
-        "name": "adv list",
-        "description": "Exibe as advertências/avisos de um usuário no servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_ADV_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Exibe as informações de uma advertência de um usuário.",
-            "usage": "user:{@user}"
-          }
-        ]
-      },
-      {
-        "name": "adv remove id",
-        "description": "Remove uma advertência/aviso do histórico servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_MANAGE_HISTORY"
-        ],
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "name": "Remove uma advertência/aviso usando o id.",
-            "usage": "id:{id}"
-          }
-        ]
-      },
-      {
-        "name": "adv remove user",
-        "description": "Remove as advertências/avisos de um usuário do servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_MANAGE_HISTORY"
-        ],
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Remove a última advertência/aviso de um usuário.",
-            "usage": "user:{@user}"
-          },
-          {
-            "title": "Remove um número de advertências/avisos de um usuário.",
-            "usage": "user:{@user} amount:{amount}"
-          },
-          {
-            "title": "Remove todas as advertências/avisos de um usuário.",
-            "usage": "user:{@user} amount:all"
-          }
-        ]
-      },
-      {
-        "name": "ban",
-        "description": "Bane um usuário do servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_BAN_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "BAN_MEMBERS"
-        ],
-        "dm": true,
-        "examples": [
-          {
-            "title": "Pune um usuário usando a menção.",
-            "usage": "user user:{@user}"
-          },
-          {
-            "title": "Pune um usuário usando o id.",
-            "usage": "user user:{userID}"
-          },
-          {
-            "title": "Pune um usuário usando com um motivo.",
-            "usage": "user user:{@user} reason:{reason}"
-          },
-          {
-            "title": "Pune um usuário sem notificar via dm.",
-            "usage": "user user:{@user} notify-dm:{notify-dm}"
-          }
-        ]
-      },
-      {
-        "name": "ban info",
-        "description": "Mostra as informações do banimento de um usuário banido no servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_BAN_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "BAN_MEMBERS"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Veja as informações de um banimento pelo id do usuário.",
-            "usage": "user:{user-id}"
-          },
-          {
-            "title": "Veja as informações de um banimento pela tag do usuário.",
-            "usage": "user:{user-tag}"
-          }
-        ]
-      },
-      {
-        "name": "ban remove",
-        "description": "Retira o banimento de um usuário do servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_BAN_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "BAN_MEMBERS"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Remove o banimento pelo id de um usuário.",
-            "usage": "user:{user-id}"
-          },
-          {
-            "title": "Remove o banimento pela tag de um usuário.",
-            "usage": "user:{user-tag}"
-          }
-        ]
-      },
-      {
-        "name": "ban soft",
-        "description": "Bane um usuário do servidor e apaga as mensagens do usuário nos últimos 7 dias.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_BAN_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "BAN_MEMBERS"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Pune um usuário usando a menção.",
-            "usage": "soft user:{@user}"
-          },
-          {
-            "title": "Pune um usuário usando o id.",
-            "usage": "soft user:{userID}"
-          },
-          {
-            "title": "Pune um usuário usando com um motivo.",
-            "usage": "soft user:{@user} reason:{reason}"
-          },
-          {
-            "title": "Pune um usuário sem notificar via dm.",
-            "usage": "soft user:{@user} notify-dm:{notify-dm}"
-          }
-        ]
-      },
-      {
-        "name": "channel info",
-        "description": "Exibe informações sobre um canal.",
-        "group": "utilities",
-        "dm": false,
-        "examples": [
-          "",
-          "channel:{channel}"
-        ]
-      },
-      {
-        "name": "channel lock",
-        "description": "Bloqueia que usuários enviem mensagem em um canal de texto.",
-        "group": "administration",
-        "dm": false,
-        "examples": [
-          "",
-          "channel:{channel}"
-        ]
-      },
-      {
-        "name": "channel unlock",
-        "description": "Desbloqueia para que usuários possam enviem mensagem em um canal de texto.",
-        "group": "administration",
-        "dm": null,
-        "examples": [
-          "",
-          "channel:{channel}"
-        ]
-      },
-      {
-        "name": "clean",
-        "description": "Limpa uma quantidade de 2 até 500 mensagens no canal.",
-        "group": "administration",
-        "userDiscordPermissions": [
-          "MANAGE_MESSAGES"
-        ],
-        "dm": false,
-        "examples": [
-          {
-            "title": "Apaga uma quantidade de mensagens no canal que foi executado o comando.",
-            "usage": "amount:{amountClear}"
-          },
-          {
-            "title": "Apaga uma quantidade de mensagens filtrando as mensagens de um usuário no canal que foi executado o comando.",
-            "usage": "amount:{amountClear} user:{userID}"
-          }
-        ]
-      },
-      {
-        "name": "eval",
-        "description": "Execute um código JavaScript.",
-        "group": "owner",
-        "dm": false,
-        "examples": null
-      },
-      {
-        "name": "help",
-        "description": "Meu comando de ajuda.",
-        "group": "bot",
-        "dm": false,
-        "examples": null
-      },
-      {
-        "name": "kick",
-        "description": "Expulsa um usuário do servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_KICK_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "KICK_MEMBERS"
-        ],
-        "dm": true,
-        "examples": [
-          {
-            "title": "Pune um usuário usando a menção.",
-            "usage": "user user:{@user}"
-          },
-          {
-            "title": "Pune um usuário usando o id.",
-            "usage": "user user:{userID}"
-          },
-          {
-            "title": "Pune um usuário usando com um motivo.",
-            "usage": "user user:{@user} reason:{reason}"
-          },
-          {
-            "title": "Pune um usuário sem notificar via dm.",
-            "usage": "user user:{@user} notify-dm:{notify-dm}"
-          }
-        ]
-      },
-      {
-        "name": "kitsu anime",
-        "description": "Veja as informações de um anime em kitsu.io",
-        "group": "utilities",
-        "examples": [
-          {
-            "title": "Veja as informações de Sword Art Online em Kitsu.",
-            "usage": "query:Sword Art Online"
-          }
-        ]
-      },
-      {
-        "name": "kitsu manga",
-        "description": "Veja as informações de um manga em kitsu.io",
-        "group": "utilities",
-        "examples": [
-          {
-            "title": "Veja as informações de Darling in the FranXX em Kitsu.",
-            "usage": "query:Darling in the FranXX"
-          }
-        ]
-      },
-      {
-        "name": "mute",
-        "description": "Silencia um usuário por um período de tempo determinado no servidor.",
-        "group": "moderation",
-        "botUserPermissions": [
-          "LUNAR_MUTE_MEMBERS"
-        ],
-        "userDiscordPermissions": [
-          "MODERATE_MEMBERS"
-        ],
-        "dm": true,
-        "examples": [
-          {
-            "title": "Pune um usuário usando a menção.",
-            "usage": "user user:{@user}"
-          },
-          {
-            "title": "Pune um usuário usando o id.",
-            "usage": "user user:{userID}"
-          },
-          {
-            "title": "Pune um usuário usando com um motivo.",
-            "usage": "user user:{@user} reason:{reason}"
-          },
-          {
-            "title": "Pune um usuário sem notificar via dm.",
-            "usage": "user user:{@user} notify-dm:{notify-dm}"
-          }
-        ]
-      },
-      {
-        "name": "ping",
-        "description": "Veja meu ping.",
-        "group": "bot",
-        "dm": false,
-        "examples": null
-      },
-      {
-        "name": "profile",
-        "description": "Exibe o perfil do usuário.",
-        "group": "social",
-        "dm": false,
-        "examples": [
-          "",
-          "user:{@user}"
-        ]
-      },
-      {
-        "name": "user avatar",
-        "description": "Veja o avatar de um usuário.",
-        "group": "utilities",
-        "examples": [
-          "user:{@user}"
-        ]
-      },
-      {
-        "name": "user banner",
-        "description": "Veja o banner de um usuário.",
-        "group": "utilities",
-        "examples": [
-          "user:{@user}"
-        ]
-      },
-      {
-        "name": "user info",
-        "description": "Veja as informações de um usuário.",
-        "group": "utilities",
-        "examples": [
-          "user:{@user}"
-        ]
-      }
+        {
+            "name": "aboutme",
+            "description": "Altere seu \"Sobre Mim\" no meu comando de perfil!.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "{aboutme}"
+            ],
+            "group": "social"
+        },
+        {
+            "name": "adv",
+            "description": "Aplica uma advertência/aviso em um usuário do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_ADV_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": true,
+            "examples": [
+                {
+                    "title": "Pune um usuário usando a menção.",
+                    "usage": "user user:{@user}"
+                },
+                {
+                    "title": "Pune um usuário usando o id.",
+                    "usage": "user user:{userID}"
+                },
+                {
+                    "title": "Pune um usuário usando com um motivo.",
+                    "usage": "user user:{@user} reason:{reason}"
+                },
+                {
+                    "title": "Pune um usuário sem notificar via dm.",
+                    "usage": "user user:{@user} notify-dm:{notify-dm}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "adv edit",
+            "description": "Edita o motivo de uma advertência/aviso do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_MANAGE_HISTORY"
+            ],
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Edita o motivo de uma advertência/aviso pelo id.",
+                    "usage": "id:{id} newreason:{newreason}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "adv info",
+            "description": "Exibe as informações de uma advertência/aviso usando id.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_ADV_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Exibe as informações de uma advertência pelo id.",
+                    "usage": "id:{id}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "adv list",
+            "description": "Exibe as advertências/avisos de um usuário no servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_ADV_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Exibe as informações de uma advertência de um usuário.",
+                    "usage": "user:{@user}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "adv remove id",
+            "description": "Remove uma advertência/aviso do histórico servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_MANAGE_HISTORY"
+            ],
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "name": "Remove uma advertência/aviso usando o id.",
+                    "usage": "id:{id}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "adv remove user",
+            "description": "Remove as advertências/avisos de um usuário do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_MANAGE_HISTORY"
+            ],
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Remove a última advertência/aviso de um usuário.",
+                    "usage": "user:{@user}"
+                },
+                {
+                    "title": "Remove um número de advertências/avisos de um usuário.",
+                    "usage": "user:{@user} amount:{amount}"
+                },
+                {
+                    "title": "Remove todas as advertências/avisos de um usuário.",
+                    "usage": "user:{@user} amount:all"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "ban",
+            "description": "Bane um usuário do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_BAN_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "BAN_MEMBERS"
+            ],
+            "dm": true,
+            "examples": [
+                {
+                    "title": "Pune um usuário usando a menção.",
+                    "usage": "user user:{@user}"
+                },
+                {
+                    "title": "Pune um usuário usando o id.",
+                    "usage": "user user:{userID}"
+                },
+                {
+                    "title": "Pune um usuário usando com um motivo.",
+                    "usage": "user user:{@user} reason:{reason}"
+                },
+                {
+                    "title": "Pune um usuário sem notificar via dm.",
+                    "usage": "user user:{@user} notify-dm:{notify-dm}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "ban info",
+            "description": "Mostra as informações do banimento de um usuário banido no servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_BAN_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "BAN_MEMBERS"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Veja as informações de um banimento pelo id do usuário.",
+                    "usage": "user:{user-id}"
+                },
+                {
+                    "title": "Veja as informações de um banimento pela tag do usuário.",
+                    "usage": "user:{user-tag}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "ban remove",
+            "description": "Retira o banimento de um usuário do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_BAN_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "BAN_MEMBERS"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Remove o banimento pelo id de um usuário.",
+                    "usage": "user:{user-id}"
+                },
+                {
+                    "title": "Remove o banimento pela tag de um usuário.",
+                    "usage": "user:{user-tag}"
+                },
+                {
+                    "title": "Remove o banimento com um motivo.",
+                    "usage": "user:{@user} reason:{reason}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "channel info",
+            "description": "Exibe informações sobre um canal.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "channel info",
+            "description": "Exibe informações sobre um canal.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "channel lock",
+            "description": "Bloqueia que usuários enviem mensagem em um canal de texto.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "channel lock",
+            "description": "Bloqueia que usuários enviem mensagem em um canal de texto.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "channel unlock",
+            "description": "Desbloqueia para que usuários possam enviem mensagem em um canal de texto.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": null,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "channel unlock",
+            "description": "Desbloqueia para que usuários possam enviem mensagem em um canal de texto.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": null,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "clean",
+            "description": "Limpa uma quantidade de 2 até 500 mensagens no canal.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": [
+                "MANAGE_MESSAGES"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Apaga uma quantidade de mensagens no canal que foi executado o comando.",
+                    "usage": "amount:{amountClear}"
+                },
+                {
+                    "title": "Apaga uma quantidade de mensagens filtrando as mensagens de um usuário no canal que foi executado o comando.",
+                    "usage": "amount:{amountClear} user:{userID}"
+                }
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "daily",
+            "description": "Pegue sua recompensa de luas diária.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": null,
+            "group": "social"
+        },
+        {
+            "name": "eval",
+            "description": "Execute um código JavaScript.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": null,
+            "group": "owner"
+        },
+        {
+            "name": "help",
+            "description": "Meu comando de ajuda.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": null,
+            "group": "bot"
+        },
+        {
+            "name": "kick",
+            "description": "Expulsa um usuário do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_KICK_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "KICK_MEMBERS"
+            ],
+            "dm": true,
+            "examples": [
+                {
+                    "title": "Pune um usuário usando a menção.",
+                    "usage": "user user:{@user}"
+                },
+                {
+                    "title": "Pune um usuário usando o id.",
+                    "usage": "user user:{userID}"
+                },
+                {
+                    "title": "Pune um usuário usando com um motivo.",
+                    "usage": "user user:{@user} reason:{reason}"
+                },
+                {
+                    "title": "Pune um usuário sem notificar via dm.",
+                    "usage": "user user:{@user} notify-dm:{notify-dm}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "kitsu anime",
+            "description": "Veja as informações de um anime em kitsu.io",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                {
+                    "title": "Veja as informações de Sword Art Online em Kitsu.",
+                    "usage": "query:Sword Art Online"
+                }
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "kitsu anime",
+            "description": "Veja as informações de um anime em kitsu.io",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                {
+                    "title": "Veja as informações de Sword Art Online em Kitsu.",
+                    "usage": "query:Sword Art Online"
+                }
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "kitsu manga",
+            "description": "Veja as informações de um manga em kitsu.io",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                {
+                    "title": "Veja as informações de Darling in the FranXX em Kitsu.",
+                    "usage": "query:Darling in the FranXX"
+                }
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "kitsu manga",
+            "description": "Veja as informações de um manga em kitsu.io",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                {
+                    "title": "Veja as informações de Darling in the FranXX em Kitsu.",
+                    "usage": "query:Darling in the FranXX"
+                }
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "luas",
+            "description": ":bug:",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": null,
+            "group": "social"
+        },
+        {
+            "name": "mute",
+            "description": "Silencia um usuário por um período de tempo determinado no servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_MUTE_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "MODERATE_MEMBERS"
+            ],
+            "dm": true,
+            "examples": [
+                {
+                    "title": "Pune um usuário usando a menção.",
+                    "usage": "user user:{@user}"
+                },
+                {
+                    "title": "Pune um usuário usando o id.",
+                    "usage": "user user:{userID}"
+                },
+                {
+                    "title": "Pune um usuário usando com um motivo.",
+                    "usage": "user user:{@user} reason:{reason}"
+                },
+                {
+                    "title": "Pune um usuário sem notificar via dm.",
+                    "usage": "user user:{@user} notify-dm:{notify-dm}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "mute remove",
+            "description": "Retira o silenciamento de um usuário do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": [
+                "LUNAR_MUTE_MEMBERS"
+            ],
+            "userDiscordPermissions": [
+                "MODERATE_MEMBERS"
+            ],
+            "dm": false,
+            "examples": [
+                {
+                    "title": "Remove o silenciamento pela menção de um usuário.",
+                    "usage": "user:{@user}"
+                },
+                {
+                    "title": "Remove o silenciamento pelo id de um usuário.",
+                    "usage": "user:{user-id}"
+                },
+                {
+                    "title": "Remove o silenciamento com um motivo.",
+                    "usage": "user:{@user} reason:{reason}"
+                }
+            ],
+            "group": "moderation"
+        },
+        {
+            "name": "pay",
+            "description": "Pague luas(moedas) para outra pessoa.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "{@user} {luasAmount}"
+            ],
+            "group": "social"
+        },
+        {
+            "name": "ping",
+            "description": "Veja meu ping.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": null,
+            "group": "bot"
+        },
+        {
+            "name": "profile",
+            "description": "Exibe o perfil do usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "user:{@user}"
+            ],
+            "group": "social"
+        },
+        {
+            "name": "role info",
+            "description": "Exibe informações de um cargo.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "role:{role}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "server info",
+            "description": "Exibe as informações do servidor.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": null,
+            "group": "utilities"
+        },
+        {
+            "name": "user avatar",
+            "description": "Veja o avatar de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user avatar",
+            "description": "Veja o avatar de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user banner",
+            "description": "Veja o banner de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user banner",
+            "description": "Veja o banner de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user info",
+            "description": "Veja as informações de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user info",
+            "description": "Veja as informações de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        }
     ]
-  }
+}

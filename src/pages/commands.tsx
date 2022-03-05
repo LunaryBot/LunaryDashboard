@@ -24,7 +24,9 @@ const constants = {
     "amount": "3",
     "id": "mhjr44cg-f1yu-0o2d-8wxq-m3n56kbgwp",
     "newreason": "É biscoito, bobinho",
-    "channel": "#general"
+    "channel": "#general",
+    "luasAmount": "1000",
+    "aboutme": "#MundoDaLua"
 }
   
 const categorys = {
@@ -39,6 +41,10 @@ const categorys = {
     "utilities": {
         name: "Utilitarios",
         color: "#fd87b0"
+    },
+    "social": {
+        name: "Social",
+        color: "#fca8a8"
     },
     "bot": {
         name: "Luny",
@@ -135,7 +141,7 @@ export default class Home extends React.Component {
                                                 return (
                                                     <>
                                                         {commands.map((command) => (
-                                                            <div className={`${styles['command']} ${command.group}`} data-name={command.name} key={command.name}>
+                                                            <div className={`${styles['command']} ${command.group}`} data-name={command.name} key={command.name.replace(/\s/g, '-') + Math.random()}>
                                                                 <div className={styles['command-heading']}>
                                                                     <div 
                                                                         className={`${styles['group-icon']} group-for-${command.name.replace(/ +/g, "_")}`}
@@ -155,7 +161,7 @@ export default class Home extends React.Component {
                                                                 </div>
 
                                                                 <div className={`${styles['command-details']} ${command.name.replace(/ +/g, "_")}-1`}>
-                                                                    <p>
+                                                                    <div>
                                                                         {String(command.description)}
                                                                         <br />
                                                                         {command.dm && (<span className={styles['code-style-inline-red']}>Bloqueado em DM</span>)}
@@ -176,23 +182,24 @@ export default class Home extends React.Component {
                                                                             Array.isArray(command.examples) ?
                                                                                 command.examples.map(x => (
                                                                                     x.name || x.title ?
-                                                                                        <main key={x.name || x.title}>
+                                                                                        <p key={x.name || x.title}>
                                                                                             <strong>{x.name || x.title}</strong>
                                                                                             <br />
                                                                                             <code>&frasl;{command.name} {replaceUsage(x.usage)}</code>
-                                                                                        </main>
+                                                                                        </p>
                                                                                     : <code>&frasl;{command.name} {replaceUsage(x)}</code>
                                                                                 ))
-                                                                            : <code>&frasl;{command.name} {replaceUsage(command.examples)}</code>
-                                                                        : <code>&frasl;{command.name}</code>
+                                                                                : <code>&frasl;{command.name} {replaceUsage(command.examples)}</code>
+                                                                            : <code>&frasl;{command.name}</code>
                                                                         }
-                                                                    </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         ))}
                                                     </>
                                                 )
                                             } catch(e) {
+                                                console.log(e)
                                                 return (
                                                     <div className={styles['commands-loading-failed']}>
                                                         <h1>Error: Unable to Load Commands</h1>

@@ -57,7 +57,7 @@ export default class DashboardMe extends React.Component {
                         <br />
                         <Select 
                             {...{
-                                id: 'select-modlogs-channel',
+                                id: 'select-modlogs_channel',
                                 placeholder: 'Selecione o canal',
                                 value: guild?.channels.find(channel => ["GUILD_TEXT", "GUILD_NEWS"].includes(channel.type) && channel.id == guild.modlogs_channel)?.name
                             }} 
@@ -98,7 +98,7 @@ export default class DashboardMe extends React.Component {
                         <br />
                         <Select 
                             {...{
-                                id: 'select-punishments-channel',
+                                id: 'select-punishments_channel',
                                 placeholder: 'Selecione o canal',
                                 value: guild?.channels.find(channel => ["GUILD_TEXT", "GUILD_NEWS"].includes(channel.type) && channel.id == guild.punishments_channel)?.name
                             }} 
@@ -224,7 +224,6 @@ export default class DashboardMe extends React.Component {
                                 console.log(json)
 
                                 api.emit('updateGuildSettings', {
-                                    guildId,
                                     data: {
                                         updateType: 'moderation',
                                         settingsData: { ...json } 

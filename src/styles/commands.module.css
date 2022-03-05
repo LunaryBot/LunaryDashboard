@@ -341,7 +341,7 @@ input:checked+.slider:before {
     box-shadow: 3px 3px 3px var(--luny-colors-band-15)
 }
 
-.command-details p {
+.command-details div {
     margin-top: 0;
     padding: 15px;
     margin-bottom: 8px;
@@ -351,7 +351,11 @@ input:checked+.slider:before {
     max-width: 100%;
     word-break: break-word;
     word-wrap: break-word;
-    overflow-x: hidden;
+    overflow-x: scroll;
+}
+
+.command-details div::-webkit-scrollbar {
+    height: 5px;
 }
 
 .command-details code {

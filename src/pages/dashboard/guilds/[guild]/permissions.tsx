@@ -183,6 +183,16 @@ export default class DashboardMe extends React.Component {
                             };
                         });
 
+                        api.on('updateGuildSettings', ({ data }) => {
+                            this.setState({
+                                permissions: Object.entries(data.permissions || {}),
+                            });
+
+                            setTimeout(() => {
+                                buttonSave.removeClass(sendingClass);
+                            }, 1000);
+                        })
+
                         $('#add').click(() => {
                             if(((this.state as IState).permissions || []).length >= 7) {
                                 return;
@@ -209,9 +219,12 @@ export default class DashboardMe extends React.Component {
 
                                 console.log(json)
 
-                                setTimeout(() => {
-                                    buttonSave.removeClass(sendingClass);
-                                }, 1000);
+                                api.emit('updateGuildSettings', {
+                                    data: {
+                                        updateType: 'permissions',
+                                        settingsData: { ...json } 
+                                    }
+                                });
                             };
                         });
 

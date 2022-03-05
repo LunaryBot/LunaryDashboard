@@ -17,16 +17,16 @@ body {
     overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 5px;
 }
         
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: var(--luny-colors-flow-80);
     box-shadow: inset 0 0 6px var(--luny-colors-flow-20);
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: var(--luny-colors-band-100);
     border-radius: 0.5em;
 }

@@ -18,7 +18,6 @@ import { Line } from 'react-chartjs-2';
 import LeftMenu from '../../../../components/LeftMenu';
 import LoadingPage from '../../../../components/LoadingPage';
 import Header from '../../../../components/Header';
-import Charts from '../../../../components/Charts';
 
 import styles from '../../../../styles/main.module.css';
 import guildStyles from '../../../../styles/guild.module.css';
