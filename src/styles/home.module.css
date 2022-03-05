@@ -140,12 +140,6 @@
     margin-top: 0px;
 }
 
-@media screen and (max-width: 450px) {
-    .main-content-children .text {
-        margin-left: 20px;
-    }
-}
-
 .bot-icon-base {
     position: relative;
     display: flex;
@@ -199,6 +193,7 @@
 }
 
 .main-features {
+    width: 100%;
     margin: 0;
     display: block;
     color: var(--luny-colors-text-100);
