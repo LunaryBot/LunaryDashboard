@@ -186,3 +186,26 @@
 .header .avatar .user-menu-wrapper .user-menu .user-menu-options div.selectTheme:hover div input {
     margin-left: 0;
 }
+
+@media screen and (max-width: 475px) {
+    .header .links .link {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .header .links .link {
+        font-size: 14px;
+    }
+
+    .header .avatar {
+        width: 60px;
+        margin-right: -10px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header .links .link {
+        font-size: 12px;
+    }
+}
