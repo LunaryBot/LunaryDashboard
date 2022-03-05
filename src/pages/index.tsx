@@ -148,7 +148,7 @@ export default class Home extends React.Component {
                         </div>
                     </div>
 
-                    <div className={styles["main-links"]}>
+                    <div className={styles["main-links"]} id="lunaVote">
                         <div className={styles["link-container"]}>
                             <div className={styles['link-content']}>
                                 <h1 style={{position: 'relative', top: '-7px'}}><img src="https://cdn.discordapp.com/emojis/816714442368352296.gif?v=1" style={{position: 'relative', bottom: '-5px'}} width="30px" /> Vote na Lunar</h1>
