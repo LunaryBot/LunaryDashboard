@@ -1,6 +1,18 @@
 {
     "commands": [
         {
+            "name": "aboutme",
+            "description": "Altere seu \"Sobre Mim\" no meu comando de perfil!.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "{aboutme}"
+            ],
+            "group": "social"
+        },
+        {
             "name": "adv",
             "description": "Aplica uma advertência/aviso em um usuário do servidor.",
             "lunyDiscordPermissions": null,
@@ -229,12 +241,51 @@
             "group": "utilities"
         },
         {
+            "name": "channel info",
+            "description": "Exibe informações sobre um canal.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "utilities"
+        },
+        {
             "name": "channel lock",
             "description": "Bloqueia que usuários enviem mensagem em um canal de texto.",
             "lunyDiscordPermissions": null,
             "botUserPermissions": null,
             "userDiscordPermissions": null,
             "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "channel lock",
+            "description": "Bloqueia que usuários enviem mensagem em um canal de texto.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": false,
+            "examples": [
+                "",
+                "channel:{channel}"
+            ],
+            "group": "administration"
+        },
+        {
+            "name": "channel unlock",
+            "description": "Desbloqueia para que usuários possam enviem mensagem em um canal de texto.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "dm": null,
             "examples": [
                 "",
                 "channel:{channel}"
@@ -346,6 +397,34 @@
                 {
                     "title": "Veja as informações de Sword Art Online em Kitsu.",
                     "usage": "query:Sword Art Online"
+                }
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "kitsu anime",
+            "description": "Veja as informações de um anime em kitsu.io",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                {
+                    "title": "Veja as informações de Sword Art Online em Kitsu.",
+                    "usage": "query:Sword Art Online"
+                }
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "kitsu manga",
+            "description": "Veja as informações de um manga em kitsu.io",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                {
+                    "title": "Veja as informações de Darling in the FranXX em Kitsu.",
+                    "usage": "query:Darling in the FranXX"
                 }
             ],
             "group": "utilities"
@@ -501,8 +580,41 @@
             "group": "utilities"
         },
         {
+            "name": "user avatar",
+            "description": "Veja o avatar de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
             "name": "user banner",
             "description": "Veja o banner de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user banner",
+            "description": "Veja o banner de um usuário.",
+            "lunyDiscordPermissions": null,
+            "botUserPermissions": null,
+            "userDiscordPermissions": null,
+            "examples": [
+                "user:{@user}"
+            ],
+            "group": "utilities"
+        },
+        {
+            "name": "user info",
+            "description": "Veja as informações de um usuário.",
             "lunyDiscordPermissions": null,
             "botUserPermissions": null,
             "userDiscordPermissions": null,

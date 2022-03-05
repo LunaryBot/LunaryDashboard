@@ -24,7 +24,9 @@ const constants = {
     "amount": "3",
     "id": "mhjr44cg-f1yu-0o2d-8wxq-m3n56kbgwp",
     "newreason": "É biscoito, bobinho",
-    "channel": "#general"
+    "channel": "#general",
+    "luasAmount": "1000",
+    "aboutme": "#MundoDaLua"
 }
   
 const categorys = {
@@ -39,6 +41,10 @@ const categorys = {
     "utilities": {
         name: "Utilitarios",
         color: "#fd87b0"
+    },
+    "social": {
+        name: "Social",
+        color: "#fca8a8"
     },
     "bot": {
         name: "Luny",
@@ -135,7 +141,7 @@ export default class Home extends React.Component {
                                                 return (
                                                     <>
                                                         {commands.map((command) => (
-                                                            <div className={`${styles['command']} ${command.group}`} data-name={command.name} key={command.name}>
+                                                            <div className={`${styles['command']} ${command.group}`} data-name={command.name} key={command.name.replace(/\s/g, '-') + Math.random()}>
                                                                 <div className={styles['command-heading']}>
                                                                     <div 
                                                                         className={`${styles['group-icon']} group-for-${command.name.replace(/ +/g, "_")}`}
@@ -155,44 +161,43 @@ export default class Home extends React.Component {
                                                                 </div>
 
                                                                 <div className={`${styles['command-details']} ${command.name.replace(/ +/g, "_")}-1`}>
-                                                                    <p>
-                                                                        {String(command.description)}
-                                                                        <br />
-                                                                        {command.dm && (<span className={styles['code-style-inline-red']}>Bloqueado em DM</span>)}
-                                                                        {command.userDiscordPermissions?.map(x => {
-                                                                            return (<span key={x} className={styles['code-style-inline-blue']}>{x.split('_').map(p=>p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()).join(' ')}</span>)
-                                                                        }) || (<span className={styles['code-style-inline-green']}>Everyone</span>)}
-                                                                        {command.botUserPermissions?.map(x => {
-                                                                            return (<span key={x} className={styles['code-style-inline-purple']}>{x.split('_').map(p=>p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()).join(' ')}</span>)
-                                                                        })}
-                                                                        {command.lunyDiscordPermissions?.map(x => {
-                                                                            return (<span key={x} className={styles['code-style-inline-red']}>{x.split('_').map(p=>p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()).join(' ')}</span>)
-                                                                        })}
-                                                                        <br />
-                                                                        <br />
-                                                                        <br />
-                                                                        <h3>Exemplos&frasl;s:</h3>
-                                                                        {command.examples ? 
-                                                                            Array.isArray(command.examples) ?
-                                                                                command.examples.map(x => (
-                                                                                    x.name || x.title ?
-                                                                                        <main key={x.name || x.title}>
-                                                                                            <strong>{x.name || x.title}</strong>
-                                                                                            <br />
-                                                                                            <code>&frasl;{command.name} {replaceUsage(x.usage)}</code>
-                                                                                        </main>
-                                                                                    : <code>&frasl;{command.name} {replaceUsage(x)}</code>
-                                                                                ))
+                                                                    {String(command.description)}
+                                                                    <br />
+                                                                    {command.dm && (<span className={styles['code-style-inline-red']}>Bloqueado em DM</span>)}
+                                                                    {command.userDiscordPermissions?.map(x => {
+                                                                        return (<span key={x} className={styles['code-style-inline-blue']}>{x.split('_').map(p=>p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()).join(' ')}</span>)
+                                                                    }) || (<span className={styles['code-style-inline-green']}>Everyone</span>)}
+                                                                    {command.botUserPermissions?.map(x => {
+                                                                        return (<span key={x} className={styles['code-style-inline-purple']}>{x.split('_').map(p=>p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()).join(' ')}</span>)
+                                                                    })}
+                                                                    {command.lunyDiscordPermissions?.map(x => {
+                                                                        return (<span key={x} className={styles['code-style-inline-red']}>{x.split('_').map(p=>p.charAt(0).toUpperCase()+p.slice(1).toLowerCase()).join(' ')}</span>)
+                                                                    })}
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                    <h3>Exemplos&frasl;s:</h3>
+                                                                    {command.examples ? 
+                                                                        Array.isArray(command.examples) ?
+                                                                            command.examples.map(x => (
+                                                                                x.name || x.title ?
+                                                                                    <p key={x.name || x.title}>
+                                                                                        <strong>{x.name || x.title}</strong>
+                                                                                        <br />
+                                                                                        <code>&frasl;{command.name} {replaceUsage(x.usage)}</code>
+                                                                                    </p>
+                                                                                : <code>&frasl;{command.name} {replaceUsage(x)}</code>
+                                                                            ))
                                                                             : <code>&frasl;{command.name} {replaceUsage(command.examples)}</code>
                                                                         : <code>&frasl;{command.name}</code>
-                                                                        }
-                                                                    </p>
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         ))}
                                                     </>
                                                 )
                                             } catch(e) {
+                                                console.log(e)
                                                 return (
                                                     <div className={styles['commands-loading-failed']}>
                                                         <h1>Error: Unable to Load Commands</h1>
