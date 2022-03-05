@@ -63,13 +63,14 @@
 }
 
 .main-content {
-    z-index: -1;
     display: flex;
     flex-wrap: wrap;
-    padding-top: 2rem;
     justify-content: center;
-    padding-bottom: 6rem;
+    width: 100%;
     color: #f1eef5;
+    z-index: -1;
+    padding-top: 2rem;
+    padding-bottom: 6rem;
 }
 
 .main-content-image figure {
