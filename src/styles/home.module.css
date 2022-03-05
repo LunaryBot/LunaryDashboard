@@ -88,6 +88,14 @@
     animation: pulse 3s linear infinite, float 6s ease-in-out infinite;
 }
 
+@media screen and (max-width: 450px) {
+    .main-content-image figure {
+        max-width: 300px;
+        width: 100%;
+        margin-left: 40px;
+    }
+}
+
 .main-content-image img {
     width: 100%;
     height: 100%;
@@ -298,7 +306,7 @@
 
 .footer.wave-border {
     width: 100%;
-    height: 20vh;
+    height: 21vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -455,7 +463,7 @@
     background-color: var(--luny-colors-band-100);
 }
 
-@media (max-width: 810px) {
+@media (max-width: 850px) {
     .main-content-image {
         height: auto;
         margin: auto;

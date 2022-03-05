@@ -199,13 +199,28 @@
     }
 
     .header .avatar {
-        width: 60px;
-        margin-right: -10px;
+        width: 30px;
+        min-width: none;
+        margin-right: 25px;
+    }
+
+    .header .CtaLogin {
+        font-size: 12px;
+    }
+
+    .header .avatar img {
+        width: 52px;
+        min-width: 32px;
+        margin-left: 10px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 360px) {
     .header .links .link {
         font-size: 12px;
+    }
+
+    .header .avatar img {
+        margin-left: 15px;
     }
 }
