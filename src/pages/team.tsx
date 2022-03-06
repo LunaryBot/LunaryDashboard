@@ -59,6 +59,41 @@ export default class Home extends React.Component {
                         <div className={styles['item']}>
                             <img
                                 className={styles['banner']}
+                                alt={"Bae-banner"}
+                                src={"https://cdn.discordapp.com/attachments/609912897769963571/949725118538592318/empty-discord-banner.png"}
+                            />
+                            <div className={styles['avatar']}>
+                                <img 
+                                    alt={"Bae-avatar"}
+                                    src={"https://cdn.discordapp.com/avatars/452618703792766987/f2f045703e2a6ae1acd5685299535503.png?size=128"}
+                                />
+                            </div>
+                            <div className={styles['user']}>
+                                <h3 className={styles['username']}>
+                                    Bae.
+                                    <span className={styles['tag']}>#7500</span>
+                                </h3>
+                            </div>
+                            <h3 className={`${styles['role']} ${styles['bigRole']}`}>
+                                Owner, Head Developer
+                            </h3>
+                            <hr />
+                            <h3 className={styles['description']}>
+                                <h3 className={styles['topText']}>SOBRE MIM</h3>
+                                Um dev ae.
+                            </h3>
+                            <div className={styles['socialMedia']}>
+                                <a href="https://discord.com/users/452618703792766987" target={"_blank"} className={styles['discord']}>
+                                    <i className="fab fa-discord" />
+                                </a>    
+                                <a href="https://github.com/JVOPINHO" target={"_blank"} className={styles['github']}>
+                                    <i className="fab fa-github" />
+                                </a>    
+                            </div>
+                        </div>
+                        <div className={styles['item']}>
+                            <img
+                                className={styles['banner']}
                                 alt={"VhGamess_1-banner"}
                                 src={"https://cdn.discordapp.com/attachments/609912897769963571/949725118538592318/empty-discord-banner.png"}
                             />
@@ -74,7 +109,7 @@ export default class Home extends React.Component {
                                     <span className={styles['tag']}>#8157</span>
                                 </h3>
                                 <h3 className={styles['role']}>
-                                    Dev
+                                    Website Builder
                                 </h3>
                             </div>
                             <hr />
@@ -83,10 +118,115 @@ export default class Home extends React.Component {
                                 Um dev ae.
                             </h3>
                             <div className={styles['socialMedia']}>
-                                <a href="#" className={styles['discord']}>
+                                <a href="https://discord.com/users/522752913794138112" target={"_blank"} className={styles['discord']}>
                                     <i className="fab fa-discord" />
                                 </a>    
-                                <a href="#" className={styles['github']}>
+                                <a href="https://github.com/victorpantarotti" target={"_blank"} className={styles['github']}>
+                                    <i className="fab fa-github" />
+                                </a>    
+                            </div>
+                        </div>
+                        <div className={styles['item']}>
+                            <img
+                                className={styles['banner']}
+                                alt={"bypolaaro.-banner"}
+                                src={"https://cdn.discordapp.com/attachments/609912897769963571/949725118538592318/empty-discord-banner.png"}
+                            />
+                            <div className={styles['avatar']}>
+                                <img 
+                                    alt={"bypolaaro.-avatar"}
+                                    src={"https://cdn.discordapp.com/avatars/846864605179674664/16be1a0cbb63189a927dd6fc132f214a.png?size=128"}
+                                />
+                            </div>
+                            <div className={styles['user']}>
+                                <h3 className={styles['username']}>
+                                    bypolaaro.
+                                    <span className={styles['tag']}>#8450</span>
+                                </h3>
+                                <h3 className={styles['role']}>
+                                    Designer
+                                </h3>
+                            </div>
+                            <hr />
+                            <h3 className={styles['description']}>
+                                <h3 className={styles['topText']}>SOBRE MIM</h3>
+                                Um dev ae.
+                            </h3>
+                            <div className={styles['socialMedia']}>
+                                <a href="https://discord.com/users/846864605179674664" target={"_blank"} className={styles['discord']}>
+                                    <i className="fab fa-discord" />
+                                </a>    
+                                <a href="https://github.com/SayranFelix" target={"_blank"} className={styles['github']}>
+                                    <i className="fab fa-github" />
+                                </a>    
+                            </div>
+                        </div>
+                        <div className={styles['item']}>
+                            <img
+                                className={styles['banner']}
+                                alt={"Weariful-banner"}
+                                src={"https://cdn.discordapp.com/attachments/609912897769963571/949725118538592318/empty-discord-banner.png"}
+                            />
+                            <div className={styles['avatar']}>
+                                <img 
+                                    alt={"Weariful-avatar"}
+                                    src={"https://cdn.discordapp.com/avatars/343778106340802580/a18fc88a59d7ff607fbdae966b8082b7.png?size=128"}
+                                />
+                            </div>
+                            <div className={styles['user']}>
+                                <h3 className={styles['username']}>
+                                    Weariful
+                                    <span className={styles['tag']}>#6650</span>
+                                </h3>
+                            </div>
+                            <h3 className={`${styles['role']} ${styles['bigRole']}`}>
+                                Assistant Developer
+                            </h3>
+                            <hr />
+                            <h3 className={styles['description']}>
+                                <h3 className={styles['topText']}>SOBRE MIM</h3>
+                                Um dev ae.
+                            </h3>
+                            <div className={styles['socialMedia']}>
+                                <a href="https://discord.com/users/343778106340802580" target={"_blank"} className={styles['discord']}>
+                                    <i className="fab fa-discord" />
+                                </a>    
+                                <a href="https://github.com/WearifulCupid0" target={"_blank"} className={styles['github']}>
+                                    <i className="fab fa-github" />
+                                </a>    
+                            </div>
+                        </div>
+                        <div className={styles['item']}>
+                            <img
+                                className={styles['banner']}
+                                alt={"! Canary. 🍁-banner"}
+                                src={"https://cdn.discordapp.com/banners/754429840857497760/2a1697ccb1f088700c5ca886fdfc5022.png?size=320"}
+                            />
+                            <div className={styles['avatar']}>
+                                <img 
+                                    alt={"! Canary. 🍁-avatar"}
+                                    src={"https://cdn.discordapp.com/avatars/754429840857497760/4ff3f1cfa9b66cd1abe5e07a1780defb.png?size=128"}
+                                />
+                            </div>
+                            <div className={styles['user']}>
+                                <h3 className={styles['username']}>
+                                    ! Canary. 🍁
+                                    <span className={styles['tag']}>#3900</span>
+                                </h3>
+                            </div>
+                            <h3 className={`${styles['role']} ${styles['bigRole']}`}>
+                                Assistant Developer
+                            </h3>
+                            <hr />
+                            <h3 className={styles['description']}>
+                                <h3 className={styles['topText']}>SOBRE MIM</h3>
+                                Um dev ae.
+                            </h3>
+                            <div className={styles['socialMedia']}>
+                                <a href="https://discord.com/users/754429840857497760" target={"_blank"} className={styles['discord']}>
+                                    <i className="fab fa-discord" />
+                                </a>    
+                                <a href="https://github.com/Canary2000"  target={"_blank"} className={styles['github']}>
                                     <i className="fab fa-github" />
                                 </a>    
                             </div>

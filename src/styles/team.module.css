@@ -10,6 +10,7 @@
     text-align: center;
     background-color: var(--luny-colors-flow-20);
     border-radius: 15px;
+    border: 1px solid var(--luny-colors-text-100);
     padding: 10px;
 }
 
@@ -89,13 +90,25 @@
     font-weight: 500;
 }
 
-.content .grid .user .role {
+.content .grid .username .role {
     position: absolute;
     right: 0;
     margin-right: 10px;
+    margin-top: 2px;
     color: var(--luny-colors-ui-60);
     font-weight: 500;
 }
+
+.content .grid .role {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 2px;
+    color: var(--luny-colors-ui-60);
+    font-weight: 500;
+}
+
+.content .grid .bigRole { margin-top: 25px; }
 
 .content .grid hr {
     height: 1px;
@@ -127,7 +140,7 @@
 }
 
 .content .grid .socialMedia i {
-    color: white;
+    color: var(--luny-colors-text-100);
     width: 22px;
     height: 32px;
 }
