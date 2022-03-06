@@ -1,0 +1,176 @@
+.content {
+    position: relative;
+    margin-top: 80px;
+}
+
+.content .introduction {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    background-color: var(--luny-colors-flow-20);
+    border-radius: 15px;
+    border: 1px solid var(--luny-colors-text-100);
+    padding: 10px;
+}
+
+.content .title {
+	background-image: linear-gradient(to right, 
+    var(--luny-colors-band-80), 
+    var(--luny-colors-band-60), 
+    var(--luny-colors-band-40),
+    var(--luny-colors-band-60),
+    var(--luny-colors-band-80));
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent;
+    background-size: 200% auto;
+    animation: title 5s linear infinite;
+}
+
+@keyframes title {
+    to {
+      background-position: 200%;
+    }
+}
+
+.content .subTitle {
+    color: var(--luny-colors-text-80);
+}
+
+.content .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.content .grid .item {
+    position: relative;
+    width: 320px;
+    max-width: 320px;
+    height: 225px;
+    min-height: 225px;
+    background-color: var(--luny-colors-background);
+    margin: 15px;
+    border-radius: 15px;
+}
+
+.content .grid .banner {
+    width: 100%;
+    height: 60px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.content .grid .avatar img {
+    position: absolute;
+    width: 86px;
+    top: 0;
+    left: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 100%;
+    border: 5px solid var(--luny-colors-dark-100);
+}
+
+.content .grid .user {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+
+.content .grid .username {
+    color: var(--luny-colors-text-100);
+    font-weight: 500;
+}
+
+.content .grid .username .tag {
+    color: var(--luny-colors-ui-60);
+    font-weight: 500;
+}
+
+.content .grid .username .role {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 2px;
+    color: var(--luny-colors-ui-60);
+    font-weight: 500;
+}
+
+.content .grid .role {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 2px;
+    color: var(--luny-colors-ui-60);
+    font-weight: 500;
+}
+
+.content .grid .bigRole { margin-top: 25px; }
+
+.content .grid hr {
+    height: 1px;
+    background-color: var(--luny-colors-band-80);
+    border: none;
+    margin-top: 55px;
+}
+
+.content .grid .description {
+    color: var(--luny-colors-text-100);
+    float: left;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.content .grid .description .topText {
+    font-size: 16px;
+    color: var(--luny-colors-ui-60);
+}
+
+.content .grid .socialMedia {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: 10px;
+}
+
+.content .grid .socialMedia i {
+    color: var(--luny-colors-text-100);
+    width: 22px;
+    height: 32px;
+}
+
+.content .grid .socialMedia a {
+    border-radius: 100%;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.content .grid .socialMedia a:hover {
+    cursor: pointer;
+}
+
+.content .grid .socialMedia .discord {
+    background-color: #7289DA;
+    transition: 0.5s;
+}
+
+.content .grid .socialMedia .discord:hover {
+    background-color: #244ee3;
+    transition: 0.5s;   
+}
+
+.content .grid .socialMedia .github {
+    background-color: #211F1F;
+    transition: 0.5s;
+}
+
+.content .grid .socialMedia .github:hover {
+    background-color: #332f2f;
+    transition: 0.5s;
+}

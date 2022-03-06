@@ -186,3 +186,41 @@
 .header .avatar .user-menu-wrapper .user-menu .user-menu-options div.selectTheme:hover div input {
     margin-left: 0;
 }
+
+@media screen and (max-width: 475px) {
+    .header .links .link {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .header .links .link {
+        font-size: 14px;
+    }
+
+    .header .avatar {
+        width: 30px;
+        min-width: none;
+        margin-right: 28px;
+    }
+
+    .header .CtaLogin {
+        font-size: 12px;
+    }
+
+    .header .avatar img {
+        width: 52px;
+        min-width: 32px;
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .header .links .link {
+        font-size: 12px;
+    }
+
+    .header .avatar img {
+        margin-left: 15px;
+    }
+}

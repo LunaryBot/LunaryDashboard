@@ -6,10 +6,14 @@
     /* padding: 20px */
 }
 
+.content-commands .spacement { display: none; }
+
 @media screen and (max-width: 570px) {
     .content-commands {
         margin: 10px;
     }
+
+    .content-commands .spacement { display: block; }
 }
 
 .content-commands p {
@@ -103,7 +107,7 @@
     border: 1px solid var(--luny-colors-ui-15);
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1146px) {
     .content-commands-column-2-left {
         width: 100%;
     }

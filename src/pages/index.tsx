@@ -60,7 +60,7 @@ export default class Home extends React.Component {
                             </div>
                         </div>
 
-                        <div className={styles['main-content-children']}>
+                        <div className={`${styles['main-content-children']}`}>
                             <div className={styles['bot-icon-base']}>
                                 <h1>Lunar</h1>
                                 <div className={styles['bot-icon']}>
@@ -109,7 +109,7 @@ export default class Home extends React.Component {
                             <div className={styles['feature-row']}>
                                 <div className={styles['feature-column']}>
                                     <div className={styles['feature-column-image']} data-tilt>
-                                        <img src={'https://media.discordapp.net/attachments/826844594464489494/846224599674650654/unknown.png'} alt={''} />
+                                        <img src={'https://imgur.com/0w2vFrO.png'} alt={''} />
                                     </div>
                                 </div>
                                 <div className={styles['feature-column']}>
@@ -120,13 +120,13 @@ export default class Home extends React.Component {
                             </div>
                             <div className={styles['feature-row']}>
                                 <div className={styles['feature-column']}>
-                                <h1>Moderação sem dar muito poder para os moderadores?</h1>
-                                <br />
-                                <p>Você não quer dar muito poder para os seus moderadores? Sem problemas, pois a Lunar conta com um sistema de permissões que trabalha separado das permissões do Discord. Por exemplo, para advertir um membro o moderador precisaria da permissão de 'Gerenciar Mensagens', mas na minha dashboard você pode configurar permissões especiais minhas para cada cargo do seu servidor.</p>                    
+                                    <h1>Moderação sem dar muito poder para os moderadores?</h1>
+                                    <br />
+                                    <p>Eu tenho a solução para você! A Lunar conta com um sistema de permissões personalizáveis que trabalham separadas as genéricas permissões do Discord. Vamos te dar um exemplo: você gostaria de adicionar alguém como moderador, para isso teria que dar a permissão de 'Gerenciar Mensagens', mas nas configurações de meu site você adicionar permissões especiais para cada cargo em seu servidor do Discord de uma forma prática e maravilhosa!</p>                    
                                 </div>
                                 <div className={styles['feature-column']}>
-                                    <div className={styles['feature-column-image']} data-tilt>
-                                        <img src={'https://media.discordapp.net/attachments/826844594464489494/846400088212504626/unknown.png'} alt={''} style={{height: '310px', width: '365px;'}} />
+                                    <div className={`${styles['feature-column-image']} ${styles['secondIMG']}`} data-tilt>
+                                        <img src={'https://cdn.discordapp.com/attachments/767078013388849212/949810152297603132/unknown.png'} alt={''} />
                                     </div>
                                 </div>
                             </div>
@@ -148,18 +148,18 @@ export default class Home extends React.Component {
                         </div>
                     </div>
 
-                    <div className={styles["main-links"]}>
+                    <div className={styles["main-links"]} id="lunaVote">
                         <div className={styles["link-container"]}>
                             <div className={styles['link-content']}>
                                 <h1 style={{position: 'relative', top: '-7px'}}><img src="https://cdn.discordapp.com/emojis/816714442368352296.gif?v=1" style={{position: 'relative', bottom: '-5px'}} width="30px" /> Vote na Lunar</h1>
                                 <p>
-                                    A Lunar está na botlist top.gg, que tal mostrar seu apoio? Vote na Lunar e deixe um comentário para a gente saber o que precisamos melhorar.
+                                    A Lunar está na botlist <strong>top.gg</strong>, que tal mostrar seu apoio? Vote na Lunar e deixe um comentário para a gente saber o que precisamos melhorar.
                                     <br />
                                     <br />
-                                    A, e quando você vota você ganha algumas Luas como agradecimento!
+                                    A, e em breve quando você votar você irá ganhar algumas Luas como agradecimento!
                                 </p>
                                 <br />
-                                <a href="https://top.gg/bot/777654875441463296/vote" target="_blank">
+                                <a href="/vote" target="_blank">
                                     <div className={styles["link-button"]}>
                                         Yep!
                                     </div>
@@ -171,10 +171,12 @@ export default class Home extends React.Component {
                                 <h1><i className={'fab fa-discord'}></i> Suporte</h1>
                                 <p>
                                     No servidor de suporte você poderá tirar todas as suas dúvidas sobre a utilização da Lunar!
-                                    No servidor de suporte você também poderá dar sugestões, e também reportar bugs/falhas. Além de encontrar uma FAQ(Frequently asked questions) que poderam te ajudar na utilização da Lunar!
+                                    <br />
+                                    <br />
+                                    No servidor de suporte você também poderá dar sugestões, e também reportar bugs/falhas. Além de encontrar uma FAQ (Frequently asked questions) que poderam te ajudar na utilização da Lunar!
                                 </p>
                                 <br />
-                                <a href="/suporte" target="_blank">
+                                <a href="/support" target="_blank">
                                     <div className={styles["link-button"]}>
                                         Join!
                                     </div>

@@ -90,6 +90,11 @@ export default class Home extends React.Component {
                 <Header {...{user}}/>
 
                 <div className={styles['content-commands']}>
+                    <div className={styles['spacement']}>
+                        <br />
+                        <br />
+                        <br />
+                    </div>
                     <div className={styles['content-commands-container']}>
                         <div className={styles['content-commands-column-1']}>
                             <p>

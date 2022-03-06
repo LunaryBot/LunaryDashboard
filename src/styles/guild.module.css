@@ -43,6 +43,13 @@
     margin-left: 3%;
 }
 
+@media screen and (max-width: 520px) {
+    .delete-button {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
 .toggles-container {
     display: grid;
     grid-template-columns: repeat(5, 0.5fr);
@@ -54,6 +61,7 @@
 
 .toggles-container div.item { 
     margin: 15px;
+    margin-right: 10px;
 }
 
 .toggles-container div.item span {
