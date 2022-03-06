@@ -181,6 +181,10 @@ export default class DashboardMe extends React.Component {
                             if(`${data.message}`.toLowerCase() == 'invalid guild') {
                                 return window.location.href = `/invite?guildId=${guildId}`;
                             };
+
+                            if(`${data.message}`.toLowerCase() == 'missing access') {
+                                return window.location.href = `/dashboard/guilds?err=${encodeURIComponent(data.message)}&guildId=${guildId}`;
+                            };
                         });
 
                         api.on('updateGuildSettings', ({ data }) => {

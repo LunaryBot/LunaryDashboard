@@ -190,6 +190,10 @@ export default class DashboardGuild extends React.Component {
                             if(`${data.message}`.toLowerCase() == 'invalid guild') {
                                 return window.location.href = `/invite?guildId=${guildId}`;
                             };
+                            
+                            if(`${data.message}`.toLowerCase() == 'missing access') {
+                                return window.location.href = `/dashboard/guilds?err=${encodeURIComponent(data.message)}&guildId=${guildId}`;
+                            };
                         });
                     }}
                 ></Script>
