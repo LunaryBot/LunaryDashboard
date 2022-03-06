@@ -159,7 +159,7 @@ export default class Home extends React.Component {
                                     A, e em breve quando você votar você irá ganhar algumas Luas como agradecimento!
                                 </p>
                                 <br />
-                                <a href="https://top.gg/bot/777654875441463296/vote" target="_blank">
+                                <a href="/vote" target="_blank">
                                     <div className={styles["link-button"]}>
                                         Yep!
                                     </div>
@@ -176,7 +176,7 @@ export default class Home extends React.Component {
                                     No servidor de suporte você também poderá dar sugestões, e também reportar bugs/falhas. Além de encontrar uma FAQ (Frequently asked questions) que poderam te ajudar na utilização da Lunar!
                                 </p>
                                 <br />
-                                <a href="/suporte" target="_blank">
+                                <a href="/support" target="_blank">
                                     <div className={styles["link-button"]}>
                                         Join!
                                     </div>

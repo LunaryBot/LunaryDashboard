@@ -65,7 +65,7 @@ export default class Header extends React.Component {
                 <div className={styles["links"]}>
                     <a href="/commands" className={styles["link"]}>Comandos</a>
                     <a href="/invite" className={styles["link"]}>Invite</a>
-                    <a href="/#lunaVote" className={styles["link"]}>Vote</a>
+                    <a href="/vote" className={styles["link"]}>Vote</a>
                 </div>
                 <div id="avatar" className={styles["avatar"]}>
                     {user ? (
