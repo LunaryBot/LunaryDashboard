@@ -35,11 +35,22 @@ a {
     text-decoration: none;
 }
 
-.background-gradient {
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    height: 900px;
-    background: linear-gradient(175deg,var(--luny-colors-band-15),transparent,transparent);
+/* .background-gradient {
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(at 71% 77%,var(--luny-colors-gradient) 0,transparent 21%),
+        radial-gradient(at 36% 47%,var(--luny-colors-gradient) 0,transparent 50%),
+        radial-gradient(at 54% 29%,var(--luny-colors-gradient) 0,transparent 28%),
+        radial-gradient(at 45% 51%,var(--luny-colors-gradient) 0,transparent 53%),
+        radial-gradient(at 73% 44%,var(--luny-colors-gradient) 0,transparent 54%),
+        radial-gradient(at 24% 7%,var(--luny-colors-gradient) 0,transparent 40%),
+        radial-gradient(at 76% 46%,var(--luny-colors-gradient) 0,transparent 50%);
+    max-height: 800px;
+    height: 80vh;
+    max-width: 1400px;
+    width: 100%;
+    filter: blur(44px);
     z-index: -1;
-}
+    opacity: 25%;
+    position: fixed;
+} */

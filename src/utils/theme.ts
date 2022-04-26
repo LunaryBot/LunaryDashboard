@@ -10,6 +10,7 @@ interface IBaseColors {
     text: string;
     overlay: string;
     icon: string | null;
+    gradient: string;
 } 
 
 const blackColor = '#000000';
@@ -17,20 +18,23 @@ const whiteColor = '#ffffff';
 
 const basesColors = {
     dark: {
-        background: '#0d0510',
+        background: '#100F13',
         ui: whiteColor,
         flow: blackColor,
         text: whiteColor,
         overlay: blackColor,
-        icon: whiteColor
+        icon: whiteColor,
+        // gradient: '#00000000',
+        gradient: 'rgba(160, 32, 240, 0.03)',
     },
     light: {
-        background: '#faecff',
+        background: '#fafcff',
         ui: blackColor,
         flow: whiteColor,
         text: blackColor,
         overlay: whiteColor,
-        icon: null
+        icon: null,
+        gradient: 'rgba(160, 32, 240, 0.13)',
     },
 };
 
@@ -59,7 +63,8 @@ function ThemeVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) 
         ...mapTonalits("--luny-colors-light", whiteColor),
         ...mapTonalits("--luny-colors-dark", blackColor),
         "--luny-colors-green": "#61fe80",
-        "--luny-colors-red": "#fe4854"
+        "--luny-colors-red": "#fe4854",
+        "--luny-colors-gradient": `${baseColors.gradient}`,
     };
 
     return { 
