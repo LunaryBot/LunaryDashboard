@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+yarn.lock
+package-lock.json
 
 # testing
 /coverage
@@ -34,6 +36,3 @@ firebase.config.json
 
 # vercel
 .vercel
-
-# Database 
-database
