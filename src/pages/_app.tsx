@@ -7,16 +7,17 @@ import '../styles/styles.css';
 import Theme from '../utils/theme';
 
 export default function MyApp({ Component, pageProps }) {
-    const [mode, setMode] = useState<'dark'|'light'|null>(null);
+    const [_mode, setMode] = useState<'dark'|'light'|null>(null);
 
     useEffect(() => {
-        if(!mode) {
+        if(!_mode) {
             setMode(localStorage.getItem('mode') as 'dark' | 'light' | null || 'dark')
         }
 
+        const mode = (localStorage.getItem('mode') as 'dark' | 'light' | null) || 'dark';
+
         const body = document.querySelector('body');
 
-        body.setAttribute('data-mode', mode);
         body.setAttribute('data-mode', mode);
         
         window.changeMode = (mode) => {
@@ -27,7 +28,7 @@ export default function MyApp({ Component, pageProps }) {
     }, []);
 
     const GlobalStyles = createGlobalStyle`
-        :root {${Theme({ mode: mode || 'dark' }).toString()}}
+        :root {${Theme({ mode: _mode || 'dark' }).toString()}}
     `
 
 
