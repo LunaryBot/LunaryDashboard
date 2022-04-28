@@ -37,7 +37,7 @@ a {
     text-decoration: none;
 }
 
-/* .background-gradient {
+/* .backgroundGradient {
     left: 50%;
     transform: translateX(-50%);
     background: radial-gradient(at 71% 77%,var(--luny-colors-gradient) 0,transparent 21%),
