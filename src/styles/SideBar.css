@@ -112,12 +112,16 @@ header .container .name  {
     margin-top: 2px;
     font-size: 14px;
     font-weight: 600;
+    overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 header .container .id {
     font-size: 10px;
     margin-top: -2px;
     display: block;
+    overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .sidebar header .image {
@@ -129,6 +133,18 @@ header .container .id {
 .sidebar header .image img {
     width: 50px;
     border-radius: 6px;
+}
+
+.sidebar header .image div {
+    text-align: center;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    background-color: var(--luny-colors-band-80);
+	overflow: hidden;
+	text-overflow: ellipsis;
+    line-height: 50px;
+    color: var(--luny-colors-text-100);
 }
 
 .sidebar header .toggle {

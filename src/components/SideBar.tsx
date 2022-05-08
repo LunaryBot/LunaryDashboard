@@ -2,22 +2,28 @@ import React, { useEffect } from 'react';
 import Script from 'next/script';
 import { URLS } from '../utils/Constants';
 import Link from 'next/link';
+import { IGuildData, IUser } from '../@types';
+import Utils from '../utils/Utils';
 
 interface IState {
     sidebarOpened: boolean;
     urls: {
         [category: string]: { url: string; label: string, icon: string }[];
     };
+    user: IUser;
+    guild: IGuildData | null;
 }
 
 class SideBar extends React.Component {
     public state: IState;
-    constructor(props: { urlsType: 'USER' }) {
+    constructor(props: { urlsType: 'USER', user: IUser, guild?: IGuildData }) {
         super(props);
 
         this.state = {
             sidebarOpened: true,
-            urls: URLS[props.urlsType]
+            urls: URLS[props.urlsType],
+            user: props.user,
+            guild: props.guild || null
         };
     }
     componentDidMount() {
@@ -56,6 +62,15 @@ class SideBar extends React.Component {
             modeIcon.classList[mode == 'dark' ? 'add' : 'remove']('fa-sun');
         });
     }
+
+    get user() {
+        return this.state.user;
+    }
+
+    get guild() {
+        return this.state.guild;
+    }
+
     render() {
         return (
             <>
@@ -63,10 +78,12 @@ class SideBar extends React.Component {
                     <header>
                         <div className={'container'}>
                             <span className={'image'}>
-                                <img src='https://github.com/jvopinho.png' alt='' />
+                                {/* <img src='https://github.com/jvopinho.png' alt='' /> */}
+                                
+                                {this.guild ? ( this.guild?.icon ? <img src={Utils.getGuildIcon(this.guild, { size: 1024, dynamic: true })} /> : (<div>{Utils.stringAcronym(this.guild.name)}</div>)) : ( <img src={Utils.getUserAvatar(this.user, { size: 1024, dynamic: true })} /> )}
                             </span>
 
-                            <div className={'text text'}>
+                            <div className={'text'}>
                                 <span className={'name'}>Bae.</span>
                                 <span className={'id'}>452618703792766987</span>
                             </div>

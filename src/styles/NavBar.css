@@ -161,3 +161,23 @@
 .header .user .menu li.logout:hover a {
     color: var(--luny-colors-red);
 }
+
+/* Login Button */
+
+.header .user .loginButton {
+    background-color: var(--luny-colors-band-80);
+    border-radius: 0.3rem;
+    padding: 5px;
+    color: var(--luny-colors-text-60);
+    font-size: 1.25rem;
+    font-weight: 500;
+    transition: background .3s;
+    height: 40px;
+    width: 80px;
+    text-align: center;
+}
+
+.header .user .loginButton:hover {
+    background-color: var(--luny-colors-band-100);
+    color: var(--luny-colors-text-80);
+}

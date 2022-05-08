@@ -1,6 +1,22 @@
 import { Component } from 'react';
+import { IUser } from '../@types';
+import Utils from '../utils/Utils';
+
+interface IState {
+    user: IUser;
+}
 
 export default class NavBar extends Component {
+    public state: IState;
+
+    constructor(props: { user: IUser }) {
+        super(props);
+
+        this.state = {
+            user: props.user
+        };
+    }
+
     componentDidMount() {
         const dropdowns = document.querySelectorAll('[data-dropdown]');
         const user = document.querySelector('.user');
@@ -29,6 +45,7 @@ export default class NavBar extends Component {
     }
 
     render() {
+        const { user } = this.state;
         return (
             <>
                 <header className={`header`}>
@@ -67,40 +84,36 @@ export default class NavBar extends Component {
                     </ul>
 
                     <div className={'user'}>
-                        <div className={'image'}>
-                            <img src={'https://github.com/jvopinho.png'} />
-                            <div className={'menu'}>
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <span>Profile</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <hr />
+                        {!user ? (<a href="#" className={'loginButton'}>Login</a>) : (
+                            <div className={'image'}>
+                                <img src={Utils.getUserAvatar(user)} />
+                                <div className={'menu'}>
+                                    <ul>
+                                        <li>
+                                            <a href={`/dashboard/@me`}>
+                                                <span>Profile</span>
+                                            </a>
+                                        </li>
+                                        
+                                        <hr />
 
-                                    <li>
-                                        <a href="#">
-                                            <span>Commands</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Settings</span>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href={'/commands'}>
+                                                <span>Commands</span>
+                                            </a>
+                                        </li>
 
-                                    <hr />
+                                        <hr />
 
-                                    <li className={'logout'}>
-                                        <a href="#">
-                                            <span>Logout</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                        <li className={'logout'}>
+                                            <a href='/auth/logout'>
+                                                <span>Logout</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-
+                        )}
                     </div>
                 </header>
             </>
