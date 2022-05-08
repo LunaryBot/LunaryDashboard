@@ -5,6 +5,7 @@ interface IThemeColors {
 
 interface IBaseColors {
     background: string;
+    backgroundSecondary: string;
     ui: string;
     flow: string;
     text: string;
@@ -18,17 +19,18 @@ const whiteColor = '#ffffff';
 
 const basesColors = {
     dark: {
-        background: '#100F13',
+        background: '#141520',
+        backgroundSecondary: '#20212B',
         ui: whiteColor,
         flow: blackColor,
         text: whiteColor,
         overlay: blackColor,
         icon: whiteColor,
-        // gradient: '#00000000',
         gradient: 'rgba(160, 32, 240, 0.03)',
     },
     light: {
-        background: '#fafcff',
+        background: '#fff',
+        backgroundSecondary: '#f2f2f2',
         ui: blackColor,
         flow: whiteColor,
         text: blackColor,
@@ -54,6 +56,7 @@ function ThemeVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) 
     
     const obj = {
         "--luny-colors-background": baseColors.background,
+        "--luny-colors-backgroundSecondary": baseColors.backgroundSecondary,
         ...mapTonalits("--luny-colors-band", band),
         ...mapTonalits("--luny-colors-ui", baseColors.ui),
         ...mapTonalits("--luny-colors-flow", baseColors.flow),

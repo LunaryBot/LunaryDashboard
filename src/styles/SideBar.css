@@ -9,7 +9,6 @@
 }
 
 body {
-    --sidebar-color: var(--luny-colors-flow-100);
     --primary-color: var(--luny-colors-icon);
     --primary-color-light: var(--luny-colors-band-10);
     --sidebar-color-toggle: #CCC;
@@ -21,7 +20,6 @@ body {
 
 body {
     min-height: 100vh;
-    background-color: var(var(--luny-colors-background));
     transition: var(--tran-05);
 }
 
@@ -31,7 +29,6 @@ body {
 }
 
 body[data-mode="dark"] {
-    --sidebar-color: var(--luny-colors-flow-20);
     --sidebar-color-toggle: #fff;
 }
 
@@ -43,7 +40,7 @@ body[data-mode="dark"] {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background: var(--sidebar-color);
+    background: var(--luny-colors-backgroundSecondary);
     transition: var(--tran-05);
     z-index: 100;
     border-right: 1px solid var(--luny-colors-ui-15);
@@ -333,14 +330,17 @@ body[data-mode="dark"] .switch::before,
     .sidebar.close {
         opacity: 0;
         display: none;
+        width: 0;
     }
 
     .content {
         width: 100%;
         left: 0;
+        padding: 12px;
     }
 
     .sidebar.close ~ .content {
         left: 0;
+        width: 100%;
     }
 }
