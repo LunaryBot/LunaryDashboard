@@ -2,11 +2,31 @@ import React from 'react';
 import SideBar from '../../../components/SideBar';
 import NavBar from '../../../components/NavBar';
 import { IUser } from '../../../@types';
+import SelectMenu from '../../../components/SelectMenu';
 
 class DashboardMe extends React.Component {
     public state: {
         user: IUser;
     }
+
+    public selectMenu = new SelectMenu([
+        {
+            value: '1',
+            label: 'Option 1',
+            default: true,
+        },
+        {
+            value: '2',
+            label: 'Option 2',
+        },
+        {
+            value: '3',
+            label: 'Option 3',
+        }
+    ], {
+        placeholder: 'Select an option',
+        max_values: 2,
+    });
 
     constructor(props) {
         super(props);
@@ -32,7 +52,7 @@ class DashboardMe extends React.Component {
                 <SideBar {...{urlsType: 'USER', user: this.user}} />
                 <div className="content">
                     <NavBar {...{user: this.user}}/>
-                    {/* <h1 style={{color: 'var(--luny-colors-text-100)'}}>Dashboard Sidebar</h1> */}
+                    <this.selectMenu.Component {...{manager: this.selectMenu}} />
                 </div>
             </div>
         );

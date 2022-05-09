@@ -46,6 +46,7 @@ export default class NavBar extends Component {
 
     render() {
         const { user } = this.state;
+
         return (
             <>
                 <header className={`header`}>
