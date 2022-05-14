@@ -20,7 +20,6 @@ export default class NavBar extends Component {
     componentDidMount() {
         const dropdowns = document.querySelectorAll('[data-dropdown]');
         const user = document.querySelector('.user');
-        const userMenu = document.querySelector('.user .menu');
 
         dropdowns.forEach((dropdown) => {
             dropdown.addEventListener('click', (e) => {
@@ -34,6 +33,7 @@ export default class NavBar extends Component {
         });
 
         user.addEventListener('click', (e) => {
+            const userMenu = document.querySelector('.user .menu');
             e.stopPropagation();
 
             userMenu?.classList?.toggle('open');
@@ -85,7 +85,7 @@ export default class NavBar extends Component {
                     </ul>
 
                     <div className={'user'}>
-                        {!user ? (<a href="/auth/login" className={'loginButton'}>Login</a>) : (
+                        {!this.state.user ? (<a href="/auth/login" className={'loginButton'}>Login</a>) : (
                             <div className={'image'}>
                                 <img src={Utils.getUserAvatar(user)} />
                                 <div className={'menu'}>

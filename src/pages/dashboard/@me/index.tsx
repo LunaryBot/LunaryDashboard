@@ -3,11 +3,19 @@ import SideBar from '../../../components/SideBar';
 import NavBar from '../../../components/NavBar';
 import { IUser } from '../../../@types';
 import SelectMenu from '../../../components/SelectMenu';
+import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
+import APIUtils from '../../../utils/APIUtils';
+import Script from 'next/script';
 
 class DashboardMe extends React.Component {
     public state: {
         user: IUser;
+        redirect: boolean;
     }
+    
+    public navBar: NavBar;
+    public sideBar: SideBar;
 
     public selectMenu = new SelectMenu([
         {
@@ -28,17 +36,16 @@ class DashboardMe extends React.Component {
         max_values: 2,
     });
 
+    private api: APIUtils;
+
     constructor(props) {
         super(props);
 
+        this.api = new APIUtils(props.token, props.apiUrl);
+
         this.state = {
-            user: {
-                id: '452618703792766987',
-                avatar: '4e7b6fef7f598ab363f5be84ffe6c3b1',
-                discriminator: '7500',
-                username: 'Bae.',
-                public_flags: 64,
-            }
+            user: undefined,
+            redirect: false,
         };
     }
 
@@ -46,12 +53,26 @@ class DashboardMe extends React.Component {
         return this.state.user;
     }
 
+    componentDidMount() {
+        this.api.user()
+        .then((user) => {
+            console.log(user);
+            this.setState({ user });
+            
+            this.navBar.setState({ user });
+            this.sideBar.setState({ user });
+        })
+        .catch((err) => {
+            window.location.href = `/auth/login?destroyToken=true?state=${window.location.href}`
+        });
+    }
+
     render() {
         return (
             <div>
-                <SideBar {...{urlsType: 'USER', user: this.user}} />
+                <SideBar {...{urlsType: 'USER'}} ref={(sideBar) => this.sideBar = sideBar} />
                 <div className="content">
-                    <NavBar {...{user: this.user}}/>
+                    <NavBar ref={(navBar) => { this.navBar = navBar; }} />
                     <this.selectMenu.Component {...{manager: this.selectMenu}} />
                 </div>
             </div>
@@ -60,3 +81,21 @@ class DashboardMe extends React.Component {
 }
 
 export default DashboardMe;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { ['__SessionLuny']: token } = parseCookies(context); 
+
+    if(!token) return { 
+        redirect: {
+            destination: `/auth/login?state=${encodeURIComponent(context.req.url)}`,
+            permanent: false,
+        } 
+    };
+
+    return {
+        props: {
+            token,
+            apiUrl: process.env.API_URL,
+        },
+    };
+}

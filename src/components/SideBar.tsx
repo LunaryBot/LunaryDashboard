@@ -84,8 +84,8 @@ class SideBar extends React.Component {
                             </span>
 
                             <div className={'text'}>
-                                <span className={'name'}>Bae.</span>
-                                <span className={'id'}>452618703792766987</span>
+                                <span className={'name'}>{this.user?.username}</span>
+                                <span className={'id'}>{this.user?.id}</span>
                             </div>
                         </div>
 
