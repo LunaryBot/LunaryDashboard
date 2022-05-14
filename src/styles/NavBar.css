@@ -65,6 +65,7 @@
     grid-gap: 10px;
     padding: 10px 0;
     animation: subMenuHover 0.25s;
+    z-index: 1000;
 }
 
 .header ul ul {
@@ -131,7 +132,8 @@
     border-radius: 0.75rem;
     padding: 0 1rem;
     animation: subMenuHover 0.25s;
-    width: 200px;    
+    width: 200px;
+    z-index: 1000;
 }
 
 .header .user .menu.open {

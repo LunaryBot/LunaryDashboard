@@ -36,10 +36,10 @@ export default class NavBar extends Component {
         user.addEventListener('click', (e) => {
             e.stopPropagation();
 
-            userMenu.classList.toggle('open');
+            userMenu?.classList?.toggle('open');
 
             document.addEventListener('click', () => {
-                userMenu.classList.remove('open');
+                userMenu?.classList?.remove('open');
             });
         });
     }
@@ -85,7 +85,7 @@ export default class NavBar extends Component {
                     </ul>
 
                     <div className={'user'}>
-                        {!user ? (<a href="#" className={'loginButton'}>Login</a>) : (
+                        {!user ? (<a href="/auth/login" className={'loginButton'}>Login</a>) : (
                             <div className={'image'}>
                                 <img src={Utils.getUserAvatar(user)} />
                                 <div className={'menu'}>
