@@ -78,14 +78,12 @@ class SideBar extends React.Component {
                     <header>
                         <div className={'container'}>
                             <span className={'image'}>
-                                {/* <img src='https://github.com/jvopinho.png' alt='' /> */}
-                                
                                 {this.guild ? ( this.guild?.icon ? <img src={Utils.getGuildIcon(this.guild, { size: 1024, dynamic: true })} /> : (<div>{Utils.stringAcronym(this.guild.name)}</div>)) : ( <img src={Utils.getUserAvatar(this.user, { size: 1024, dynamic: true })} /> )}
                             </span>
 
                             <div className={'text'}>
-                                <span className={'name'}>{this.user?.username}</span>
-                                <span className={'id'}>{this.user?.id}</span>
+                                <span className={'name'}>{this.guild?.name || this.user?.username}</span>
+                                <span className={'id'}>{this.guild?.id || this.user?.id}</span>
                             </div>
                         </div>
 
@@ -109,7 +107,7 @@ class SideBar extends React.Component {
 
                                         {urls.map((url, index) => (
                                             <li className={'navLink'} key={`${category}-${index}`}>
-                                                <Link href={url.url}>
+                                                <Link href={url.url.replace(/\[guild]/ig, this.guild?.id)}>
                                                     <a>
                                                         <i className={`${url.icon} icon`} />
                                                         <span className={'text'}>{url.label}</span>
