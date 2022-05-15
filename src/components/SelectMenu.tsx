@@ -95,7 +95,7 @@ class SelectMenuComponent extends React.Component {
             placeholder: this.manager.placeholder,
             max_values: this.manager.max_values,
             disabled: this.manager.disabled,
-            opened: true,
+            opened: false,
             _id: v4(),
         };
 
