@@ -69,3 +69,13 @@ export interface IGuild {
 	cluserID: string;
     features: string[];
 }
+
+export interface IMember {
+	id: string;
+	createdAt: number;
+	communicationDisabledUntil: number;
+	joinedAt: number;
+	nick: string|null;
+	roles: string[];
+	permissions: number;
+}
