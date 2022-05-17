@@ -116,6 +116,10 @@
     font-size: 12px;
 }
 
+.selectMenu .container .options .option[data-selected="true"] {
+    background-color: var(--luny-colors-ui-15);
+}
+
 .selectMenu[data-opened="true"] .container .options {
     display: block;
 }

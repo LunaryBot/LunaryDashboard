@@ -188,7 +188,7 @@ class SelectMenuComponent extends React.Component {
         
         if(options.length > 0) {
             return options.map((option) => (
-                <div className={Styles.option} data-value={option.value} key={option.value} onClick={() => this.setValue(option.value)}>
+                <div className={Styles.option} data-value={option.value} data-selected={String(this.manager.value.includes(option.value))} key={option.value} onClick={() => this.setValue(option.value)}>
                     {option.icon && <img src={option.icon.url} alt={option.label} />}
                     {option.label}
                 </div>
