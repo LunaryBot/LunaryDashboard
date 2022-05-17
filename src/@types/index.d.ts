@@ -27,17 +27,17 @@ export interface IGuildData {
 export interface IChannel {
 	id: string;
 	name: string;
-	type: string;
+	type: number;
 	deleted: boolean;
-	guildId: string;
+	guildID: string;
 	guild: string;
-	parentId: string;
+	parentID: string;
 	permissionOverwrites: string[];
 	nsfw: boolean;
 	position: number;
 	rawPosition: number;
 	topic: string|null;
-	lastMessageId: string|null;
+	lastMessageID: string|null;
 	rateLimitPerUser: number;
 	createdTimestamp: number;
 }
