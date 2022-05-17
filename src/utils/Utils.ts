@@ -1,4 +1,5 @@
-import { IGuild, IGuildData, IUser } from '../@types';
+import { IChannel, IGuild, IGuildData, IUser } from '../@types';
+import { ChannelTypes } from './Constants';
 
 type TScope = 
 	'applications.builds.read' 
@@ -50,6 +51,15 @@ class Utils {
             .replace(/\s/g, '');
     }
 
+    static sortChannels(channels: IChannel[]) {
+        const categorys = channels.filter(channel => channel.type == ChannelTypes.GUILD_CATEGORY).sort((a, b) => a.position - b.position);
+        console.log([[null, filterChannels()], ...categorys.map(category => [category, filterChannels(category.id)])]);
+        return [[null, filterChannels()], ...categorys.map(category => [category, filterChannels(category.id)])].map(x => x[1]).flat();
+
+        function filterChannels(parentID: string = null) {
+            return channels.filter(channel => channel.type != ChannelTypes.GUILD_CATEGORY && ('parentID' in channel ? channel.parentID : null) == parentID).sort((a, b) => a.position - b.position);
+        }
+    }
     
     static generateOAuth2({
         clientId = process.env.DISCORD_CLIENT_ID,
