@@ -29,7 +29,7 @@ const basesColors = {
         gradient: 'rgba(160, 32, 240, 0.03)',
     },
     light: {
-        background: '#fff',
+        background: '#CCE',
         backgroundSecondary: '#f2f2f2',
         ui: blackColor,
         flow: whiteColor,
