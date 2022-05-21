@@ -17,6 +17,11 @@
     border-radius: 10px;
     border: 2px solid var(--luny-colors-ui-15);
 }
+
+.selectMenu[data-opened="true"] .placeholderWrapper {
+    border-color: var(--luny-colors-band-100);
+}
+
 .selectMenu .container .placeholder div {
     position: relative;
     display: flex;
