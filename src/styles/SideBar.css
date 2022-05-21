@@ -354,6 +354,7 @@ body[data-mode="dark"] .switch::before,
     margin-left: auto;
     margin-right: auto;
     padding: 24px;
+    color: var(--luny-colors-text-60);
 }
 
 .content main .small-card {
@@ -372,15 +373,48 @@ body[data-mode="dark"] .switch::before,
 .content main .card h2, 
 .content main .small-card h2 {
     font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: var(--luny-colors-text-100);
+    font-weight: 700;
+    margin-bottom: 13px;
 }
 
 .content main .card i, 
 .content main .small-card i {
     color: var(--luny-colors-band-100);
     margin-right: 10px;
+}
+
+.content main .card details summary span, 
+.content main .small-card details summary span {
+    background-color: var(--luny-colors-ui-5);
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    color: var(--luny-colors-text-100);
+    width: auto;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.content main .card details p, 
+.content main .small-card details p {
+    background-color: var(--luny-colors-ui-5);
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    width: auto;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    border: 1px solid var(--luny-colors-ui-15);
+}
+
+.content main .card details p i, 
+.content main .card details p > a, 
+.content main .small-card details p i,
+.content main .small-card details p > a {
+    color: var(--luny-colors-band-100);
 }
 
 .sidebar.close ~ .content {
