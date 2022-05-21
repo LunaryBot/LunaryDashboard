@@ -389,7 +389,7 @@ body[data-mode="dark"] .switch::before,
     width: calc(100% - 78px);
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1750px) {
     .sidebar {
         width: 350px;
     }
@@ -434,5 +434,12 @@ body[data-mode="dark"] .switch::before,
     .sidebar.close ~ .content {
         left: 0;
         width: 100%;
+    }
+
+    .content main .card,
+    .content main .small-card {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
     }
 }
