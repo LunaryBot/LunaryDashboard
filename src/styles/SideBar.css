@@ -40,7 +40,7 @@ body[data-mode="dark"] {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background: var(--luny-colors-backgroundSecondary);
+    background: var(--luny-colors-background);
     transition: var(--tran-05);
     z-index: 100;
     border-right: 1px solid var(--luny-colors-ui-15);
@@ -310,13 +310,77 @@ body[data-mode="dark"] .switch::before,
 .content {
     position: absolute;
     top: 0;
-    top: 0;
     left: 250px;
     height: 100vh;
     width: calc(100% - 250px);
     background-color: var(var(--luny-colors-background));
     transition: var(--tran-05);
     padding: 12px 60px;
+}
+
+.content main {
+    margin-top: 25px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    background-position: center;
+    background-size: cover;
+}
+
+.content main h1 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--luny-colors-ui-20);
+    color: var(--luny-colors-text-100);
+    width: 98%;
+}
+
+.content main h1 i {
+    color: var(--luny-colors-band-100);
+    margin-right: 10px;
+}
+
+.content main .card, 
+.content main .small-card {
+    position: relative;
+    margin-top: 25px;
+    border-radius: 6px;
+    background-color: var(--luny-colors-ui-5);
+    border: 1px solid var(--luny-colors-ui-15);
+    min-width: 96%;
+    width: 96%;
+    max-width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px;
+}
+
+.content main .small-card {
+    min-width: 46%;
+    width: 46%;
+    max-width: 46%;
+}
+
+.content .card hr,
+.content .small-card hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--luny-colors-band-20);
+}
+
+.content main .card h2, 
+.content main .small-card h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--luny-colors-text-100);
+}
+
+.content main .card i, 
+.content main .small-card i {
+    color: var(--luny-colors-band-100);
+    margin-right: 10px;
 }
 
 .sidebar.close ~ .content {
@@ -333,6 +397,18 @@ body[data-mode="dark"] .switch::before,
     .content {
         width: calc(100% - 350px);
         left: 350px;
+    }
+
+    .content main {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    }
+
+    .sidebar.close ~ .content {
+        left: 78px;
+        height: 100vh;
+        width: calc(100% - 78px);
     }
 }
 
