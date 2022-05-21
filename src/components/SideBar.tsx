@@ -85,6 +85,36 @@ class SideBar extends React.Component {
                                 <span className={'name'}>{this.guild?.name || this.user?.username}</span>
                                 <span className={'id'}>{this.guild?.id || this.user?.id}</span>
                             </div>
+
+                            <section className={'menu'}>
+                                    <ul>
+                                        <li>
+                                            <div className={'container svMenu'}>
+                                                <a className={'btn'} href={`#`}>
+                                                    <span className={'image'}>
+                                                        {this.guild ? ( this.guild?.icon ? <img src={Utils.getGuildIcon(this.guild, { size: 1024, dynamic: true })} /> : (<div>{Utils.stringAcronym(this.guild.name)}</div>)) : ( <img src={Utils.getUserAvatar(this.user, { size: 1024, dynamic: true })} /> )}
+                                                    </span>
+                                                    <div className={'text'}>
+                                                        <span className={'name'}>{this.guild?.name || this.user?.username}</span>
+                                                    </div>
+                                                </a>  
+                                            </div>
+                                        </li>
+                                        <hr />
+                                        <li>
+                                            <div className={'container svMenu'}>
+                                                <a className={'btn'} href={`#`}>
+                                                    <span className={'image'}>
+                                                        {this.guild ? ( this.guild?.icon ? <img src={Utils.getGuildIcon(this.guild, { size: 1024, dynamic: true })} /> : (<div>{Utils.stringAcronym(this.guild.name)}</div>)) : ( <img src={Utils.getUserAvatar(this.user, { size: 1024, dynamic: true })} /> )}
+                                                    </span>
+                                                    <div className={'text'}>
+                                                        <span className={'name'}>{this.guild?.name || this.user?.username}</span>
+                                                    </div>
+                                                </a>  
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </section>
                         </div>
 
                         <i className={'bx bx-chevron-right toggle'} />

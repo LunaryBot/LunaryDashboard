@@ -106,6 +106,22 @@ body[data-mode="dark"] {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 10px;
+}
+
+.sidebar header .menu {
+    display: block;
+    position: absolute;
+    float: left;
+    top: 50px;
+    left: 10px;
+    background-color: var(--luny-colors-background);
+    border: 1px solid var(--luny-colors-ui-15);
+    border-radius: 0.75rem;
+    padding: 0 1rem;
+    animation: subMenuHover 0.25s;
+    width: 200px;
+    z-index: 1000;
 }
 
 header .container .name  {
@@ -124,6 +140,31 @@ header .container .id {
 	text-overflow: ellipsis;
 }
 
+header .container .menu li {
+    margin-bottom: 10px;
+}
+
+header .container .svMenu a {
+    margin-left: -5px;
+    width: 110%;
+}
+
+header .container .svMenu a .image img {
+    border-radius: 50%;
+    width: 36px;
+}
+
+header .container .svMenu .name {
+    font-size: 13px;
+    margin-left: 30px;
+}
+
+header .container .svMenu .image {
+    position: absolute;
+    left: 0;
+    margin-left: 5px;
+}
+
 .sidebar header .image {
     display: flex;
     align-items: center;
@@ -132,7 +173,7 @@ header .container .id {
 
 .sidebar header .image img {
     width: 50px;
-    border-radius: 6px;
+    border-radius: 15px;
 }
 
 .sidebar header .image div {
@@ -207,11 +248,13 @@ body[data-mode="dark"] .sidebar header .toggle {
     border-radius: 6px;
     text-decoration: none;
     transition: var(--tran-03);
+    padding: 8px;
 }
 
 .sidebar li a:hover {
     background-color: var(--primary-color);
 }
+
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text {
     color: var(--luny-colors-flow-100);
