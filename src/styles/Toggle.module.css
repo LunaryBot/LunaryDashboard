@@ -1,0 +1,46 @@
+.switch {
+    display: inline-block;
+    height: 30px;
+    position: relative;
+    width: 56px;
+}
+
+.switch > input {
+    height: 0px;
+    opacity: 0;
+    width: 0px;
+}
+
+.switch > .switch-slider {
+    -webkit-transition: .4s;
+    background-color: var(--luny-colors-background);
+    border-radius: 30px;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border: 1px solid var(--luny-colors-ui-15);
+}
+
+.switch > .switch-slider:before {
+    -webkit-transition: .4s;
+    background-color: var(--luny-colors-ui-40);
+    border-radius: 50%;
+    bottom: 3.55px;
+    content: "";
+    height: 21px;
+    left: 4px;
+    position: absolute;
+    transition: .25s;
+    width: 22px;
+}
+
+.switch > input:checked + .switch-slider:before {
+    -ms-transform: translateX(24px);
+    -webkit-transform: translateX(24px);
+    transform: translateX(24px);
+    background-color: var(--luny-colors-band-100);
+}
