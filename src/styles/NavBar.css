@@ -3,7 +3,7 @@
     height: 64px;
     display: flex;
     align-items: center;
-    background-color: var(--luny-colors-backgroundSecondary);
+    background-color: var(--luny-colors-background);
     font-size: 1rem;
     font-weight: 500;
     border: 1px solid var(--luny-colors-ui-15);
@@ -50,7 +50,7 @@
     display: none;
     left: 0;
     position: absolute;
-    background-color: var(--luny-colors-backgroundSecondary);
+    background-color: var(--luny-colors-background);
     margin-top: 10px;
     border: 1px solid var(--luny-colors-ui-15);
     border-radius: 0.75rem;
@@ -127,7 +127,7 @@
     position: absolute;
     top: 70px;
     right: 90px;
-    background-color: var(--luny-colors-backgroundSecondary);
+    background-color: var(--luny-colors-background);
     border: 1px solid var(--luny-colors-ui-15);
     border-radius: 0.75rem;
     padding: 0 1rem;
