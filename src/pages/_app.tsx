@@ -42,7 +42,7 @@ export default function MyApp({ Component, pageProps }) {
                 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
             </Head>
             <GlobalStyles id="globalstyles" />
-            <div className={"background-gradient"} />
+            <div className={"backgroundGradient"} />
             <Component {...pageProps} />
         </>
     )
