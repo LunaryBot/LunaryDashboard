@@ -99,6 +99,33 @@ body[data-mode="dark"] {
     display: flex;
     align-items: center;
 }
+
+.sidebar header .userInfo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 6px;
+    padding: 5px 0;
+    border: 1px solid transparent;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sidebar header .userInfo:hover {
+    background-color: var(--luny-colors-ui-15);
+}
+
+.sidebar header .userInfo[data-opened="true"] {
+    padding: 4px -1px;
+    background-color: var(--luny-colors-ui-15);
+    border-color: var(--luny-colors-band-100);
+}
+
 .sidebar header .text {
     display: flex;
     flex-direction: column;
@@ -106,25 +133,10 @@ body[data-mode="dark"] {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left: 10px;
+    pointer-events: none;
 }
 
-.sidebar header .menu {
-    display: block;
-    position: absolute;
-    float: left;
-    top: 50px;
-    left: 10px;
-    background-color: var(--luny-colors-background);
-    border: 1px solid var(--luny-colors-ui-15);
-    border-radius: 0.75rem;
-    padding: 0 1rem;
-    animation: subMenuHover 0.25s;
-    width: 200px;
-    z-index: 1000;
-}
-
-header .container .name  {
+header .userInfo .name  {
     margin-top: 2px;
     font-size: 14px;
     font-weight: 600;
@@ -132,7 +144,7 @@ header .container .name  {
 	text-overflow: ellipsis;
 }
 
-header .container .id {
+header .userInfo .id {
     font-size: 10px;
     margin-top: -2px;
     display: block;
@@ -140,43 +152,18 @@ header .container .id {
 	text-overflow: ellipsis;
 }
 
-header .container .menu li {
-    margin-bottom: 10px;
-}
-
-header .container .svMenu a {
-    margin-left: -5px;
-    width: 110%;
-}
-
-header .container .svMenu a .image img {
-    border-radius: 50%;
-    width: 36px;
-}
-
-header .container .svMenu .name {
-    font-size: 13px;
-    margin-left: 30px;
-}
-
-header .container .svMenu .image {
-    position: absolute;
-    left: 0;
-    margin-left: 5px;
-}
-
-.sidebar header .image {
+.sidebar header .userInfo .image {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.sidebar header .image img {
+.sidebar header .userInfo .image img {
     width: 50px;
     border-radius: 15px;
 }
 
-.sidebar header .image div {
+.sidebar header .userInfo .image div {
     text-align: center;
     border-radius: 100%;
     width: 50px;
@@ -186,6 +173,116 @@ header .container .svMenu .image {
 	text-overflow: ellipsis;
     line-height: 50px;
     color: var(--luny-colors-text-100);
+}
+
+.sidebar header .serversMenu {
+    display: none;
+    position: absolute;
+    float: left;
+    top: 65px;
+    background-color: var(--luny-colors-backgroundSecondary);
+    border: 1px solid var(--luny-colors-ui-15);
+    border-radius: 10px;
+    padding: 0 5px;
+    animation: subMenuHover 0.25s;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 0.25rem 0.5rem var(--luny-colors-ui-5);
+    max-height: 300px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sidebar header .serversMenu .serversMenuContent {
+    border-radius: 8px;
+    width: 101%;
+    max-height: 298px;
+    overflow-y: auto;
+}
+
+.sidebar header .serversMenu .serversMenuContent::-webkit-scrollbar-track {
+    background: transparent;
+    height: calc(100% - 10px);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar header .serversMenu[data-opened="true"] {
+    display: block;
+}
+
+.sidebar header .serversMenu hr {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid var(--luny-colors-ui-15);
+}
+
+header .container .serversMenu .serversMenuContent li {
+    margin-bottom: 10px;
+    border-radius: 6px;
+    max-width: 110%;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+header .container .serversMenu .serversMenuContent li.invite {
+    background-color: var(--luny-colors-band-15);
+}
+
+header .container .serversMenu .serversMenuContent li .server {
+    margin-left: -5px;
+    width: 110%;
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+    padding: 8px;
+}
+
+header .container .serversMenuContent li:hover {
+    background-color: var(--luny-colors-ui-15);
+}
+
+header .container .serversMenu .serversMenuContent li .server .name {
+    font-size: 13px;
+}
+
+header .container .serversMenu .serversMenuContent li .server .image {
+    position: relative;
+    left: 2.5px;
+}
+
+header .container .serversMenu .serversMenuContent li .server .image div {
+    text-align: center;
+    border-radius: 100%;
+    width: 36px;
+    height: 36px;
+    background-color: var(--luny-colors-band-80);
+	overflow: hidden;
+	text-overflow: ellipsis;
+    line-height: 36px;
+    color: var(--luny-colors-text-100);
+}
+
+header .container .serversMenu .serversMenuContent li .server .image img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+header .container .serversMenu .serversMenuContent li[data-selected="true"] {
+    background-color: var(--luny-colors-ui-15);
 }
 
 .sidebar header .toggle {
@@ -251,22 +348,22 @@ body[data-mode="dark"] .sidebar header .toggle {
     padding: 8px;
 }
 
-.sidebar li a:hover {
+.sidebar .menuBar li a:hover {
     background-color: var(--primary-color);
 }
 
-.sidebar li a:hover .icon,
-.sidebar li a:hover .text {
+.sidebar .menuBar li a:hover .icon,
+.sidebar .menuBar li a:hover .text {
     color: var(--luny-colors-flow-100);
 }
 
-.sidebar li.discord a:hover .icon,
-.sidebar li.discord a:hover .text {
+.sidebar .menuBar li.discord a:hover .icon,
+.sidebar .menuBar li.discord a:hover .text {
     color: var(--luny-colors-flow-100);
 }
 
-body[data-mode="dark"] .sidebar li.discord a:hover .icon,
-body[data-mode="dark"] .sidebar li.discord a:hover .text {
+body[data-mode="dark"] .sidebar .menuBar li.discord a:hover .icon,
+body[data-mode="dark"] .sidebar .menuBar li.discord a:hover .text {
     color: #5865F2;
 }
 
