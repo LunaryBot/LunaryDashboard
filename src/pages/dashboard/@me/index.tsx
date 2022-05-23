@@ -2,11 +2,8 @@ import React from 'react';
 import SideBar from '../../../components/SideBar';
 import NavBar from '../../../components/NavBar';
 import { IUser } from '../../../@types';
-import SelectMenu from '../../../components/SelectMenu';
-import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
 import APIUtils from '../../../utils/APIUtils';
-import Script from 'next/script';
+import getServerSideProps from '../../../utils/getServerSideProps';
 
 class DashboardMe extends React.Component {
     public state: {
@@ -80,20 +77,4 @@ class DashboardMe extends React.Component {
 
 export default DashboardMe;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { ['__SessionLuny']: token } = parseCookies(context); 
-
-    if(!token) return { 
-        redirect: {
-            destination: `/auth/login?state=${encodeURIComponent(context.req.url)}`,
-            permanent: false,
-        } 
-    };
-
-    return {
-        props: {
-            token,
-            apiUrl: process.env.API_URL,
-        },
-    };
-}
+export { getServerSideProps };
