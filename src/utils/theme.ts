@@ -30,7 +30,7 @@ const basesColors = {
     },
     light: {
         background: '#CCE',
-        backgroundSecondary: '#f2f2f2',
+        backgroundSecondary: '#DDF',
         ui: blackColor,
         flow: whiteColor,
         text: blackColor,
@@ -67,6 +67,7 @@ function ThemeVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) 
         ...mapTonalits("--luny-colors-dark", blackColor),
         "--luny-colors-green": "#61fe80",
         "--luny-colors-red": "#fe4854",
+        "--luny-colors-blue": "#0d97fb",
         "--luny-colors-gradient": `${baseColors.gradient}`,
     };
 
