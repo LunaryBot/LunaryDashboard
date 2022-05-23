@@ -53,7 +53,7 @@ class Utils {
 
     static sortChannels(channels: IChannel[]) {
         const categorys = channels.filter(channel => channel.type == ChannelTypes.GUILD_CATEGORY).sort((a, b) => a.position - b.position);
-        console.log([[null, filterChannels()], ...categorys.map(category => [category, filterChannels(category.id)])]);
+        
         return [[null, filterChannels()], ...categorys.map(category => [category, filterChannels(category.id)])].map(x => x[1]).flat();
 
         function filterChannels(parentID: string = null) {
