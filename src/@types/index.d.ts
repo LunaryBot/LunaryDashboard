@@ -22,6 +22,7 @@ export interface IGuildData {
 	permissions: number;
 	features: string[];
 	permissions_new: string;
+	access?: boolean;
 }
 
 export interface IChannel {
