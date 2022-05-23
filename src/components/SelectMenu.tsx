@@ -19,72 +19,12 @@ interface IData {
     placeholder?: string;
     max_values?: number;
     disabled?: boolean;
+    customId: string;
+    options: Array<IOption>;
 }
 
-class SelectMenu extends EventEmitter {
-    public declare data: IData;
-
-    public _options: Array<IOption>;
-    public values: Array<IOption>;
-    public placeholder: string;
-    public max_values: number;
-    public disabled: boolean;
-    public _id: string;
-
-    constructor(options: Array<IOption>, data: IData = {}) {
-        super();
-
-        this._options = options;
-        this.values = options.filter((option) => option.default == true) || [];
-        this.placeholder = data.placeholder;
-        this.max_values = data.max_values || 1;
-        this.disabled = data.disabled;
-        this._id = v4();
-    }
-
-    public get options() {
-        return this._options;
-    }
-
-    public set options(options: Array<IOption>) {
-        this._options = options;
-
-        this.emit('optionsUpdate', this._options);
-    }
-
-    public get multiple() {
-        return this.max_values > 1;
-    }
-
-    public get value(): Array<string> {
-        return this.values.map((option) => option.value);
-    }
-
-    public removeValue(value: string) {
-        this.values = this.values.filter((option) => option.value != value);
-
-        this.emit('change', this.values);
-
-        return this.values;
-    }
-
-    public set value(value: string | Array<string>) {
-        if (Array.isArray(value)) {
-            this.values = this.options.filter((option) => value.includes(option.value)).splice(0, this.max_values);
-        } else {
-            this.values = this.options.filter((option) => option.value == value).splice(0, this.max_values);;
-        }
-
-        this.emit('change', this.values);
-    }
-
-    get Component() {
-        return SelectMenuComponent;
-    }
-}
-
-class SelectMenuComponent extends React.Component {
-    public manager: SelectMenu;
+class SelectMenu extends React.Component {
+    public emitter: EventEmitter;
     
     public state: {
         options: Array<IOption>;
@@ -93,35 +33,25 @@ class SelectMenuComponent extends React.Component {
         max_values: number;
         disabled: boolean;
         opened: boolean;
+        customId: string;
         _id: string;
     };
 
-    constructor(props: { manager: SelectMenu }) {
+    constructor(props: IData) {
         super(props);
 
-        this.manager = props.manager;
+        this.emitter = new EventEmitter();
 
         this.state = {
-            options: this.manager.options,
-            values: this.manager.values,
-            placeholder: this.manager.placeholder,
-            max_values: this.manager.max_values,
-            disabled: this.manager.disabled,
+            options: props.options,
+            values: props.options.filter((option) => option.default == true) || [],
+            placeholder: props.placeholder,
+            max_values: props.max_values,
+            disabled: props.disabled,
             opened: false,
+            customId: props.customId,
             _id: v4(),
         };
-
-        this.manager.on('change', (values) => {
-            this.setState({
-                values,
-            })
-        });
-
-        this.manager.on('optionsUpdate', (options) => {
-            this.setState({
-                options,
-            })
-        });
 
         this.setState({
             _id: v4(),
@@ -131,6 +61,37 @@ class SelectMenuComponent extends React.Component {
     get _id() {
         return this.state._id;
     }
+
+    get options() {
+        return this.state.options;
+    }
+
+    public get multiple() {
+        return this.state.max_values > 1;
+    }
+
+    public get value(): Array<string> {
+        return this.state.values.map((option) => option.value);
+    }
+
+    public removeValue(value: string) {
+        this.state.values = this.state.values.filter((option) => option.value != value);
+
+        this.emitter.emit('change', this.state.values);
+
+        return this.state.values;
+    }
+
+    public set value(value: string | Array<string>) {
+        if (Array.isArray(value)) {
+            this.state.values = this.options.filter((option) => value.includes(option.value)).splice(0, this.state.max_values);
+        } else {
+            this.state.values = this.options.filter((option) => option.value == value).splice(0, this.state.max_values);
+        }
+
+        this.emitter.emit('change', this.state.values);
+    }
+    
 
     public componentDidMount() {
         window.addEventListener('click', (e) => {
@@ -157,11 +118,11 @@ class SelectMenuComponent extends React.Component {
     }
 
     private placeholder() {
-        if (this.manager.values.length > 0) {
-            if(this.manager.multiple) {
-                return this.state.values.map((option) => (<span className={Styles.option} key={option.value} onClick={() => this.manager.removeValue(option.value)}>{option.label}</span>))
+        if (this.state.values.length > 0) {
+            if(this.multiple) {
+                return this.state.values.map((option) => (<span className={Styles.option} key={option.value} onClick={() => this.removeValue(option.value)}>{option.label}</span>))
             } else {
-                return this.manager.values[0].label;
+                return this.state.values[0].label;
             }
         }
 
@@ -169,14 +130,14 @@ class SelectMenuComponent extends React.Component {
     }
 
     private setValue(value: string) {
-        if(this.manager.multiple && this.manager.values.length >= this.manager.max_values) {
+        if(this.multiple && this.state.values.length >= this.state.max_values) {
             return false;
         }
         
-        if(this.manager.value.includes(value)) {
-            this.manager.removeValue(value);
+        if(this.value.includes(value)) {
+            this.removeValue(value);
         } else {
-            this.manager.value = [value, ...(this.manager.multiple ? this.manager.value : [])];
+            this.value = [value, ...(this.multiple ? this.value : [])];
         }
 
         this.toggle();
@@ -188,7 +149,7 @@ class SelectMenuComponent extends React.Component {
         
         if(options.length > 0) {
             return options.map((option) => (
-                <div className={Styles.option} data-value={option.value} data-selected={String(this.manager.value.includes(option.value))} key={option.value} onClick={() => this.setValue(option.value)}>
+                <div className={Styles.option} data-value={option.value} data-selected={String(this.value.includes(option.value))} key={option.value} onClick={() => this.setValue(option.value)}>
                     {option.icon && <img src={option.icon.url} alt={option.label} />}
                     {option.label}
                 </div>
@@ -200,7 +161,7 @@ class SelectMenuComponent extends React.Component {
 
     public render() {
         return (
-            <div id={this._id} className={Styles.selectMenu} data-opened={String(this.state.opened)} data-values-full={String(this.manager.multiple && this.state.values.length >= this.manager.max_values)}>
+            <div id={this._id} className={Styles.selectMenu} data-opened={String(this.state.opened)} data-values-full={String(this.multiple && this.state.values.length >= this.state.max_values)}>
                 <div className={Styles.container}>
                     <div className={Styles.placeholderWrapper} onClick={this.toggle.bind(this)}>
                         <div className={Styles.placeholder}>
@@ -218,7 +179,5 @@ class SelectMenuComponent extends React.Component {
         )
     }
 }
-
-export { SelectMenu, SelectMenuComponent };
 
 export default SelectMenu;

@@ -17,25 +17,6 @@ class DashboardMe extends React.Component {
     public navBar: NavBar;
     public sideBar: SideBar;
 
-    public selectMenu = new SelectMenu([
-        {
-            value: '1',
-            label: 'Option 1',
-            default: true,
-        },
-        {
-            value: '2',
-            label: 'Option 2',
-        },
-        {
-            value: '3',
-            label: 'Option 3',
-        }
-    ], {
-        placeholder: 'Select an option',
-        max_values: 2,
-    });
-
     private api: APIUtils;
 
     constructor(props) {
@@ -54,7 +35,11 @@ class DashboardMe extends React.Component {
     }
 
     componentDidMount() {
-        this.api.user()
+        this.connectApi();
+    }
+
+    connectApi() {
+        this.api.connect()
         .then((user) => {
             console.log(user);
             this.setState({ user });
@@ -67,13 +52,26 @@ class DashboardMe extends React.Component {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.guildId) {
+            this.setState({ guild: undefined });
+            
+            this.navBar.setState({ guild: undefined });
+            this.sideBar.setState({ guild: undefined });
+        }
+    }
+
     render() {
         return (
             <div>
-                <SideBar {...{urlsType: 'USER'}} ref={(sideBar) => this.sideBar = sideBar} />
+                <SideBar {...{api: this.api}} ref={(sideBar) => this.sideBar = sideBar} />
                 <div className="content">
                     <NavBar ref={(navBar) => { this.navBar = navBar; }} />
-                    <this.selectMenu.Component {...{manager: this.selectMenu}} />
+                    <main>
+                        <h1>
+                            {this.user?.username}
+                        </h1>
+                    </main>
                 </div>
             </div>
         );
