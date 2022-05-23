@@ -1,4 +1,3 @@
-import { GetServerSideProps, GetServerSidePropsResult } from 'next';
 import { parseCookies } from 'nookies';
 
 export default async (context) => {
