@@ -14,7 +14,7 @@ export default async (context) => {
         props: {
             token,
             apiUrl: process.env.API_URL,
-            guildId: context.query.guild,
+            guildId: context.query.guild || null,
         },
     };
 }
