@@ -24,6 +24,16 @@ export const URLS = {
                 label: 'Moderação',
                 url: '/dashboard/guilds/[guild]/moderation',
                 icon: 'far fa-hammer'
+            },
+            {
+                label: 'Permissões',
+                url: '/dashboard/guilds/[guild]/permissions',
+                icon: 'far fa-briefcase'
+            },
+            {
+                label: 'Embed de punições',
+                url: '/dashboard/guilds/[guild]/punishment-embed',
+                icon: 'far fa-window-maximize'
             }
         ]
     }
