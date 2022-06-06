@@ -173,6 +173,7 @@ class SideBar extends React.Component {
                                         <hr />
 
                                         <li className={'invite'}>
+                                            <Link href={'/invite'}>
                                                 <a>
                                                     <div className={'server'}>
                                                         <span className={'image'}>
@@ -184,6 +185,7 @@ class SideBar extends React.Component {
                                                         </span>
                                                     </div>
                                                 </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>

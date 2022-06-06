@@ -18,25 +18,26 @@
     margin-bottom: 5px;
 }
 
-.guildImage .blur {
+.guildImage div {
     position: absolute;
-    width: 108%;
-    height: 100%;
-    top: -15px;
-    left: -15px;
-    opacity: 50%;
-    z-index: 1;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: blur(9px);
-    -webkit-filter: blur(9px);
+    text-align: center;
+    border-radius: 100%;
+    z-index: 2;
+    width: 132px;
+    height: 132px;
+    background-color: var(--luny-colors-band-80);
+	overflow: hidden;
+	text-overflow: ellipsis;
+    line-height: 132px;
+    color: var(--luny-colors-text-100);
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .guildImage img {
     position: absolute;
     z-index: 2;
-    /* border: 2px solid white; */
     border-radius: 100%;
     top: 25px;
 	left: 50%;
@@ -77,7 +78,7 @@
 .guildCard .infos h3 {
     font-size: 1.1em;
     font-weight: 600;
-    color: var(--luny-colors-text-100);
+    color: var(--luny-colors-band-100);
     max-width: 100%;
     margin-bottom: 20px;
     max-height: 25px;
@@ -95,7 +96,7 @@
     margin: 10px;
     background: var(--luny-colors-band-100);
     background-size: 800% 400%;
-    color: var(--luny-colors-text-100);
+    color: var(--luny-colors-light-100);
     font-size: 17px;
     font-weight: 500;
     padding: 10px;

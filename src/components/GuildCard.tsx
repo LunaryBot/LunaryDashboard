@@ -1,9 +1,20 @@
-import { Component } from "react";
-import Styles from "../styles/GuildCard.module.css";
+import { Component } from 'react';
+import { IGuildData } from '../@types';
+import Styles from '../styles/GuildCard.module.css';
+import Utils from '../utils/Utils';
+import Link from 'next/link';
 
 class GuildCard extends Component {
+    state: IGuildData;
+    
+    constructor(props: IGuildData) {
+        super(props);
+
+        this.state = {...props};
+    }
+    
     render() {
-        return <>
+        return (
             <div className={Styles.guildCard}>
                 <div className={Styles.guildImage}>
                     <span className={Styles.firstIcon}>
@@ -12,15 +23,8 @@ class GuildCard extends Component {
                     <span className={Styles.secondIcon}>
                         <i className='far fa-star' />
                     </span>
-                    <div 
-                        className={Styles.blur} 
-                        style={{ backgroundImage: `url(https://cdn.discordapp.com/avatars/522752913794138112/9f81dd922901d2108219c9960ecf86f4.png)` }} 
-                    />
                     
-                    <img
-                        src={"https://cdn.discordapp.com/avatars/522752913794138112/9f81dd922901d2108219c9960ecf86f4.png"}
-                        alt={''}
-                    />
+                    {this.state.icon ? <img src={Utils.getGuildIcon(this.state, { size: 1024, dynamic: true })} /> : (<div>{Utils.stringAcronym(this.state.name)}</div>)}
                     
                 </div>
                 <div className={Styles.infos}>
@@ -31,21 +35,19 @@ class GuildCard extends Component {
                             marginBottom: '15px'
                         }}
                     >
-                        Teste
+                        {this.state.name}
                     </h3>
                     <div className={Styles.btnGrid}>
-                        <a href={`/dashboard/guilds/`}>
-                            <i className='fas fa-wrench'style={{ marginRight: '5px' }} />
-                            Configurar
-                        </a>
-                        <a href={`/dashboard/guilds/`}>
-                            <i className='fas fa-wrench'style={{ marginRight: '5px' }} />
-                            Configurar
-                        </a>
+                        <Link href={`${this.state.access ? '/dashboard/guilds/' : '/invite?guild='}${this.state.id}`}>
+                            <a>
+                                <i className='fas fa-wrench'style={{ marginRight: '5px' }} />
+                                Configurar
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>
-        </>
+        );
     }
 }
 
