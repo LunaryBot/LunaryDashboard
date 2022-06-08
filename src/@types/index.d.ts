@@ -23,6 +23,7 @@ export interface IGuildData {
 	features: string[];
 	permissions_new: string;
 	access?: boolean;
+	favorite?: boolean;
 }
 
 export interface IChannel {

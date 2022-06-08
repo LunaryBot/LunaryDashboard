@@ -99,6 +99,13 @@
     padding: 4px;
 }
 
+.selectMenu .container .options::-webkit-scrollbar-track {
+    background: transparent;
+    height: calc(100% - 10px);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .selectMenu[data-values-full="true"] .container .options {
     pointer-events: none;
     opacity: 0.5;

@@ -12,5 +12,6 @@ declare global {
 
     interface Window {
         changeMode: (mode: "dark" | "light") => void;
+        toggleFavorite: (guildID: string) => void;
     }
 }

@@ -46,7 +46,7 @@
 	transform: translate(-50%, -50%);
 }
 
-.guildImage .firstIcon {
+.guildImage .rankIcon {
     position: absolute;
     z-index: 2;
     top: -15px;
@@ -54,10 +54,9 @@
     font-size: 20px;
     background: -webkit-gradient(linear, left top, left bottom, from(var(--luny-colors-text-100)), to(var(--luny-colors-text-60)));
 	background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
 
-.guildImage .secondIcon {
+.guildImage .favoriteIcon {
     position: absolute;
     z-index: 2;
     top: -15px;
@@ -65,7 +64,12 @@
     font-size: 20px;
     background: -webkit-gradient(linear, left top, left bottom, from(var(--luny-colors-text-100)), to(var(--luny-colors-text-60)));
 	background-clip: text;
-	-webkit-text-fill-color: transparent;
+    color: var(--luny-colors-ui-40);
+    cursor: pointer;
+}
+
+.guildImage .favoriteIcon[data-value='true'] {
+    color: #faa81a!important;
 }
 
 .guildCard .infos {
@@ -78,7 +82,6 @@
 .guildCard .infos h3 {
     font-size: 1.1em;
     font-weight: 600;
-    color: var(--luny-colors-band-100);
     max-width: 100%;
     margin-bottom: 20px;
     max-height: 25px;
@@ -109,6 +112,7 @@
     animation: gradient 3s infinite;
     transform: scale(1.05);
     transition: 0.5s;
+    background-color: var(--luny-colors-band-80);
 }
 
 .guildCard .infos a:active {
@@ -120,19 +124,10 @@
 @media screen and (max-width: 980px) {
     .guildCard {
         width: 100%;
-        /* height: auto;
-        margin: 0;
-        padding: 0;
-        border: none;
-        border-radius: 0; */
     }
 
     .guildCard .guildImage {
         width: 100%;
         max-width: 100%;
-        /* height: auto;
-        max-height: auto;
-        margin-bottom: 0; */
     }
-
 }
