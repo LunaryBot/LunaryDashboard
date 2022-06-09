@@ -19,11 +19,12 @@ interface IData {
     placeholder?: string;
     max_values?: number;
     disabled?: boolean;
-    customId: string;
+    customId?: string;
     options: Array<IOption>;
 }
 
 class SelectMenu extends React.Component {
+    public props: IData;
     public emitter: EventEmitter;
     
     public state: {

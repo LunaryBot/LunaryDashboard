@@ -345,7 +345,6 @@ body[data-mode="dark"] .sidebar header .toggle {
     border-radius: 6px;
     text-decoration: none;
     transition: var(--tran-03);
-    padding: 8px;
 }
 
 .sidebar .menuBar li a:hover {
@@ -481,8 +480,19 @@ body[data-mode="dark"] .switch::before,
     margin-right: 10px;
 }
 
+.content main code {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--luny-colors-text-100);
+    margin-bottom: 10px;
+    background-color: var(--luny-colors-background);
+    border: 1px solid var(--luny-colors-ui-20);
+    border-radius: 6px;
+    padding: 0px 3px;
+}
+
 .content main .card, 
-.content main .small-card {
+.content main .card.small {
     position: relative;
     margin-top: 25px;
     border-radius: 6px;
@@ -493,38 +503,88 @@ body[data-mode="dark"] .switch::before,
     max-width: 96%;
     margin-left: auto;
     margin-right: auto;
-    padding: 24px;
+    padding: 12px;
     color: var(--luny-colors-text-60);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.content main .small-card {
+.content main .card.small {
     min-width: 46%;
     width: 46%;
     max-width: 46%;
 }
 
 .content .card hr,
-.content .small-card hr {
+.content .card.small hr {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid var(--luny-colors-band-20);
 }
 
+.content .card .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    height: 50px;
+    width: 100%;
+}
+
+.content .card[data-retractable="true"] {
+    padding-bottom: 0;
+}
+
+.content .card[data-retractable="true"] .cardHeader {
+    position: relative;
+    cursor: pointer;
+    padding-bottom: 7px;
+    top: 1px;
+}
+
+.content .card[data-opened="true"][data-retractable="true"] .cardHeader {
+    border-bottom: 1px solid var(--luny-colors-band-20);
+}
+
+.content .card .cardBody {
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+    width: 100%;
+    position: relative;
+    margin-top: -1px;
+    padding: 7px;
+}
+
+.content .card[data-opened="true"] .cardBody {
+    display: block;
+}
+
 .content main .card h2, 
-.content main .small-card h2 {
+.content main .card.small h2 {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 13px;
 }
 
+.content main .card span {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
 .content main .card i, 
-.content main .small-card i {
+.content main .card.small i {
     color: var(--luny-colors-band-100);
     margin-right: 10px;
 }
 
 .content main .card details summary span, 
-.content main .small-card details summary span {
+.content main .card.small details summary span {
     background-color: var(--luny-colors-ui-5);
     border-radius: 10px;
     padding: 5px 10px;
@@ -538,7 +598,7 @@ body[data-mode="dark"] .switch::before,
 }
 
 .content main .card details p, 
-.content main .small-card details p {
+.content main .card.small details p {
     background-color: var(--luny-colors-ui-5);
     border-radius: 10px;
     padding: 5px 10px;
@@ -552,8 +612,8 @@ body[data-mode="dark"] .switch::before,
 
 .content main .card details p i, 
 .content main .card details p > a, 
-.content main .small-card details p i,
-.content main .small-card details p > a {
+.content main .card.small details p i,
+.content main .card.small details p > a {
     color: var(--luny-colors-band-100);
 }
 
@@ -611,7 +671,7 @@ body[data-mode="dark"] .switch::before,
     }
 
     .content main .card,
-    .content main .small-card {
+    .content main .card.small {
         min-width: 100%;
         width: 100%;
         max-width: 100%;
