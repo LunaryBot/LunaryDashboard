@@ -13,7 +13,6 @@ class BitField {
 		Object.defineProperty(this, 'data', { value: data, enumerable: false });
 		Object.defineProperty(this, 'FLAGS', { value: data.FLAGS, enumerable: false });
 	
-        console.log(bits);
 		this.bitfield = BitField.resolve(bits, this.data);
 	}
 
@@ -48,10 +47,9 @@ class BitField {
 	}
 
 	serialize() {
-		const serialized: { [key: string]: number } = {};
+		const serialized: { [key: string]: boolean } = {};
 
 		for (const [flag, bit] of Object.entries(BitField.FLAGS)) {
-            // @ts-ignore
             serialized[flag] = this.has(bit);
         }
 
