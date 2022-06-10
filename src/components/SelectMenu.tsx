@@ -5,7 +5,7 @@ import Styles from '../styles/SelectMenu.module.css';
 
 interface IOption {
     label: string;
-    value: string|number;
+    value: string|number|bigint;
     description?: string;
     icon?: {
         url: string;
@@ -51,11 +51,11 @@ class SelectMenu extends React.Component {
             disabled: props.disabled,
             opened: false,
             customId: props.customId,
-            _id: v4(),
+            _id: v4().replace(/-/g, ''),
         };
 
         this.setState({
-            _id: v4(),
+            _id: v4().replace(/-/g, ''),
         })
     }
 
@@ -71,11 +71,11 @@ class SelectMenu extends React.Component {
         return this.state.max_values > 1;
     }
 
-    public get value(): Array<string|number> {
+    public get value(): Array<string|number|bigint> {
         return this.state.values.map((option) => option.value);
     }
 
-    public removeValue(value: string|number) {
+    public removeValue(value: string|number|bigint) {
         this.state.values = this.state.values.filter((option) => option.value != value);
 
         this.emitter.emit('change', this.state.values);
@@ -83,7 +83,7 @@ class SelectMenu extends React.Component {
         return this.state.values;
     }
 
-    public set value(value: string | number | Array<string|number>) {
+    public set value(value: string | number | Array<string|number|bigint>) {
         if (Array.isArray(value)) {
             this.state.values = this.options.filter((option) => value.includes(option.value)).splice(0, this.state.max_values);
         } else {
@@ -114,14 +114,13 @@ class SelectMenu extends React.Component {
     private toggle() {
         this.setState({
             opened: !this.state.opened,
-            _id: v4(),
         });
     }
 
     private placeholder() {
         if (this.state.values.length > 0) {
             if(this.multiple) {
-                return this.state.values.map((option) => (<span className={Styles.option} key={option.value} onClick={() => this.removeValue(option.value)}>{option.label}</span>))
+                return this.state.values.map((option) => (<span className={Styles.option} key={`${option.value}`} onClick={() => this.removeValue(option.value)}>{option.label}</span>))
             } else {
                 return this.state.values[0].label;
             }
@@ -130,7 +129,7 @@ class SelectMenu extends React.Component {
         return this.state.placeholder;
     }
 
-    private setValue(value: string|number) {
+    private setValue(value: string|number|bigint) {
         if(this.multiple && this.state.values.length >= this.state.max_values) {
             return false;
         }
@@ -150,7 +149,7 @@ class SelectMenu extends React.Component {
         
         if(options.length > 0) {
             return options.map((option) => (
-                <div className={Styles.option} data-value={option.value} data-selected={String(this.value.includes(option.value))} key={option.value} onClick={() => this.setValue(option.value)}>
+                <div className={Styles.option} data-value={option.value} data-selected={String(this.value.includes(option.value))} key={`${this._id}${option.value}`} onClick={() => this.setValue(option.value)}>
                     {option.icon && <img src={option.icon.url} alt={option.label} />}
                     {option.label}
                 </div>
