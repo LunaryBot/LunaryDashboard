@@ -5,7 +5,7 @@ import Styles from '../styles/SelectMenu.module.css';
 
 interface IOption {
     label: string;
-    value: string;
+    value: string|number;
     description?: string;
     icon?: {
         url: string;
@@ -71,11 +71,11 @@ class SelectMenu extends React.Component {
         return this.state.max_values > 1;
     }
 
-    public get value(): Array<string> {
+    public get value(): Array<string|number> {
         return this.state.values.map((option) => option.value);
     }
 
-    public removeValue(value: string) {
+    public removeValue(value: string|number) {
         this.state.values = this.state.values.filter((option) => option.value != value);
 
         this.emitter.emit('change', this.state.values);
@@ -83,7 +83,7 @@ class SelectMenu extends React.Component {
         return this.state.values;
     }
 
-    public set value(value: string | Array<string>) {
+    public set value(value: string | number | Array<string|number>) {
         if (Array.isArray(value)) {
             this.state.values = this.options.filter((option) => value.includes(option.value)).splice(0, this.state.max_values);
         } else {
@@ -130,7 +130,7 @@ class SelectMenu extends React.Component {
         return this.state.placeholder;
     }
 
-    private setValue(value: string) {
+    private setValue(value: string|number) {
         if(this.multiple && this.state.values.length >= this.state.max_values) {
             return false;
         }
@@ -167,7 +167,7 @@ class SelectMenu extends React.Component {
                     <div className={Styles.placeholderWrapper} onClick={this.toggle.bind(this)}>
                         <div className={Styles.placeholder}>
                             <div>
-                                <span>{this.placeholder()}</span>
+                            {this.placeholder()}
                             </div>
                         </div>
                     </div>
