@@ -59,6 +59,10 @@ class SelectMenu extends React.Component {
         })
     }
 
+    public get customId() {
+        return this.state.customId;
+    }
+
     get _id() {
         return this.state._id;
     }
