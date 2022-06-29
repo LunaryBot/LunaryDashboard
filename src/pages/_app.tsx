@@ -1,10 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
-import '../styles/SideBar.css';
-import '../styles/NavBar.css';
 
-import '../styles/styles.css';
 import Theme from '../utils/theme';
 
 export default function MyApp({ Component, pageProps }) {
@@ -31,7 +28,6 @@ export default function MyApp({ Component, pageProps }) {
     const GlobalStyles = createGlobalStyle`
         :root {${Theme({ mode: _mode || 'dark' }).toString()}}
     `
-
 
     return (
         <> 

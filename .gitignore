@@ -36,3 +36,6 @@ firebase.config.json
 
 # vercel
 .vercel
+
+# swr
+.swc
