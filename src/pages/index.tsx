@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from '@apollo/client';
 
 import useFetch from '../utils/useFetch';
 
