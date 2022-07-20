@@ -237,7 +237,7 @@ export default class DashboardMe extends React.Component {
                         });
 
                         function saveJSON() {
-                            const json = { config: 0 }
+                            const json = { configs: 0 }
 
                             $('[data-send-on-save]').map(function() {
                                 const a = $(this);
@@ -251,7 +251,7 @@ export default class DashboardMe extends React.Component {
                                 
                                 if(type == 'bitfield') {
                                     if(a.is(':checked')) {
-                                        json.config |= parseInt(value);
+                                        json.configs |= parseInt(value);
                                     }
                                 };
                             });

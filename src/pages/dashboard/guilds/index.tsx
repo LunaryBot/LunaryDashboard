@@ -1,5 +1,4 @@
 import React from 'react';
-import Script from 'next/script';
 import { GetServerSideProps } from 'next'
 import socket from 'socket.io-client';
 import { parseCookies } from 'nookies';
@@ -39,9 +38,36 @@ export default class DashboardMe extends React.Component {
         } as IState;
     }
 
+    componentDidMount(): void {
+        const { token, hostApi } = this.props as IProps;
+
+        const api = socket(hostApi, {
+            query: {
+                token,
+                fetchGuilds: true
+            },
+        });
+
+        api.on('ready', ({ data }) => {
+            console.log(data)
+            this.setState({
+                user: data.user,
+                guilds: data.guilds,
+                loading: false,
+            });
+        });
+
+        api.on('error', ({ data }) => {
+            console.log(data);
+
+            if(!data?.message || `${data.message}`.toLowerCase().includes('token')) {
+                return window.location.href = '/api/auth/login?dt=true';
+            };
+        });
+    }
+
     render() {
         const { user, guilds, loading } = this.state as IState;
-        const { token, hostApi } = this.props as IProps;
 
         return (
             <>
@@ -51,39 +77,10 @@ export default class DashboardMe extends React.Component {
 
                 <div className={`${styles['content']}`}>
                     {guilds
-                        .sort((a, b) => a.name.localeCompare(b.name))
                         .filter(guild => guild.owner || (guild.permissions & Permissions.ADMINISTRATOR) == Permissions.ADMINISTRATOR)
                         .map((guild, index) => ( <GuildCard {...{guild}} key={guild.id}/> ))
                     }
                 </div>
-
-                <Script
-                    src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
-                    onLoad={() => {
-                        const api = socket(hostApi, {
-                            query: {
-                                token,
-                                fetchGuilds: true
-                            },
-                        });
-
-                        api.on('ready', ({ data }) => {
-                            this.setState({
-                                user: data.user,
-                                guilds: data.guilds,
-                                loading: false,
-                            });
-                        });
-
-                        api.on('error', ({ data }) => {
-                            console.log(data);
-
-                            if(!data?.message || `${data.message}`.toLowerCase().includes('token')) {
-                                return window.location.href = '/api/auth/login?dt=true';
-                            };
-                        });
-                    }}
-                ></Script>
             </>
         );
     }
