@@ -39,3 +39,7 @@ firebase.config.json
 
 # swr
 .swc
+
+# Apollo Extension Config
+apollo.config.js
+schema.graphql

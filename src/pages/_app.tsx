@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import { DashboardLayout } from '../components/dashboard';
 
 import Theme from '../utils/theme';
 
@@ -39,7 +40,9 @@ export default function MyApp({ Component, pageProps }) {
             </Head>
             <GlobalStyles id="globalstyles" />
             <div className={"backgroundGradient"} />
-            <Component {...pageProps} />
+            <DashboardLayout>
+                <Component {...pageProps} />   
+            </DashboardLayout>
         </>
     )
 }
