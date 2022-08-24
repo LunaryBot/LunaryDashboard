@@ -26,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
     "axios": "^0.27.2",
+    "bootstrap": "^5.2.0",
     "eslint": "^8.22.0",
     "eslint-config-next": "^12.2.5",
     "graphql": "^16.5.0",

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DashboardSidebar } from './sidebar';
+
 export class DashboardLayout extends React.Component {
     props: React.PropsWithChildren;
 
@@ -16,6 +18,7 @@ export class DashboardLayout extends React.Component {
 
         return (
             <div>
+                <DashboardSidebar />
                 <main>{children}</main>
             </div>
         )

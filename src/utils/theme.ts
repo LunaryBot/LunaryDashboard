@@ -57,6 +57,10 @@ function ThemeVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) 
     const obj = {
         "--luny-colors-background": baseColors.background,
         "--luny-colors-backgroundSecondary": baseColors.backgroundSecondary,
+        "--luny-colors-band": band,
+        "--luny-colors-text": baseColors.text,
+        "--luny-colors-ui": baseColors.ui,
+        "--luny-colors-flow": baseColors.flow,
         ...mapTonalits("--luny-colors-band", band),
         ...mapTonalits("--luny-colors-ui", baseColors.ui),
         ...mapTonalits("--luny-colors-flow", baseColors.flow),

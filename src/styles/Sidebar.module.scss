@@ -1,0 +1,96 @@
+@import "theme.scss";
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+$band: #A020F0;
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    background: #11101d;
+    z-index: 100;
+    transition: all 0.5s ease;
+
+    .links {
+        overflow: auto;
+        height: calc(100% - 55px);
+        flex-direction: column;
+        justify-content: space-between;
+        overflow-y: scroll;
+
+        li {
+            margin-left: -40px;
+            list-style: none;
+            
+            a {
+                height: 100%;
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                border-radius: 6px;
+                text-decoration: none;
+                transition: var(--tran-03);
+
+                &:hover {
+                    background-color: red;
+                }
+            }
+        }
+        
+        & {
+            overflow-y: scroll;
+        }
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .profile {
+        position: fixed;
+        bottom: 0;
+        width: 300px;
+        display: flex;
+        align-items: center;
+        background: #1d1b31;
+        padding: 12px 0;
+        transition: all 0.5s ease;
+
+        .image {
+            display: flex;
+            align-items: center;
+
+            img {
+                height: 52px;
+                width: 52px;
+                object-fit: cover;
+                border-radius: 16px;
+                margin: 0 14px 0 12px;
+                background: #1d1b31;
+                transition: all 0.5s ease;
+            }
+        }
+
+        p, 
+        span {
+            // color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            white-space: nowrap;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        span {
+            color: darken($luny-band, 10%);
+        }
+    }
+}

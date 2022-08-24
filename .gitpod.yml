@@ -1,0 +1,9 @@
+tasks:
+  - init: yarn install && yarn run build
+    command: yarn run start
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+ports:
+  - port: 3000
+    onOpen: open-preview
