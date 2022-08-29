@@ -1,4 +1,4 @@
-@import "theme.scss";
+@import "theme.module";
 
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
@@ -90,7 +90,7 @@ $band: #A020F0;
         }
 
         span {
-            color: darken($luny-band, 10%);
+            color: themed('luny-band', $lightness: -20%);
         }
     }
 }

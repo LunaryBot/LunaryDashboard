@@ -1,0 +1,43 @@
+$light-theme: (
+    luny-band: #A020F0,
+    luny-text: #000000,
+    luny-flow: #FFFAFA,
+    luny-ui: #000000,
+    luny-background: #CCE,
+);
+
+$dark-theme: (
+    luny-band: #A020F0,
+    luny-text: map-get($light-theme, luny-flow),
+    luny-flow: map-get($light-theme, luny-ui),
+    luny-ui: map-get($light-theme, luny-flow),
+    luny-background: #141520,
+);
+
+@mixin define-color($title, $color) {
+    --#{$title}-h: #{hue($color)};
+    --#{$title}-l: #{lightness($color)};
+    --#{$title}-s: #{saturation($color)};
+    --#{$title}-a: #{alpha($color)};
+}
+
+body.root :global {
+    @each $name, $color in $dark-theme {
+        @include define-color($name, $color);
+    }
+}
+
+body.root[data-theme='light'] :global {
+    @each $name, $color in $light-theme {
+        @include define-color($name, $color);
+    }
+}
+
+@function themed($title, $hue: 0deg, $lightness: 0%, $saturation: 0%, $alpha: 0) {
+    @return hsla(
+        calc(var(--#{$title}-h) + #{$hue}), 
+        calc(var(--#{$title}-s) + #{$saturation}),
+        calc(var(--#{$title}-l) + #{$lightness}),
+        calc(var(--#{$title}-a) + #{$alpha}),
+    );
+}
