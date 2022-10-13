@@ -16,8 +16,8 @@ export function DashboardSidebar(props: {}) {
                     <img src={'https://github.com/jvopinho.png'} alt={'@jvopinho'} />
                 </div>
 
-                <p>JVOPINHOOOOOOOOOOOO</p>
-                <span>#7500</span>
+                <p>JVOPINHOOOOOOOOOOOO<br /><span>#7500</span></p>
+                
             </div>
         </div>
     )
