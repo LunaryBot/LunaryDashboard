@@ -4,8 +4,10 @@
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins";
 
-:root {
-    $text: red;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
@@ -19,6 +21,20 @@ body {
     overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+        
+::-webkit-scrollbar-track {
+    background: var(--luny-colors-flow-80);
+    box-shadow: inset 0 0 6px var(--luny-colors-flow-20);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--luny-colors-band-100);
+    border-radius: 0.5em;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -26,10 +42,6 @@ a {
     &:hover {
         color: #000000a2
     }
-}
-
-* {
-    box-sizing: border-box;
 }
 
 p {

@@ -46,7 +46,7 @@ $band: #A020F0;
 
                 &[data-opened] {
                     padding: 4px -1px;
-                    background-color: themed('--luny-ui', 15);
+                    background-color: themed('luny-ui', 15);
                     border-color: themed('luny-band')
                 }
 
@@ -99,6 +99,124 @@ $band: #A020F0;
                     .id {
                         overflow: hidden;
                         text-overflow: ellipsis;
+                    }
+                }
+            }
+
+            section.serversMenuWrapper {
+                display: none;
+                position: absolute;
+                float: left;
+                top: 65px;
+                background-color: var(--luny-backgroundSecondary);
+                border: 1px solid themed('luny-ui', 15);
+                border-radius: 10px;
+                padding: 0;
+                width: 100%;
+                z-index: 1000;
+                box-shadow: 0 0.25rem 0.5rem themed('luny-ui', 5);
+                max-height: 300px;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+    
+                .serversMenu {
+                    border-radius: 8px;
+                    width: 100%;
+                    max-height: 298px;
+                    overflow-y: auto;
+                    padding: 0 5px;
+    
+                    hr {
+                        margin: 0;
+                        border: none;
+                        border-bottom: 1px solid themed('luny-ui', 15);
+                    }
+    
+                    li {
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                        border-radius: 6px;
+                        max-width: 110%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+    
+                        .server {
+                            width: 110%;
+                            list-style: none;
+                            height: 100%;
+                            background-color: transparent;
+                            display: flex;
+                            align-items: center;
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 6px;
+                            text-decoration: none;
+                            transition: all 0.3s ease;
+                            padding: 8px;
+    
+                            .image {
+                                position: relative;
+                                left: 2.5px;
+    
+                                div {
+                                    text-align: center;
+                                    border-radius: 100%;
+                                    width: 36px;
+                                    height: 36px;
+                                    background-color: themed('luny-band', 80);
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    line-height: 36px;
+                                }
+                                
+                                img {
+                                    border-radius: 50%;
+                                    width: 36px;
+                                    height: 36px;
+                                }
+                            }
+    
+                            .name {
+                                font-size: 13px;
+                                font-weight: 500;
+                                white-space: nowrap;
+                                opacity: 1;
+                                margin-left: 10px;
+                                color: themed('luny-text', 60);
+                            }
+                        }
+
+                        &[data-selected] {
+                            background-color: themed('luny-ui', 5); 
+                        }
+    
+                        &.invite {
+                            background-color: themed('luny-band', 15);
+                        }
+    
+                        &:hover {
+                            background-color: themed('luny-ui', 15);
+                        }
+                    }
+    
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                        height: calc(100% - 10px);
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                    }
+                }
+    
+                &[data-opened] {
+                    display: block;
+    
+                    .serversMenu {
+                        background-color: themed('luny-ui', 15)
                     }
                 }
             }
@@ -177,5 +295,42 @@ $band: #A020F0;
         &::-webkit-scrollbar {
             display: none;
         }
+    }
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(var(--luny-colors-background));
+    transition: var(--tran-05);
+    padding: 12px 60px;
+}
+
+.content main {
+    margin-top: 25px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    background-position: center;
+    background-size: cover;
+}
+
+@media screen and (min-width: 1750px) {
+    .sidebar {
+        width: 350px;
+    }
+
+    .content {
+        width: calc(100% - 350px);
+        left: 350px;
+    }
+
+    .content main {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
     }
 }
