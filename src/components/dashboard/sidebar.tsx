@@ -1,24 +1,46 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import Dots from '../Dots';
+
 import styles from '../../styles/Sidebar.module.scss';
 
 export function DashboardSidebar(props: {}) {
+    const router = useRouter();
+    
+    console.log(router);
     return (
-        <div className={styles.sidebar}>
-            <ul className={styles.links}>
-                <li>
-                    <a href="#">
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-            </ul>
+        <nav className={styles.sidebar}>
+            <header>
+                <div className={styles.container}>
+                    <div className={styles.profile}>
+                        <span className={styles.image}>
+                            <img src={'https://github.com/jvopinho.png'} alt={'@jvopinho'} />
+                        </span>
 
-            <div className={styles.profile}>
-                <div className={styles.image}>
-                    <img src={'https://github.com/jvopinho.png'} alt={'@jvopinho'} />
+                        <div className={styles.text}>
+                            <span className={styles.name}>Bae.</span>
+                            <span className={styles.id}>452618703792766987</span>
+                        </div>
+                    </div>
                 </div>
+            </header>
 
-                <p>JVOPINHOOOOOOOOOOOO<br /><span>#7500</span></p>
-                
-            </div>
-        </div>
+            <ul className={styles.links}>
+                <div>
+                    <li>
+                        <span>General</span>
+                    </li>
+                    <li data-selected>
+                        <Link href='#'>
+                            <a>
+                                <i className={`${router.asPath == '/' ? 'fa' : 'far'} fa-home`} />
+                                <span>Dashboard</span>
+                            </a>
+                        </Link>
+                    </li>
+                </div>
+            </ul>
+        </nav>
     )
 }

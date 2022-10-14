@@ -1,3 +1,9 @@
+@import "theme.module";
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
 :root {
     $text: red;
 }
@@ -8,7 +14,9 @@ body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-color: var(--luny-colors-background);
+    background: linear-gradient(90deg, var(--luny-background) 21px, transparent 1%) 50%, linear-gradient(var(--luny-background) 21px,transparent 1%) 50%, #333;
+    background-size: 22px 22px;
+    overflow-x: hidden;
 }
 
 a {
@@ -40,6 +48,15 @@ p {
     &[data-size="lg"] {
         font-size: 1.125rem;
     }
+}
+
+.backgroundGradient {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 900px;
+    background: linear-gradient(175deg, themed('luny-band', 15), transparent, transparent);
+    z-index: -1;
 }
 
 /*

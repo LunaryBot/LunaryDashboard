@@ -51,28 +51,26 @@ const tonalits = Object.entries({
     "100": ''
 });
 
-function ThemeVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) {
+function ThemeCSSVariables({ band = "#A020F0", mode = 'dark' }: IThemeColors = {}) {
     const baseColors: IBaseColors = basesColors[mode] || basesColors['dark'];
     
     const obj = {
-        "--luny-colors-background": baseColors.background,
-        "--luny-colors-backgroundSecondary": baseColors.backgroundSecondary,
-        "--luny-colors-band": band,
-        "--luny-colors-text": baseColors.text,
-        "--luny-colors-ui": baseColors.ui,
-        "--luny-colors-flow": baseColors.flow,
-        ...mapTonalits("--luny-colors-band", band),
-        ...mapTonalits("--luny-colors-ui", baseColors.ui),
-        ...mapTonalits("--luny-colors-flow", baseColors.flow),
-        ...mapTonalits("--luny-colors-text", baseColors.text),
-        "--luny-colors-overlay": baseColors.overlay + "E6",
-        "--luny-colors-icon": baseColors.icon || band,
-        ...mapTonalits("--luny-colors-light", whiteColor),
-        ...mapTonalits("--luny-colors-dark", blackColor),
-        "--luny-colors-green": "#61fe80",
-        "--luny-colors-red": "#fe4854",
-        "--luny-colors-blue": "#0d97fb",
-        "--luny-colors-gradient": `${baseColors.gradient}`,
+        "--luny-background": baseColors.background,
+        "--luny-backgroundSecondary": baseColors.backgroundSecondary,
+        "--luny-band": band,
+        "--luny-text": baseColors.text,
+        "--luny-ui": baseColors.ui,
+        "--luny-flow": baseColors.flow,
+        ...mapTonalits("--luny-band", band),
+        ...mapTonalits("--luny-ui", baseColors.ui),
+        ...mapTonalits("--luny-flow", baseColors.flow),
+        ...mapTonalits("--luny-text", baseColors.text),
+        "--luny-overlay": baseColors.overlay + "E6",
+        "--luny-icon": baseColors.icon || band,
+        "--luny-green": "#61fe80",
+        "--luny-red": "#fe4854",
+        "--luny-blue": "#0d97fb",
+        "--luny-gradient": `${baseColors.gradient}`,
     };
 
     return { 
@@ -89,5 +87,5 @@ function mapTonalits(key: string, color: string) {
     );
 };
     
-export default ThemeVariables;
+export default ThemeCSSVariables;
 module.exports.mapTonalits = mapTonalits;

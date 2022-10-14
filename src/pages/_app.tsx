@@ -16,8 +16,6 @@ export default function MyApp({ Component, pageProps }) {
         const body = document.querySelector('body');
 
         body.classList.add(themesStyle.root);
-
-        console.log(themesStyle.root)
         
         if(!_mode) {
             setMode(localStorage.getItem('theme') as 'dark' | 'light' | null || 'dark')
@@ -28,11 +26,15 @@ export default function MyApp({ Component, pageProps }) {
         body.setAttribute('data-theme', mode);
 
         window.changeMode = (mode) => {
-            localStorage.setItem('mode', mode);
-            // document.querySelector('[data-styled]').innerHTML = `:root {${Theme({ mode: mode || 'dark' }).toString()}}`
+            localStorage.setItem('theme', mode);
+            document.querySelector('[data-styled]').innerHTML = `:root {${Theme({ mode: mode || 'dark' }).toString()}}`
             body.setAttribute('data-theme', mode);
         }
     }, []);
+
+    const GlobalStyle = createGlobalStyle`
+        :root {${Theme({ mode: _mode || 'dark' })}};
+    `
 
     return (
         <> 
@@ -42,7 +44,8 @@ export default function MyApp({ Component, pageProps }) {
                 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
                 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
             </Head>
-            <div className={"backgroundGradient"} />
+            <GlobalStyle />
+            <div className={'backgroundGradient'} />
             <DashboardLayout>
                 <Component {...pageProps} />   
             </DashboardLayout>
