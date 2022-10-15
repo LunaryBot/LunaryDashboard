@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Dots from '../Dots';
-
 import styles from '../../styles/Sidebar.module.scss';
 
 const servers = [

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Dots = styled.div`
+const DotsWrapper = styled.div`
     width: 100%;
     height: 40px;
     display: flex;
@@ -32,10 +32,10 @@ const Dots = styled.div`
     }
 `;
 
-export default () => (
-    <Dots>
+export const Dots = () => (
+    <DotsWrapper>
         <div />
         <div />
         <div />
-    </Dots>
+    </DotsWrapper>
 )
