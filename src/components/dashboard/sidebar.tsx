@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import Dots from '../Dots';
 
 import styles from '../../styles/Sidebar.module.scss';
-import { useEffect, useState } from 'react';
 
 const servers = [
     'LunaryBot',
@@ -16,12 +16,21 @@ const servers = [
     'TuneMusicBot',
 ];
 
-export function DashboardSidebar(props: {}) {
+export function DashboardSidebar() {
     const [opened, setOpen] = useState<boolean>(false);
 
     const router = useRouter();
 
-    useEffect(() => console.log(opened))
+    useEffect(() => {
+        const serversMenu = document.querySelector(`.${styles.serversMenuWrapper}`) as HTMLElement;
+        const profile = document.querySelector(`.${styles.profile}`) as HTMLElement;
+
+        window.addEventListener('click', (e) => {
+            if(opened && !serversMenu.contains(e.target as Node) && !profile.contains(e.target as Node)) {
+                setOpen(false);
+            }
+        });
+    })
 
     const openedProps = opened ? {'data-opened': true} : {}
 
@@ -62,7 +71,7 @@ export function DashboardSidebar(props: {}) {
                                 <hr />
 
                                 {servers.map(name => (
-                                    <li>
+                                    <li key={name}>
                                         <Link href={`/dashboard/guilds/${name}`}>
                                             <a>
                                                 <div className={styles.server}>
@@ -110,7 +119,7 @@ export function DashboardSidebar(props: {}) {
                     <li data-selected>
                         <Link href='#'>
                             <a>
-                                <i className={`${router.asPath == '/' ? 'fa' : 'far'} fa-home`} />
+                                <i className={`${router.pathname == '/' ? 'fa' : 'far'} fa-home`} />
                                 <span>Dashboard</span>
                             </a>
                         </Link>
