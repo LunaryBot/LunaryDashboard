@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { DashboardSidebar } from './sidebar';
+import { Header } from '../header';
 
 import styles from '../../styles/Sidebar.module.scss';
 
@@ -21,9 +22,10 @@ export class DashboardLayout extends React.Component {
         return (
             <>
                 <DashboardSidebar />
-                <div className={styles.content}>
+                <section className={styles.content}>
+                    <Header />
                     {children}
-                </div>
+                </section>
             </>
         )
     }

@@ -1,0 +1,112 @@
+@import "theme.module";
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+.header {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    background-color: var(--luny-background);
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid themed('luny-ui', 15);
+    border-radius: 0.75rem;
+    color: themed('luny-text', 60);
+    padding: 0 1rem;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            display: inline;
+            position: relative;
+            cursor: pointer;
+            padding: 0 10px;
+
+            i {
+                font-size: 1.25rem;
+            }
+
+            span.text {
+                padding-left: 10px;
+            }
+
+            a {
+                text-decoration: none;
+                display: inline-block;
+                transition: background .3s;
+                padding: 0 10px;
+                color: themed('luny-text', 60);
+            }
+
+            
+            ul {
+                display: none;
+                left: 0;
+                position: absolute;
+                background-color: var(--luny-background);
+                margin-top: 10px;
+                border: 1px solid themed('luny-ui', 15);
+                border-radius: 0.75rem;
+                width: 200px;
+
+                li {
+                    a {
+                        display: block;
+                        border-radius: 0.3rem;
+                        padding: 10px;
+
+                        &:hover {
+                            background-color: themed('luny-ui', 15);
+                        }
+                    }
+                }
+            }
+
+            &.open {
+                ul {
+                    display: grid;
+                    grid-gap: 10px;
+                    padding: 10px 0;
+                    animation: subMenuHover 0.25s;
+                    z-index: 1000;
+                }
+            }
+
+            &:hover {
+                ul {
+                    a {
+                        color: themed('luny-text', 60);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes subMenuHover {
+    0% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        ul {
+            li {
+                a {
+                    span.text {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
