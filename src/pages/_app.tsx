@@ -30,7 +30,7 @@ export default function MyApp({ Component, pageProps }) {
             document.querySelector('[data-styled]').innerHTML = `:root {${Theme({ mode: mode || 'dark' }).toString()}}`
             body.setAttribute('data-theme', mode);
         }
-    }, []);
+    });
 
     const GlobalStyle = createGlobalStyle`
         :root {${Theme({ mode: _mode || 'dark' })}};
