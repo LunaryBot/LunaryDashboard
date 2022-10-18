@@ -1,4 +1,4 @@
-import { PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useState, MouseEvent} from 'react';
+import { PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useState} from 'react';
 
 import styles from '../styles/Card.module.scss';
 
