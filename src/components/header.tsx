@@ -9,15 +9,20 @@ export function Header() {
 
         dropdowns.forEach((dropdown) => {
             dropdown.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdown.classList.toggle(styles.open);
+                const classList = dropdown.classList;
+
+                if(classList.toString().includes(styles.open)) {
+                    classList.remove(styles.open)
+                } else {
+                    classList.add(styles.open)
+                }
             });
 
             document.addEventListener('click', () => {
                 dropdown.classList.remove(styles.open);
             });
         });
-    });
+    }, []);
 
     return (
         <header className={styles.header}>
@@ -34,7 +39,7 @@ export function Header() {
                     </a>
                 </li>
 
-                <li data-dropdown>
+                <li data-dropdown className=''>
                     <i className={'fad fa-box-alt'} />
                     <span className={styles.text}>Features</span>
                     <ul>
