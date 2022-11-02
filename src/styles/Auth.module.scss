@@ -1,0 +1,79 @@
+@import "theme.module";
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+      
+    .help {
+        padding-top: 95px;
+    }
+
+    .loginInfos {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+        img {
+            width: 125px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .placeholder {
+            width: 125px;
+            height: 120px;
+            display: block;
+            border-radius: 50%;
+            background-color: themed('luny-band');
+        }
+
+        label {
+            display: block;
+            font-size: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: themed('luny-text');
+        }
+
+        button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            background-color: themed('luny-band');
+            color: white;
+            transition: all ease .3s;
+        }
+
+        button:hover {
+            background-color: themed('luny-band', 60);
+        }
+    }
+
+    @media (min-width: 768px) {
+        & {
+            width: 750px;
+        }
+    }
+      
+    @media (min-width: 992px) {
+        & {
+          width: 970px;
+        }
+    }
+      
+    @media (min-width: 1200px) {
+        & {
+          width: 1170px;
+        }
+    }
+}
