@@ -6,10 +6,8 @@ export const api = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export const createAPIClient = token => new ApolloClient({
+export const createAPIClient = (token: string | null) => new ApolloClient({
     uri: ApiUrl,
     cache: new InMemoryCache(),
-    headers: {
-        'Authorization': token,
-    },
+    headers: token ? { 'Authorization': token } : undefined,
 });
