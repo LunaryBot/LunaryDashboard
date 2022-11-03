@@ -8,14 +8,17 @@ import { DashboardLayout } from '../components/dashboard';
 import Theme from '../utils/theme';
 
 import themesStyle from '../styles/theme.module.scss';
+import { useRouter } from 'next/router';
+import { APIProvider } from '../contexts/APIContext';
+
+APIProvider
 
 export default function MyApp({ Component, pageProps }) {
     const [_mode, setMode] = useState<'dark'|'light'|null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const body = document.querySelector('body');
-
-        body.classList.add(themesStyle.root);
         
         if(!_mode) {
             setMode(localStorage.getItem('theme') as 'dark' | 'light' | null || 'dark')
@@ -32,9 +35,11 @@ export default function MyApp({ Component, pageProps }) {
         }
     });
 
-    const GlobalStyle = createGlobalStyle`
-        :root {${Theme({ mode: _mode || 'dark' })}};
-    `
+    const Children = router.pathname.startsWith('/dashboard') ? (
+        <DashboardLayout>
+            <Component {...pageProps} />   
+        </DashboardLayout>
+    ) : <Component {...pageProps} />   
 
     return (
         <> 
@@ -44,11 +49,13 @@ export default function MyApp({ Component, pageProps }) {
                 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
                 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
             </Head>
-            <GlobalStyle />
+            <style id={'colors'}>{`
+                :root {${Theme({ mode: _mode || 'dark' })}};
+            `}</style>
             <div className={'backgroundGradient'} />
-            <DashboardLayout>
-                <Component {...pageProps} />   
-            </DashboardLayout>
+            <APIProvider>
+                {Children}
+            </APIProvider>
         </>
     )
 }
