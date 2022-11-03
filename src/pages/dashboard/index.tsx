@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { useContext } from 'react';
 
 import { Card, Select } from '../../components';
-import APIContext from '../../contexts/APIContext';
+import { useAPI } from '../../hooks/useAPI';
 
 export default function Index() {
-    const context = useContext(APIContext)
+    const context = useAPI();
+
     return (
         <main>
             <Card size='small'>

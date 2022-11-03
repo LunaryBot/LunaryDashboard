@@ -1,16 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Utils } from '../../utils';
 
 import styles from '../../styles/Sidebar.module.scss';
-import APIContext from '../../contexts/APIContext';
 import { Dots } from '../dots';
+import { useAPI } from '../../hooks/useAPI';
 
 export function DashboardSidebar() {
     const [opened, setOpen] = useState<boolean>(false);
-    const { user, fetchUserGuilds } = useContext(APIContext);
+    const { user, fetchUserGuilds } = useAPI();
 
     const router = useRouter();
 
