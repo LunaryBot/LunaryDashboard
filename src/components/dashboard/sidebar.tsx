@@ -1,21 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import styles from '../../styles/Sidebar.module.scss';
+import { Utils } from '../../utils';
 
-const servers = [
-    'LunaryBot',
-    'Ballerini-Server',
-    'ZulyBot',
-    'IsLuny',
-    'mpyorg',
-    'Blue-Phoenix-org',
-    'TuneMusicBot',
-];
+import styles from '../../styles/Sidebar.module.scss';
+import APIContext from '../../contexts/APIContext';
+import { Dots } from '../dots';
 
 export function DashboardSidebar() {
     const [opened, setOpen] = useState<boolean>(false);
+    const { user, fetchUserGuilds } = useContext(APIContext);
 
     const router = useRouter();
 
@@ -28,7 +23,11 @@ export function DashboardSidebar() {
                 setOpen(false);
             }
         });
-    })
+
+        if(opened && !user.guilds) {
+            fetchUserGuilds();
+        }
+    });
 
     const openedProps = opened ? {'data-opened': true} : {}
 
@@ -38,12 +37,12 @@ export function DashboardSidebar() {
                 <div className={styles.container}>
                     <div className={styles.profile} {...openedProps} onClick={() => setOpen(!opened)}>
                         <span className={styles.image}>
-                            <img src={'https://github.com/jvopinho.png'} alt={'@jvopinho'} />
+                            <img src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.webp?size=2048`} alt={`@${user?.username}`} />
                         </span>
 
                         <div className={styles.text}>
-                            <span className={styles.name}>Bae.</span>
-                            <span className={styles.id}>452618703792766987</span>
+                            <span className={styles.name}>{user?.username}</span>
+                            <span className={styles.id}>{user?.id}</span>
                         </div>
                     </div>
 
@@ -55,11 +54,11 @@ export function DashboardSidebar() {
                                         <a>
                                             <div className={styles.server}>
                                                 <span className={styles.image}>
-                                                    <img src={'https://github.com/jvopinho.png'} />
+                                                    <img src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.webp?size=2048`} />
                                                 </span>
 
                                                 <span className={styles.text}>
-                                                    <span className={styles.name}>Bae.</span>
+                                                    <span className={styles.name}>{user?.username}</span>
                                                 </span>
                                             </div>
                                         </a>
@@ -68,23 +67,23 @@ export function DashboardSidebar() {
 
                                 <hr />
 
-                                {servers.map(name => (
-                                    <li key={name}>
-                                        <Link href={`/dashboard/guilds/${name}`}>
+                                {user?.guilds?.map(guild => (
+                                    <li key={guild.id}>
+                                        <Link href={`/dashboard/guilds/${guild.id}`}>
                                             <a>
                                                 <div className={styles.server}>
                                                     <span className={styles.image}>
-                                                        <img src={`https://github.com/${name}.png`} />
+                                                        { guild.icon ? <img src={Utils.getGuildIcon(guild, { size: 1024, dynamic: true })} /> : <div>{Utils.stringAcronym(guild.name)}</div> }
                                                     </span>
 
                                                     <span className={styles.text}>
-                                                        <span className={styles.name}>{name}</span>
+                                                        <span className={styles.name}>{guild.name}</span>
                                                     </span>
                                                 </div>
                                             </a>
                                         </Link>  
                                     </li>
-                                ))}
+                                )) ?? <Dots />}
 
                                 <hr />
 

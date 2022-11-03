@@ -1,9 +1,13 @@
 import Link from 'next/link';
+import { useContext } from 'react';
 
-import { Card, Select } from '../components';
+import { Card, Select } from '../../components';
+import APIContext from '../../contexts/APIContext';
 
 export default function Index() {
+    const context = useContext(APIContext)
     return (
+        <main>
             <Card size='small'>
                 <Card.Header>
                     <h2>
@@ -34,5 +38,6 @@ export default function Index() {
                     />
                 </Card.Content>
             </Card>
+        </main>
     )
 }
