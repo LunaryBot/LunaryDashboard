@@ -1,0 +1,39 @@
+@import "theme.module";
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+.button {
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background-color: themed('luny-band');
+    color: white;
+    transition: all ease .3s;
+    display: inline-flex;
+	align-items: center;
+    height: 40px;
+    padding: 10px 10px;
+    justify-content: center;
+
+    span {
+        font-size: 17px;
+
+        &:is(.text, .icon) {
+            padding: 10px 10px;
+        }
+
+        &.text {
+            justify-content: center;
+        }
+    }
+
+    &:hover {
+        background-color: themed('luny-band', 80);
+    }
+
+    &:disabled {
+        background-color: themed('luny-band', 20);
+    }
+}

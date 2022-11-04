@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Card, Select } from '../../components';
+import { Card, Select, Button } from '../../components';
 import { useAPI } from '../../hooks/useAPI';
 
 export default function Index() {
@@ -36,6 +36,34 @@ export default function Index() {
                             }
                         ]}
                     />
+
+                    <Button style={{width: '100px'}}>
+                        <Button.Icon>
+                            <i className='far fa-home'/>
+                        </Button.Icon>
+                        
+                        <Button.Content>
+                            Home
+                        </Button.Content>
+                    </Button>
+
+                    <Button style={{width: '100px'}}>
+                        <Button.Icon>
+                            <i className='far fa-home'/>
+                        </Button.Icon>
+                    </Button>
+
+                    <Button style={{width: '100px'}}>
+                        <Button.Content>
+                            Home
+                        </Button.Content>
+                    </Button>
+                    
+                    {/* <Button>
+                        <Button.Content>
+                            <i className='far fa-home'/>
+                        </Button.Content>
+                    </Button> */}
                 </Card.Content>
             </Card>
         </main>
