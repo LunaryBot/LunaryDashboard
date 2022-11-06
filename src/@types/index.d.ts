@@ -19,6 +19,17 @@ export interface Channel {
 	nsfw: boolean;
 }
 
+export interface Guild {
+	id: string;
+	name: string;
+	owner_id: string;
+	banner: string | null;
+	features: string[];
+	icon: string | null;
+	channels: Channel[];
+	roles: Role[];
+}
+
 export interface Role {
 	id: string;
 	name: string;
