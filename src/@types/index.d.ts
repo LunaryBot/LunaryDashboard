@@ -1,3 +1,5 @@
+import { ChannelType } from 'discord-api-types/v10';
+
 export interface AbstractGuild {
 	id: string;
 	name: string;
@@ -5,6 +7,16 @@ export interface AbstractGuild {
 	features: string[];
 	owner: boolean;
 	permissions: number;
+}
+
+export interface Channel {
+	id: string;
+	name: string;
+	type: ChannelType;
+	createdAt: number;
+	parent_id: string | null;
+	position: number;
+	nsfw: boolean;
 }
 
 export interface User {
