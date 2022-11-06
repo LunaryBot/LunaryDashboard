@@ -19,6 +19,17 @@ export interface Channel {
 	nsfw: boolean;
 }
 
+export interface Role {
+	id: string;
+	name: string;
+	permissions: number;
+	color: number | null;
+	hoist: boolean;
+	managed: boolean;
+	mentionable: boolean;
+	position: number;
+}
+
 export interface User {
 	id: string;
 	username: string;
