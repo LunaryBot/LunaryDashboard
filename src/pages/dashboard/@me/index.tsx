@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { Card, Select, Button } from '../../components';
-import { useAPI } from '../../hooks/useAPI';
+import { Card, Select, Button } from '../../../components';
+import { useAPI } from '../../../hooks/useAPI';
 
 export default function Index() {
     const context = useAPI();
@@ -58,12 +58,6 @@ export default function Index() {
                             Home
                         </Button.Content>
                     </Button>
-                    
-                    {/* <Button>
-                        <Button.Content>
-                            <i className='far fa-home'/>
-                        </Button.Content>
-                    </Button> */}
                 </Card.Content>
             </Card>
         </main>
