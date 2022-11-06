@@ -43,17 +43,6 @@
             color: themed('luny-text');
         }
 
-        button {
-            padding: 10px 30px;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            cursor: pointer;
-            background-color: themed('luny-band');
-            color: white;
-            transition: all ease .3s;
-        }
-
         button:hover {
             background-color: themed('luny-band', 60);
         }

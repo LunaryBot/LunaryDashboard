@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import qs from 'qs';
 import { gql } from '@apollo/client';
 
 import { User } from '../../@types';
 
-import { useApolloFetch } from '../../hooks/useApolloFetch';
+import { Button } from '../../components'
 
 import { createAPIClient } from '../../services/ApiService';
 
@@ -13,7 +12,6 @@ import styles from '../../styles/Auth.module.scss';
 
 export default function AuthDiscord() {
     const [user, setUser] = useState<User>();
-    // const [token ,setToken] = useState<string | null>();
 
     useEffect(() => {
         const loginButton = document.getElementById('loginButton');
@@ -61,7 +59,11 @@ export default function AuthDiscord() {
             <div className={styles.loginInfos}>
                 { user?.avatar ? <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=2048`} alt={`@${user.username}`} /> : <div className={styles.placeholder}></div> }
                 <label>{user?.username}</label>
-                <button id={'loginButton'}>Logar</button>
+                <Button id={'loginButton'}>
+                    <Button.Content>
+                        Logar
+                    </Button.Content>
+                </Button>
             </div>
         </div>
     )
