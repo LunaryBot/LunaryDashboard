@@ -51,17 +51,15 @@ export function DashboardSidebar() {
                             <ul>
                                 <li data-selected>
                                     <Link href={'/dashboard/@me'}>
-                                        <a>
-                                            <div className={styles.server}>
-                                                <span className={styles.image}>
-                                                    <img src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.webp?size=2048`} />
-                                                </span>
+                                        <div className={styles.server}>
+                                            <span className={styles.image}>
+                                                <img src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.webp?size=2048`} />
+                                            </span>
 
-                                                <span className={styles.text}>
-                                                    <span className={styles.name}>{user?.username}</span>
-                                                </span>
-                                            </div>
-                                        </a>
+                                            <span className={styles.text}>
+                                                <span className={styles.name}>{user?.username}</span>
+                                            </span>
+                                        </div>
                                     </Link>  
                                 </li>
 
@@ -69,18 +67,21 @@ export function DashboardSidebar() {
 
                                 {user?.guilds?.map(guild => (
                                     <li key={guild.id}>
-                                        <Link href={`/dashboard/guilds/${guild.id}`}>
-                                            <a>
-                                                <div className={styles.server}>
-                                                    <span className={styles.image}>
-                                                        { guild.icon ? <img src={Utils.getGuildIcon(guild, { size: 1024, dynamic: true })} /> : <div>{Utils.stringAcronym(guild.name)}</div> }
-                                                    </span>
+                                        <Link href={{
+                                            href: `/dashboard/guilds/[guild]`,
+                                            query: {
+                                                guild: guild.id,
+                                            }
+                                        }} >
+                                            <div className={styles.server}>
+                                                <span className={styles.image}>
+                                                    { guild.icon ? <img src={Utils.getGuildIcon(guild, { size: 1024, dynamic: true })} /> : <div>{Utils.stringAcronym(guild.name)}</div> }
+                                                </span>
 
-                                                    <span className={styles.text}>
-                                                        <span className={styles.name}>{guild.name}</span>
-                                                    </span>
-                                                </div>
-                                            </a>
+                                                <span className={styles.text}>
+                                                    <span className={styles.name}>{guild.name}</span>
+                                                </span>
+                                            </div>
                                         </Link>  
                                     </li>
                                 )) ?? <Dots />}
@@ -89,17 +90,15 @@ export function DashboardSidebar() {
 
                                 <li className={styles.invite}>
                                     <Link href={'/invite'}>
-                                        <a>
-                                            <div className={styles.server}>
-                                                <span className={styles.image}>
-                                                    <img src={'https://imgur.com/xCIgS2n.png'} style={{borderRadius: '0'}} />
-                                                </span>
+                                        <div className={styles.server}>
+                                            <span className={styles.image}>
+                                                <img src={'https://imgur.com/xCIgS2n.png'} style={{borderRadius: '0'}} />
+                                            </span>
 
-                                                <span className={styles.text}>
-                                                    <span className={styles.name}>Invite</span>
-                                                </span>
-                                            </div>
-                                        </a>
+                                            <span className={styles.text}>
+                                                <span className={styles.name}>Invite</span>
+                                            </span>
+                                        </div>
                                     </Link>
                                 </li>
                             </ul>
@@ -115,10 +114,8 @@ export function DashboardSidebar() {
                     </li>
                     <li data-selected>
                         <Link href='#'>
-                            <a>
-                                <i className={`${router.pathname == '/' ? 'fa' : 'far'} fa-home`} />
-                                <span>Dashboard</span>
-                            </a>
+                            <i className={`${router.pathname == '/' ? 'fa' : 'far'} fa-home`} />
+                            <span>Dashboard</span>
                         </Link>
                     </li>
                 </div>
