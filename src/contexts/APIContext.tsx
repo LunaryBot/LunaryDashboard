@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import { User, UserWithGuilds, AbstractGuild } from '../@types';
+import { User, UserWithGuilds, AbstractGuild, Guild } from '../@types';
 import { createAPIClient } from '../services/ApiService';
 import { gql } from '@apollo/client';
 import { Client } from '../services/ClientService';
@@ -10,6 +10,7 @@ interface APIContextData {
     loading: boolean;
     user: UserWithGuilds;
 
+    fetchGuild: (id: string) => Promise<Guild[]>;
     fetchUserGuilds: () => Promise<AbstractGuild[]>;
 }
 
@@ -73,6 +74,49 @@ export class APIProvider extends React.Component {
         }
     }
 
+    async fetchGuild(id: string) {
+        const { data, errors } = await this.client.api.query({
+            query: gql`
+                query Guild($guild_id: String!) {
+                    Guild(id: $guild_id) {
+                        id
+                        name
+                        features
+                        icon
+                        owner_id
+                        banner
+                        channels {
+                            id
+                            type
+                            createdAt
+                            name
+                            nsfw
+                            parent_id
+                            position
+                        }
+                        roles {
+                            color
+                            hoist
+                            id
+                            managed
+                            mentionable
+                            name
+                            permissions
+                            position
+                        }
+                    }
+                }
+            `,
+            variables: {
+                guild_id: id,
+            },
+        });
+
+        console.log(errors);
+
+        return data?.Guild as Guild;
+    }
+
     async fetchUserGuilds() {
         const { data, errors } = await this.client.api.query({
             query: gql`
@@ -106,10 +150,17 @@ export class APIProvider extends React.Component {
             props: { children },
             state: { loading, user },
             fetchUserGuilds,
+            fetchGuild,
         } = this;
 
         return (
-            <APIContext.Provider value={{signed: !!user, user, loading, fetchUserGuilds: fetchUserGuilds.bind(this)}}>
+            <APIContext.Provider value={{
+                signed: !!user, 
+                loading, 
+                user, 
+                fetchUserGuilds: fetchUserGuilds.bind(this), 
+                fetchGuild: fetchGuild.bind(this),
+            }}>
                 {children}
             </APIContext.Provider>
         )
