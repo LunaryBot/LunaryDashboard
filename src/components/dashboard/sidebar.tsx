@@ -67,12 +67,7 @@ export function DashboardSidebar() {
 
                                 {user?.guilds?.map(guild => (
                                     <li key={guild.id}>
-                                        <Link href={{
-                                            href: `/dashboard/guilds/[guild]`,
-                                            query: {
-                                                guild: guild.id,
-                                            }
-                                        }} >
+                                        <Link href={`/dashboard/guilds/${guild.id}`} >
                                             <div className={styles.server}>
                                                 <span className={styles.image}>
                                                     { guild.icon ? <img src={Utils.getGuildIcon(guild, { size: 1024, dynamic: true })} /> : <div>{Utils.stringAcronym(guild.name)}</div> }
