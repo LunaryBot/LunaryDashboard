@@ -13,10 +13,9 @@ export interface Channel {
 	id: string;
 	name: string;
 	type: ChannelType;
-	createdAt: number;
 	parent_id: string | null;
 	position: number;
-	nsfw: boolean;
+	nsfw: boolean | null;
 }
 
 export interface Guild {
