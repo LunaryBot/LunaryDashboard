@@ -5,6 +5,9 @@ import { createAPIClient } from '../services/ApiService';
 import { ApolloError, gql, NetworkStatus, ServerError, ServerParseError } from '@apollo/client';
 import { Client } from '../services/ClientService';
 import { NetworkError } from '@apollo/client/errors';
+import { Utils } from '../utils';
+
+const guildUrlString = /\/dashboard\/guilds\/(\d*).*?/i
 
 interface APIContextData {
     signed: boolean;
@@ -12,6 +15,7 @@ interface APIContextData {
     user: UserWithGuilds;
     guild?: Guild;
 
+    checkGuild: (guildId: string) => boolean;
     fetchGuild: (id: string) => Promise<Guild[]>;
     fetchUserGuilds: () => Promise<AbstractGuild[]>;
 }
@@ -89,6 +93,23 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
         }
     }
 
+    async componentDidUpdate() {
+        const pathname = window.location.pathname;
+
+        if(guildUrlString.test(pathname)) {
+            const guildId = pathname.replace(guildUrlString, '$1');
+
+            if(this.state.guild?.id !== guildId) {
+                await this.fetchGuild(guildId);
+            }
+        }
+    }
+
+
+    checkGuild(guildId: string) {
+        return this.state.guild?.id === guildId;
+    }
+
     async fetchGuild(id: string) {
         const { data, errors } = await this.client.api.query({
             query: gql`
@@ -103,7 +124,6 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
                         channels {
                             id
                             type
-                            createdAt
                             name
                             nsfw
                             parent_id
@@ -165,9 +185,10 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
     render(): React.ReactNode {
         const { 
             props: { children },
-            state: { loading, user },
+            state: { loading, user, guild },
             fetchUserGuilds,
             fetchGuild,
+            checkGuild,
         } = this;
 
         return (
@@ -175,6 +196,8 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
                 signed: !!user, 
                 loading, 
                 user, 
+                guild,
+                checkGuild: checkGuild.bind(this),
                 fetchUserGuilds: fetchUserGuilds.bind(this), 
                 fetchGuild: fetchGuild.bind(this),
             }}>
