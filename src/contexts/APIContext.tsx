@@ -2,13 +2,15 @@ import React, { createContext, useEffect, useState } from 'react';
 
 import { User, UserWithGuilds, AbstractGuild, Guild } from '../@types';
 import { createAPIClient } from '../services/ApiService';
-import { gql } from '@apollo/client';
+import { ApolloError, gql, NetworkStatus, ServerError, ServerParseError } from '@apollo/client';
 import { Client } from '../services/ClientService';
+import { NetworkError } from '@apollo/client/errors';
 
 interface APIContextData {
     signed: boolean;
     loading: boolean;
     user: UserWithGuilds;
+    guild?: Guild;
 
     fetchGuild: (id: string) => Promise<Guild[]>;
     fetchUserGuilds: () => Promise<AbstractGuild[]>;
@@ -16,14 +18,12 @@ interface APIContextData {
 
 const APIContext = createContext<APIContextData>({} as APIContextData);
 
-export class APIProvider extends React.Component {
-    public props: React.PropsWithChildren;
-    public state: {
-        loading: boolean;
-        user: UserWithGuilds;
-        token: string;
-    }
-
+export class APIProvider extends React.Component<React.PropsWithChildren, {
+    loading: boolean;
+    user: UserWithGuilds;
+    token: string;
+    guild: Guild;
+}> {
     public client = new Client();
 
     constructor(props: React.PropsWithChildren) {
@@ -32,6 +32,7 @@ export class APIProvider extends React.Component {
         this.state = {
             loading: true,
             user: null,
+            guild: null,
             token: null,
         }
     }
@@ -42,35 +43,49 @@ export class APIProvider extends React.Component {
         const loadUser = async() => {
             this.client.setToken(storagedToken);
 
-            const { data, errors } = await this.client.api.query({
-                query: gql`
-                    query User {
-                        CurrentUser {
-                            username
-                            id
-                            public_flags
-                            avatar
-                            discriminator
+            try {
+                const { data, errors } = await this.client.api.query({
+                    query: gql`
+                        query User {
+                            CurrentUser {
+                                username
+                                id
+                                public_flags
+                                avatar
+                                discriminator
+                            }
                         }
-                    }
-                `,
-            });
-            
-            if(errors?.length > 0) {
-                return errors;
-            }
-
-            if(data) {
-                this.setState({
-                    user: { ...data.CurrentUser, guilds: null },
-                    loading: false,
-                    token: storagedToken,
+                    `,
                 });
+                
+                if(errors?.length > 0) {
+                    console.log(errors);
+                    return errors;
+                }
+    
+                if(data) {
+                    this.setState({
+                        user: { ...data.CurrentUser, guilds: null },
+                        loading: false,
+                        token: storagedToken,
+                    });
+                }
+            } catch(error) {
+                const err = (error as ApolloError).graphQLErrors[0] as any;
+
+                if(err.status == 401) {
+                    localStorage.removeItem('auth_token')
+                    window.location.href = '/login';
+                }
+
+                console.log(err);
             }
         }
 
         if(storagedToken) {
-            loadUser();
+            loadUser()
+        } else if(window.location.pathname.startsWith('/dashboard')) {
+            window.location.href = '/login';
         }
     }
 
@@ -112,9 +127,11 @@ export class APIProvider extends React.Component {
             },
         });
 
-        console.log(errors);
+        const guild = data?.Guild as Guild;
 
-        return data?.Guild as Guild;
+        this.setState({ guild });
+
+        return guild;
     }
 
     async fetchUserGuilds() {
@@ -136,13 +153,13 @@ export class APIProvider extends React.Component {
             }
         });
 
-        const guilds = data.CurrentUserGuilds;
+        const guilds = data.CurrentUserGuilds as AbstractGuild[];
 
         this.setState({
             user: { ...this.state.user, guilds },
         });
 
-        return guilds as AbstractGuild[];
+        return guilds;
     }
 
     render(): React.ReactNode {
