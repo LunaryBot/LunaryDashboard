@@ -1,4 +1,4 @@
-import { AbstractGuild } from '../@types';
+import { AbstractGuild, User } from '../@types';
 
 type TScope = 
 	'applications.builds.read' 
@@ -32,6 +32,14 @@ export class Utils {
             .replace(/'s /g, ' ')
             .replace(/\w+/g, w => w[0])
             .replace(/\s/g, '');
+    }
+
+    static getUserAvatar(user: User, options: { size: 128 | 256 | 512 | 1024 | 2048, dynamic?: boolean } = { size: 1024 }): string {
+        if (user?.avatar) {
+            return `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.webp?size=${options.size}`;
+        } else {
+            return `https://cdn.discordapp.com/embed/avatars/${Number(user?.discriminator || '0000') % 5}.png`;
+        }
     }
 
     static getGuildIcon(guild: AbstractGuild, options: { size: 128 | 256 | 512 | 1024 | 2048, dynamic?: boolean } = { size: 1024 }): string {
