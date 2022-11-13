@@ -102,6 +102,8 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
             if(this.state.guild?.id !== guildId) {
                 await this.fetchGuild(guildId);
             }
+        } else if(this.state.guild) {
+            this.setState({ guild: null });
         }
     }
 
