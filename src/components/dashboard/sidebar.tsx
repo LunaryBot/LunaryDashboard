@@ -10,7 +10,7 @@ import { useAPI } from '../../hooks/useAPI';
 
 export function DashboardSidebar() {
     const [opened, setOpen] = useState<boolean>(false);
-    const { user, fetchUserGuilds } = useAPI();
+    const { user, guild, fetchUserGuilds } = useAPI();
 
     const router = useRouter();
 
@@ -37,12 +37,12 @@ export function DashboardSidebar() {
                 <div className={styles.container}>
                     <div className={styles.profile} {...openedProps} onClick={() => setOpen(!opened)}>
                         <span className={styles.image}>
-                            <img src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.webp?size=2048`} alt={`@${user?.username}`} />
+                            { guild ? (guild.icon ? <img src={Utils.getGuildIcon(guild as any, { size: 1024, dynamic: true })} alt={`#${guild.name}`} /> : <div>{Utils.stringAcronym(guild.name)}</div>) : <img src={Utils.getUserAvatar(user)} alt={`@${user?.username}`} /> }
                         </span>
 
                         <div className={styles.text}>
-                            <span className={styles.name}>{user?.username}</span>
-                            <span className={styles.id}>{user?.id}</span>
+                            <span className={styles.name}>{guild?.name || user?.username}</span>
+                            <span className={styles.id}>{(guild || user)?.id}</span>
                         </div>
                     </div>
 

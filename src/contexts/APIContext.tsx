@@ -107,7 +107,6 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
         }
     }
 
-
     checkGuild(guildId: string) {
         return this.state.guild?.id === guildId;
     }
