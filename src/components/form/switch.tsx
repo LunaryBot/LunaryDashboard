@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
+
+type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'type'> & {
+
+}
 
 const SwitchWrapper = styled.label`
     display: inline-block;
@@ -46,11 +50,19 @@ const SwitchWrapper = styled.label`
         transform: translateX(24px);
         background-color: var(--luny-band-100);
     }
+
+    & > input:checked:disabled + span {
+        cursor: no-drop;
+        
+        &:before {
+            background-color: var(--luny-band-40);
+        }
+    }
 `;
 
-export const Switch: React.FC = ({ checked: defaultChecked = false, disblabed = false }: { checked?: boolean, disblabed?: boolean }) => (
+export const Switch: React.FC<Props> = (props) => (
     <SwitchWrapper> 
-        <input type={'checkbox'} defaultChecked={defaultChecked} disabled={disblabed} />
+        <input type={'checkbox'} {...props} />
         <span />
     </SwitchWrapper>
 );
