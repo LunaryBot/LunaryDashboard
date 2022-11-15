@@ -7,7 +7,7 @@ import { Client } from '../services/ClientService';
 import { NetworkError } from '@apollo/client/errors';
 import { Utils } from '../utils';
 
-const guildUrlString = /\/dashboard\/guilds\/(\d*).*?/i
+const guildUrlString = /\/dashboard\/guilds\/(\d*)(\/.*)?/i
 
 interface APIContextData {
     signed: boolean;
@@ -35,7 +35,7 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
 
         this.state = {
             loading: true,
-            user: null,
+            user: null, 
             guild: null,
             token: null,
         }
