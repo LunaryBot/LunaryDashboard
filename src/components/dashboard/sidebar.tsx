@@ -8,11 +8,15 @@ import styles from '../../styles/Sidebar.module.scss';
 import { Dots } from '../dots';
 import { useAPI } from '../../hooks/useAPI';
 
+import { URLS } from '../../utils/Constants';
+
 export function DashboardSidebar() {
     const [opened, setOpen] = useState<boolean>(false);
     const { user, guild, fetchUserGuilds } = useAPI();
 
     const router = useRouter();
+
+    const urls = URLS[guild ? 'GUILD' : 'USER'];
 
     useEffect(() => {
         const serversMenu = document.querySelector(`.${styles.serversMenuWrapper}`) as HTMLElement;
@@ -103,17 +107,22 @@ export function DashboardSidebar() {
             </header>
 
             <ul className={styles.links}>
-                <div>
-                    <li>
-                        <span>General</span>
-                    </li>
-                    <li data-selected>
-                        <Link href='#'>
-                            <i className={`${router.pathname == '/' ? 'fa' : 'far'} fa-home`} />
-                            <span>Dashboard</span>
-                        </Link>
-                    </li>
-                </div>
+                {Object.entries(urls).map(([category, urls], index) => (
+                    <div key={`urls-${index}`}>
+                        <li>
+                            <span>{category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()}</span>
+                        </li>
+
+                        {urls.map((url, index) => (
+                            <li {...(router.pathname == url.url ? {'data-selected': true} : {})} key={`urls-${category}-${index}`}>
+                                <Link href={url.url.replace('[guild]', guild?.id)}>
+                                    <i className={`${router.pathname == '/' ? 'fa' : 'far'} ${url.icon}`} />
+                                    <span>{url.label}</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </div>
+                ))}
             </ul>
         </nav>
     )
