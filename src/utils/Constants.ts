@@ -17,7 +17,7 @@ export const URLS = {
         general: [
             {
                 label: 'Home',
-                url: '/dashboard/guilds/[guild]/',
+                url: '/dashboard/guilds/[guild]',
                 icon: 'fa-home'
             },
             {
