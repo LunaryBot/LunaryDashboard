@@ -45,9 +45,10 @@ export default function MyApp({ Component, pageProps }) {
         <> 
             <Head>
                 <title>Luna</title>
-                <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" />
-                <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+                <link href='https://pro.fontawesome.com/releases/v5.15.4/css/all.css' rel='stylesheet' />
+                <link href='https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap' rel='stylesheet' />
                 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
+                <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap' rel='stylesheet' />
             </Head>
             <style id={'colors'}>{`
                 :root {${Theme({ mode: _mode || 'dark' })}};
