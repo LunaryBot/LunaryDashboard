@@ -1,4 +1,4 @@
-import { PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useState} from 'react';
+import { PropsWithChildren, DetailedHTMLProps, HTMLAttributes, MouseEvent, useState, useEffect, useRef} from 'react';
 
 import styles from '../styles/Card.module.scss';
 
@@ -15,6 +15,7 @@ interface CardPropsRetractable extends CardProps {
 
 export function Card(props: CardProps|CardPropsRetractable = {}) {
     const [opened, setOpen] = useState<boolean>((props as CardPropsRetractable).defaultOpened ?? false);
+    const ref = useRef<HTMLDivElement>();
 
     const myProps = {
         'data-size': props.size || 'large',
@@ -26,8 +27,15 @@ export function Card(props: CardProps|CardPropsRetractable = {}) {
         if(opened) myProps['data-opened'] = true;
     }
 
+    
+    function toggle(event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) {
+        if(ref && ([ ...(ref.current?.childNodes || []) ].find(element => element.nodeName == 'HEADER') as HTMLDivElement)?.contains(event.target as any)) {
+            setOpen(!opened)
+        }
+    }
+
     return (
-        <div {...myProps} className={`${styles.card} ${props?.className || ''}`.trim()} onClick={(e) => setOpen(!opened)} />
+        <div {...myProps} className={`${styles.card} ${props?.className || ''}`.trim()} onClick={(e) => toggle(e)} ref={ref} />
     )
 }
 
