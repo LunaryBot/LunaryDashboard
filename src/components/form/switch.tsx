@@ -7,7 +7,7 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'type'> & 
 
 const SwitchWrapper = styled.label`
     display: inline-block;
-    height: 30px;
+    height: 40px;
     position: relative;
     width: 56px;
 
