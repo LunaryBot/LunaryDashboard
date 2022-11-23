@@ -1,0 +1,28 @@
+@import "theme.module";
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+.togglesBoxWrapper {
+    justify-content: center;
+    flex-wrap: wrap;
+    background-position: center;
+    display: flex;
+
+    .toggleBox {
+        width: 49%;
+        background-color: none;
+        padding: 10px 20px;
+        display: inline-block;
+        margin: 10px auto;
+        background-color: none;
+        border-radius: 10px;
+        border: 1px solid themed('luny-ui', 10);
+    }
+
+    .toggleBox[data-selected] {
+        background-color: themed('luny-ui', 15);
+        border: 1px solid themed('luny-band', 100);
+    }
+}
