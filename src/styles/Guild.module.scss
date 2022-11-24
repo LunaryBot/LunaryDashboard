@@ -19,10 +19,28 @@
         background-color: none;
         border-radius: 10px;
         border: 1px solid themed('luny-ui', 10);
+
+        .checkedIcon {
+            display: none;
+            float: right;
+            vertical-align: middle;
+            margin: auto;
+            margin-right: -22.5px;
+            margin-top: -12.5px;
+            padding: 3px;
+            border-radius: 15px;
+            background-color: themed('luny-band');
+            color: white;
+        }
     }
 
-    .toggleBox[data-selected] {
+    .toggleBox[data-checked] {
         background-color: themed('luny-ui', 15);
-        border: 1px solid themed('luny-band', 100);
+        border: 2px solid themed('luny-band', 100);
+        padding: 9px 19px;
+
+        .checkedIcon {
+            display: flex;
+        }
     }
 }
