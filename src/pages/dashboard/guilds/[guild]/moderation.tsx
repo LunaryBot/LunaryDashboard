@@ -15,10 +15,12 @@ const ToggleBox: React.FC<PropsWithChildren & { defaultValue?: boolean }> = (pro
     const [value, setValue] = useState<boolean>(!!props?.defaultValue);
 
     return (
-        <div className={styles.toggleBox} {...(value ? {'data-checked': true} : {})} onClick={() => setValue(!value)}>
-            <div className={styles.checkedIcon}><i className={'fas fa-check'}/></div>
+        <button className={styles.toggleBox} {...(value ? {'data-checked': true} : {})} onClick={() => setValue(!value)} role={'checkbox'}>
+            <span className={styles.checkedIcon}>
+                <i className={'fas fa-check'}/>
+            </span>
             {props.children}
-        </div>
+        </button>
     )
 }
 
