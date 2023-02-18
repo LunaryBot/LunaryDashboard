@@ -1,4 +1,4 @@
-import { useEffect, useState, PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useId } from 'react';
+import { useState, PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useId, useEffect, useRef } from 'react';
 import styles from '../../styles/Select.module.scss';
 
 type Props = PropsWithChildren<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
@@ -23,9 +23,19 @@ export function Select(props: SelectProps) {
     const [opened, setOpen] = useState<boolean>(false);
     const [values, setValues] = useState<Option[]>(props.options.filter(option => option.default));
 
+    const ref = useRef<HTMLDivElement>(null);
+
     const _values = values.map(({ value }) => value);
     const isMultiple = props.maxValues > 1;
     const id = useId();
+
+    useEffect(() => {
+        window.addEventListener('click', e => {
+            if(ref.current && opened && !ref.current.contains(e.target as Node)) {
+                setOpen(false)
+            } 
+        }, { capture: true });
+    }, [ref, opened, setOpen]);
 
     function Placeholder() {
         let placeholder: string|JSX.Element[] = props.placeholder;
@@ -100,7 +110,7 @@ export function Select(props: SelectProps) {
     if(values.length >= props.maxValues) selectProps['data-full-values'] = true;
 
     return (
-        <div className={styles.select} {...selectProps}>
+        <div className={styles.select} {...selectProps} ref={ref} data-itemID={id}>
             <div className={styles.container}>
                 <div className={styles.placeholderWrapper} onClick={() => setOpen(!opened)}>
                     <div className={styles.placeholder}>
