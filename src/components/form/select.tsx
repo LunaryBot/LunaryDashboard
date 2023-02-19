@@ -107,7 +107,7 @@ export function Select(props: SelectProps) {
     const selectProps = {};
 
     if(opened) selectProps['data-opened'] = true;
-    if(values.length >= props.maxValues) selectProps['data-full-values'] = true;
+    if(values.length >= props.maxValues && isMultiple) selectProps['data-full-values'] = true;
 
     return (
         <div className={styles.select} {...selectProps} ref={ref} data-itemID={id}>
