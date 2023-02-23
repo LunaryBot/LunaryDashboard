@@ -10,6 +10,7 @@ interface Option {
         url: string;
     };
     default?: boolean;
+    color?: string;
 }
 
 interface SelectProps extends Props {
@@ -66,10 +67,19 @@ export function Select(props: SelectProps) {
             return options.map((option) => {
                 const props = {
                     'data-value': option.value,
+                    style: {},
                 };
 
                 if(_values.includes(option.value)) {
                     props['data-selected'] = true;
+                }
+
+                if(option.color) {
+                    const c = hexToRgb(option.color);
+
+                    if(c) props.style = {
+                        color: `rgb(${c.r}, ${c.g}, ${c.b})`
+                    }
                 }
 
                 return (
@@ -125,3 +135,12 @@ export function Select(props: SelectProps) {
         </div>
     )
 }
+
+function hexToRgb(hex: string) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
