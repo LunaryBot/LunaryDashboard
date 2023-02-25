@@ -20,21 +20,30 @@ export const URLS = {
                 url: '/dashboard/guilds/[guild]',
                 icon: 'fa-home'
             },
+        ],
+        moderation: [
             {
                 label: 'Moderação',
                 url: '/dashboard/guilds/[guild]/moderation',
                 icon: 'fa-hammer'
             },
             {
+                label: 'Motivos Pre-Definidos',
+                url: '/dashboard/guilds/[guild]/reasons',
+                icon: 'fa-sticky-note'
+            },
+            {
+                label: 'Embed de punições',
+                url: '/dashboard/guilds/[guild]/moderation/embed',
+                icon: 'fa-window-maximize'
+            }
+        ],
+        permissions: [
+            {
                 label: 'Permissões',
                 url: '/dashboard/guilds/[guild]/permissions',
                 icon: 'fa-briefcase'
             },
-            {
-                label: 'Embed de punições',
-                url: '/dashboard/guilds/[guild]/punishment-embed',
-                icon: 'fa-window-maximize'
-            }
         ]
     }
 }
