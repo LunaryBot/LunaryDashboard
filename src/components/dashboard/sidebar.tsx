@@ -116,7 +116,7 @@ export function DashboardSidebar() {
                         {urls.map((url, index) => (
                             <li {...(router.pathname == url.url ? {'data-selected': true} : {})} key={`urls-${category}-${index}`}>
                                 <Link href={url.url.replace('[guild]', guild?.id)}>
-                                    <i className={`${router.pathname == '/' ? 'fa' : 'far'} ${url.icon}`} />
+                                    <i className={`${router.pathname == url.url ? 'fa' : 'far'} ${url.icon}`} />
                                     <span>{url.label}</span>
                                 </Link>
                             </li>
