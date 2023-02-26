@@ -17,9 +17,10 @@ export const GuildPermissions: React.FC<{}> = (props) => {
                 }}>
                     <Select
                         customId='role'
-                        options={[...(guild?.roles || [])].sort((a, b) => a.position - b.position).map(role => ({
+                        options={[...(guild?.roles || [])].sort((a, b) => b.position - a.position).map(role => ({
                             label: role.name,
                             value: role.id,
+                            color: role.color ? `#${role.color.toString(16)}` : undefined
                         })) || []}
                         placeholder={'Select a role'}
                         maxValues={1}
