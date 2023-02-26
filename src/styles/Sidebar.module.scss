@@ -239,6 +239,10 @@
 
             &[data-selected] a {
                 background-color: themed('luny-ui', 5);
+
+                i {
+                    color: themed('luny-band', 60);
+                }
             }
 
             span {
