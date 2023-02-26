@@ -85,7 +85,7 @@ export function Select(props: SelectProps) {
                 return (
                     <div className={styles.option} {...props} key={`${id}${option.value}`} onClick={() => setValue(option.value)}>
                         {option.icon && <img src={option.icon.url} alt={option.label} />}
-                        {option.label}
+                        <span>{option.label}</span>
                     </div>
                 )
             });
