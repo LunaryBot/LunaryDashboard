@@ -1,6 +1,6 @@
 import React, { useState, PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useId, useEffect, useRef } from 'react';
-import styles from '../../styles/Select.module.scss';
-import { Utils } from '../../utils';
+import styles from './styles.module.scss';
+import { Utils } from '../../../utils';
 
 type Props = PropsWithChildren<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
 
