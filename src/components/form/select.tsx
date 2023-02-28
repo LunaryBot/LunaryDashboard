@@ -1,5 +1,6 @@
-import { useState, PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useId, useEffect, useRef } from 'react';
+import React, { useState, PropsWithChildren, DetailedHTMLProps, HTMLAttributes, useId, useEffect, useRef } from 'react';
 import styles from '../../styles/Select.module.scss';
+import { Utils } from '../../utils';
 
 type Props = PropsWithChildren<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>;
 
@@ -20,120 +21,143 @@ interface SelectProps extends Props {
     maxValues?: number;
 }
 
-export function Select(props: SelectProps) {
-    const [opened, setOpen] = useState<boolean>(false);
-    const [values, setValues] = useState<Option[]>(props.options.filter(option => option.default));
+export class Select extends React.Component<SelectProps, { opened: boolean, values: Option[] }> {
+    ref: React.RefObject<HTMLDivElement>;
+    _id: string;
 
-    const ref = useRef<HTMLDivElement>(null);
+    constructor(props: SelectProps) {
+        super(props);
 
-    const _values = values.map(({ value }) => value);
-    const isMultiple = props.maxValues > 1;
-    const id = useId();
+        this.state = {
+            opened: false,
+            values: props.options.filter(option => option.default),
+        }
 
-    useEffect(() => {
+        this.ref = React.createRef<HTMLDivElement>();
+
+        this._id = Utils.uuid();
+    }
+
+    componentDidMount(): void {
         window.addEventListener('click', e => {
-            if(ref.current && opened && !ref.current.contains(e.target as Node)) {
-                setOpen(false)
+            if(this.ref.current && this.state.opened && !this.ref.current.contains(e.target as Node)) {
+                this.setState({ opened: false })
             } 
         }, { capture: true });
-    }, [ref, opened, setOpen]);
-
-    function Placeholder() {
-        let placeholder: string|JSX.Element[] = props.placeholder;
-    
-        if (values.length > 0) {
-            if(isMultiple) {
-                placeholder = values.map((option) => (
-                    <span className={styles.option} key={`${option.value}`} onClick={() => removeValue(option.value)}>
-                        {option.label}
-                    </span>
-                ))
-            } else {
-                placeholder = values[0].label;
-            }
-        }
-    
-        return (
-            <div>
-                {placeholder}
-            </div>
-        )
     }
 
-    function Options() {
-        const options = isMultiple ? props.options.filter((option) => !_values.includes(option.value)) : props.options;
-        
-        if(options.length > 0) {
-            return options.map((option) => {
-                const props = {
-                    'data-value': option.value,
-                    style: {},
-                };
+    setValue(value: Option['value']) {
+        const { props, state } = this;
 
-                if(_values.includes(option.value)) {
-                    props['data-selected'] = true;
-                }
+        const _values = state.values.map(({ value }) => value);
 
-                if(option.color) {
-                    const c = hexToRgb(option.color);
+        const isMultiple = props.maxValues > 1;
 
-                    if(c) props.style = {
-                        color: `rgb(${c.r}, ${c.g}, ${c.b})`
-                    }
-                }
-
-                return (
-                    <div className={styles.option} {...props} key={`${id}${option.value}`} onClick={() => setValue(option.value)}>
-                        {option.icon && <img src={option.icon.url} alt={option.label} />}
-                        <span>{option.label}</span>
-                    </div>
-                )
-            });
-        }
-
-        return (<span>Não há nada para ver aqui</span>)
-    }
-
-    function setValue(value: Option['value']) {
-        if(isMultiple && values.length >= props.maxValues) {
+        if(isMultiple && state.values.length >= props.maxValues) {
             return false;
         }
 
         if(_values.includes(value)) {
-            removeValue(value);
+            this.removeValue(value);
+            this.setState({ opened: false })
         } else {
             const option = props.options.find(option => option.value == value);
 
-            setValues([option, ...(isMultiple ? values : [])].splice(0, props.maxValues))
+            this.setState({ 
+                values: [option, ...(isMultiple ? state.values : [])].splice(0, props.maxValues), 
+                opened: false 
+            });
+        }
+    }
+
+    removeValue(value: Option['value']) {
+        return this.setState({ values: this.state.values.filter((option) => option.value != value) });
+    }
+
+    render() {
+        const { props, state: { values, opened }, _id: id } = this;
+
+        const _values = values.map(({ value }) => value);
+
+        const isMultiple = props.maxValues > 1;
+
+        const Placeholder = () => {
+            let placeholder: string|JSX.Element[] = props.placeholder;
+        
+            if (values.length > 0) {
+                if(isMultiple) {
+                    placeholder = values.map((option) => (
+                        <span className={styles.option} key={`${option.value}`} onClick={() => this.removeValue(option.value)}>
+                            {option.label}
+                        </span>
+                    ))
+                } else {
+                    placeholder = values[0].label;
+                }
+            }
+        
+            return (
+                <div>
+                    {placeholder}
+                </div>
+            )
+        }
+    
+        const Options = () => {
+            const options = isMultiple ? props.options.filter((option) => !_values.includes(option.value)) : props.options;
+            
+            if(options.length > 0) {
+                return options.map((option) => {
+                    const props = {
+                        'data-value': option.value,
+                        style: {},
+                    };
+    
+                    if(_values.includes(option.value)) {
+                        props['data-selected'] = true;
+                    }
+    
+                    if(option.color) {
+                        const c = hexToRgb(option.color);
+    
+                        if(c) props.style = {
+                            color: `rgb(${c.r}, ${c.g}, ${c.b})`
+                        }
+                    }
+    
+                    return (
+                        <div className={styles.option} {...props} key={`${id}${option.value}`} onClick={() => this.setValue(option.value)}>
+                            {option.icon && <img src={option.icon.url} alt={option.label} />}
+                            <span {...props}>{option.label}</span>
+                        </div>
+                    )
+                });
+            }
+    
+            return (<span>Não há nada para ver aqui</span>)
         }
 
-        setOpen(false);
-    }
+        const selectProps = {};
 
-    function removeValue(value: Option['value']) {
-        return setValues(values.filter((option) => option.value != value));
-    }
+        if(opened) selectProps['data-opened'] = true;
+        if(values.length >= props.maxValues && isMultiple) selectProps['data-full-values'] = true;
 
-    const selectProps = {};
-
-    if(opened) selectProps['data-opened'] = true;
-    if(values.length >= props.maxValues && isMultiple) selectProps['data-full-values'] = true;
-
-    return (
-        <div className={styles.select} {...selectProps} ref={ref} data-itemID={id}>
-            <div className={styles.container}>
-                <div className={styles.placeholderWrapper} onClick={() => setOpen(!opened)}>
-                    <div className={styles.placeholder}>
-                        <Placeholder />
+        return (
+            <div className={styles.select} {...selectProps} ref={this.ref} data-itemID={id}>
+                <div className={styles.container}>
+                    <div className={styles.placeholderWrapper} onClick={() => this.setState({ opened: !opened })}>
+                        <div className={styles.placeholder}>
+                            <Placeholder />
+                        </div>
+                    </div>
+    
+                    <div className={styles.options}>
+                        {Options()}
                     </div>
                 </div>
-
-                <div className={styles.options}>
-                    {Options()}
-                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 function hexToRgb(hex: string) {
@@ -143,4 +167,4 @@ function hexToRgb(hex: string) {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
-  }
+}

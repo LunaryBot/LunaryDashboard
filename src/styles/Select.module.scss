@@ -93,9 +93,18 @@
                 line-height: 30px;
                 height: 30px;
 
+                img {
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
                 span {
+                    top: 5px;
                     color: themed('luny-text', 60);
                     font-size: 12px;
+                    height: 30px;
                 }
 
                 &[data-selected] {
