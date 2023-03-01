@@ -105,7 +105,11 @@ const DashboardGuildModeration: React.FC = () => {
                 </Card.Content>
             </Card>
             
-            <GuildPermissions />
+            <Card>
+                <Card.Content>
+                    <GuildPermissions />
+                </Card.Content>
+            </Card>
         </main>
     )
 }
