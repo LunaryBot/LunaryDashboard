@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useAPI } from '../../../../hooks/useAPI';
 
-import { Switch, Card, Select, GuildPermissions } from '../../../../components';
+import { Switch, Card, Select, GuildPermissions, Button } from '../../../../components';
 
 import { PermissionFlagsBits } from 'discord-api-types/v10';
 
@@ -108,6 +108,18 @@ const DashboardGuildModeration: React.FC = () => {
             <Card>
                 <Card.Content>
                     <GuildPermissions />
+                    <GuildPermissions />
+                    <Card style={{backgroundColor: 'transparent', border: 'none', padding: '0'}}>  
+                        <Button className={styles.newItemButton}>
+                            <Button.Icon>
+                                <i className='far fa-plus'/>
+                            </Button.Icon>
+                            
+                            <Button.Content>
+                                Add permissions
+                            </Button.Content>
+                        </Button> 
+                    </Card>
                 </Card.Content>
             </Card>
         </main>

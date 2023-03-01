@@ -10,7 +10,7 @@ export const GuildPermissions: React.FC<{}> = (props) => {
     const { guild } = useAPI();
 
     return (
-        <Card style={{backgroundColor: 'var(--luny-background)'}}>
+        <Card style={{backgroundColor: 'var(--luny-background)', marginTop: '0', marginBottom: '20px'}}>
             <Card.Content>
                 <div style={{
                     display: 'flex'

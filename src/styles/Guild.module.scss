@@ -44,3 +44,16 @@
         }
     }
 }
+
+.newItemButton {
+    background-color: themed('luny-ui', 20);
+    font-weight: 100;
+
+    &:hover {
+        background-color: themed('luny-ui', 40);
+    }
+
+    &:disabled {
+        background-color: themed('luny-ui', 5);
+    }
+}
