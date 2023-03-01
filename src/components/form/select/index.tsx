@@ -19,6 +19,8 @@ interface SelectProps extends Props {
     customId: string;
     options: Option[];
     maxValues?: number;
+
+    backgroundColor?: string;
 }
 
 export class Select extends React.Component<SelectProps, { opened: boolean, values: Option[] }> {
@@ -81,13 +83,15 @@ export class Select extends React.Component<SelectProps, { opened: boolean, valu
 
         const isMultiple = props.maxValues > 1;
 
+        const style = {backgroundColor: props.backgroundColor};
+
         const Placeholder = () => {
             let placeholder: string|JSX.Element[] = props.placeholder;
         
             if (values.length > 0) {
                 if(isMultiple) {
                     placeholder = values.map((option) => (
-                        <span className={styles.option} key={`${option.value}`} onClick={() => this.removeValue(option.value)}>
+                        <span className={styles.option} style={style} key={`${option.value}`} onClick={() => this.removeValue(option.value)}>
                             {option.label}
                         </span>
                     ))
@@ -97,7 +101,7 @@ export class Select extends React.Component<SelectProps, { opened: boolean, valu
             }
         
             return (
-                <div>
+                <div style={style}>
                     {placeholder}
                 </div>
             )
@@ -151,7 +155,7 @@ export class Select extends React.Component<SelectProps, { opened: boolean, valu
                         </div>
                     </div>
     
-                    <div className={styles.options}>
+                    <div className={styles.options} style={{backgroundColor: props.backgroundColor}}>
                         {Options()}
                     </div>
                 </div>
