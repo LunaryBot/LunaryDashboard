@@ -51,18 +51,21 @@ export const GuildPredefinedReason: React.FC<{}> = () => {
                     label: 'h',
                     max: 24,
                     min: 0,
+                    ms: 1000 * 60 * 60,
                 },
                 {
                     name: 'minutes',
                     label: 'm',
                     max: 24,
                     min: 0,
+                    ms: 1000 * 60,
                 },
                 {
                     name: 'seconds',
                     label: 's',
                     max: 24,
                     min: 0,
+                    ms: 1000,
                 },
             ]} /></span>
         </Card>

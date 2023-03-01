@@ -4,11 +4,20 @@ import styles from './styles.module.scss';
 import { Utils } from '../../../utils/Utils';
 
 interface Props {
-    stages: { name: string, label?: string, min: number, max: number, default?: number }[];
+    stages: { 
+        name: string;
+        label?: string;
+        min: number;
+        max: number;
+        ms: number;
+        default?: number;
+    }[];
     disable?: boolean;
 }
 
 export class DurationInput extends React.Component<Props, { values: Record<string, number>, disabled: boolean }> {
+    readonly type = 'duration';
+
     _id = Utils.uuid();
 
     constructor(props) {
@@ -20,6 +29,10 @@ export class DurationInput extends React.Component<Props, { values: Record<strin
             ),
             disabled: props.disabled,
         }
+    }
+
+    get value(): number {
+        return Object.entries(this.state.values).map(([name, value]) => (this.props.stages.find(stage => stage.name === name)?.ms || 0) * value).reduce((a, b) => a + b, 0);
     }
 
     setDisable(disabled: boolean) {
