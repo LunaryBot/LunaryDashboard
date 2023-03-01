@@ -33,6 +33,7 @@ yarn-error.log*
 .env.production.local
 .env
 firebase.config.json
+src/config/config.ts
 
 # vercel
 .vercel
