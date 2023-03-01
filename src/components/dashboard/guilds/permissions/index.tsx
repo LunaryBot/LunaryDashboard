@@ -10,7 +10,7 @@ export const GuildPermissions: React.FC<{}> = (props) => {
     const { guild } = useAPI();
 
     return (
-        <Card>
+        <Card style={{backgroundColor: 'var(--luny-background)'}}>
             <Card.Content>
                 <div style={{
                     display: 'flex'
@@ -24,6 +24,7 @@ export const GuildPermissions: React.FC<{}> = (props) => {
                         })) || []}
                         placeholder={'Select a role'}
                         maxValues={1}
+                        backgroundColor={'var(--luny-backgroundSecondary)'}
                     />
 
                     <div className={styles.deleteButton}><i className={'fas fa-trash'} /></div>
