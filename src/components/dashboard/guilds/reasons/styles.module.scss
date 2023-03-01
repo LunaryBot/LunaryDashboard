@@ -1,0 +1,33 @@
+@import '../../../../styles/theme.module.scss';
+
+.durationInputs {
+    color: #333;
+    border-radius: 10px;
+    padding: 60px 50px 100px;
+    // text-align: center;
+    font-size: 30px;
+
+    input:is([type='number']) {
+        background: #c7e0f8;
+        color: #0776de;
+        padding: 10px;
+        width: 55px;
+        border-radius: 5px;
+        margin: 3px 3px 0 20px;
+        display: inline-block;
+        font-size: 16px;
+        border: none;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+
+    span {
+        display: block;
+        font-size: 10px;
+        margin-left: 20px;
+        color: themed('luny-text', 60);
+    }
+}

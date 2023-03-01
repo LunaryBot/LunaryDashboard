@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useAPI } from '../../../../hooks/useAPI';
 
-import { Switch, Card, Select } from '../../../../components';
+import { Switch, Card, Select, GuildPermissions } from '../../../../components';
 
 import { PermissionFlagsBits } from 'discord-api-types/v10';
 
@@ -26,8 +26,6 @@ const ToggleBox: React.FC<PropsWithChildren & { defaultValue?: boolean }> = (pro
 
 const DashboardGuildModeration: React.FC = () => {
     const { user, guild } = useAPI();
-
-    console.log();
 
     return (
         <main>
@@ -80,14 +78,16 @@ const DashboardGuildModeration: React.FC = () => {
                 </Card.Header>
                 <Card.Content>
                     <Select 
-                        options={flagsEntries.map(([key, value]) => {
-                            return ({
-                                label: key.replace(/([A-Z])|^([a-z])/g, (w) => ` ${w.toUpperCase()}`),
-                                value: value,
-                                default: key == ''
-                            })
-                        })}
-                        customId={'ban_command_permissions'}
+                        options={[
+                            ...flagsEntries.map(([key, value]) => {
+                                return ({
+                                    label: key.replace(/([A-Z])|^([a-z])/g, (w) => ` ${w.toUpperCase()}`),
+                                    value: value,
+                                    default: key == ''
+                                })
+                            }),
+                        ]}
+                        customId={'banCommandPermissions'}
                         placeholder={'Select a permission'}
                         maxValues={flagsEntries.length}
                     />
@@ -104,6 +104,8 @@ const DashboardGuildModeration: React.FC = () => {
                     </div>
                 </Card.Content>
             </Card>
+            
+            <GuildPermissions />
         </main>
     )
 }

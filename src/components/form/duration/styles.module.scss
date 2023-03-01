@@ -1,0 +1,35 @@
+@import '../../../styles/theme.module.scss';
+
+.container {
+    display: inline-block;
+    width: auto;
+    padding: 2px;
+
+    .innerContainer {
+        display: inline-block;
+        width: auto;
+        padding-right: 2px;
+
+        input[type='number'] {
+            width: 40px;
+            display: inline-block;
+            border: none;
+            padding-left: 7%;
+            text-align: right;
+            background-color: transparent;
+            &::placeholder,
+            & {
+                color: themed('luny-text', 100); 
+            }
+
+            &[readonly] {
+                cursor: not-allowed;
+            }
+        }
+
+        .label {
+            display: inline-block;
+            color: themed('luny-text', 60);
+        }
+    }
+}
