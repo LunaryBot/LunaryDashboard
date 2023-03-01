@@ -10,22 +10,14 @@
     cursor: pointer;
     background-color: themed('luny-band');
     color: white;
+    padding: 10px;
     transition: all ease .3s;
-    display: inline-flex;
-	align-items: center;
-    height: 40px;
-    padding: 10px 10px;
-    justify-content: center;
 
     span {
         font-size: 17px;
 
-        &:is(.text, .icon) {
-            padding: 10px 10px;
-        }
-
-        &.text {
-            justify-content: center;
+        &:is(.icon) {
+            margin-right: 5px;
         }
     }
 

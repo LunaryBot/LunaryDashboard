@@ -40,7 +40,7 @@ export default function Index() {
                     <br />
 
                     <Button style={{width: '100px', marginRight: '10px'}}>
-                        <Button.Icon>
+                        <Button.Icon style={{marginRight: '4px'}}>
                             <i className='far fa-home'/>
                         </Button.Icon>
                         

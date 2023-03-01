@@ -62,8 +62,8 @@ const DashboardGuildModeration: React.FC = () => {
             </Card>
 
             <Card retractable={true}>
-                <Card.Header>
-                    <h2>
+                <Card.Header style={{marginTop: '10px'}}>
+                    <h2 style={{marginBottom: '20px'}}>
                         <code style={{backgroundColor: 'transparent', border: 'none', fontSize: '16px'}}>
                             <i className={'fas fa-slash'} style={{transform: 'rotate(90deg)', marginRight: '0', color: 'var(--luny-band-100)'}} />
                             ban user {/* */}
