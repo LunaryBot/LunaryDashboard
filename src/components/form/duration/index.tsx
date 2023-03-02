@@ -13,6 +13,7 @@ interface Props {
         default?: number;
     }[];
     disable?: boolean;
+    max?: number;
 }
 
 export class DurationInput extends React.Component<Props, { values: Record<string, number>, disabled: boolean }> {
@@ -31,8 +32,22 @@ export class DurationInput extends React.Component<Props, { values: Record<strin
         }
     }
 
+    calcDuration(values: Record<string, number>): number {
+        return Object.entries(values).map(([name, value]) => (this.props.stages.find(stage => stage.name === name)?.ms || 0) * value).reduce((a, b) => a + b, 0);
+    }
+
+    #calc(name: string, value: number | string) {
+        const newValue = { ...this.state.values, [name]: Number((event.target as HTMLInputElement).value + `${value}`) };
+
+        const v = this.calcDuration(newValue);
+
+        console.log(v, newValue);
+
+        return v;
+    }
+
     get value(): number {
-        return Object.entries(this.state.values).map(([name, value]) => (this.props.stages.find(stage => stage.name === name)?.ms || 0) * value).reduce((a, b) => a + b, 0);
+        return this.calcDuration(this.state.values);
     }
 
     setDisable(disabled: boolean) {
@@ -48,7 +63,7 @@ export class DurationInput extends React.Component<Props, { values: Record<strin
                         <input
                             className={styles.durationInput}
                             type={'number'} 
-                            min={stage.min} 
+                            min={stage.min}
                             max={stage.max}
                             maxLength={2}
                             placeholder={'0'} 
@@ -59,6 +74,8 @@ export class DurationInput extends React.Component<Props, { values: Record<strin
                             onChange={event => this.setState({
                                 values: { ...values, [stage.name]: Number(event.target.value) ?? 0 },
                             })}
+
+                            onKeyPress={event => (([',', '.', '-', 'e']).includes(event.key) || (props.max && this.#calc(stage.name, event.key) > props.max)) && event.preventDefault()}
                         />
                         <span className={styles.label}>
                             {stage.label || stage.name}

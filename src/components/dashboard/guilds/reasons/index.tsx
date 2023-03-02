@@ -45,29 +45,38 @@ export const GuildPredefinedReason: React.FC<{}> = () => {
                 <span>Duração maxima de 28 dias</span>
             </div> */}
 
-            <span>Mute Duration: <DurationInput stages={[
-                {
-                    name: 'hours',
-                    label: 'h',
-                    max: 24,
-                    min: 0,
-                    ms: 1000 * 60 * 60,
-                },
-                {
-                    name: 'minutes',
-                    label: 'm',
-                    max: 24,
-                    min: 0,
-                    ms: 1000 * 60,
-                },
-                {
-                    name: 'seconds',
-                    label: 's',
-                    max: 24,
-                    min: 0,
-                    ms: 1000,
-                },
-            ]} /></span>
+            <Card.Content>
+                <span>
+                    Mute Duration: <DurationInput 
+                        stages={[
+                            {
+                                name: 'days',
+                                label: 'd',
+                                max: 28,
+                                min: 0,
+                                ms: 1000 * 60 * 60 * 24,
+                            },
+                            {
+                                name: 'hours',
+                                label: 'h',
+                                max: 24,
+                                min: 0,
+                                ms: 1000 * 60 * 60,
+                            },
+                            {
+                                name: 'minutes',
+                                label: 'm',
+                                max: 60,
+                                min: 0,
+                                ms: 1000 * 60,
+                            },
+                        ]}
+                        max={28 * 1000 * 60 * 60 * 24}
+                    />
+                    <br />
+                    <span>* Duração maxima de 28 dias</span>
+                </span>
+            </Card.Content>
         </Card>
     )
 }

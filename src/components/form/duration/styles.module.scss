@@ -11,15 +11,20 @@
         padding-right: 2px;
 
         input[type='number'] {
-            width: 40px;
+            width: 30px;
             display: inline-block;
             border: none;
-            padding-left: 7%;
+            padding-left: 5%;
             text-align: right;
             background-color: transparent;
+            margin-right: 5px;
             &::placeholder,
             & {
                 color: themed('luny-text', 100); 
+            }
+
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
             }
 
             &[readonly] {
