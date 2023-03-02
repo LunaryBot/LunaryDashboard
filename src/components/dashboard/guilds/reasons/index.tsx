@@ -1,49 +1,45 @@
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { InputHTMLAttributes, useRef, useEffect } from 'react';
 
 import { Card } from '../../../card';
 
 import styles from './styles.module.scss';
 import { DurationInput } from '../../../form/duration';
+import { Utils } from '../../../../utils/Utils';
 
 type Props = InputHTMLAttributes<HTMLInputElement>;
 
 const maxDurationLength = 28 * 1000 * 60 * 60 * 24;
 
 export const GuildPredefinedReason: React.FC<{}> = () => {
-    let value: {days: number, hours: number, minutes: number} = { days: 0, hours: 0, minutes: 0 };
+    const _id = Utils.uuid();
 
-    const calculeteDurationLength = (d = value) => {
-        const { days, hours, minutes } = d;
+    let setedUseEffect = false;
 
-        const v = (days * 1000 * 60 * 60 * 24) + (hours * 1000 * 60 * 60) + (minutes * 1000 * 60);
+    useEffect(() => {
+        const card = document.querySelector(`div[id="${_id}"]`);
+        const span = document.querySelector(`span[id="${_id}"]`) as HTMLDivElement;
 
-        console.log(v);
+        if(card) {
+            const observer = new MutationObserver(mutations => {
+                if(!mutations.some(mutation => mutation.attributeName == 'data-opened')) return;
 
-        return v;
-    }
-
-    const NumberInput: React.FC<Props> = (props) => (
-        <input {...props} type={'number'} onKeyPress={(event) => {
-            if(event.key === '.' || isNaN(Number(event.key))) return event.preventDefault();
-
-            const newValue = { ...value, [props.name]: Number((event.target as HTMLInputElement).value + event.key) };
-            
-            if(calculeteDurationLength(newValue) >= maxDurationLength) {
-                return event.preventDefault();
-            }
-
-            value = newValue;
-        }} />
-    )
-
+                // @ts-ignore
+                span.style = `display: ${card.getAttribute('data-opened') ? 'none' : 'block'}`
+            });
+    
+            observer.observe(card, { attributes: true });
+        }
+    }, [_id]);
+    
     return (
-        <Card>
-            {/* <div className={styles.durationInputs}>
-                <NumberInput name='days' defaultValue={value.days} />
-                <NumberInput name='hours' defaultValue={value.hours} />
-                <NumberInput name='minutes' defaultValue={value.minutes} />
-                <span>Duração maxima de 28 dias</span>
-            </div> */}
+        <Card retractable id={_id}>
+            <Card.Header>
+                <h2 style={{fontSize: '18px'}}>
+                    #1 Rule
+                    <br />
+                    <span id={_id} style={{fontSize: '12px'}}>Lorem ipsum dolor sit amet consectetur, adipiscing elit praesent vehicula duis integer, bibendum nisi per molestie. Donec vitae parturient pretium pulvinar fermentum ultricies nec elementum eu massa vestibulum, tempus viverra porttitor vulputate taciti torquent gravida vel hac nisi, dictumst vivamus tortor litora maecenas consequat sociis mattis nisl pellentesque. Nec nostra cubilia habitant ut interdum nam feugiat litora potenti vel accumsan ad, vitae euismod dapibus molestie eros non id venenatis integer.</span>
+                </h2>
+            </Card.Header>
 
             <Card.Content>
                 <span>
@@ -71,7 +67,7 @@ export const GuildPredefinedReason: React.FC<{}> = () => {
                                 ms: 1000 * 60,
                             },
                         ]}
-                        max={28 * 1000 * 60 * 60 * 24}
+                        max={maxDurationLength}
                     />
                     <br />
                     <span>* Duração maxima de 28 dias</span>

@@ -41,6 +41,10 @@
         h2 {
             margin-bottom: 15px;
             font-weight: 700;
+            white-space: nowrap;
+            max-width: 100%; 
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         i {
