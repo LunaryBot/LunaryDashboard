@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useRef, useEffect } from 'react';
+import React, { InputHTMLAttributes, useEffect } from 'react';
 
 import { Card } from '../../../card';
 
@@ -13,18 +13,21 @@ const maxDurationLength = 28 * 1000 * 60 * 60 * 24;
 export const GuildPredefinedReason: React.FC<{}> = () => {
     const _id = Utils.uuid();
 
-    let setedUseEffect = false;
-
     useEffect(() => {
         const card = document.querySelector(`div[id="${_id}"]`);
         const span = document.querySelector(`span[id="${_id}"]`) as HTMLDivElement;
+        const textarea = document.querySelector(`textarea[id="${_id}"]`) as HTMLTextAreaElement;
 
         if(card) {
             const observer = new MutationObserver(mutations => {
                 if(!mutations.some(mutation => mutation.attributeName == 'data-opened')) return;
 
+                const isOpened = card.getAttribute('data-opened');
+
+                if(!isOpened) span.innerHTML = textarea.value;
+
                 // @ts-ignore
-                span.style = `display: ${card.getAttribute('data-opened') ? 'none' : 'block'}`
+                span.style = `display: ${isOpened ? 'none' : 'block'}`
             });
     
             observer.observe(card, { attributes: true });
@@ -32,7 +35,7 @@ export const GuildPredefinedReason: React.FC<{}> = () => {
     }, [_id]);
     
     return (
-        <Card retractable id={_id}>
+        <Card retractable id={_id} style={{backgroundColor: 'var(--luny-background)', marginTop: '0', marginBottom: '20px'}}>
             <Card.Header>
                 <h2 style={{fontSize: '18px'}}>
                     #1 Rule
@@ -42,6 +45,9 @@ export const GuildPredefinedReason: React.FC<{}> = () => {
             </Card.Header>
 
             <Card.Content>
+                Reason Text:
+                <textarea name={'reason text'} id={_id} cols={30} rows={10} className={styles.textInput}></textarea>
+                <br />
                 <span>
                     Mute Duration: <DurationInput 
                         stages={[
