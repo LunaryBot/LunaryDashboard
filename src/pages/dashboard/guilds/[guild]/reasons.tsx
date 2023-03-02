@@ -3,33 +3,31 @@ import styled from 'styled-components';
 
 import { useAPI } from '../../../../hooks/useAPI';
 
-import { GuildPredefinedReason } from '../../../../components';
-
-import { PermissionFlagsBits } from 'discord-api-types/v10';
+import { GuildPredefinedReason, Card, Button } from '../../../../components';
 
 import styles from '../../../../styles/Guild.module.scss';
-
-const flagsEntries = Object.entries(PermissionFlagsBits);
-
-const ToggleBox: React.FC<PropsWithChildren & { defaultValue?: boolean }> = (props) => {
-    const [value, setValue] = useState<boolean>(!!props?.defaultValue);
-
-    return (
-        <button className={styles.toggleBox} {...(value ? {'data-checked': true} : {})} onClick={() => setValue(!value)} role={'checkbox'}>
-            <span className={styles.checkedIcon}>
-                <i className={'fas fa-check'}/>
-            </span>
-            {props.children}
-        </button>
-    )
-}
 
 const DashboardGuildReasons: React.FC = () => {
     const { user, guild } = useAPI();
 
     return (
         <main>
-            <GuildPredefinedReason />
+           <Card>
+                <Card.Content>
+                    <GuildPredefinedReason />
+                    <Card style={{backgroundColor: 'transparent', border: 'none', padding: '0'}}>  
+                            <Button className={styles.newItemButton}>
+                                <Button.Icon>
+                                    <i className='far fa-plus'/>
+                                </Button.Icon>
+                                
+                                <Button.Content>
+                                    Add Predefined Reason
+                                </Button.Content>
+                            </Button> 
+                        </Card>
+                </Card.Content>
+           </Card>
         </main>
     )
 }
