@@ -15,7 +15,7 @@ interface APIContextData {
     user: UserWithGuilds;
     guild?: Guild;
 
-    // checkGuild: (guildId: string) => boolean;
+    checkGuild: (guildId: string) => boolean;
     // fetchGuild: (id: string) => Promise<Guild[]>;
     // fetchUserGuilds: () => Promise<AbstractGuild[]>;
 }
@@ -40,10 +40,15 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
         }
     }
 
+    checkGuild(guildId: string) {
+        return this.state.guild?.id === guildId;
+    }
+
     render(): React.ReactNode {
         const { 
             props: { children },
             state: { loading, user, guild },
+            checkGuild,
         } = this;
 
         return (
@@ -52,6 +57,7 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
                 loading, 
                 user, 
                 guild,
+                checkGuild: checkGuild.bind(this),
             }}>
                 {children}
             </APIContext.Provider>
