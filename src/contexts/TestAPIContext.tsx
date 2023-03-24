@@ -40,6 +40,21 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
         }
     }
 
+    componentDidMount(): void {
+        this.setState({
+            user: {
+                id: '842170079520096276',
+                username: 'Myka',
+                discriminator: '0806',
+                avatar: '74a291872af71565d98d870384d8d666',
+                public_flags: 0,
+                guilds: null
+            },
+            loading: false,
+            token: 'N/A',
+        });
+    }
+
     async componentDidUpdate() {
         const pathname = window.location.pathname;
 
