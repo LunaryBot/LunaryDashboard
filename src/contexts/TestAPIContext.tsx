@@ -75,7 +75,7 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
 
     async fetchGuild(id: string) {
         const guild: Guild = {
-            id: 'id',
+            id: '787667696077504552',
             name: '🌇 Lunar City',
             banner: null,
             channels: [
@@ -104,7 +104,38 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
                     type: 0,
                 },
             ],
-            roles: [],
+            roles: [
+                {
+                    id: '787668624797466675',
+                    name: '『🚀 [Dev] Space Engineer』',
+                    permissions: 1649267441655,
+                    position: 40,
+                    color: 10494192,
+                    hoist: true,
+                    managed: false,
+                    mentionable: false
+                },
+                {
+                    id: '787668626403753984',
+                    name: '『🙇‍♀️[Suporte] Atendentes』',
+                    permissions: 693741547328,
+                    position: 34,
+                    color: 13942765,
+                    hoist: true,
+                    managed: false,
+                    mentionable: false
+                },
+                {
+                    id: '787668627943718913',
+                    name: '『🌿 Users』',
+                    permissions: 6546640448,
+                    position: 23,
+                    color: 15109595,
+                    hoist: true,
+                    managed: false,
+                    mentionable: false
+                },
+            ],
             features: ['ANIMATED_ICON'],
             icon: 'a_e32c439c0f444ee342ff89e631957af9',
             owner_id: '842170079520096276'
@@ -116,7 +147,21 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
     }
 
     async fetchUserGuilds() {
-        
+        this.setState({ 
+            user: { 
+                ...this.state.user,
+                guilds: [
+                    {
+                        id: '787667696077504552',
+                        name: '🌇 Lunar City',
+                        features: ['ANIMATED_ICON'],
+                        icon: 'a_e32c439c0f444ee342ff89e631957af9',
+                        owner: true,
+                        permissions: 8,
+                    }
+                ]
+            }
+        })
     }
 
     render(): React.ReactNode {

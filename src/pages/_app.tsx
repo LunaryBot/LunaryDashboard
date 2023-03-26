@@ -9,9 +9,7 @@ import Theme from '../utils/theme';
 
 import themesStyle from '../styles/theme.module.scss';
 import { useRouter } from 'next/router';
-import { APIProvider } from '../contexts/APIContext';
-
-APIProvider
+import { APIProvider } from '../contexts/TestAPIContext';
 
 export default function MyApp({ Component, pageProps }) {
     const [_mode, setMode] = useState<'dark'|'light'|null>(null);
