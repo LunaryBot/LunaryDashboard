@@ -1,10 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, } from 'react';
 
 import { User, UserWithGuilds, AbstractGuild, Guild } from '../@types';
-import { createAPIClient } from '../services/ApiService';
-import { ApolloError, gql, NetworkStatus, ServerError, ServerParseError } from '@apollo/client';
-import { Client } from '../services/ClientService';
-import { NetworkError } from '@apollo/client/errors';
 import { Utils } from '../utils';
 
 const guildUrlString = /\/dashboard\/guilds\/(\d*)(\/.*)?/i
