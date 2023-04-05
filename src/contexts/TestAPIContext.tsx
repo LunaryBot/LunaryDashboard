@@ -1,4 +1,4 @@
-import React, { createContext, } from 'react';
+import React, { createContext } from 'react';
 
 import { User, UserWithGuilds, AbstractGuild, Guild } from '../@types';
 import { Utils } from '../utils';
@@ -71,7 +71,7 @@ export class APIProvider extends React.Component<React.PropsWithChildren, {
 
     async fetchGuild(id: string) {
         const guild: Guild = {
-            id: '787667696077504552',
+            id,
             name: '🌇 Lunar City',
             banner: null,
             channels: [
