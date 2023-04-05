@@ -33,6 +33,12 @@ export function Header() {
                     </a>
                 </li>
 
+                <li className={styles.sidebar}>
+                    <a href={'#'}>
+                        <i className={'fas fa-bars'} />
+                    </a>
+                </li>
+
                 <li>
                     <a href={'#'}>
                         <i className={'fab fa-discord'} />

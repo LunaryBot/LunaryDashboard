@@ -321,19 +321,31 @@
     background-size: cover;
 }
 
-@media screen and (min-width: 1750px) {
+@media screen and (max-width: 1024px) {
     .sidebar {
-        width: 350px;
+        display: none;
     }
 
     .content {
-        width: calc(100% - 350px);
-        left: 350px;
-    }
-
-    .content main {
-        margin-left: auto;
-        margin-right: auto;
-        width: 80%;
+        width: 100%;
+        left: 0;
+        padding: 16px;
     }
 }
+
+// @media screen and (min-width: 1750px) {
+//     .sidebar {
+//         width: 350px;
+//     }
+
+//     .content {
+//         width: calc(100% - 350px);
+//         left: 350px;
+//     }
+
+//     .content main {
+//         margin-left: auto;
+//         margin-right: auto;
+//         width: 80%;
+//     }
+// }
